@@ -7,6 +7,7 @@ package gameworld.world;
 public class Player implements Entity {
 	private int team;	// TODO maybe change to enum?
 	private int score;
+	private int health;
 	private String name;
 	private Inventory inventory;
 	

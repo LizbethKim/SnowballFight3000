@@ -2,6 +2,7 @@ package gameworld.world;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class Chest implements Inventory, StaticEntity {
 
 	@Override
 	public Collection<Item> getContents() {
-		return contents;
+		return Collections.unmodifiableCollection(contents);
 	}
 
 
