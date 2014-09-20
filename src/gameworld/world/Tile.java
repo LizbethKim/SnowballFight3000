@@ -5,8 +5,9 @@ public class Tile {
 	// private Terraintype-thingy
 	private InanimateEntity on;
 	
-	public Tile(Location l) {
+	public Tile(Location l, InanimateEntity on) {
 		this.coords = l;
+		this.on = on;
 	}
 
 	public Location getCoords () {
@@ -15,6 +16,23 @@ public class Tile {
 	
 	public InanimateEntity getOn() {
 		return on;
+	}
+	
+	public Item removeOn() {	// TODO perhaps exceptions, not nulls
+		Item toReturn = null;
+		if (this.on instanceof Item) {
+			toReturn = (Item) on;
+			this.on = null;
+		}
+		return toReturn;
+	}
+	
+	public boolean place(Item i) {
+		if (this.on != null) {
+			return false;
+		}
+		this.on = i;
+		return true;
 	}
 	
 	/**

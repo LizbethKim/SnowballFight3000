@@ -1,5 +1,5 @@
 package gameworld.world;
 
-public interface Item {
+public interface Item extends InanimateEntity{
 
 }
