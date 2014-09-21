@@ -3,7 +3,7 @@ package ui;
 public class UI {
 
 	/*	=========================================================
-	 * 	PLEASE DO MODIFY
+	 * 	PLEASE MODIFY
 	 * 	This is here so code compiles, I just don't uncompilable 
 	 * 	code at the moment. But feel free to rename EVERYTHING,
 	 * 	including the package.
@@ -12,7 +12,7 @@ public class UI {
 	 */
 	
 	public UI() {
-		// TODO Auto-generated constructor stub
+		// AUTO
 	}
 
 	public void repaint() {

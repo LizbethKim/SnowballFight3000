@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class PlayerInventory implements Inventory {
-	public static final int DEFAULT_LIMIT = 15; // TODO change perhaps 
+	public static final int DEFAULT_LIMIT = 15; // KTC change perhaps 
 	private int itemLimit;
 	private List<Item> contents;
 	

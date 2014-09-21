@@ -1,9 +1,9 @@
 package gameworld.world;
 
-public class Map implements Item {
+public class Map extends Item {
 
 	public Map() {
-		// TODO Auto-generated constructor stub
+		// AUTO
 	}
 
 }

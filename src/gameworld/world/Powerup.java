@@ -1,5 +1,5 @@
 package gameworld.world;
 
-public interface Powerup extends Item {
+public class Powerup extends Item {
 
 }

@@ -18,7 +18,7 @@ public class Tile {
 		return on;
 	}
 	
-	public Item removeOn() {	// TODO perhaps exceptions, not nulls
+	public Item removeOn() {	// KTC perhaps exceptions, not nulls
 		Item toReturn = null;
 		if (this.on instanceof Item) {
 			toReturn = (Item) on;
@@ -46,7 +46,7 @@ public class Tile {
 	 * @return Whether moving entities could move through the tile.
 	 */
 	public boolean isTraversable() {
-		// TODO
+		// KTC
 		return false; 	// something to do with what sort of object is on it
 	}
 }
