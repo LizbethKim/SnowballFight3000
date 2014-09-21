@@ -8,6 +8,10 @@ public class Board {
 		// AUTO
 	}
 	
+	public boolean canTraverse (Location l) {
+		return board[l.x][l.y].isTraversable();		// TEMP
+	}
+	
 	public Item removeItemAt(Location l) {
 		if (l.x >= board[0].length || l.x < 0 
 				|| l.y >= board.length || l.y < 0) 
