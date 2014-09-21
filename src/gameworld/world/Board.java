@@ -17,4 +17,8 @@ public class Board {
 		return board[l.x][l.y].removeOn();
 	}
 
+	public void clockTick() {
+		// TODO update projectiles, possibly do time logic. 
+	}
+
 }
