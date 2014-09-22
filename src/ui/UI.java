@@ -3,6 +3,8 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -13,6 +15,8 @@ import gameworld.world.Board;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -27,7 +31,8 @@ public class UI extends JFrame {
 	private JPanel inventoryPanel;
 	private JButton rotateViewLeft;
 	private JButton rotateViewRight;
-	private Canvas canvas;
+	private Canvas gameCanvas;
+	private JLayeredPane gamePanel;
 	
 	
 	/*	=========================================================
@@ -47,7 +52,9 @@ public class UI extends JFrame {
 		
 		setupFileBar();
 		setupButtonPanel();
-		setupCanvas();
+		setupGamePanel();
+		
+		
 		
 		//set initial size
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -62,6 +69,28 @@ public class UI extends JFrame {
 
 		// Display window
 		setVisible(true);
+	}
+	
+	private void setupGamePanel(){
+		setupCanvas();
+		setupInventoryBar();
+		gamePanel = new JLayeredPane();
+		gamePanel.setLayout(new BorderLayout());
+		
+		gamePanel.add(gameCanvas, BorderLayout.CENTER, new Integer(2));
+		gamePanel.add(inventoryPanel,BorderLayout.SOUTH, new Integer(1));
+		add(gamePanel, BorderLayout.CENTER);
+	}
+	
+	private void setupInventoryBar(){
+		inventoryPanel = new JPanel();
+		inventoryPanel.setLayout(new FlowLayout());
+		
+		inventoryPanel.add(new JButton("Item"));
+		inventoryPanel.add(new JButton("Item2"));
+		inventoryPanel.add(new JButton("Item3"));
+		inventoryPanel.add(new JButton("Item4"));
+		//add(inventoryPanel, BorderLayout.SOUTH);
 	}
 	
 	private void setupFileBar(){
@@ -82,14 +111,18 @@ public class UI extends JFrame {
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(EXIT_ON_CLOSE);;
+				System.exit(EXIT_ON_CLOSE);
 			}
 		});
 	}
 	
 	private void setupCanvas(){
-		canvas = new Canvas();
-		add(canvas, BorderLayout.CENTER);
+		gameCanvas = new Canvas(){
+			public void paint(Graphics g){
+				g.fillRect(0, 0, this.getHeight(), this.getWidth());
+			}
+		};
+		//add(gameCanvas, BorderLayout.CENTER);
 	}
 	
 	private void setupButtonPanel(){
@@ -121,7 +154,7 @@ public class UI extends JFrame {
 	}
 
 	public void repaint() {
-		canvas.repaint();
+		gamePanel.repaint();
 	}
 	
 	public static void main(String[] args){
