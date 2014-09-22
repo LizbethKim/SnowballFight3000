@@ -1,6 +1,8 @@
 package ui;
 
-public class UI {
+import javax.swing.JFrame;
+
+public class UI extends JFrame {
 
 	/*	=========================================================
 	 * 	PLEASE MODIFY
