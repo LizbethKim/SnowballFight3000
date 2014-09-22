@@ -1,8 +1,10 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,6 +22,7 @@ public class UI extends JFrame {
 	private JPanel buttonPanel;
 	private JButton rotateViewLeft;
 	private JButton rotateViewRight;
+	private Canvas canvas;
 	
 	
 	/*	=========================================================
@@ -32,10 +35,19 @@ public class UI extends JFrame {
 	 */
 	
 	public UI() {
+		
 		//initialise UI
 		super();
 		setLayout(new BorderLayout());
 		setupButtonPanel();
+		setupCanvas();
+		
+		//set initial size
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Dimension scrnsize = toolkit.getScreenSize();
+		setBounds((scrnsize.width - getWidth()) / 2,
+				(scrnsize.height - getHeight()) / 2, getWidth(), getHeight());
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
@@ -43,6 +55,11 @@ public class UI extends JFrame {
 
 		// Display window
 		setVisible(true);
+	}
+	
+	private void setupCanvas(){
+		canvas = new Canvas();
+		add(canvas, BorderLayout.CENTER);
 	}
 	
 	private void setupButtonPanel(){
@@ -70,7 +87,7 @@ public class UI extends JFrame {
 		
 		buttonPanel.add(rotateViewLeft);
 		buttonPanel.add(rotateViewRight);
-		add(buttonPanel, BorderLayout.EAST);
+		add(buttonPanel, BorderLayout.WEST);
 	}
 
 	public void repaint() {
