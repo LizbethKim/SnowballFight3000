@@ -9,12 +9,17 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import gameworld.world.Board;
 
+import javax.swing.ActionMap;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -22,6 +27,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
 public class UI extends JFrame {
@@ -57,7 +63,7 @@ public class UI extends JFrame {
 		setupFileBar();
 		setupButtonPanel();
 		setupGamePanel();
-		
+		setupKeyBindings();
 		
 		
 		//set initial size
@@ -75,26 +81,43 @@ public class UI extends JFrame {
 		setVisible(true);
 	}
 	
+	private void setupKeyBindings(){
+		InputMap im = getRootPane().getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
+	    ActionMap am = getRootPane().getActionMap();
+
+	    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "RightArrow");
+	    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "LeftArrow");
+	    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "UpArrow");
+	    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DownArrow");
+	    
+
+	    am.put("RightArrow", new ArrowAction("RightArrow"));
+	    am.put("LeftArrow", new ArrowAction("LeftArrow"));
+	    am.put("UpArrow", new ArrowAction("UpArrow"));
+	    am.put("DownArrow", new ArrowAction("DownArrow"));
+	}
+	
 	private void setupGamePanel(){
 		setupCanvas();
 		setupInventoryBar();
 		gamePanel = new JLayeredPane();
-	//	gamePanel.setLayout(new BorderLayout());
 		gamePanel.setPreferredSize(new Dimension(500,500));
 		gamePanel.setBorder(BorderFactory.createTitledBorder(
                 "Snowball Fight 3000"));
-		gamePanel.add(new JLabel("working"), new Integer(1));
-		gamePanel.add(gameCanvas, /*BorderLayout.CENTER,*/ new Integer(2));
-		gamePanel.add(inventoryPanel, /*BorderLayout.CENTER,*/ new Integer(3));
-		gamePanel.moveToFront(inventoryPanel);
+		gamePanel.add(gameCanvas, new Integer(0));
+		gamePanel.add(inventoryPanel, new Integer(1));
+		//gamePanel.addKeyListener(new GameListener())
 		add(gamePanel, BorderLayout.CENTER);
 	}
 	
 	private void setupInventoryBar(){
+		final int panelHeight = (int)(GAME_HEIGHT*0.98);
 		
 		//setup buttons
 		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new FlowLayout());
 		buttonPanel.setOpaque(false);
+		
 		buttonPanel.add(new JButton("Item"));
 		buttonPanel.add(new JButton("Item2"));
 		buttonPanel.add(new JButton("Item3"));
@@ -103,7 +126,7 @@ public class UI extends JFrame {
 		inventoryPanel = new JPanel();
 		inventoryPanel.setLayout(new BorderLayout());
 		inventoryPanel.setOpaque(false);
-		inventoryPanel.setSize(GAME_WIDTH,GAME_HEIGHT);
+		inventoryPanel.setSize(GAME_WIDTH, panelHeight);
 		
 		inventoryPanel.add(buttonPanel, BorderLayout.SOUTH);
 		//add(inventoryPanel, BorderLayout.SOUTH);
@@ -133,14 +156,12 @@ public class UI extends JFrame {
 	}
 	
 	private void setupCanvas(){
-		final int TEMP_WIDTH = 500;
-		final int TEMP_HEIGHT = 500;
 		gameCanvas = new Canvas(){
 			public void paint(Graphics g){
 				g.fillRect(0, 0, this.getHeight(), this.getWidth());
 			}
 		};
-		gameCanvas.setPreferredSize(new Dimension(TEMP_WIDTH, TEMP_HEIGHT));
+		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 		//add(gameCanvas, BorderLayout.CENTER);
 	}
 	
@@ -190,4 +211,5 @@ public class UI extends JFrame {
 		}
 		UI tester = new UI();
 	}
+
 }
