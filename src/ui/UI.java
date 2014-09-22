@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 
 import gameworld.world.Board;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,8 +25,11 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 public class UI extends JFrame {
-	//Fields
 	
+	public static final int GAME_WIDTH = 500;
+	public static final int GAME_HEIGHT = 500;
+	
+	//Fields
 	private Board board;
 	private JPanel buttonPanel;
 	private JPanel inventoryPanel;
@@ -75,21 +79,33 @@ public class UI extends JFrame {
 		setupCanvas();
 		setupInventoryBar();
 		gamePanel = new JLayeredPane();
-		gamePanel.setLayout(new BorderLayout());
-		
-		gamePanel.add(gameCanvas, BorderLayout.CENTER, new Integer(2));
-		gamePanel.add(inventoryPanel,BorderLayout.SOUTH, new Integer(1));
+	//	gamePanel.setLayout(new BorderLayout());
+		gamePanel.setPreferredSize(new Dimension(500,500));
+		gamePanel.setBorder(BorderFactory.createTitledBorder(
+                "Snowball Fight 3000"));
+		gamePanel.add(new JLabel("working"), new Integer(1));
+		gamePanel.add(gameCanvas, /*BorderLayout.CENTER,*/ new Integer(2));
+		gamePanel.add(inventoryPanel, /*BorderLayout.CENTER,*/ new Integer(3));
+		gamePanel.moveToFront(inventoryPanel);
 		add(gamePanel, BorderLayout.CENTER);
 	}
 	
 	private void setupInventoryBar(){
-		inventoryPanel = new JPanel();
-		inventoryPanel.setLayout(new FlowLayout());
 		
-		inventoryPanel.add(new JButton("Item"));
-		inventoryPanel.add(new JButton("Item2"));
-		inventoryPanel.add(new JButton("Item3"));
-		inventoryPanel.add(new JButton("Item4"));
+		//setup buttons
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setOpaque(false);
+		buttonPanel.add(new JButton("Item"));
+		buttonPanel.add(new JButton("Item2"));
+		buttonPanel.add(new JButton("Item3"));
+		buttonPanel.add(new JButton("Item4"));
+		
+		inventoryPanel = new JPanel();
+		inventoryPanel.setLayout(new BorderLayout());
+		inventoryPanel.setOpaque(false);
+		inventoryPanel.setSize(GAME_WIDTH,GAME_HEIGHT);
+		
+		inventoryPanel.add(buttonPanel, BorderLayout.SOUTH);
 		//add(inventoryPanel, BorderLayout.SOUTH);
 	}
 	
@@ -117,11 +133,14 @@ public class UI extends JFrame {
 	}
 	
 	private void setupCanvas(){
+		final int TEMP_WIDTH = 500;
+		final int TEMP_HEIGHT = 500;
 		gameCanvas = new Canvas(){
 			public void paint(Graphics g){
 				g.fillRect(0, 0, this.getHeight(), this.getWidth());
 			}
 		};
+		gameCanvas.setPreferredSize(new Dimension(TEMP_WIDTH, TEMP_HEIGHT));
 		//add(gameCanvas, BorderLayout.CENTER);
 	}
 	
