@@ -91,18 +91,38 @@ public class UI extends JFrame {
 	 */
 	private void setupKeyBindings() {
 		// sets the window to respond to inputs from any internal components
+
+		// add arrow keys and WASD for movement
+		addKeyBinding("RightArrow", new MoveRight(board), KeyEvent.VK_RIGHT,
+				KeyEvent.VK_D);
+		addKeyBinding("LeftArrow", new MoveLeft(board), KeyEvent.VK_LEFT,
+				KeyEvent.VK_A);
+		addKeyBinding("UpArrow", new MoveUp(board), KeyEvent.VK_UP,
+				KeyEvent.VK_S);
+		addKeyBinding("DownArrow", new MoveDown(board), KeyEvent.VK_DOWN,
+				KeyEvent.VK_W);
+
+	}
+
+	/**
+	 * Sets up key bindings for given keyConstants
+	 * @param actionString the action string to be used in the action map 
+	 * @param action the action to be tied to the keys
+	 * @param keyConstants the key constants to tie to the action string
+	 */
+	private void addKeyBinding(String actionString, KeyAction action,
+			int... keyConstants) {
+		
+		//get the input and action maps
 		InputMap im = getRootPane().getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
 		ActionMap am = getRootPane().getActionMap();
-
-		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "RightArrow");
-		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "LeftArrow");
-		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "UpArrow");
-		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DownArrow");
-
-		am.put("RightArrow", new MoveRight(board));
-		am.put("LeftArrow", new MoveLeft(board));
-		am.put("UpArrow", new MoveUp(board));
-		am.put("DownArrow", new MoveDown(board));
+		
+		//tie each key constant to the action string
+		for (int key : keyConstants) {
+			im.put(KeyStroke.getKeyStroke(key, 0), actionString);
+		}
+		//now tie the action to the action string
+		am.put(actionString, action);
 	}
 
 	/**
