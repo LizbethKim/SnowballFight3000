@@ -13,13 +13,18 @@ import gameworld.world.Board;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 public class UI extends JFrame {
 	//Fields
 	
 	private Board board;
 	private JPanel buttonPanel;
+	private JPanel inventoryPanel;
 	private JButton rotateViewLeft;
 	private JButton rotateViewRight;
 	private Canvas canvas;
@@ -39,6 +44,8 @@ public class UI extends JFrame {
 		//initialise UI
 		super();
 		setLayout(new BorderLayout());
+		
+		setupFileBar();
 		setupButtonPanel();
 		setupCanvas();
 		
@@ -55,6 +62,29 @@ public class UI extends JFrame {
 
 		// Display window
 		setVisible(true);
+	}
+	
+	private void setupFileBar(){
+		
+		//setup menu and items
+		JMenuBar menu = new JMenuBar();
+		final JMenu fileMenu = new JMenu("File");
+		final JMenuItem newGame = new JMenuItem("New Game");
+		final JMenuItem quit = new JMenuItem("Quit");
+
+		//add menu and items
+		menu.add(fileMenu);
+		fileMenu.add(newGame);
+		fileMenu.add(quit);
+		
+		setJMenuBar(menu);
+		//setup listeners for the menu
+		quit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(EXIT_ON_CLOSE);;
+			}
+		});
 	}
 	
 	private void setupCanvas(){
@@ -91,10 +121,21 @@ public class UI extends JFrame {
 	}
 
 	public void repaint() {
-		
+		canvas.repaint();
 	}
 	
 	public static void main(String[] args){
+		try {
+		    for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+
+		    }
+		} catch (Exception e) {
+			//do nothing
+		}
 		UI tester = new UI();
 	}
 }
