@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import gameworld.world.Board;
+import ui.actions.*;
 
 import javax.swing.ActionMap;
 import javax.swing.BorderFactory;
@@ -98,10 +99,10 @@ public class UI extends JFrame {
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "UpArrow");
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DownArrow");
 
-		am.put("RightArrow", new KeyAction("RightArrow"));
-		am.put("LeftArrow", new KeyAction("LeftArrow"));
-		am.put("UpArrow", new KeyAction("UpArrow"));
-		am.put("DownArrow", new KeyAction("DownArrow"));
+		am.put("RightArrow", new MoveRight(board));
+		am.put("LeftArrow", new MoveLeft(board));
+		am.put("UpArrow", new MoveUp(board));
+		am.put("DownArrow", new MoveDown(board));
 	}
 
 	/**
