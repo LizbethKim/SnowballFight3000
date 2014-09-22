@@ -91,10 +91,10 @@ public class UI extends JFrame {
 	    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "DownArrow");
 	    
 
-	    am.put("RightArrow", new ArrowAction("RightArrow"));
-	    am.put("LeftArrow", new ArrowAction("LeftArrow"));
-	    am.put("UpArrow", new ArrowAction("UpArrow"));
-	    am.put("DownArrow", new ArrowAction("DownArrow"));
+	    am.put("RightArrow", new KeyAction("RightArrow"));
+	    am.put("LeftArrow", new KeyAction("LeftArrow"));
+	    am.put("UpArrow", new KeyAction("UpArrow"));
+	    am.put("DownArrow", new KeyAction("DownArrow"));
 	}
 	
 	private void setupGamePanel(){

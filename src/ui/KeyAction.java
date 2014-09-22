@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-public class ArrowAction extends AbstractAction {
+public class KeyAction extends AbstractAction {
 
 	private String cmd;
 
-    public ArrowAction(String cmd) {
+    public KeyAction(String cmd) {
         this.cmd = cmd;
     }
 
