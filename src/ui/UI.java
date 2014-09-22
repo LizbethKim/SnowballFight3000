@@ -1,9 +1,16 @@
 package ui;
 
+import gameworld.world.Board;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class UI extends JFrame {
-
+	
+	private Board board;
+	private JButton rotateViewLeft;
+	private JButton rotateViewRight;
+	
 	/*	=========================================================
 	 * 	PLEASE MODIFY
 	 * 	This is here so code compiles, I just don't uncompilable 
@@ -14,10 +21,14 @@ public class UI extends JFrame {
 	 */
 	
 	public UI() {
-		// AUTO
+		super();
 	}
 
 	public void repaint() {
 		
+	}
+	
+	public static void main(String[] args){
+		new UI();
 	}
 }
