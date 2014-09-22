@@ -1,5 +1,5 @@
+package ui.actions;
 import gameworld.world.Board;
-import ui.actions.KeyAction;
 
 
 public class FireSnowball extends KeyAction{
