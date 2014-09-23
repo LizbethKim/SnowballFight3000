@@ -84,6 +84,7 @@ public class UI extends JFrame {
 		pack();
 		setResizable(true);
 		setVisible(true);
+		//repaint();
 	}
 
 	/**
@@ -101,27 +102,32 @@ public class UI extends JFrame {
 				KeyEvent.VK_S);
 		addKeyBinding("DownArrow", new MoveDown(board), KeyEvent.VK_DOWN,
 				KeyEvent.VK_W);
+		addKeyBinding("SpaceBar", new FireSnowball(board), KeyEvent.VK_SPACE);
 
 	}
 
 	/**
 	 * Sets up key bindings for given keyConstants
-	 * @param actionString the action string to be used in the action map 
-	 * @param action the action to be tied to the keys
-	 * @param keyConstants the key constants to tie to the action string
+	 * 
+	 * @param actionString
+	 *            the action string to be used in the action map
+	 * @param action
+	 *            the action to be tied to the keys
+	 * @param keyConstants
+	 *            the key constants to tie to the action string
 	 */
 	private void addKeyBinding(String actionString, KeyAction action,
 			int... keyConstants) {
-		
-		//get the input and action maps
+
+		// get the input and action maps
 		InputMap im = getRootPane().getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
 		ActionMap am = getRootPane().getActionMap();
-		
-		//tie each key constant to the action string
+
+		// tie each key constant to the action string
 		for (int key : keyConstants) {
 			im.put(KeyStroke.getKeyStroke(key, 0), actionString);
 		}
-		//now tie the action to the action string
+		// now tie the action to the action string
 		am.put(actionString, action);
 	}
 
@@ -143,7 +149,6 @@ public class UI extends JFrame {
 		// add the canvas and inventory
 		gamePanel.add(gameCanvas, new Integer(0));
 		gamePanel.add(inventoryPanel, new Integer(1));
-
 		add(gamePanel, BorderLayout.CENTER);
 	}
 
@@ -159,18 +164,30 @@ public class UI extends JFrame {
 		buttonPanel.setOpaque(false);
 
 		// temporary buttons as first implementation
-		buttonPanel.add(new JButton("Item"));
-		buttonPanel.add(new JButton("Item2"));
-		buttonPanel.add(new JButton("Item3"));
-		buttonPanel.add(new JButton("Item4"));
+		addComponent(buttonPanel, new JButton("Item"));
+		addComponent(buttonPanel, new JButton("Item2"));
+		addComponent(buttonPanel, new JButton("Item3"));
+		addComponent(buttonPanel, new JButton("Item4"));
 
 		inventoryPanel = new JPanel();
 		inventoryPanel.setLayout(new BorderLayout());
-		inventoryPanel.setOpaque(false);
 		inventoryPanel.setSize(GAME_WIDTH, panelHeight);
+		inventoryPanel.setOpaque(false);
 
 		inventoryPanel.add(buttonPanel, BorderLayout.SOUTH);
 		// add(inventoryPanel, BorderLayout.SOUTH);
+	}
+
+	/**
+	 * Adds the button to the panel, and sets it to be not focusable so as not
+	 * to interfere with spacebar fire
+	 * 
+	 * @param panel
+	 * @param button
+	 */
+	private void addComponent(JPanel panel, JComponent comp) {
+		comp.setFocusable(false);
+		panel.add(comp);
 	}
 
 	/**
@@ -180,6 +197,7 @@ public class UI extends JFrame {
 
 		// setup menu and items
 		JMenuBar menu = new JMenuBar();
+		menu.setFocusable(false);
 		final JMenu fileMenu = new JMenu("File");
 		final JMenuItem newGame = new JMenuItem("New Game");
 		final JMenuItem quit = new JMenuItem("Quit");
@@ -209,7 +227,7 @@ public class UI extends JFrame {
 				g.fillRect(0, 0, this.getHeight(), this.getWidth());
 			}
 		};
-		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+		gameCanvas.setSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 		// add(gameCanvas, BorderLayout.CENTER);
 	}
 
@@ -239,13 +257,14 @@ public class UI extends JFrame {
 			}
 		});
 
-		buttonPanel.add(rotateViewLeft);
-		buttonPanel.add(rotateViewRight);
+		addComponent(buttonPanel, rotateViewLeft);
+		addComponent(buttonPanel, rotateViewRight);
 		add(buttonPanel, BorderLayout.WEST);
 	}
 
 	public void repaint() {
 		gamePanel.repaint();
+		System.out.println("Canvas size: " + gameCanvas);
 	}
 
 	public static void main(String[] args) {
