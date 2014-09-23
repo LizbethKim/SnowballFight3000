@@ -216,7 +216,7 @@ public class UI extends JFrame {
 	private void setupCanvas() {
 		gameCanvas = new Canvas() {
 			public void paint(Graphics g) {
-				g.fillRect(0, 0, getHeight(), getWidth());
+				g.fillRect(0, 0, getWidth(), getHeight());
 			}
 		};
 		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT-INVENTORY_HEIGHT));
