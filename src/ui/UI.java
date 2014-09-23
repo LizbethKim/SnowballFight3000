@@ -44,6 +44,7 @@ public class UI extends JFrame {
 
 	public static final int GAME_WIDTH = 500;
 	public static final int GAME_HEIGHT = 500;
+	public static final int INVENTORY_HEIGHT = 40;
 
 	// Fields
 	private Board board;
@@ -52,7 +53,7 @@ public class UI extends JFrame {
 	private JButton rotateViewLeft;
 	private JButton rotateViewRight;
 	private Canvas gameCanvas;
-	private JLayeredPane gamePanel;
+	private JPanel gamePanel;
 
 	/*
 	 * ========================================================= PLEASE MODIFY
@@ -141,41 +142,32 @@ public class UI extends JFrame {
 		setupInventoryBar();
 
 		// setup pane
-		gamePanel = new JLayeredPane();
-		gamePanel.setPreferredSize(new Dimension(500, 500));
+		gamePanel = new JPanel();
+		gamePanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 		gamePanel.setBorder(BorderFactory
 				.createTitledBorder("Snowball Fight 3000"));
+		gamePanel.setLayout(new BorderLayout());
 
 		// add the canvas and inventory
-		gamePanel.add(gameCanvas, new Integer(0));
-		gamePanel.add(inventoryPanel, new Integer(1));
+		gamePanel.add(gameCanvas, BorderLayout.CENTER);
+		gamePanel.add(inventoryPanel, BorderLayout.SOUTH);
 		add(gamePanel, BorderLayout.CENTER);
 	}
 
-	/**
-	 * Sets up the bar that will hold the inventory items
-	 */
+	
 	private void setupInventoryBar() {
-		final int panelHeight = (int) (GAME_HEIGHT * 0.98);
-
 		// setup buttons
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new FlowLayout());
-		buttonPanel.setOpaque(false);
+		inventoryPanel = new JPanel();
+		inventoryPanel.setLayout(new GridLayout(1,0));
+		inventoryPanel.setPreferredSize(new Dimension(GAME_WIDTH, INVENTORY_HEIGHT));
 
 		// temporary buttons as first implementation
-		addComponent(buttonPanel, new JButton("Item"));
-		addComponent(buttonPanel, new JButton("Item2"));
-		addComponent(buttonPanel, new JButton("Item3"));
-		addComponent(buttonPanel, new JButton("Item4"));
+		addComponent(inventoryPanel, new JButton("Item"));
+		addComponent(inventoryPanel, new JButton("Item2"));
+		addComponent(inventoryPanel, new JButton("Item3"));
+		addComponent(inventoryPanel, new JButton("Item4"));
 
-		inventoryPanel = new JPanel();
-		inventoryPanel.setLayout(new BorderLayout());
-		inventoryPanel.setSize(GAME_WIDTH, panelHeight);
-		inventoryPanel.setOpaque(false);
-
-		inventoryPanel.add(buttonPanel, BorderLayout.SOUTH);
-		// add(inventoryPanel, BorderLayout.SOUTH);
+		
 	}
 
 	/**
@@ -224,10 +216,10 @@ public class UI extends JFrame {
 	private void setupCanvas() {
 		gameCanvas = new Canvas() {
 			public void paint(Graphics g) {
-				g.fillRect(0, 0, this.getHeight(), this.getWidth());
+				g.fillRect(0, 0, getHeight(), getWidth());
 			}
 		};
-		gameCanvas.setSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT-INVENTORY_HEIGHT));
 		// add(gameCanvas, BorderLayout.CENTER);
 	}
 
