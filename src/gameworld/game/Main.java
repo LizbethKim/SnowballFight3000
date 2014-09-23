@@ -17,7 +17,7 @@ public class Main {
 			// Bryden, this is where I'll need your code
 			// runServer(board); (??)
 		} else if (CLIENT) {
-			// Here too Bryden
+			// Here too Bryden BF
 			// runClient(); (??)
 		} else { // debug single-player testing dev mode
 			
