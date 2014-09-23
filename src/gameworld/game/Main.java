@@ -1,5 +1,7 @@
 package gameworld.game;
 
+import server.Client;
+import server.Server;
 import ui.UI;
 import gameworld.world.Board;
 
@@ -14,11 +16,19 @@ public class Main {
 
 	public static void main (String[] args) {
 		if (SERVER) {
-			// Bryden, this is where I'll need your code
-			// runServer(board); (??)
+			Server server = new Server();
+			// start server connection accepting thread
+			new Thread(server).start();
+			// currently, the server hogs the current thread (this function runs a while(true) statement)
+			server.sendLoop();
+			// I think in theory, the server's main loop is basically the server recieve loop anyway, so this should be fine
+			// (since the tick stuff should happen in another thread anyway)
+			// the only caveat is a client probably can't be a server as well
+			// if you don't like this, I can change it and make it more multithreaded
 		} else if (CLIENT) {
-			// Here too Bryden BF
-			// runClient(); (??)
+			Client client = new Client("127.0.0.1"); //connect to localhost for testing, you can put a different address here
+			//this function creates a new thread for itself
+			client.startReceiving();
 		} else { // debug single-player testing dev mode
 			
 			// KATE, this is where I'll need dataloading methods
