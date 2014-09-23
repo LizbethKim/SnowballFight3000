@@ -41,8 +41,6 @@ public class Server implements Runnable {
 	
 	public void queuePlayerUpdate(UpdateEvent event, int playerID) {
 		RemotePlayer playerUpdates = playersByID.get(playerID);
-		// this is here for testing
-		// BF should be moved to where players first connect
 		playerUpdates.queueEvent(event);
 		playersByID.put(playerID, playerUpdates);
 		updateQueue.offer(playerUpdates);
