@@ -161,13 +161,14 @@ public class UI extends JFrame {
 	 * is developed
 	 */
 	private void setupCanvas() {
-		gameCanvas = new Canvas() {
+		/*gameCanvas = new Canvas() {
 			public void paint(Graphics g) {
 				g.drawRect(0, 0, getWidth(), getHeight());
 				g.setColor(Color.GRAY);
 				g.fillRect(0, 0, getWidth(), getHeight());
 			}
-		};
+		};*/
+		gameCanvas = new GameCanvas(client);
 		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 		add(gameCanvas);
 	}
