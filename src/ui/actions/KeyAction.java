@@ -6,12 +6,14 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import client.Client;
+
 public abstract class KeyAction extends AbstractAction {
 
-	protected Board board;
+	protected Client client;
 
-    public KeyAction(Board board) {
-        this.board = board;
+    public KeyAction(Client client) {
+        this.client = client;
     }
 
     @Override

@@ -31,6 +31,8 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
+import client.Client;
+
 /**
  * The UI class encompasses the application window to display the game. It
  * listens to all user inputs and sends them to the board where they can be
@@ -47,7 +49,7 @@ public class SwingUI extends JFrame {
 	public static final int INVENTORY_HEIGHT = 40;
 
 	// Fields
-	private Board board;
+	private Client client;
 	private JPanel buttonPanel;
 	private JPanel inventoryPanel;
 	private JButton rotateViewLeft;
@@ -57,9 +59,10 @@ public class SwingUI extends JFrame {
 	
 
 	public SwingUI() {
+		super();
+		client = new Client(0);
 
 		// initialise UI
-		super();
 		setLayout(new BorderLayout());
 
 		// setup components
@@ -89,15 +92,15 @@ public class SwingUI extends JFrame {
 		// sets the window to respond to inputs from any internal components
 
 		// add arrow keys and WASD for movement
-		addKeyBinding("RightArrow", new MoveRight(board), KeyEvent.VK_RIGHT,
+		addKeyBinding("RightArrow", new MoveRight(client), KeyEvent.VK_RIGHT,
 				KeyEvent.VK_D);
-		addKeyBinding("LeftArrow", new MoveLeft(board), KeyEvent.VK_LEFT,
+		addKeyBinding("LeftArrow", new MoveLeft(client), KeyEvent.VK_LEFT,
 				KeyEvent.VK_A);
-		addKeyBinding("UpArrow", new MoveUp(board), KeyEvent.VK_UP,
+		addKeyBinding("UpArrow", new MoveUp(client), KeyEvent.VK_UP,
 				KeyEvent.VK_S);
-		addKeyBinding("DownArrow", new MoveDown(board), KeyEvent.VK_DOWN,
+		addKeyBinding("DownArrow", new MoveDown(client), KeyEvent.VK_DOWN,
 				KeyEvent.VK_W);
-		addKeyBinding("SpaceBar", new FireSnowball(board), KeyEvent.VK_SPACE);
+		addKeyBinding("SpaceBar", new FireSnowball(client), KeyEvent.VK_SPACE);
 
 	}
 

@@ -1,15 +1,18 @@
 package ui.actions;
 
+import client.Client;
+import client.Client.Direction;
 import gameworld.world.Board;
 
 public class MoveLeft extends KeyAction{
 	
-	public MoveLeft(Board b){
-		super(b);
+	public MoveLeft(Client cl){
+		super(cl);
 	}
 
 	@Override
 	protected void execute(){
+		client.move(Direction.WEST);
 		System.out.println("moveLeft");
 		//TODO board.moveleft()
 	}

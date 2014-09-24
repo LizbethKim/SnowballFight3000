@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -31,6 +32,8 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
+import client.Client;
+
 /**
  * The UI class encompasses the application window to display the game. It
  * listens to all user inputs and sends them to the board where they can be
@@ -44,10 +47,9 @@ public class UI extends JFrame {
 
 	public static final int GAME_WIDTH = 500;
 	public static final int GAME_HEIGHT = 500;
-	public static final int INVENTORY_HEIGHT = 40;
 
 	// Fields
-	private Board board;
+	private Client client;
 	private JPanel buttonPanel;
 	private JPanel inventoryPanel;
 	private JButton rotateViewLeft;
@@ -60,13 +62,14 @@ public class UI extends JFrame {
 
 		// initialise UI
 		super();
-		setLayout(new BorderLayout());
+		
+		client = new Client(0);
+	//	setLayout(new BorderLayout());
 
 		// setup components
 		setupFileBar();
-		setupButtonPanel();
-		setupGamePanel();
 		setupKeyBindings();
+		setupCanvas();
 
 		// set initial size
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -89,15 +92,15 @@ public class UI extends JFrame {
 		// sets the window to respond to inputs from any internal components
 
 		// add arrow keys and WASD for movement
-		addKeyBinding("RightArrow", new MoveRight(board), KeyEvent.VK_RIGHT,
+		addKeyBinding("RightArrow", new MoveRight(client), KeyEvent.VK_RIGHT,
 				KeyEvent.VK_D);
-		addKeyBinding("LeftArrow", new MoveLeft(board), KeyEvent.VK_LEFT,
+		addKeyBinding("LeftArrow", new MoveLeft(client), KeyEvent.VK_LEFT,
 				KeyEvent.VK_A);
-		addKeyBinding("UpArrow", new MoveUp(board), KeyEvent.VK_UP,
+		addKeyBinding("UpArrow", new MoveUp(client), KeyEvent.VK_UP,
 				KeyEvent.VK_S);
-		addKeyBinding("DownArrow", new MoveDown(board), KeyEvent.VK_DOWN,
+		addKeyBinding("DownArrow", new MoveDown(client), KeyEvent.VK_DOWN,
 				KeyEvent.VK_W);
-		addKeyBinding("SpaceBar", new FireSnowball(board), KeyEvent.VK_SPACE);
+		addKeyBinding("SpaceBar", new FireSnowball(client), KeyEvent.VK_SPACE);
 
 	}
 
@@ -124,55 +127,6 @@ public class UI extends JFrame {
 		}
 		// now tie the action to the action string
 		am.put(actionString, action);
-	}
-
-	/**
-	 * sets up a layered panel which will hold the game window and also the
-	 * inventory bar overlayed
-	 */
-	private void setupGamePanel() {
-		// creates the canvas an inventory bars
-		setupCanvas();
-		setupInventoryBar();
-
-		// setup pane
-		gamePanel = new JPanel();
-		gamePanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
-		gamePanel.setBorder(BorderFactory.createCompoundBorder());
-		gamePanel.setLayout(new BorderLayout());
-
-		// add the canvas and inventory
-		gamePanel.add(gameCanvas, BorderLayout.CENTER);
-		gamePanel.add(inventoryPanel, BorderLayout.SOUTH);
-		add(gamePanel, BorderLayout.CENTER);
-	}
-
-	
-	private void setupInventoryBar() {
-		// setup buttons
-		inventoryPanel = new JPanel();
-		inventoryPanel.setLayout(new GridLayout(1,0));
-		inventoryPanel.setPreferredSize(new Dimension(GAME_WIDTH, INVENTORY_HEIGHT));
-
-		// temporary buttons as first implementation
-		addComponent(inventoryPanel, new JButton("Item"));
-		addComponent(inventoryPanel, new JButton("Item2"));
-		addComponent(inventoryPanel, new JButton("Item3"));
-		addComponent(inventoryPanel, new JButton("Item4"));
-
-		
-	}
-
-	/**
-	 * Adds the button to the panel, and sets it to be not focusable so as not
-	 * to interfere with spacebar fire
-	 * 
-	 * @param panel
-	 * @param button
-	 */
-	private void addComponent(JPanel panel, JComponent comp) {
-		comp.setFocusable(false);
-		panel.add(comp);
 	}
 
 	/**
@@ -209,46 +163,13 @@ public class UI extends JFrame {
 	private void setupCanvas() {
 		gameCanvas = new Canvas() {
 			public void paint(Graphics g) {
+				g.drawRect(0, 0, getWidth(), getHeight());
+				g.setColor(Color.GRAY);
 				g.fillRect(0, 0, getWidth(), getHeight());
 			}
 		};
-		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT-INVENTORY_HEIGHT));
-	}
-
-	/**
-	 * Sets up the lefthand panel that contains the buttons to do actions
-	 */
-	private void setupButtonPanel() {
-		buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(0, 1));
-
-		// setup buttons
-		rotateViewLeft = new JButton("Rotate Left");
-		rotateViewLeft.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// :TODO rotate view left
-				System.out.println("Testing... Rotate Left");
-			}
-		});
-
-		rotateViewRight = new JButton("Rotate Right");
-		rotateViewRight.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// :TODO rotate view left
-				System.out.println("Testing... Rotate Right");
-			}
-		});
-
-		addComponent(buttonPanel, rotateViewLeft);
-		addComponent(buttonPanel, rotateViewRight);
-		add(buttonPanel, BorderLayout.WEST);
-	}
-
-	public void repaint() {
-		gamePanel.repaint();
-		System.out.println("Canvas size: " + gameCanvas);
+		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+		add(gameCanvas);
 	}
 
 	public static void main(String[] args) {
