@@ -2,7 +2,6 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -43,10 +42,11 @@ import client.Client;
  * @author Ryan Burnell, 300279172
  * 
  */
-public class UI extends JFrame {
+public class SwingUI extends JFrame {
 
 	public static final int GAME_WIDTH = 500;
 	public static final int GAME_HEIGHT = 500;
+	public static final int INVENTORY_HEIGHT = 40;
 
 	// Fields
 	private Client client;
@@ -58,18 +58,18 @@ public class UI extends JFrame {
 	private JPanel gamePanel;
 	
 
-	public UI() {
+	public SwingUI() {
+		super();
+		client = new Client(0);
 
 		// initialise UI
-		super();
-		
-		client = new Client(0);
-	//	setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
 
 		// setup components
 		setupFileBar();
+		setupButtonPanel();
+		setupGamePanel();
 		setupKeyBindings();
-		setupCanvas();
 
 		// set initial size
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -130,6 +130,55 @@ public class UI extends JFrame {
 	}
 
 	/**
+	 * sets up a layered panel which will hold the game window and also the
+	 * inventory bar overlayed
+	 */
+	private void setupGamePanel() {
+		// creates the canvas an inventory bars
+		setupCanvas();
+		setupInventoryBar();
+
+		// setup pane
+		gamePanel = new JPanel();
+		gamePanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+		gamePanel.setBorder(BorderFactory.createCompoundBorder());
+		gamePanel.setLayout(new BorderLayout());
+
+		// add the canvas and inventory
+		gamePanel.add(gameCanvas, BorderLayout.CENTER);
+		gamePanel.add(inventoryPanel, BorderLayout.SOUTH);
+		add(gamePanel, BorderLayout.CENTER);
+	}
+
+	
+	private void setupInventoryBar() {
+		// setup buttons
+		inventoryPanel = new JPanel();
+		inventoryPanel.setLayout(new GridLayout(1,0));
+		inventoryPanel.setPreferredSize(new Dimension(GAME_WIDTH, INVENTORY_HEIGHT));
+
+		// temporary buttons as first implementation
+		addComponent(inventoryPanel, new JButton("Item"));
+		addComponent(inventoryPanel, new JButton("Item2"));
+		addComponent(inventoryPanel, new JButton("Item3"));
+		addComponent(inventoryPanel, new JButton("Item4"));
+
+		
+	}
+
+	/**
+	 * Adds the button to the panel, and sets it to be not focusable so as not
+	 * to interfere with spacebar fire
+	 * 
+	 * @param panel
+	 * @param button
+	 */
+	private void addComponent(JPanel panel, JComponent comp) {
+		comp.setFocusable(false);
+		panel.add(comp);
+	}
+
+	/**
 	 * Sets up the file menu and listeners
 	 */
 	private void setupFileBar() {
@@ -161,16 +210,48 @@ public class UI extends JFrame {
 	 * is developed
 	 */
 	private void setupCanvas() {
-		/*gameCanvas = new Canvas() {
+		gameCanvas = new Canvas() {
 			public void paint(Graphics g) {
-				g.drawRect(0, 0, getWidth(), getHeight());
-				g.setColor(Color.GRAY);
 				g.fillRect(0, 0, getWidth(), getHeight());
 			}
-		};*/
-		gameCanvas = new GameCanvas(client);
-		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
-		add(gameCanvas);
+		};
+		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT-INVENTORY_HEIGHT));
+	}
+
+	/**
+	 * Sets up the lefthand panel that contains the buttons to do actions
+	 */
+	private void setupButtonPanel() {
+		buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(0, 1));
+
+		// setup buttons
+		rotateViewLeft = new JButton("Rotate Left");
+		rotateViewLeft.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// :TODO rotate view left
+				System.out.println("Testing... Rotate Left");
+			}
+		});
+
+		rotateViewRight = new JButton("Rotate Right");
+		rotateViewRight.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// :TODO rotate view left
+				System.out.println("Testing... Rotate Right");
+			}
+		});
+
+		addComponent(buttonPanel, rotateViewLeft);
+		addComponent(buttonPanel, rotateViewRight);
+		add(buttonPanel, BorderLayout.WEST);
+	}
+
+	public void repaint() {
+		gamePanel.repaint();
+		System.out.println("Canvas size: " + gameCanvas);
 	}
 
 	public static void main(String[] args) {
@@ -186,7 +267,7 @@ public class UI extends JFrame {
 		} catch (Exception e) {
 			// do nothing
 		}
-		UI tester = new UI();
+		SwingUI tester = new SwingUI();
 	}
 
 }
