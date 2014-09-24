@@ -40,7 +40,7 @@ import javax.swing.UIManager;
  * @author Ryan Burnell, 300279172
  * 
  */
-public class UI extends JFrame {
+public class SwingUI extends JFrame {
 
 	public static final int GAME_WIDTH = 500;
 	public static final int GAME_HEIGHT = 500;
@@ -56,7 +56,7 @@ public class UI extends JFrame {
 	private JPanel gamePanel;
 	
 
-	public UI() {
+	public SwingUI() {
 
 		// initialise UI
 		super();
@@ -264,7 +264,7 @@ public class UI extends JFrame {
 		} catch (Exception e) {
 			// do nothing
 		}
-		UI tester = new UI();
+		SwingUI tester = new SwingUI();
 	}
 
 }
