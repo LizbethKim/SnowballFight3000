@@ -10,6 +10,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -62,11 +64,11 @@ public class UI extends JFrame {
 
 		// initialise UI
 		super();
-		
 		client = new Client(0);
 	//	setLayout(new BorderLayout());
 
 		// setup components
+	//	setupAspectRatio();
 		setupFileBar();
 		setupKeyBindings();
 		setupCanvas();
@@ -85,6 +87,17 @@ public class UI extends JFrame {
 		//repaint();
 	}
 
+	private void setupAspectRatio(){
+		addComponentListener(new ComponentAdapter() {
+		      @Override
+		      public void componentResized(ComponentEvent e) {
+		      System.out.println("Resized");
+		      int width = e.getComponent().getWidth();
+		      setSize(width, width/2);
+		    }
+		  });
+	}
+	
 	/**
 	 * sets up the window to respond to key presses using a key binding system
 	 */
@@ -102,6 +115,8 @@ public class UI extends JFrame {
 				KeyEvent.VK_W);
 		addKeyBinding("ThrowSnowball", new ThrowSnowball(client), KeyEvent.VK_SPACE);
 		addKeyBinding("Inspect", new InspectItem(client), KeyEvent.VK_I);
+		
+		//setup
 		addKeyBinding("UseItem1", new UseItem(client, 1), KeyEvent.VK_1);
 		addKeyBinding("UseItem2", new UseItem(client, 2), KeyEvent.VK_2);
 		addKeyBinding("UseItem3", new UseItem(client, 3), KeyEvent.VK_3);
