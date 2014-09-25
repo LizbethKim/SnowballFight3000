@@ -28,7 +28,9 @@ public class GameCanvas extends Canvas {
 	private static final Image hideItems = loadImage("HideItems.png");
 	private static final Image showItems = loadImage("ShowItems.png");
 	
-	private static final double showHideProportion = 1.0/20.0;
+	private static final double showHideXProportion = 1.0/20.0;
+	private static final double inventoryYProportion = 1.0/10.0;
+	
 	
 	
 	private final Client client;
@@ -63,7 +65,7 @@ public class GameCanvas extends Canvas {
 	
 	
 	private void paintShowHideButton(Graphics g){
-		final int width = (int)(this.getWidth()*showHideProportion);
+		final int width = (int)(this.getWidth()*showHideXProportion);
 		final int height = width*2;
 		final int xPos = 0;
 		final int yPos = this.getHeight()-height;
@@ -78,7 +80,7 @@ public class GameCanvas extends Canvas {
 	
 	private void paintInventory(Graphics g){
 		final int inventoryNumber = 10;
-		int xPos = (int)(this.getWidth()*showHideProportion);
+		int xPos = getShowHideWidth();
 		final int size = (this.getWidth()-xPos)/inventoryNumber;
 		final int yPos = this.getHeight()-size;
 		
@@ -118,10 +120,23 @@ public class GameCanvas extends Canvas {
 		});
 	}
 	
+	private int getInventoryYPos(){
+		return this.getHeight()-(int)(this.getHeight()*inventoryYProportion);
+	}
+	
+	private int getShowHideWidth(){
+		return (int)(this.getWidth()*showHideXProportion);
+	}
+	
 	private void dealWithClick(MouseEvent e){
+		System.out.println("dealing with click");
 		int x = e.getX();
 		int y = e.getY();
-		//if()
+		if(y>0 && x>0 && y > getInventoryYPos() && x < getShowHideWidth()){
+			System.out.println("show/hide");
+			inventoryHidden = !inventoryHidden;
+			repaint();
+		}
 	}
 	
 	/**
