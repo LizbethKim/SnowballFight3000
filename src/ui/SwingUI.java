@@ -100,7 +100,7 @@ public class SwingUI extends JFrame {
 				KeyEvent.VK_S);
 		addKeyBinding("DownArrow", new MoveDown(client), KeyEvent.VK_DOWN,
 				KeyEvent.VK_W);
-		addKeyBinding("SpaceBar", new FireSnowball(client), KeyEvent.VK_SPACE);
+		addKeyBinding("SpaceBar", new ThrowSnowball(client), KeyEvent.VK_SPACE);
 
 	}
 
@@ -254,7 +254,10 @@ public class SwingUI extends JFrame {
 		System.out.println("Canvas size: " + gameCanvas);
 	}
 
-	public static void main(String[] args) {
+	/*
+	 * Testing main, unused
+	 * 
+	 * public static void main(String[] args) {
 		try {
 			for (UIManager.LookAndFeelInfo info : UIManager
 					.getInstalledLookAndFeels()) {
@@ -268,6 +271,6 @@ public class SwingUI extends JFrame {
 			// do nothing
 		}
 		SwingUI tester = new SwingUI();
-	}
+	}*/
 
 }

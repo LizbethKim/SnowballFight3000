@@ -92,15 +92,16 @@ public class UI extends JFrame {
 		// sets the window to respond to inputs from any internal components
 
 		// add arrow keys and WASD for movement
-		addKeyBinding("RightArrow", new MoveRight(client), KeyEvent.VK_RIGHT,
+		addKeyBinding("MoveRight", new MoveRight(client), KeyEvent.VK_RIGHT,
 				KeyEvent.VK_D);
-		addKeyBinding("LeftArrow", new MoveLeft(client), KeyEvent.VK_LEFT,
+		addKeyBinding("MoveLeft", new MoveLeft(client), KeyEvent.VK_LEFT,
 				KeyEvent.VK_A);
-		addKeyBinding("UpArrow", new MoveUp(client), KeyEvent.VK_UP,
+		addKeyBinding("MoveUp", new MoveUp(client), KeyEvent.VK_UP,
 				KeyEvent.VK_S);
-		addKeyBinding("DownArrow", new MoveDown(client), KeyEvent.VK_DOWN,
+		addKeyBinding("MoveDown", new MoveDown(client), KeyEvent.VK_DOWN,
 				KeyEvent.VK_W);
-		addKeyBinding("SpaceBar", new FireSnowball(client), KeyEvent.VK_SPACE);
+		addKeyBinding("ThrowSnowball", new ThrowSnowball(client), KeyEvent.VK_SPACE);
+		addKeyBinding("Inspect", new InspectItem(client), KeyEvent.VK_I);
 
 	}
 

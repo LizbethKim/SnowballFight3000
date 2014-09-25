@@ -3,16 +3,16 @@ import client.Client;
 import gameworld.world.Board;
 
 
-public class FireSnowball extends KeyAction{
+public class InspectItem extends KeyAction{
 
-	public FireSnowball(Client cl){
+	public InspectItem(Client cl){
 		super(cl);
 	}
 	
 	@Override
 	protected void execute() {
-		System.out.println("FireSnowball");
-		client.throwSnowball();
+		System.out.println("Inspect");
+		//client.inspectItem(null);
 		//:TODO board.firesnowball()
 	}
 
