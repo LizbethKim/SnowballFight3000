@@ -9,6 +9,9 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +42,6 @@ public class GameCanvas extends Canvas {
 
 	public GameCanvas(Client cl) {
 		this.client = cl;
-		super.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		setupListeners();
 		
 		GraphicsEnvironment env = GraphicsEnvironment
@@ -118,6 +120,17 @@ public class GameCanvas extends Canvas {
 				dealWithClick(e);
 			}
 		});
+		
+		addMouseMotionListener(new MotionListener());
+			
+	}
+	
+	private void updateCursor(MouseEvent e){
+		if(onShowHideButton(e.getX(), e.getY())){
+			super.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		} else {
+			super.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		}
 	}
 	
 	private int getInventoryYPos(){
@@ -128,11 +141,15 @@ public class GameCanvas extends Canvas {
 		return (int)(this.getWidth()*showHideXProportion);
 	}
 	
+	private boolean onShowHideButton(int x, int y){
+		return y>0 && x>0 && y > getInventoryYPos() && x < getShowHideWidth();
+	}
+	
 	private void dealWithClick(MouseEvent e){
 		System.out.println("dealing with click");
 		int x = e.getX();
 		int y = e.getY();
-		if(y>0 && x>0 && y > getInventoryYPos() && x < getShowHideWidth()){
+		if(onShowHideButton(x,y)){
 			System.out.println("show/hide");
 			inventoryHidden = !inventoryHidden;
 			repaint();
@@ -158,5 +175,17 @@ public class GameCanvas extends Canvas {
 			throw new RuntimeException("Unable to load image: " + filename);
 		}
 
+	}
+	
+	private class MotionListener implements MouseMotionListener{
+		@Override
+		public void mouseMoved(MouseEvent e){
+			updateCursor(e);
+		}
+		
+		@Override
+		public void mouseDragged(MouseEvent arg0) {
+			//do nothing
+		}
 	}
 }
