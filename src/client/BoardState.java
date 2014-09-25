@@ -33,10 +33,23 @@ public class BoardState {
 		objects[8][5] = Objects.TREE;
 	}
 
+	/**
+	 * Represents the types of objects that can be rendered on a tile
+	 *  - this can be furniture, items, etc. WALL_E_W is a wall going east to west,
+	 *  WALL_N_S is a wall going north to south.
+	 *  KTC EK we may need to add extra wall types, such as corners/doors.
+	 * @author jackkels
+	 *
+	 */
 	public enum Objects {
 		KEY, POWERUP, CHEST, TREE, TABLE, WALL_E_W, WALL_N_S, BUSH
 	}
 
+	/**
+	 * Represents the different types of terrain a tile may have.
+	 * @author jackkels
+	 *
+	 */
 	public enum Tile {
 		SNOW, FLOOR, GRASS
 	}
