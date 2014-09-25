@@ -22,9 +22,9 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void run() {
 		while(true) {
@@ -39,7 +39,7 @@ public class Client implements Runnable {
 			}
 		}
 	}
-	
+
 	public void startReceiving() {
 		Thread t = new Thread(this);
 		t.start();
