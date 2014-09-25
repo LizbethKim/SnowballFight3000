@@ -102,6 +102,15 @@ public class UI extends JFrame {
 				KeyEvent.VK_W);
 		addKeyBinding("ThrowSnowball", new ThrowSnowball(client), KeyEvent.VK_SPACE);
 		addKeyBinding("Inspect", new InspectItem(client), KeyEvent.VK_I);
+		addKeyBinding("UseItem1", new UseItem(client, 1), KeyEvent.VK_1);
+		addKeyBinding("UseItem2", new UseItem(client, 2), KeyEvent.VK_2);
+		addKeyBinding("UseItem3", new UseItem(client, 3), KeyEvent.VK_3);
+		addKeyBinding("UseItem4", new UseItem(client, 4), KeyEvent.VK_4);
+		addKeyBinding("UseItem5", new UseItem(client, 5), KeyEvent.VK_5);
+		addKeyBinding("UseItem6", new UseItem(client, 6), KeyEvent.VK_6);
+		addKeyBinding("UseItem7", new UseItem(client, 7), KeyEvent.VK_7);
+		addKeyBinding("UseItem8", new UseItem(client, 8), KeyEvent.VK_8);
+		addKeyBinding("UseItem9", new UseItem(client, 9), KeyEvent.VK_9);
 
 	}
 
