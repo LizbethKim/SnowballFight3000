@@ -3,7 +3,9 @@ package ui;
 import gameworld.world.Board;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
@@ -81,14 +83,19 @@ public class GameCanvas extends Canvas {
 	}
 	
 	private void paintInventory(Graphics g){
-		final int inventoryNumber = 10;
+		final int inventoryNumber = 9;
 		int xPos = getShowHideWidth();
 		final int size = (this.getWidth()-xPos)/inventoryNumber;
 		final int yPos = this.getHeight()-size;
-		
+		int fontSize = size/6;
 		Image slot = inventorySlot.getScaledInstance(size, size, 0);
 		for(int i = 0; i < inventoryNumber; i++){
 			g.drawImage(slot, xPos, yPos, null, null);
+			g.setFont(new Font("Times", Font.PLAIN, fontSize));
+			int numberXPos = xPos + size/12;
+			int numberYPos = yPos + size/30 + fontSize;
+			g.setColor(Color.white);
+			g.drawString(""+(i+1), numberXPos, numberYPos);
 			xPos += size;
 		}
 	}
@@ -146,6 +153,7 @@ public class GameCanvas extends Canvas {
 	}
 	
 	private void dealWithClick(MouseEvent e){
+		//RB: Fix mouse hover when window is resized
 		System.out.println("dealing with click");
 		int x = e.getX();
 		int y = e.getY();
