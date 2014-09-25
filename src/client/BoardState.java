@@ -9,7 +9,7 @@ package client;
 public class BoardState {
 	private Tile[][] board;
 	private Objects[][] objects;
-
+	private Direction d;
 	/*
 	 * EK This is for you, sets up a plain boring board for testing purposes.
 	 */
@@ -31,6 +31,7 @@ public class BoardState {
 		objects[4][2] = Objects.TREE;
 		objects[2][7] = Objects.CHEST;
 		objects[8][5] = Objects.TREE;
+		this.d = Direction.NORTH;
 	}
 
 	/**
@@ -45,6 +46,10 @@ public class BoardState {
 		KEY, POWERUP, CHEST, TREE, TABLE, WALL_E_W, WALL_N_S, BUSH
 	}
 
+	public enum Direction {
+		NORTH, SOUTH, EAST, WEST
+	}
+
 	/**
 	 * Represents the different types of terrain a tile may have.
 	 * @author jackkels
@@ -54,6 +59,7 @@ public class BoardState {
 		SNOW, FLOOR, GRASS
 	}
 
+	// Getter methods for EK
 	public Tile[][] getArea() {
 		return board;
 	}
@@ -62,10 +68,15 @@ public class BoardState {
 		return objects;
 	}
 
+	public Direction getDirection() {
+		return d;
+	}
 
-	public void update(Tile[][] newBoard, Objects[][] newObjects) {
+
+	public void update(Tile[][] newBoard, Objects[][] newObjects, Direction d) {
 		this.board = newBoard;
 		this.objects = newObjects;
+		this.d = d;
 	}
 
 
