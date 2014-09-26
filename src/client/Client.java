@@ -1,10 +1,13 @@
 package client;
 
+import gameworld.world.Location;
 import graphics.assets.Objects;
 
 import java.util.List;
 
 public class Client {
+	private PlayerState player;
+	
 	// RB for you
 	private int playerID;
 
@@ -19,8 +22,19 @@ public class Client {
 
 
 	public void move (Direction d) {
+		Location newLoc;
+		if (d == Direction.NORTH) {
+			newLoc = new Location(player.getL().x, player.getL().y + 1);
+		} else if (d == Direction.SOUTH) {
+			newLoc = new Location(player.getL().x, player.getL().y - 1);
+		} else if (d == Direction.EAST) {
+			newLoc = new Location(player.getL().x + 1, player.getL().y);
+		} else {
+			newLoc = new Location(player.getL().x - 1, player.getL().y);
+		}
+		// network.send( new MoveEvent(newLoc);
 		// Ok, BF, I need a way to send this through the network. I think I just need 
-		// a MoveEvent class?
+		// a MoveEvent class? Which takes a playerID (possibly) and the new location.
 	}
 
 	public void throwSnowball () {

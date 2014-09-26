@@ -1,20 +1,27 @@
 package gameworld.game;
 
+import java.util.Map;
+
 import gameworld.world.Board;
 import gameworld.world.Location;
 import gameworld.world.Player;
 
 public class Game {
 	private Board board;
+	private Map<Integer, Player> playerIDs;
 	
 	public Game() {
 		// AUTO
 	}
 	
 	// examples of methods that will be in here
-	public void move (String player, Location l) {
-		// KTC move specified player to specified location IF possible.
-		// KTC representation of players outside of objects perhaps 
+	public void move (int playerID, Location l) {
+		Player p = playerIDs.get(playerID);
+		if (board.canTraverse(l)) {
+			if (p.move(l)) {
+				// KTC only here do you send out an update.
+			}
+		}	
 	}
 	
 	public void pickUpItemAt (String player, Location l) {

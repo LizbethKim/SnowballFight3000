@@ -13,7 +13,7 @@ import graphics.assets.Terrain;
 public class BoardState {
 	private Terrain[][] board;
 	private Objects[][] entities;
-	private Direction d;
+	private Direction d;	// The direction that the board is oriented. (Possibly something RB should store)
 	/*
 	 * EK This is for you, sets up a plain boring board for testing purposes.
 	 */
