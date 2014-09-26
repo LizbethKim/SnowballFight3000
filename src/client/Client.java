@@ -1,8 +1,8 @@
 package client;
 
-import java.util.List;
+import graphics.assets.Objects;
 
-import client.BoardState.Objects;
+import java.util.List;
 
 public class Client {
 	// RB for you
@@ -19,7 +19,8 @@ public class Client {
 
 
 	public void move (Direction d) {
-		// KTC
+		// Ok, BF, I need a way to send this through the network. I think I just need 
+		// a MoveEvent class?
 	}
 
 	public void throwSnowball () {

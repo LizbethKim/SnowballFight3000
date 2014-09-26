@@ -1,9 +1,9 @@
 package client;
 
+import graphics.assets.Objects;
+
 import java.util.Collections;
 import java.util.List;
-
-import client.BoardState.Objects;
 
 public class PlayerState {
 	private List<Objects> inventory;
