@@ -1,5 +1,8 @@
 package client;
 
+import java.util.Collections;
+import java.util.List;
+
 import client.Client.Direction;
 import graphics.assets.Objects;
 import graphics.assets.Terrain;
@@ -13,7 +16,9 @@ import graphics.assets.Terrain;
 public class BoardState {
 	private Terrain[][] board;
 	private Objects[][] entities;
+	private List<PlayerState> players;
 	private Direction d;	// The direction that the board is oriented. (Possibly something RB should store)
+	
 	/*
 	 * EK This is for you, sets up a plain boring board for testing purposes.
 	 */
@@ -33,7 +38,7 @@ public class BoardState {
 
 		entities = new Objects[10][10];
 		entities[4][2] = Objects.TREE;
-		entities[2][7] = Objects.CHEST;
+		entities[2][7] = Objects.BUSH;
 		entities[8][5] = Objects.TREE;
 		this.d = Direction.NORTH;
 	}
@@ -56,6 +61,10 @@ public class BoardState {
 		this.board = newBoard;
 		this.entities = newEntities;
 		this.d = d;
+	}
+
+	public List<PlayerState> getPlayers() {
+		return Collections.unmodifiableList(players);
 	}
 
 

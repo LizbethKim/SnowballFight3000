@@ -5,6 +5,8 @@ import graphics.assets.Objects;
 
 import java.util.List;
 
+import server.events.MoveEvent;
+
 public class Client {
 	private PlayerState player;
 	
@@ -20,7 +22,9 @@ public class Client {
 		this.playerID = playerID;
 	}
 
-
+	public PlayerState getPlayer() {
+		return player;
+	}
 	public void move (Direction d) {
 		Location newLoc;
 		if (d == Direction.NORTH) {
@@ -32,6 +36,7 @@ public class Client {
 		} else {
 			newLoc = new Location(player.getL().x - 1, player.getL().y);
 		}
+		new MoveEvent(newLoc);
 		// network.send( new MoveEvent(newLoc);
 		// Ok, BF, I need a way to send this through the network. I think I just need 
 		// a MoveEvent class? Which takes a playerID (possibly) and the new location.
@@ -59,5 +64,9 @@ public class Client {
 	public List<Objects> getContents(Objects cont) {
 		// KTC
 		return null;
+	}
+
+	public int getPlayerID() {
+		return playerID;
 	}
 }
