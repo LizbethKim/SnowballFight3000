@@ -1,15 +1,28 @@
 package gameworld.world;
 
+import graphics.assets.Objects;
+import graphics.assets.Terrain;
+
 public class Board {
 	// KTC add more 
-	private Tile[][] board; 	// board[row][column] will access correctly.
+	private Tile[][] board; 	// board[row][column] will access correctly. 
 	
 	public Board() {
-		// AUTO
+		// KTC currently only a test board. need to really load in from file.
+		board = new Tile[20][15];
+		for (int row = 0; row < 20; row++) {
+			for (int col = 0; col < 15; col++) {
+				board[row][col] = new Tile(new Location(row, col), Terrain.SNOW, null);
+			}
+		}
+		board[9][12].place(new Furniture("A tree", Objects.TREE));
+		board[2][3].place(new Furniture("A tree", Objects.TREE));
+		board[18][4].place(new Furniture("A tree", Objects.TREE));
+		board[7][7].place(new Furniture("A bush", Objects.BUSH));
 	}
 	
 	public boolean canTraverse (Location l) {
-		return board[l.x][l.y].isTraversable();		// TEMP
+		return board[l.x][l.y].isTraversable();	
 	}
 	
 	public Item removeItemAt(Location l) {

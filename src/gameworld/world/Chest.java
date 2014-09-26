@@ -41,5 +41,10 @@ public class Chest implements Inventory, StaticEntity {
 		return Collections.unmodifiableCollection(contents);
 	}
 
+	@Override
+	public boolean canMoveThrough() {
+		return false;
+	}
+
 
 }

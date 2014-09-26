@@ -5,8 +5,9 @@ package gameworld.world;
  * @author kelsey
  */
 public class Location {
-	public final int x;
-	public final int y;
+	public final int x;	// The bigger the x, the more east we are
+	public final int y;	// The bigger the y, the further south (EK, does that make sense?)
+	
 	public Location(int x, int y) {
 		this.x = x;
 		this.y = y;

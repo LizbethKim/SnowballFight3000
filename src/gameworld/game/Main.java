@@ -46,7 +46,7 @@ public class Main {
 	 * Everything else will be event-driven (at least, in my mind). 
 	 */
 	private static void singlePlayerGame(Board game) {
-		
+		//	PROBABLY REDUNDANT
 		UI display = new UI(); 	// This is where I'll hook in Ryan's code. 
 		// This should create the window etc.
 		// Also of course appropriate parameters.

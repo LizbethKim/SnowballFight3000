@@ -1,12 +1,16 @@
 package gameworld.world;
 
+import graphics.assets.Terrain;
+
 public class Tile {
 	private Location coords;
-	// private Terraintype-thingy
+	private Terrain type;	// the image won't be used internally
 	private InanimateEntity on;
 	
-	public Tile(Location l, InanimateEntity on) {
-		this.coords = l;
+	
+	public Tile(Location c, Terrain type, InanimateEntity on) {
+		this.coords = c;
+		this.type = type;
 		this.on = on;
 	}
 
@@ -27,7 +31,7 @@ public class Tile {
 		return toReturn;
 	}
 	
-	public boolean place(Item i) {
+	public boolean place(InanimateEntity i) {
 		if (this.on != null) {
 			return false;
 		}
@@ -43,10 +47,13 @@ public class Tile {
 	}
 		
 	/**
+	 * Checks whether the item on the tile will block the way through it.
 	 * @return Whether moving entities could move through the tile.
 	 */
 	public boolean isTraversable() {
-		// KTC
-		return false; 	// something to do with what sort of object is on it
+		if (on != null && !on.canMoveThrough()) {
+			return false;
+		}
+		return true;
 	}
 }

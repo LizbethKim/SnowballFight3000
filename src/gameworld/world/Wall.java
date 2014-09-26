@@ -6,4 +6,9 @@ public class Wall implements StaticEntity {
 		// AUTO
 	}
 
+	@Override
+	public boolean canMoveThrough() {
+		return false;
+	}
+
 }
