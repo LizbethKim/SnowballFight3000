@@ -25,4 +25,11 @@ public class Furniture implements StaticEntity {
 		return false;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public Objects getType() {
+		return type;
+	}
 }

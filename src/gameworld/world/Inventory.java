@@ -10,7 +10,20 @@ import java.util.Collection;
  */
 public interface Inventory {
 	
-	public void addItem(Item i);
+	/**
+	 * Attempts to add i to the inventory. The inventory may be at capacity 
+	 * and not allow the addition though.
+	 * @param i Item to be added
+	 * @return True if there was space and the item was added, false otherwise.
+	 */
+	public boolean addItem(Item i);
+	
+	
+	/**
+	 * Removes i from the inventory if it contains i. 
+	 * @param i
+	 * @return True for successful removal, false if the item wasn't present.
+	 */
 	public boolean removeItem(Item i);
 	public Collection<Item> getContents();
 

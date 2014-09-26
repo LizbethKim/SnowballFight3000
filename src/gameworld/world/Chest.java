@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Represents a chest. Currently has unlimited capacity.
  * @author kelsey
  */
 public class Chest implements Inventory, StaticEntity {
@@ -27,8 +28,9 @@ public class Chest implements Inventory, StaticEntity {
 	}
 	
 	@Override
-	public void addItem(Item i) {
+	public boolean addItem(Item i) {
 		this.contents.add(i);
+		return true;
 	}
 
 	@Override

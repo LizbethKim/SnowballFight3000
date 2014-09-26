@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class PlayerInventory implements Inventory {
-	public static final int DEFAULT_LIMIT = 15; // KTC change perhaps 
+	public static final int DEFAULT_LIMIT = 10; // KTC change perhaps 
 	private int itemLimit;
 	private List<Item> contents;
 	
@@ -38,8 +38,12 @@ public class PlayerInventory implements Inventory {
 	}
 	
 	@Override
-	public void addItem(Item i) {
-		contents.add(i);
+	public boolean addItem(Item i) {
+		if (contents.size() < itemLimit) {
+			contents.add(i);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
