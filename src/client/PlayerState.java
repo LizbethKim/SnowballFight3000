@@ -48,7 +48,7 @@ public class PlayerState {
 		this.sprite = sprite;
 	}
 
-	public Direction getD() {
+	public Direction getDirection() {
 		return d;
 	}
 

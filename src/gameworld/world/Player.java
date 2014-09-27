@@ -27,14 +27,6 @@ public class Player implements Entity {
 	 * @return	true if they moved, false otherwise
 	 */
 	public boolean move(Location l) {
-//		if (l.x - loc.x == 1) {
-//			loc = l;
-//			d = Direction.SOUTH;
-//			return true;
-//		} else if (l.x - loc.x == -1) {
-//			loc = l;
-//			d = Direction.NORTH;
-//		} else if ()
 		if ((Math.abs(l.x - loc.x) == 1) != (Math.abs(l.y - loc.y) == 1)) {	
 			// if exactly one step in a cardinal direction has been taken
 			loc = l;

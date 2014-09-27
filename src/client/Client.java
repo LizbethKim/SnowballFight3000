@@ -7,6 +7,7 @@ import graphics.assets.Objects;
 import java.util.List;
 
 import server.events.MoveEvent;
+import server.events.TurnEvent;
 
 public class Client {
 	private PlayerState player;
@@ -23,28 +24,33 @@ public class Client {
 		return player;
 	}
 	public void move (Direction d) {
-		Location newLoc;
-		if (d == Direction.NORTH) {
-			newLoc = new Location(player.getL().x, player.getL().y - 1);
-		} else if (d == Direction.SOUTH) {
-			newLoc = new Location(player.getL().x, player.getL().y + 1);
-		} else if (d == Direction.EAST) {
-			newLoc = new Location(player.getL().x + 1, player.getL().y);
+		if (player.getDirection() == d) {
+			Location newLoc;
+			if (d == Direction.NORTH) {
+				newLoc = new Location(player.getL().x, player.getL().y - 1);
+			} else if (d == Direction.SOUTH) {
+				newLoc = new Location(player.getL().x, player.getL().y + 1);
+			} else if (d == Direction.EAST) {
+				newLoc = new Location(player.getL().x + 1, player.getL().y);
+			} else {
+				newLoc = new Location(player.getL().x - 1, player.getL().y);
+			}
+			new MoveEvent(newLoc);
+			// network.send( new MoveEvent(newLoc);
+			// Ok, BF, I need a way to send this through the network. I think I just need 
+			// a MoveEvent class? Which takes a playerID (possibly) and the new location.
 		} else {
-			newLoc = new Location(player.getL().x - 1, player.getL().y);
+			new TurnEvent(d);
+			// KTC send this through the network.
 		}
-		new MoveEvent(newLoc);
-		// network.send( new MoveEvent(newLoc);
-		// Ok, BF, I need a way to send this through the network. I think I just need 
-		// a MoveEvent class? Which takes a playerID (possibly) and the new location.
 	}
 
 	public void throwSnowball () {
 		// KTC
 	}
 
-	public String inspectItem(Objects i) {
-		// KTC
+	public String inspectItem() {
+		// KTC inspect the item in front of them.
 		return "";
 	}
 
