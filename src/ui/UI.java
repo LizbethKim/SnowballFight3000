@@ -50,8 +50,8 @@ import client.Client;
  */
 public class UI extends JFrame {
 
-	public static final int GAME_WIDTH = 500;
-	public static final int GAME_HEIGHT = 500;
+	public static final int DEFAULT_GAME_WIDTH = 500;
+	public static final int DEFAULT_GAME_HEIGHT = 500;
 
 	// Fields
 	private Client client;
@@ -101,12 +101,12 @@ public class UI extends JFrame {
 		// final int defaultHeight = 500;
 
 		gamePanel = new JLayeredPane();
-		gamePanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+		gamePanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT));
 		gamePanel.add(hudPanel);
 		gamePanel.add(graphicsPanel);
 		// gamePanel.setBounds(0,0,GAME_WIDTH, GAME_HEIGHT);
-		graphicsPanel.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
-		hudPanel.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		graphicsPanel.setBounds(0, 0, DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
+		hudPanel.setBounds(0, 0, DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
 		add(gamePanel);
 	}
 
@@ -257,8 +257,8 @@ public class UI extends JFrame {
 	 * is developed
 	 */
 	private void setupCanvas() {
-		hudPanel = new HUDPanel(client);
-		hudPanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+		hudPanel = new HUDPanel(client, DEFAULT_GAME_WIDTH/DEFAULT_GAME_HEIGHT);
+		hudPanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT));
 		hudPanel.setOpaque(false);
 		// add(gameCanvas);
 	}

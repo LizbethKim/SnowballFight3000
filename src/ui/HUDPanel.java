@@ -35,13 +35,14 @@ public class HUDPanel extends JPanel {
 	private static final double showHideXProportion = 1.0 / 20.0;
 	private static final double inventoryYProportion = 1.0 / 10.0;
 	private static final double maxHealth = 100.0;
-	private static final double aspectRatio = 1/1;
 
 	private final Client client;
 	private boolean inventoryHidden = false;
+	private final double aspectRatio;
 
-	public HUDPanel(Client cl) {
+	public HUDPanel(Client cl, double aspectRatio) {
 		this.client = cl;
+		this.aspectRatio = aspectRatio;
 		setupListeners();
 		// this.set
 		GraphicsEnvironment env = GraphicsEnvironment
