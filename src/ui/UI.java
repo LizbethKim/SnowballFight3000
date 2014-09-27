@@ -50,8 +50,9 @@ import client.Client;
  */
 public class UI extends JFrame {
 
-	public static final int DEFAULT_GAME_WIDTH = 500;
-	public static final int DEFAULT_GAME_HEIGHT = 500;
+	public static final int DEFAULT_GAME_WIDTH = 800;
+	public static final int DEFAULT_GAME_HEIGHT = 450;
+	public static final double ASPECT_RATIO = 1.0*DEFAULT_GAME_WIDTH/DEFAULT_GAME_HEIGHT;
 
 	// Fields
 	private Client client;
@@ -125,20 +126,20 @@ public class UI extends JFrame {
 				int width = e.getComponent().getWidth();
 				int height = e.getComponent().getHeight();
 
-				if (width - (2 * RESIZE_EDGE_SIZE) == height
-						- (QUIT_BAR_SIZE + RESIZE_EDGE_SIZE)) {
+				if (width - (2 * RESIZE_EDGE_SIZE) == (height
+						- (QUIT_BAR_SIZE + RESIZE_EDGE_SIZE))*ASPECT_RATIO) {
 					int newSize = width - (2 * RESIZE_EDGE_SIZE);
-					gamePanel.setSize(newSize, newSize);
-					graphicsPanel.setSize(newSize, newSize);
-					hudPanel.setSize(newSize, newSize);
+					gamePanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
+					graphicsPanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
+					hudPanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
 				} else {
 					System.out.println("aspect ratio wrong");
 					int newSize = Math.min(width, height);
-					setSize(newSize + (2 * RESIZE_EDGE_SIZE), newSize
+					setSize((newSize + (2 * RESIZE_EDGE_SIZE)), (int)(newSize/ASPECT_RATIO)
 							+ QUIT_BAR_SIZE + RESIZE_EDGE_SIZE);
-					gamePanel.setSize(newSize, newSize);
-					graphicsPanel.setSize(newSize, newSize);
-					hudPanel.setSize(newSize, newSize);
+					gamePanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
+					graphicsPanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
+					hudPanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
 				}
 			}
 		});
@@ -257,7 +258,7 @@ public class UI extends JFrame {
 	 * is developed
 	 */
 	private void setupCanvas() {
-		hudPanel = new HUDPanel(client, DEFAULT_GAME_WIDTH/DEFAULT_GAME_HEIGHT);
+		hudPanel = new HUDPanel(client, ASPECT_RATIO);
 		hudPanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT));
 		hudPanel.setOpaque(false);
 		// add(gameCanvas);

@@ -140,7 +140,7 @@ public class HUDPanel extends JPanel {
 	}
 
 	private int getShowHideWidth() {
-		return (int) (this.getWidth() * showHideXProportion);
+		return (int) (this.getWidth() * showHideXProportion/aspectRatio);
 	}
 
 	private boolean onShowHideButton(int x, int y) {
