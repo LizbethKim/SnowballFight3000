@@ -1,5 +1,6 @@
 package client;
 
+import gameworld.world.Direction;
 import gameworld.world.Location;
 import graphics.assets.Objects;
 import graphics.assets.Sprites;
@@ -7,8 +8,13 @@ import graphics.assets.Sprites;
 import java.util.Collections;
 import java.util.List;
 
-import client.Client.Direction;
 
+/**
+ * Gives information about the state of the player to the GUI.
+ * Is updated by the client when updates are sent through the network.
+ * @author kelsey 300275851
+ *
+ */
 public class PlayerState {
 	private List<Objects> inventory;
 	private int health;
@@ -16,7 +22,7 @@ public class PlayerState {
 	private Direction d; 	// the direction the player is facing
 	private Sprites sprite;
 
-	public void update(List<Objects> inventory, int health, Location l, Direction d) {
+	protected void update(List<Objects> inventory, int health, Location l, Direction d) {
 		this.inventory = inventory;
 		this.health = health;
 		this.l = l;

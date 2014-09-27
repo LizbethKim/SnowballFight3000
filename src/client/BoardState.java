@@ -3,7 +3,7 @@ package client;
 import java.util.Collections;
 import java.util.List;
 
-import client.Client.Direction;
+import gameworld.world.Direction;
 import graphics.assets.Objects;
 import graphics.assets.Terrain;
 
@@ -38,9 +38,38 @@ public class BoardState {
 
 		entities = new Objects[10][10];
 		entities[4][2] = Objects.TREE;
+		entities[5][3] = Objects.BUSH;
 		entities[2][7] = Objects.BUSH;
 		entities[8][5] = Objects.TREE;
 		this.d = Direction.NORTH;
+		
+		// Prints to the UI. Just to see if it works.
+		System.out.println("Board:");
+		for (int row = 0; row < board.length; row++) {
+			for (int col = 0; col < board[0].length; col++) {
+				if (board[row][col] == Terrain.GRASS) {
+					System.out.print("G");
+				} else if (board[row][col] == Terrain.SNOW) {
+					System.out.print("S");
+				}
+			}
+			System.out.println("");
+		}
+		
+		System.out.println("");
+		System.out.println("Entities:");
+		for (int row = 0; row < board.length; row++) {
+			for (int col = 0; col < board[0].length; col++) {
+				if (entities[row][col] == Objects.TREE) {
+					System.out.print("T");
+				} else if (entities[row][col] == Objects.BUSH) {
+					System.out.print("B");
+				} else {
+					System.out.print('-');
+				}
+			}
+			System.out.println("");
+		}
 	}
 
 	// Getter methods for EK
@@ -66,7 +95,10 @@ public class BoardState {
 	public List<PlayerState> getPlayers() {
 		return Collections.unmodifiableList(players);
 	}
-
+	
+	public static void main (String[] args) {
+		new BoardState();
+	}
 
 }
 

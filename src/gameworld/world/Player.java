@@ -11,6 +11,7 @@ public class Player implements Entity {
 	private int health = 100;	// From 0 to 100. 0 is frozen.
 	public final String name;	// KTC necessary?
 	private Inventory inventory;
+	private Direction d = Direction.NORTH;
 	
 	public Player (int team, Location l, String name) {
 		this.loc = l;
@@ -26,6 +27,14 @@ public class Player implements Entity {
 	 * @return	true if they moved, false otherwise
 	 */
 	public boolean move(Location l) {
+//		if (l.x - loc.x == 1) {
+//			loc = l;
+//			d = Direction.SOUTH;
+//			return true;
+//		} else if (l.x - loc.x == -1) {
+//			loc = l;
+//			d = Direction.NORTH;
+//		} else if ()
 		if ((Math.abs(l.x - loc.x) == 1) != (Math.abs(l.y - loc.y) == 1)) {	
 			// if exactly one step in a cardinal direction has been taken
 			loc = l;
@@ -55,6 +64,18 @@ public class Player implements Entity {
 	
 	public void damage(int amount) {
 		health -= amount;
+	}
+	
+	public void incrementScore(int amount) {
+		score += amount;
+	}
+
+	public Direction getDirection() {
+		return d;
+	}
+	
+	public void setDirection(Direction d) {
+		this.d = d;
 	}
 	
 }

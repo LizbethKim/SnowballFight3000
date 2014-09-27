@@ -1,5 +1,6 @@
 package client;
 
+import gameworld.world.Direction;
 import gameworld.world.Location;
 import graphics.assets.Objects;
 
@@ -12,10 +13,6 @@ public class Client {
 	
 	// RB for you
 	private int playerID;
-
-	public enum Direction {
-		NORTH, SOUTH, EAST, WEST
-	}
 
 
 	public Client (int playerID) {
