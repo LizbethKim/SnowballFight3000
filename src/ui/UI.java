@@ -163,6 +163,9 @@ public class UI extends JFrame {
 				KeyEvent.VK_SPACE);
 		addKeyBinding("Inspect", new InspectItem(client), KeyEvent.VK_I);
 		addKeyBinding("Interact", new InteractWithItem(client), KeyEvent.VK_Q);
+		
+		addKeyBinding("RotateClockwise", new RotateClockwise(client), KeyEvent.VK_O);
+		addKeyBinding("RotateAntiClockwise", new RotateAntiClockwise(client), KeyEvent.VK_P);
 
 		// setup item hotkeys
 		addKeyBinding("UseItem1", new UseItem(client, 1), KeyEvent.VK_1);
