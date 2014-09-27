@@ -35,6 +35,7 @@ public class HUDPanel extends JPanel {
 	private static final double showHideXProportion = 1.0 / 20.0;
 	private static final double inventoryYProportion = 1.0 / 10.0;
 	private static final double maxHealth = 100.0;
+	private static final double aspectRatio = 1/1;
 
 	private final Client client;
 	private boolean inventoryHidden = false;
@@ -56,8 +57,6 @@ public class HUDPanel extends JPanel {
 	 * draws the board and players
 	 */
 	public void paint(Graphics g) {
-		System.out.println("WIDTH:     " + getWidth());
-		System.out.println("HEIGHT:     " + getHeight());
 		paintHealthBar(g);
 		paintShowHideButton(g);
 		if (!inventoryHidden) {
@@ -66,7 +65,7 @@ public class HUDPanel extends JPanel {
 	}
 
 	private void paintShowHideButton(Graphics g) {
-		final int width = (int) (this.getWidth() * showHideXProportion);
+		final int width = (int) (this.getWidth() * showHideXProportion / aspectRatio);
 		final int height = getHeight() - getInventoryYPos();
 		final int xPos = 0;
 		final int yPos = getInventoryYPos();
@@ -97,9 +96,9 @@ public class HUDPanel extends JPanel {
 	}
 
 	private void paintHealthBar(Graphics g) {
-		final int xPos = this.getWidth() / 20;
+		final int xPos = (int)(this.getWidth() / 20 / aspectRatio);
 		final int yPos = this.getHeight() / 20;
-		final int width = this.getWidth() / 3;
+		final int width = (int)(this.getWidth() / 3 / aspectRatio);
 		final int height = this.getHeight() / 11;
 		final int healthXPos = xPos + (2*width / 7);
 		final int healthYPos = yPos + (height / 4);
@@ -107,12 +106,9 @@ public class HUDPanel extends JPanel {
 		final int healthWidth = (int)(width * 7/10 * healthProportion);
 		final int healthHeight = height * 3 / 5;
 
-		Image base = healthBase.getScaledInstance(width, height, 0);
-		g.drawImage(base, xPos, yPos, null, null);
+		g.drawImage(healthBase, xPos, yPos, width, height, null);
 		if (healthWidth > 0) {
-			Image bar = healthBar.getScaledInstance(healthWidth, healthHeight,
-					0);
-			g.drawImage(bar, healthXPos, healthYPos, null, null);
+			g.drawImage(healthBar, healthXPos, healthYPos, healthWidth, healthHeight, null);
 		}
 
 	}
