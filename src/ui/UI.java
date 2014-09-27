@@ -50,8 +50,8 @@ import client.Client;
  */
 public class UI extends JFrame {
 
-	public static final int DEFAULT_GAME_WIDTH = 800;
-	public static final int DEFAULT_GAME_HEIGHT = 450;
+	public static final int DEFAULT_GAME_WIDTH = 600;
+	public static final int DEFAULT_GAME_HEIGHT = 600;
 	public static final double ASPECT_RATIO = 1.0*DEFAULT_GAME_WIDTH/DEFAULT_GAME_HEIGHT;
 
 	// Fields
@@ -222,6 +222,7 @@ public class UI extends JFrame {
 		final JMenuItem newGame = new JMenuItem("New Game");
 		final JMenuItem quit = new JMenuItem("Quit");
 		final JMenuItem controls = new JMenuItem("Show Controls");
+		final JMenuItem cheats = new JMenuItem("Enable Cheats");
 
 		// add menu and items
 		menu.add(fileMenu);
@@ -230,6 +231,7 @@ public class UI extends JFrame {
 		
 		menu.add(helpMenu);
 		helpMenu.add(controls);
+		helpMenu.add(cheats);
 		
 		setJMenuBar(menu);
 		// setup listeners for the menu
@@ -251,6 +253,13 @@ public class UI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new ControlsPopup();
+			}
+		});
+		
+		cheats.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new CheatsPopup(client);
 			}
 		});
 	}
