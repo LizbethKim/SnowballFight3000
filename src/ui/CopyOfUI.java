@@ -53,7 +53,7 @@ public class CopyOfUI extends JFrame {
 
 	// Fields
 	private Client client;
-	private Canvas gameCanvas;
+	private JPanel hudPanel;
 	private JPanel graphicsPanel;
 	private JLayeredPane gamePanel;
 
@@ -92,10 +92,10 @@ public class CopyOfUI extends JFrame {
 		
 	gamePanel = new JLayeredPane();
 	gamePanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
-	gamePanel.add(gameCanvas);
+	gamePanel.add(hudPanel);
 	gamePanel.add(graphicsPanel);
 	graphicsPanel.setBounds(0,0,gamePanel.getPreferredSize().width, gamePanel.getPreferredSize().height);
-	gameCanvas.setBounds(0,0,gameCanvas.getPreferredSize().width, gameCanvas.getPreferredSize().height);
+	hudPanel.setBounds(0,0,hudPanel.getPreferredSize().width, hudPanel.getPreferredSize().height);
 	add(gamePanel);
 	}
 	
@@ -203,8 +203,8 @@ public class CopyOfUI extends JFrame {
 	 * is developed
 	 */
 	private void setupCanvas() {
-		gameCanvas = new GameCanvas(client);
-		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+		hudPanel = new HUDPanel(client);
+		hudPanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 		//add(gameCanvas);
 	}
 

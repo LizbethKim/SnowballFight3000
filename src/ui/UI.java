@@ -56,7 +56,7 @@ public class UI extends JFrame {
 	private JPanel inventoryPanel;
 	private JButton rotateViewLeft;
 	private JButton rotateViewRight;
-	private Canvas gameCanvas;
+	private JPanel hudPanel;
 	private JPanel gamePanel;
 	
 
@@ -187,9 +187,9 @@ public class UI extends JFrame {
 	 * is developed
 	 */
 	private void setupCanvas() {
-		gameCanvas = new GameCanvas(client);
-		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
-		add(gameCanvas);
+		hudPanel = new HUDPanel(client);
+		hudPanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+		add(hudPanel);
 	}
 
 	public static void main(String[] args) {

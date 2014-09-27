@@ -20,12 +20,13 @@ import java.io.IOException;
 import java.util.HashSet;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 import client.Client;
 
 
 
-public class GameCanvas extends Canvas {
+public class HUDPanel extends JPanel {
 	public static final String IMAGE_PATH = "src/ui/HUDAssets/";
 	private static final Image healthBar = loadImage("HealthBar.png");
 	private static final Image healthBase = loadImage("HealthBarBase.png");
@@ -42,7 +43,7 @@ public class GameCanvas extends Canvas {
 	private boolean inventoryHidden = false;
 	
 
-	public GameCanvas(Client cl) {
+	public HUDPanel(Client cl) {
 		this.client = cl;
 		setupListeners();
 		//this.set
