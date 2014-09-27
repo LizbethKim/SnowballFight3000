@@ -58,16 +58,18 @@ public class UI extends JFrame {
 	private JPanel hudPanel;
 	private JPanel graphicsPanel;
 	private JLayeredPane gamePanel;
+	private int currentWidth;
+	private int currentHeight;
 
 	public UI(Client cl) {
 
 		// initialise UI
 		super();
 		client = cl;
-	//	setLayout(new BorderLayout());
+		// setLayout(new BorderLayout());
 
 		// setup components
-	//	setupAspectRatio();
+
 		setupFileBar();
 		setupKeyBindings();
 		setupCanvas();
@@ -79,49 +81,69 @@ public class UI extends JFrame {
 		Dimension scrnsize = toolkit.getScreenSize();
 		setBounds((scrnsize.width - getWidth()) / 2,
 				(scrnsize.height - getHeight()) / 2, getWidth(), getHeight());
+		currentWidth = getWidth();
+		currentHeight = getHeight();
+
+		setupAspectRatio();
+
+		System.out.println("WHOLE WIDTH = " + getWidth());
+		System.out.println("WHOLE HEIGHT = " + getHeight());
 
 		// pack and Display window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setResizable(true);
 		setVisible(true);
-		//repaint();
-	}
-	
-	private void setupGamePanel(){
-	//	final int defaultWidth = 500;
-		//final int defaultHeight = 500;
-		
-	gamePanel = new JLayeredPane();
-	gamePanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
-	gamePanel.add(hudPanel);
-	gamePanel.add(graphicsPanel);
-	//gamePanel.setBounds(0,0,GAME_WIDTH, GAME_HEIGHT);
-	graphicsPanel.setBounds(0,0,GAME_WIDTH, GAME_HEIGHT);
-	hudPanel.setBounds(0,0,GAME_WIDTH, GAME_HEIGHT);
-	add(gamePanel);
-	}
-	
-	private void setupGraphics(){
-		graphicsPanel = new GraphicsPane(2, client.getBoard()); //temporaryBoardState);
 	}
 
-	private void setupAspectRatio(){
-		addComponentListener(new ComponentAdapter() {
-		      @Override
-		      public void componentResized(ComponentEvent e) {
-		      System.out.println("Resized");
-		      int width = e.getComponent().getWidth();
-		      int height = e.getComponent().getHeight();
-		      int newSize = Math.max(width, height);
-		      setSize(newSize, newSize);
-		      gamePanel.setBounds(0,0,newSize, newSize);
-		      graphicsPanel.setBounds(0,0,newSize, newSize);
-		      hudPanel.setBounds(0,0,newSize, newSize);
-		    }
-		  });
+	private void setupGamePanel() {
+		// final int defaultWidth = 500;
+		// final int defaultHeight = 500;
+
+		gamePanel = new JLayeredPane();
+		gamePanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+		gamePanel.add(hudPanel);
+		gamePanel.add(graphicsPanel);
+		// gamePanel.setBounds(0,0,GAME_WIDTH, GAME_HEIGHT);
+		graphicsPanel.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		hudPanel.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		add(gamePanel);
 	}
-	
+
+	private void setupGraphics() {
+		graphicsPanel = new GraphicsPane(2, client.getBoard()); // temporaryBoardState);
+	}
+
+	private void setupAspectRatio() {
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+
+				final int QUIT_BAR_SIZE = 54;
+				final int RESIZE_EDGE_SIZE = 8;
+
+				int width = e.getComponent().getWidth();
+				int height = e.getComponent().getHeight();
+
+				if (width - (2 * RESIZE_EDGE_SIZE) == height
+						- (QUIT_BAR_SIZE + RESIZE_EDGE_SIZE)) {
+					int newSize = width - (2 * RESIZE_EDGE_SIZE);
+					gamePanel.setSize(newSize, newSize);
+					graphicsPanel.setSize(newSize, newSize);
+					hudPanel.setSize(newSize, newSize);
+				} else {
+					System.out.println("aspect ratio wrong");
+					int newSize = Math.min(width, height);
+					setSize(newSize + (2 * RESIZE_EDGE_SIZE), newSize
+							+ QUIT_BAR_SIZE + RESIZE_EDGE_SIZE);
+					gamePanel.setSize(newSize, newSize);
+					graphicsPanel.setSize(newSize, newSize);
+					hudPanel.setSize(newSize, newSize);
+				}
+			}
+		});
+	}
+
 	/**
 	 * sets up the window to respond to key presses using a key binding system
 	 */
@@ -137,11 +159,12 @@ public class UI extends JFrame {
 				KeyEvent.VK_S);
 		addKeyBinding("MoveDown", new MoveDown(client), KeyEvent.VK_DOWN,
 				KeyEvent.VK_W);
-		addKeyBinding("ThrowSnowball", new ThrowSnowball(client), KeyEvent.VK_SPACE);
+		addKeyBinding("ThrowSnowball", new ThrowSnowball(client),
+				KeyEvent.VK_SPACE);
 		addKeyBinding("Inspect", new InspectItem(client), KeyEvent.VK_I);
 		addKeyBinding("Interact", new InteractWithItem(client), KeyEvent.VK_Q);
-		
-		//setup item hotkeys
+
+		// setup item hotkeys
 		addKeyBinding("UseItem1", new UseItem(client, 1), KeyEvent.VK_1);
 		addKeyBinding("UseItem2", new UseItem(client, 2), KeyEvent.VK_2);
 		addKeyBinding("UseItem3", new UseItem(client, 3), KeyEvent.VK_3);
@@ -214,7 +237,7 @@ public class UI extends JFrame {
 		hudPanel = new HUDPanel(client);
 		hudPanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 		hudPanel.setOpaque(false);
-		//add(gameCanvas);
+		// add(gameCanvas);
 	}
 
 	public static void main(String[] args) {

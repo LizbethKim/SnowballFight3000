@@ -60,6 +60,8 @@ public class HUDPanel extends JPanel {
 	 * draws the board and players
 	 */
 	public void paint(Graphics g) {
+		System.out.println("WIDTH:     "+getWidth());
+		System.out.println("HEIGHT:     "+getHeight());
 		paintHealthBar(g);
 		paintShowHideButton(g);
 		if(!inventoryHidden){
@@ -86,7 +88,7 @@ public class HUDPanel extends JPanel {
 	private void paintInventory(Graphics g){
 		final int inventoryNumber = 9;
 		int xPos = getShowHideWidth();
-		final int size = (this.getWidth()-xPos)/inventoryNumber;
+		final int size = this.getHeight()-getInventoryYPos();
 		int fontSize = size/6;
 		Image slot = inventorySlot.getScaledInstance(size, size, 0);
 		for(int i = 0; i < inventoryNumber; i++){
