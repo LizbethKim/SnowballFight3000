@@ -16,7 +16,7 @@ public class Test extends JFrame{
 	public Test(){
 		super("Graphics Test");
 		BoardState meow = new BoardState();
-		setContentPane(new GraphicsPane(1, WIDTH, HEIGHT, meow));
+		setContentPane(new GraphicsPane(1, meow));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(WIDTH, HEIGHT);
 		setVisible(true); 

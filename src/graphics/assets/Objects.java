@@ -16,13 +16,13 @@ import javax.imageio.ImageIO;
  */
 public enum Objects {
 	KEY(""), 	// EK add the image names here if you find some
-	POWERUP(""), 
+	POWERUP("PowerUp.png"), 
 	CHEST(""), 
-	TREE(""), 
+	TREE("PowerUp.png"), 
 	TABLE(""), 
 	WALL_E_W(""), 
 	WALL_N_S(""), 
-	BUSH("");
+	BUSH("PowerUp.png");
 	
 	public final Image img;
 
