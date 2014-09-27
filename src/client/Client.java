@@ -9,6 +9,12 @@ import java.util.List;
 import server.events.MoveEvent;
 import server.events.TurnEvent;
 
+/**
+ * Current reprentation of the model on the client. Deals with the 
+ * network and sends and receives updates to/from the server.
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class Client {
 	private PlayerState player;
 	

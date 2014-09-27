@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Gives information about the state of the player to the GUI.
  * Is updated by the client when updates are sent through the network.
- * @author kelsey 300275851
+ * @author Kelsey Jack 300275851
  *
  */
 public class PlayerState {

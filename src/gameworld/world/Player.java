@@ -2,7 +2,7 @@ package gameworld.world;
 
 /**
  * Represents players in the world
- * @author kelsey
+ * @author Kelsey Jack 300275851
  */
 public class Player implements Entity {
 	private Location loc;

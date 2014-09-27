@@ -5,6 +5,11 @@ import server.Server;
 import ui.UI;
 import gameworld.world.Board;
 
+/**
+ * Main game loop.
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class Main {
 	public static final boolean SERVER = false;
 	public static final boolean CLIENT = false;
@@ -33,8 +38,8 @@ public class Main {
 			
 			// KATE, this is where I'll need dataloading methods
 			Board board = null; // createBoardFromFile(filename);	
-			
-			singlePlayerGame(board);							
+			Game game = new Game(board);
+			singlePlayerGame(game);							
 		}
 	}
 	
@@ -45,7 +50,7 @@ public class Main {
 	 * so it knows to increment projectiles and other time-based things.
 	 * Everything else will be event-driven (at least, in my mind). 
 	 */
-	private static void singlePlayerGame(Board game) {
+	private static void singlePlayerGame(Game game) {
 		//	PROBABLY REDUNDANT
 		UI display = new UI(); 	// This is where I'll hook in Ryan's code. 
 		// This should create the window etc.

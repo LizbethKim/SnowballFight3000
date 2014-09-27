@@ -5,6 +5,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents the inventory of a player. Has a limit to the number of items
+ * it can carry.
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class PlayerInventory implements Inventory {
 	public static final int DEFAULT_LIMIT = 10; // KTC change perhaps 
 	private int itemLimit;

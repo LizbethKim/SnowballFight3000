@@ -3,6 +3,11 @@ package gameworld.world;
 import graphics.assets.Objects;
 import graphics.assets.Terrain;
 
+/**
+ * Represents the map. Made of Tile objects.
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class Board {
 	// KTC add more 
 	private Tile[][] board; 	// board[row][column] will access correctly. 
@@ -34,8 +39,6 @@ public class Board {
 		return board[l.x][l.y].removeOn();
 	}
 
-	public void clockTick() {
-		// KTC update projectiles, possibly do time logic. 
-	}
+	
 
 }

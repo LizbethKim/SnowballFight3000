@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Represents a chest. Currently has unlimited capacity.
- * @author kelsey
+ * @author Kelsey Jack 300275851
  */
 public class Chest implements Inventory, StaticEntity {
 	List<Item> contents;

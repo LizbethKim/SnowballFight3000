@@ -1,5 +1,10 @@
 package gameworld.world;
 
+/**
+ * 
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class Door implements Lockable {
 	private boolean locked;
 	

@@ -4,6 +4,12 @@ import graphics.assets.Objects;
 
 import java.util.EnumSet;
 
+/**
+ * A decorative object that can only be inspected, not interacted
+ * with. Blocks the tile it's on. 
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class Furniture implements StaticEntity {
 	
 	private static EnumSet<Objects> FURNITURE = EnumSet.of(Objects.BUSH, 

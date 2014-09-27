@@ -2,6 +2,11 @@ package gameworld.world;
 
 import graphics.assets.Terrain;
 
+/**
+ * Represents one tile in the board. 
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class Tile {
 	private Location coords;
 	private Terrain type;	// the image won't be used internally

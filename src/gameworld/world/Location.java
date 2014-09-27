@@ -2,7 +2,7 @@ package gameworld.world;
 
 /**
  * Represents a coordinate in the map
- * @author kelsey
+ * @author Kelsey Jack 300275851
  */
 public class Location {
 	public final int x;	// The bigger the x, the more east we are

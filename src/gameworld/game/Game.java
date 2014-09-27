@@ -7,11 +7,17 @@ import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
 
+/**
+ * Main game logic class. Interacts with the network on the server side.
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class Game {
 	private Board board;
 	private Map<Integer, Player> playerIDs;
 	
-	public Game() {
+	public Game(Board b) {
+		this.board = b;
 		// AUTO
 	}
 	
@@ -46,4 +52,7 @@ public class Game {
 		return null;
 	}
 	
+	public void clockTick() {
+		// KTC update projectiles, possibly do time logic. 
+	}
 }
