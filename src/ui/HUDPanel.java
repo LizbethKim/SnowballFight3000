@@ -71,9 +71,9 @@ public class HUDPanel extends JPanel {
 	
 	private void paintShowHideButton(Graphics g){
 		final int width = (int)(this.getWidth()*showHideXProportion);
-		final int height = width*2;
+		final int height = getHeight()-getInventoryYPos();
 		final int xPos = 0;
-		final int yPos = this.getHeight()-height;
+		final int yPos = getInventoryYPos();
 		Image showHideButton;
 		if(inventoryHidden){
 		showHideButton = showItems.getScaledInstance(width, height, 0);
@@ -87,14 +87,13 @@ public class HUDPanel extends JPanel {
 		final int inventoryNumber = 9;
 		int xPos = getShowHideWidth();
 		final int size = (this.getWidth()-xPos)/inventoryNumber;
-		final int yPos = this.getHeight()-size;
 		int fontSize = size/6;
 		Image slot = inventorySlot.getScaledInstance(size, size, 0);
 		for(int i = 0; i < inventoryNumber; i++){
-			g.drawImage(slot, xPos, yPos, null, null);
+			g.drawImage(slot, xPos, getInventoryYPos(), null, null);
 			g.setFont(new Font("Times", Font.PLAIN, fontSize));
 			int numberXPos = xPos + size/12;
-			int numberYPos = yPos + size/30 + fontSize;
+			int numberYPos = getInventoryYPos() + size/30 + fontSize;
 			g.setColor(Color.white);
 			g.drawString(""+(i+1), numberXPos, numberYPos);
 			xPos += size;

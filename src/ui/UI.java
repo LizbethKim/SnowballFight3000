@@ -67,7 +67,7 @@ public class UI extends JFrame {
 	//	setLayout(new BorderLayout());
 
 		// setup components
-		setupAspectRatio();
+	//	setupAspectRatio();
 		setupFileBar();
 		setupKeyBindings();
 		setupCanvas();
@@ -96,6 +96,7 @@ public class UI extends JFrame {
 	gamePanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 	gamePanel.add(hudPanel);
 	gamePanel.add(graphicsPanel);
+	//gamePanel.setBounds(0,0,GAME_WIDTH, GAME_HEIGHT);
 	graphicsPanel.setBounds(0,0,GAME_WIDTH, GAME_HEIGHT);
 	hudPanel.setBounds(0,0,GAME_WIDTH, GAME_HEIGHT);
 	add(gamePanel);
@@ -112,7 +113,7 @@ public class UI extends JFrame {
 		      System.out.println("Resized");
 		      int width = e.getComponent().getWidth();
 		      int height = e.getComponent().getHeight();
-		      int newSize = Math.min(width, height);
+		      int newSize = Math.max(width, height);
 		      setSize(newSize, newSize);
 		      gamePanel.setBounds(0,0,newSize, newSize);
 		      graphicsPanel.setBounds(0,0,newSize, newSize);
