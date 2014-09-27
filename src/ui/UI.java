@@ -57,15 +57,15 @@ public class UI extends JFrame {
 	private JPanel graphicsPanel;
 	private JLayeredPane gamePanel;
 
-	public UI() {
+	public UI(Client cl) {
 
 		// initialise UI
 		super();
-		client = new Client(0);
+		client = cl;
 	//	setLayout(new BorderLayout());
 
 		// setup components
-	//	setupAspectRatio();
+		setupAspectRatio();
 		setupFileBar();
 		setupKeyBindings();
 		setupCanvas();
@@ -109,7 +109,9 @@ public class UI extends JFrame {
 		      public void componentResized(ComponentEvent e) {
 		      System.out.println("Resized");
 		      int width = e.getComponent().getWidth();
-		      setSize(width, width/2);
+		      int height = e.getComponent().getHeight();
+		      int newSize = Math.min(width, height);
+		      setSize(newSize, newSize);
 		    }
 		  });
 	}
@@ -222,7 +224,7 @@ public class UI extends JFrame {
 		} catch (Exception e) {
 			// do nothing
 		}
-		UI tester = new UI();
+		UI tester = new UI(new Client(1));
 	}
 
 }
