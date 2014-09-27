@@ -18,7 +18,7 @@ public class BoardState {
 	private Objects[][] entities;
 	private List<PlayerState> players;
 	private Direction d;	// The direction that the board is oriented. (Possibly something RB should store)
-	
+
 	/*
 	 * EK This is for you, sets up a plain boring board for testing purposes.
 	 */
@@ -43,7 +43,7 @@ public class BoardState {
 		entities[2][7] = Objects.BUSH;
 		entities[8][5] = Objects.TREE;
 		this.d = Direction.NORTH;
-		
+
 		// Prints to the UI. Just to see if it works.
 		System.out.println("Board:");
 		for (int row = 0; row < board.length; row++) {
@@ -56,7 +56,7 @@ public class BoardState {
 			}
 			System.out.println("");
 		}
-		
+
 		System.out.println("");
 		System.out.println("Entities:");
 		for (int row = 0; row < board.length; row++) {
@@ -87,7 +87,7 @@ public class BoardState {
 	}
 
 
-	public void update(Terrain[][] newBoard, Objects[][] newEntities, Direction d) {
+	protected void update(Terrain[][] newBoard, Objects[][] newEntities, Direction d) {
 		this.board = newBoard;
 		this.entities = newEntities;
 		this.d = d;
@@ -96,7 +96,7 @@ public class BoardState {
 	public List<PlayerState> getPlayers() {
 		return Collections.unmodifiableList(players);
 	}
-	
+
 	public static void main (String[] args) {
 		new BoardState();
 	}
