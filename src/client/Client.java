@@ -17,6 +17,7 @@ import server.events.TurnEvent;
  */
 public class Client {
 	private PlayerState player;
+	private BoardState board;
 	
 	// RB for you
 	private int playerID;
@@ -78,4 +79,9 @@ public class Client {
 	public int getPlayerID() {
 		return playerID;
 	}
+
+	public BoardState getBoard() {
+		return board;
+	}
+
 }
