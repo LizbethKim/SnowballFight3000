@@ -2,6 +2,8 @@ package graphics;
 
 import javax.swing.JFrame;
 
+import client.BoardState;
+
 public class Test extends JFrame{
 	
 	/**
@@ -13,8 +15,8 @@ public class Test extends JFrame{
 	
 	public Test(){
 		super("Graphics Test");
-		
-		setContentPane(new GraphicsPane(1, WIDTH, HEIGHT));
+		BoardState meow = new BoardState();
+		setContentPane(new GraphicsPane(1, WIDTH, HEIGHT, meow));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(WIDTH, HEIGHT);
 		setVisible(true); 

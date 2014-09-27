@@ -7,7 +7,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import client.BoardState;
 import graphics.assets.Sprites;
+import graphics.assets.Terrain;
 
 public class GraphicsPane extends JPanel {
 
@@ -18,46 +20,38 @@ public class GraphicsPane extends JPanel {
 	private Sprites players;
 	private int width;
 	private int height;
-	private BufferedImage img;
-	private BufferedImage[][] boardTest;
+	private BufferedImage[][] board;
+	private BoardState boardState;
 
-	public GraphicsPane(int playerNum, int width, int height) {
+	public GraphicsPane(int playerNum, int width, int height, BoardState boardState) {
 		players = new Sprites();
 		this.width = width;
 		this.height = height;
-
-		try {
-			System.out.println(getClass().getResource(
-					"/graphics/assets/Tile.png"));
-			img = ImageIO.read(getClass().getResource(
-					"/graphics/assets/Tile.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		boardTest = new BufferedImage[10][10];
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				boardTest[i][j] = img;
-			}
-		}
+		this.boardState = boardState;
+		board = new BufferedImage[boardState.getArea().length][boardState.getArea()[0].length];
 	}
 
 	public void paintComponent(Graphics g) {
+		Terrain[][] currentBoard = boardState.getArea();
+		for (int i = 0; i < currentBoard.length; i++){
+			for (int j = 0; j < currentBoard[0].length; j++){
+				board[i][j] = currentBoard[i][j].img;
+			}
+		}
 		width = getWidth();
 		height = getHeight();
 		g.fillRect(0, 0, width, height);
 		System.out.println("Width + Tile Width | " + width + " "
-				+ img.getWidth());
+				+ board[0][0].getWidth());
 		System.out.println("Height + Tile Height | " + height + " "
-				+ img.getHeight());
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
+				+ board[0][0].getHeight());
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[0].length; j++) {
 				double x = (i * 0.5 * width / 10) - (j * 0.5 * width / 10)
-						+ (boardTest.length / 1.75) * (int) width / 13;
+						+ (board.length / 1.75) * (int) width / 13;
 				double y = (i * 0.5 * height / 15) + (j * 0.5 * height / 15)
-						+ (boardTest[0].length / 3) * (int) height / 21;
-				g.drawImage(img, (int) x, (int) y, (int) width / 10,
+						+ (board[0].length / 3) * (int) height / 21;
+				g.drawImage(board[i][j], (int) x, (int) y, (int) width / 10,
 						(int) height / 15, null);
 			}
 		}
