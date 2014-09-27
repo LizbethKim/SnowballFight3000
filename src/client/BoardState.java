@@ -10,7 +10,7 @@ import graphics.assets.Terrain;
 /**
  * Represents the state of the board on the clients so that it can be
  * rendered
- * @author jackkels
+ * @author Kelsey Jack 300275851
  *
  */
 public class BoardState {

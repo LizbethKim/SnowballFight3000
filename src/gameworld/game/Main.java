@@ -52,7 +52,7 @@ public class Main {
 	 */
 	private static void singlePlayerGame(Game game) {
 		//	PROBABLY REDUNDANT
-		UI display = new UI(); 	// This is where I'll hook in Ryan's code. 
+		UI display = new UI(new client.Client(100)); 	// This is where I'll hook in Ryan's code. 
 		// This should create the window etc.
 		// Also of course appropriate parameters.
 		
