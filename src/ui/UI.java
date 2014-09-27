@@ -101,8 +101,7 @@ public class UI extends JFrame {
 	}
 	
 	private void setupGraphics(){
-		BoardState temporaryBoardState = new BoardState();		//RB Totally added a random board state here <3
-		graphicsPanel = new GraphicsPane(2, GAME_WIDTH, GAME_HEIGHT, temporaryBoardState/*client.getBoard()*/);
+		graphicsPanel = new GraphicsPane(2, GAME_WIDTH, GAME_HEIGHT,client.getBoard()); //temporaryBoardState);
 	}
 
 	private void setupAspectRatio(){
@@ -114,6 +113,8 @@ public class UI extends JFrame {
 		      int height = e.getComponent().getHeight();
 		      int newSize = Math.min(width, height);
 		      setSize(newSize, newSize);
+		      gamePanel.setPreferredSize(new Dimension(newSize, newSize));
+		      hudPanel.setPreferredSize(new Dimension(newSize, newSize));
 		    }
 		  });
 	}
