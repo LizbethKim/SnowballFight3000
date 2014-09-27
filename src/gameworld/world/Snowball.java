@@ -1,15 +1,20 @@
 package gameworld.world;
 
+import gameworld.world.SnowballFactory.SnowballType;
+
 /**
- * Represents a normal snowball.
+ * Represents a projectile, eg a snowball.
  * @author Kelsey Jack 300275851
  *
  */
-public class Snowball implements Projectile{
+public class Snowball implements Entity {
+	
 	public final Direction d;
 	private Location l;
-	public static final int DAMAGE = 10;
-	// KTC moves per tick modulo arithmetic
+	public final int damage;
+	public final double ticksPerSquare;
+	private double ticksSinceLast = 0;
+	public final SnowballType type;
 	
 	/**
 	 * Creates a new snowball and starts it one square in 
@@ -17,11 +22,13 @@ public class Snowball implements Projectile{
 	 * @param thrownAt
 	 * @param d
 	 */
-	public Snowball(Location thrownAt, Direction d) {
+	public Snowball(Location thrownAt, Direction d, int damage, double ticksPerSquare, SnowballType t) {
 		this.d = d;
 		this.l = thrownAt;
 		this.moveForward();
-
+		this.damage = damage;
+		this.ticksPerSquare = ticksPerSquare;
+		this.type = t;
 	}
 
 	/* Move forward one square. May be different to the clockTick,
@@ -39,14 +46,24 @@ public class Snowball implements Projectile{
 		}
 	}
 
-	@Override
+	
+	/**
+	 * Damages the player it hits. KTC right now friendly fire can hurt
+	 * @param p The player hit
+	 */
 	public void hit(Player p) {
-		p.damage(Snowball.DAMAGE);
+		p.damage(this.damage);
 	}
 
-	@Override
+	/**
+	 * Will move the projectile one tick's worth.
+	 */
 	public void clockTick() {
-		moveForward();
+		ticksSinceLast += 1;
+		while (ticksSinceLast >= ticksPerSquare) {
+			moveForward();
+			ticksSinceLast -= ticksPerSquare;
+		}
 	}
 
 }

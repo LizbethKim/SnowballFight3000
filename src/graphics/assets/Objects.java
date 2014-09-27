@@ -22,6 +22,7 @@ public enum Objects {
 	TABLE(""), 
 	WALL_E_W(""), 
 	WALL_N_S(""), 
+	SNOWBALL(""),
 	BUSH("PowerUp.png");
 	
 	public final Image img;

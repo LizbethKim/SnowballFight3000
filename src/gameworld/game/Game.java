@@ -7,8 +7,9 @@ import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
-import gameworld.world.Projectile;
 import gameworld.world.Snowball;
+import gameworld.world.SnowballFactory;
+import gameworld.world.SnowballFactory.SnowballType;
 
 /**
  * Main game logic class. Interacts with the network on the server side.
@@ -18,7 +19,8 @@ import gameworld.world.Snowball;
 public class Game {
 	private Board board;
 	private Map<Integer, Player> playerIDs;
-	private List<Projectile> projectiles;
+	private List<Snowball> projectiles;
+	private SnowballFactory snowballFactory;
 	
 	public Game(Board b) {
 		this.board = b;
@@ -50,7 +52,7 @@ public class Game {
 	public void throwSnowball(int playerID) {
 		Player thrower = playerIDs.get(playerID);
 		if (board.tileAt(thrower.getLocation()).isSnow()) {
-			projectiles.add(new Snowball(thrower.getLocation(), thrower.getDirection()));
+			projectiles.add(snowballFactory.makeSnowball(thrower.getLocation(), thrower.getDirection(), SnowballType.NORMAL));
 		}
 	}
 	
@@ -60,6 +62,11 @@ public class Game {
 	}
 	
 	public void clockTick() {
+		for (Snowball s: projectiles) {
+			s.clockTick();
+			// if it has collided with anything, make it hit that, and then
+			// delete it from the list.
+		}
 		// KTC update projectiles, possibly do time logic. 
 		// check for collisions and remove projectiles that have hit something.
 	}
