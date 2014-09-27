@@ -214,20 +214,40 @@ public class UI extends JFrame {
 		JMenuBar menu = new JMenuBar();
 		menu.setFocusable(false);
 		final JMenu fileMenu = new JMenu("File");
+		final JMenu helpMenu = new JMenu("Help");
+		
 		final JMenuItem newGame = new JMenuItem("New Game");
 		final JMenuItem quit = new JMenuItem("Quit");
+		final JMenuItem controls = new JMenuItem("Show Controls");
 
 		// add menu and items
 		menu.add(fileMenu);
 		fileMenu.add(newGame);
 		fileMenu.add(quit);
-
+		
+		menu.add(helpMenu);
+		helpMenu.add(controls);
+		
 		setJMenuBar(menu);
 		// setup listeners for the menu
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(EXIT_ON_CLOSE);
+			}
+		});
+		
+		newGame.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//RB: client.newGame()?
+			}
+		});
+		
+		controls.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new ControlsPopup();
 			}
 		});
 	}
