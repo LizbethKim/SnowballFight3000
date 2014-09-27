@@ -156,16 +156,16 @@ public class UI extends JFrame {
 		addKeyBinding("MoveLeft", new MoveLeft(client), KeyEvent.VK_LEFT,
 				KeyEvent.VK_A);
 		addKeyBinding("MoveUp", new MoveUp(client), KeyEvent.VK_UP,
-				KeyEvent.VK_S);
-		addKeyBinding("MoveDown", new MoveDown(client), KeyEvent.VK_DOWN,
 				KeyEvent.VK_W);
+		addKeyBinding("MoveDown", new MoveDown(client), KeyEvent.VK_DOWN,
+				KeyEvent.VK_S);
 		addKeyBinding("ThrowSnowball", new ThrowSnowball(client),
 				KeyEvent.VK_SPACE);
 		addKeyBinding("Inspect", new InspectItem(client), KeyEvent.VK_I);
 		addKeyBinding("Interact", new InteractWithItem(client), KeyEvent.VK_Q);
 		
-		addKeyBinding("RotateClockwise", new RotateClockwise(client), KeyEvent.VK_O);
-		addKeyBinding("RotateAntiClockwise", new RotateAntiClockwise(client), KeyEvent.VK_P);
+		addKeyBinding("RotateClockwise", new RotateClockwise(client), KeyEvent.VK_P);
+		addKeyBinding("RotateAntiClockwise", new RotateAntiClockwise(client), KeyEvent.VK_O);
 
 		// setup item hotkeys
 		addKeyBinding("UseItem1", new UseItem(client, 1), KeyEvent.VK_1);

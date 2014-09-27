@@ -12,8 +12,7 @@ public class RotateClockwise extends KeyAction{
 
 	@Override
 	protected void execute(){
-		client.move(Direction.SOUTH);
-		System.out.println("moveDown");
-		//TODO board.movedown()
+		client.rotateClockwise();
+		System.out.println("rotateClockwise");
 	}
 }
