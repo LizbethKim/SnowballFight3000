@@ -1,8 +1,8 @@
 package ui.actions;
 
 import client.Client;
-import client.Client.Direction;
 import gameworld.world.Board;
+import gameworld.world.Direction;
 
 public class MoveDown extends KeyAction{
 	

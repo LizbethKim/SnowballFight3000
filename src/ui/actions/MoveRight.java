@@ -1,7 +1,7 @@
 package ui.actions;
 
 import client.Client;
-import client.Client.Direction;
+import gameworld.world.Direction;
 import gameworld.world.Board;
 
 public class MoveRight extends KeyAction{

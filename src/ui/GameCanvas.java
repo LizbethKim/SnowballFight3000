@@ -45,7 +45,7 @@ public class GameCanvas extends Canvas {
 	public GameCanvas(Client cl) {
 		this.client = cl;
 		setupListeners();
-		
+		//this.set
 		GraphicsEnvironment env = GraphicsEnvironment
 				.getLocalGraphicsEnvironment();
 		HashSet<String> availableNames = new HashSet();
