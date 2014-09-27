@@ -115,8 +115,9 @@ public class UI extends JFrame {
 				KeyEvent.VK_W);
 		addKeyBinding("ThrowSnowball", new ThrowSnowball(client), KeyEvent.VK_SPACE);
 		addKeyBinding("Inspect", new InspectItem(client), KeyEvent.VK_I);
+		addKeyBinding("Interact", new InteractWithItem(client), KeyEvent.VK_Q);
 		
-		//setup
+		//setup item hotkeys
 		addKeyBinding("UseItem1", new UseItem(client, 1), KeyEvent.VK_1);
 		addKeyBinding("UseItem2", new UseItem(client, 2), KeyEvent.VK_2);
 		addKeyBinding("UseItem3", new UseItem(client, 3), KeyEvent.VK_3);
@@ -186,13 +187,6 @@ public class UI extends JFrame {
 	 * is developed
 	 */
 	private void setupCanvas() {
-		/*gameCanvas = new Canvas() {
-			public void paint(Graphics g) {
-				g.drawRect(0, 0, getWidth(), getHeight());
-				g.setColor(Color.GRAY);
-				g.fillRect(0, 0, getWidth(), getHeight());
-			}
-		};*/
 		gameCanvas = new GameCanvas(client);
 		gameCanvas.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 		add(gameCanvas);
