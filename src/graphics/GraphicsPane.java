@@ -48,12 +48,12 @@ public class GraphicsPane extends JPanel {
 		}
 		
 		Objects[][] currentObjects = boardState.getObjects();
-		for (int i = 0; i < currentObjects.length; i++){
-			for (int j = -1; j < currentObjects[0].length - 1; j++){
+		for (int i = 0; i < currentBoard.length; i++){
+			for (int j = -1; j < currentBoard[0].length - 1; j++){
 				double x = (i * 0.5 * width / currentBoard.length) - (j * 0.5 * width / currentBoard.length)
-						+ (currentObjects.length / 1.75) * (int) width / 13 - (0.25 * width/currentBoard.length);
+						+ (currentBoard.length / 1.75) * (int) width / 13 - (0.25 * width/currentBoard.length);
 				double y = (i * 0.5 * height / (currentBoard[0].length*1.5)) + (j * 0.5 * height / (currentBoard[0].length * 1.5))
-						+ (currentObjects[0].length / 3) * (int) height / 21 - (0.25 * height/(currentBoard[0].length*1.5));
+						+ (currentBoard[0].length / 3) * (int) height / 21 - (0.25 * height/(currentBoard[0].length*1.5));
 				if (currentObjects[i][j + 1] != null){
 					g.drawImage(currentObjects[i][j + 1].img, (int) x, (int) y, null);
 				}
