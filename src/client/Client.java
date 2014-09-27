@@ -25,6 +25,7 @@ public class Client {
 
 	public Client (int playerID) {
 		this.playerID = playerID;
+		board = new BoardState();
 	}
 
 	public PlayerState getPlayer() {
