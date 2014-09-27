@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import gameworld.world.Board;
+import graphics.GraphicsPane;
 import ui.actions.*;
 
 import javax.swing.ActionMap;
@@ -52,13 +53,9 @@ public class UI extends JFrame {
 
 	// Fields
 	private Client client;
-	private JPanel buttonPanel;
-	private JPanel inventoryPanel;
-	private JButton rotateViewLeft;
-	private JButton rotateViewRight;
 	private JPanel hudPanel;
-	private JPanel gamePanel;
-	
+	private JPanel graphicsPanel;
+	private JLayeredPane gamePanel;
 
 	public UI() {
 
@@ -72,6 +69,8 @@ public class UI extends JFrame {
 		setupFileBar();
 		setupKeyBindings();
 		setupCanvas();
+		setupGraphics();
+		setupGamePanel();
 
 		// set initial size
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -85,6 +84,23 @@ public class UI extends JFrame {
 		setResizable(true);
 		setVisible(true);
 		//repaint();
+	}
+	
+	private void setupGamePanel(){
+	//	final int defaultWidth = 500;
+		//final int defaultHeight = 500;
+		
+	gamePanel = new JLayeredPane();
+	gamePanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+	gamePanel.add(hudPanel);
+	gamePanel.add(graphicsPanel);
+	graphicsPanel.setBounds(0,0,gamePanel.getPreferredSize().width, gamePanel.getPreferredSize().height);
+	hudPanel.setBounds(0,0,hudPanel.getPreferredSize().width, hudPanel.getPreferredSize().height);
+	add(gamePanel);
+	}
+	
+	private void setupGraphics(){
+		graphicsPanel = new GraphicsPane(2, GAME_WIDTH, GAME_HEIGHT);
 	}
 
 	private void setupAspectRatio(){
@@ -189,7 +205,8 @@ public class UI extends JFrame {
 	private void setupCanvas() {
 		hudPanel = new HUDPanel(client);
 		hudPanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
-		add(hudPanel);
+		hudPanel.setOpaque(false);
+		//add(gameCanvas);
 	}
 
 	public static void main(String[] args) {
