@@ -85,7 +85,7 @@ public class UI extends JFrame {
 		currentWidth = getWidth();
 		currentHeight = getHeight();
 
-		setupAspectRatio();
+		setupResizing();
 
 		System.out.println("WHOLE WIDTH = " + getWidth());
 		System.out.println("WHOLE HEIGHT = " + getHeight());
@@ -115,36 +115,38 @@ public class UI extends JFrame {
 		graphicsPanel = new GraphicsPane(2, client.getBoard()); // temporaryBoardState);
 	}
 
-	private void setupAspectRatio() {
-		addComponentListener(new ComponentAdapter() {
+	private void setupResizing() {
+		gamePanel.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-
-				final int QUIT_BAR_SIZE = 54;
-				final int RESIZE_EDGE_SIZE = 8;
-
-				int width = e.getComponent().getWidth();
-				int height = e.getComponent().getHeight();
-
-				if (width - (2 * RESIZE_EDGE_SIZE) == (height
-						- (QUIT_BAR_SIZE + RESIZE_EDGE_SIZE))*ASPECT_RATIO) {
-					int newSize = width - (2 * RESIZE_EDGE_SIZE);
-					gamePanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
-					graphicsPanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
-					hudPanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
-				} else {
-					System.out.println("aspect ratio wrong");
-					int newSize = Math.min(width, height);
-					setSize((newSize + (2 * RESIZE_EDGE_SIZE)), (int)(newSize/ASPECT_RATIO)
-							+ QUIT_BAR_SIZE + RESIZE_EDGE_SIZE);
-					gamePanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
-					graphicsPanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
-					hudPanel.setSize(newSize, (int)(newSize/ASPECT_RATIO));
-				}
+				resizeToRatio(e);
 			}
 		});
 	}
 
+	private void resizeToRatio(ComponentEvent e){
+		final int QUIT_BAR_SIZE = 54;
+		final int RESIZE_EDGE_SIZE = 8;
+		
+		int windowXBorder = QUIT_BAR_SIZE + RESIZE_EDGE_SIZE;
+		int windowYBorder = RESIZE_EDGE_SIZE + RESIZE_EDGE_SIZE;
+		
+		int width = e.getComponent().getWidth();
+		int height = e.getComponent().getHeight();
+		
+		Dimension newSize = getMaximumAspectSize(width, height);
+		graphicsPanel.setSize(newSize.width,newSize.height);
+		hudPanel.setSize(newSize.width,newSize.height);
+	}
+	
+	private Dimension getMaximumAspectSize(int width, int height){
+		if(width/ASPECT_RATIO<height){
+			return new Dimension(width, (int) (width/ASPECT_RATIO));
+		} else {
+			return new Dimension((int) (height*ASPECT_RATIO), height);
+		}
+	}
+	
 	/**
 	 * sets up the window to respond to key presses using a key binding system
 	 */
