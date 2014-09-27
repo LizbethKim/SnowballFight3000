@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,7 +67,7 @@ public class UI extends JFrame {
 	//	setLayout(new BorderLayout());
 
 		// setup components
-		//setupAspectRatio();
+		setupAspectRatio();
 		setupFileBar();
 		setupKeyBindings();
 		setupCanvas();
@@ -95,13 +96,13 @@ public class UI extends JFrame {
 	gamePanel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 	gamePanel.add(hudPanel);
 	gamePanel.add(graphicsPanel);
-	graphicsPanel.setBounds(0,0,gamePanel.getPreferredSize().width, gamePanel.getPreferredSize().height);
-	hudPanel.setBounds(0,0,hudPanel.getPreferredSize().width, hudPanel.getPreferredSize().height);
+	graphicsPanel.setBounds(0,0,GAME_WIDTH, GAME_HEIGHT);
+	hudPanel.setBounds(0,0,GAME_WIDTH, GAME_HEIGHT);
 	add(gamePanel);
 	}
 	
 	private void setupGraphics(){
-		graphicsPanel = new GraphicsPane(2, GAME_WIDTH, GAME_HEIGHT,client.getBoard()); //temporaryBoardState);
+		graphicsPanel = new GraphicsPane(2, client.getBoard()); //temporaryBoardState);
 	}
 
 	private void setupAspectRatio(){
@@ -113,8 +114,9 @@ public class UI extends JFrame {
 		      int height = e.getComponent().getHeight();
 		      int newSize = Math.min(width, height);
 		      setSize(newSize, newSize);
-		      gamePanel.setPreferredSize(new Dimension(newSize, newSize));
-		      hudPanel.setPreferredSize(new Dimension(newSize, newSize));
+		      gamePanel.setBounds(0,0,newSize, newSize);
+		      graphicsPanel.setBounds(0,0,newSize, newSize);
+		      hudPanel.setBounds(0,0,newSize, newSize);
 		    }
 		  });
 	}
