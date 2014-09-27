@@ -56,18 +56,18 @@ public class Main {
 		// This should create the window etc.
 		// Also of course appropriate parameters.
 		
-		while (true) {	// KTC perhaps change to "playing", allow game to finish.
-			// Loop forever			
-			try {
-				Thread.sleep(TICK_TIME);
-				game.clockTick();
-				if(display != null) {
-					display.repaint();
-				}
-			} catch(InterruptedException e) {
-				// should never happen KTC perhaps do something here
-			}			
-		}
+//		while (true) {	// KTC perhaps change to "playing", allow game to finish.
+//			// Loop forever			
+//			try {
+//				Thread.sleep(TICK_TIME);
+//				game.clockTick();
+//				if(display != null) {
+//					display.repaint();
+//				}
+//			} catch(InterruptedException e) {
+//				// should never happen KTC perhaps do something here
+//			}			
+//		}
 	}
 	
 	/*
