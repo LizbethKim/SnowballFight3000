@@ -18,8 +18,10 @@ public class GraphicsPane extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -2715513999456707521L;
-	private int width;
-	private int height;
+	private double width;
+	private double height;
+	private double startingWidth;
+	private double startingHeight;
 	private BoardState boardState;
 
 	public GraphicsPane(int playerNum, BoardState boardState) {
@@ -29,9 +31,11 @@ public class GraphicsPane extends JPanel {
 	public void paintComponent(Graphics g) {
 		Terrain[][] currentBoard = boardState.getArea();
 
+		if (startingWidth == 0) startingWidth = getWidth();
+		if (startingHeight == 0) startingHeight = getHeight();
 		width = getWidth();
 		height = getHeight();
-		g.fillRect(0, 0, width, height);
+		g.fillRect(0, 0, (int)width, (int)height);
 		System.out.println("Width + Tile Width | " + width + " "
 				+ currentBoard[0][0].img.getWidth());
 		System.out.println("Height + Tile Height | " + height + " "
@@ -50,12 +54,13 @@ public class GraphicsPane extends JPanel {
 		Objects[][] currentObjects = boardState.getObjects();
 		for (int i = 0; i < currentBoard.length; i++){
 			for (int j = -1; j < currentBoard[0].length - 1; j++){
+				System.out.println((width * (width/startingWidth)) == width);
 				double x = (i * 0.5 * width / currentBoard.length) - (j * 0.5 * width / currentBoard.length)
 						+ (currentBoard.length / 1.75) * (int) width / 13 - (0.25 * width/currentBoard.length);
 				double y = (i * 0.5 * height / (currentBoard[0].length*1.5)) + (j * 0.5 * height / (currentBoard[0].length * 1.5))
 						+ (currentBoard[0].length / 3) * (int) height / 21 - (0.25 * height/(currentBoard[0].length*1.5));
 				if (currentObjects[i][j + 1] != null){
-					g.drawImage(currentObjects[i][j + 1].img, (int) x, (int) y, null);
+					g.drawImage(currentObjects[i][j + 1].img, (int) x, (int) y, (int) (currentObjects[i][j+1].img.getWidth(null)* (width/startingWidth)),(int) (currentObjects[i][j+1].img.getHeight(null)* (height/startingHeight)), null);
 				}
 			}
 		}
