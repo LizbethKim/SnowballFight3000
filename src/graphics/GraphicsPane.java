@@ -26,13 +26,12 @@ public class GraphicsPane extends JPanel {
 
 	public GraphicsPane(int playerNum, BoardState boardState) {
 		this.boardState = boardState;
+		startingWidth = 700;
+		startingHeight = 700;
 	}
 
 	public void paintComponent(Graphics g) {
 		Terrain[][] currentBoard = boardState.getArea();
-
-		if (startingWidth == 0) startingWidth = getWidth();
-		if (startingHeight == 0) startingHeight = getHeight();
 		width = getWidth();
 		height = getHeight();
 		g.fillRect(0, 0, (int)width, (int)height);
@@ -42,9 +41,9 @@ public class GraphicsPane extends JPanel {
 				+ currentBoard[0][0].img.getHeight());
 		for (int i = 0; i < currentBoard.length; i++) {
 			for (int j = 0; j < currentBoard[0].length; j++) {
-				double x = (i * 0.5 * width / 10) - (j * 0.5 * width / 10)
+				double x = (i * 0.5 * width / currentBoard.length) - (j * 0.5 * width / currentBoard.length)
 						+ (currentBoard.length / 1.75) * (int) width / 13;
-				double y = (i * 0.5 * height / 15) + (j * 0.5 * height / 15)
+				double y = (i * 0.5 * height / (currentBoard[0].length*1.5)) + (j * 0.5 * height / (currentBoard[0].length*1.5))
 						+ (currentBoard[0].length / 3) * (int) height / 21;
 				g.drawImage(currentBoard[i][j].img, (int) x, (int) y, (int) width / 10,
 						(int) height / 15, null);
@@ -52,14 +51,14 @@ public class GraphicsPane extends JPanel {
 		}
 		
 		Objects[][] currentObjects = boardState.getObjects();
-		for (int i = -1; i < currentBoard.length -1; i++){
+		for (int i = 0; i < currentBoard.length; i++){
 			for (int j = -1; j < currentBoard[0].length -1; j++){
 				double x = (i * 0.5 * width / currentBoard.length) - (j * 0.5 * width / currentBoard.length)
-						+ (currentBoard.length / 1.75) * (int) width / 13;// - (0.25 * width/currentBoard.length);
+						+ (currentBoard.length / 1.75) * (int) width / 13 - (0.25 * width/currentBoard.length);
 				double y = (i * 0.5 * height / (currentBoard[0].length*1.5)) + (j * 0.5 * height / (currentBoard[0].length * 1.5))
-						+ (currentBoard[0].length / 3) * (int) height / 21;// - (0.25 * height/(currentBoard[0].length*1.5));
-				if (currentObjects[i + 1][j + 1] != null){
-					g.drawImage(currentObjects[i + 1][j + 1].img, (int) x, (int) y, (int) (currentObjects[i + 1][j + 1].img.getWidth(null)* (width/startingWidth)),(int) (currentObjects[i + 1][j + 1].img.getHeight(null)* (height/startingHeight)), null);
+						+ (currentBoard[0].length / 3) * (int) height / 21 - (0.25 * height/(currentBoard[0].length*1.5));
+				if (currentObjects[i][j + 1] != null){
+					g.drawImage(currentObjects[i][j + 1].img, (int) x, (int) y, (int) (currentObjects[i][j + 1].img.getWidth(null)* (width/startingWidth)),(int) (currentObjects[i][j + 1].img.getHeight(null)* (height/startingHeight)), null);
 				}
 			}
 		}
