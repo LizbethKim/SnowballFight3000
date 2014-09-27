@@ -27,14 +27,14 @@ public class ControlsPopup extends JPanel{
 	}
 	
 	private void showControls(){
-		JOptionPane.showMessageDialog(null, this, "Game Controls",0);
+		JOptionPane.showMessageDialog(null, this, "Game Controls",JOptionPane.PLAIN_MESSAGE);
 	}
 	
 	private void addControl(String action, String control){
 		JLabel a = new JLabel(action);
 		JLabel c = new JLabel(" "+control);
-		a.setFont(new Font("Times", Font.BOLD, 18));
-		c.setFont(new Font("Times", Font.PLAIN, 18));
+		a.setFont(new Font("Verdana", Font.BOLD, 18));
+		c.setFont(new Font("Verdana", Font.PLAIN, 18));
 		actions.add(a);
 		controls.add(c);
 	}
