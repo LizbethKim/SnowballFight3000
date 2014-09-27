@@ -34,6 +34,15 @@ public class PlayerState {
 		this.health = health;
 		this.l = l;
 	}
+	
+	protected void rotateClockwise() {
+		d = Direction.values()[(d.ordinal() + 1) % 4];
+	}
+	
+	protected void rotateAnticlockwise() {
+		// goes forward 3 clockwise - same as going one anticlockwise.
+		d = Direction.values()[(d.ordinal() + 3) % 4];
+	}
 
 	public List<Objects> getInventory() {
 		return Collections.unmodifiableList(inventory);

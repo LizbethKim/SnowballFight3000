@@ -58,6 +58,14 @@ public class Client {
 		}
 	}
 
+	public void rotateClockwise() {
+		player.rotateClockwise();
+	}
+	
+	public void rotateAnticlockwise() {
+		player.rotateAnticlockwise();
+	}
+	
 	public void throwSnowball () {
 		// KTC
 	}
