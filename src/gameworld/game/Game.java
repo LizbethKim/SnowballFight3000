@@ -1,11 +1,14 @@
 package gameworld.game;
 
+import java.util.List;
 import java.util.Map;
 
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
+import gameworld.world.Projectile;
+import gameworld.world.Snowball;
 
 /**
  * Main game logic class. Interacts with the network on the server side.
@@ -15,6 +18,7 @@ import gameworld.world.Player;
 public class Game {
 	private Board board;
 	private Map<Integer, Player> playerIDs;
+	private List<Projectile> projectiles;
 	
 	public Game(Board b) {
 		this.board = b;
@@ -44,7 +48,10 @@ public class Game {
 	}
 	
 	public void throwSnowball(int playerID) {
-		
+		Player thrower = playerIDs.get(playerID);
+		if (board.tileAt(thrower.getLocation()).isSnow()) {
+			projectiles.add(new Snowball(thrower.getLocation(), thrower.getDirection()));
+		}
 	}
 	
 	public Player playerAt(Location l) {
@@ -54,5 +61,6 @@ public class Game {
 	
 	public void clockTick() {
 		// KTC update projectiles, possibly do time logic. 
+		// check for collisions and remove projectiles that have hit something.
 	}
 }

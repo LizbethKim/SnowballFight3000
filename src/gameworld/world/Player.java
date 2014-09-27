@@ -35,6 +35,10 @@ public class Player implements Entity {
 		return false;
 	}
 	
+	public Location getLocation() {
+		return loc;
+	}
+	
 	/**
 	 * @return Whether the player has been frozen or not.
 	 */
