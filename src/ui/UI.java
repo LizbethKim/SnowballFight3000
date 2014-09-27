@@ -66,7 +66,7 @@ public class UI extends JFrame {
 	//	setLayout(new BorderLayout());
 
 		// setup components
-		setupAspectRatio();
+		//setupAspectRatio();
 		setupFileBar();
 		setupKeyBindings();
 		setupCanvas();
@@ -102,7 +102,7 @@ public class UI extends JFrame {
 	
 	private void setupGraphics(){
 		BoardState temporaryBoardState = new BoardState();		//RB Totally added a random board state here <3
-		graphicsPanel = new GraphicsPane(2, GAME_WIDTH, GAME_HEIGHT, temporaryBoardState);
+		graphicsPanel = new GraphicsPane(2, GAME_WIDTH, GAME_HEIGHT, temporaryBoardState/*client.getBoard()*/);
 	}
 
 	private void setupAspectRatio(){
