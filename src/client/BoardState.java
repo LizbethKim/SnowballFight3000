@@ -37,6 +37,7 @@ public class BoardState {
 		}
 
 		entities = new Objects[10][10];
+		entities[0][0] = Objects.POWERUP;
 		entities[4][2] = Objects.TREE;
 		entities[5][3] = Objects.BUSH;
 		entities[2][7] = Objects.BUSH;
