@@ -35,6 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
+import client.BoardState;
 import client.Client;
 
 /**
@@ -100,7 +101,8 @@ public class UI extends JFrame {
 	}
 	
 	private void setupGraphics(){
-		graphicsPanel = new GraphicsPane(2, GAME_WIDTH, GAME_HEIGHT);
+		BoardState temporaryBoardState = new BoardState();		//RB Totally added a random board state here <3
+		graphicsPanel = new GraphicsPane(2, GAME_WIDTH, GAME_HEIGHT, temporaryBoardState);
 	}
 
 	private void setupAspectRatio(){

@@ -20,7 +20,6 @@ public class Test extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(WIDTH, HEIGHT);
 		setVisible(true); 
-		
 	}
 
 	public static void main(String args[]){
