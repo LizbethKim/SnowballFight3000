@@ -4,6 +4,7 @@ import gameworld.world.Direction;
 import gameworld.world.Location;
 import graphics.assets.Objects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import server.events.MoveEvent;
@@ -25,6 +26,10 @@ public class Client {
 
 	public Client (int playerID) {
 		this.playerID = playerID;
+		List<Objects> playerInventory = new ArrayList<Objects>();
+		playerInventory.add(Objects.KEY);
+		playerInventory.add(Objects.POWERUP);
+		this.player = new PlayerState(new ArrayList<Objects>(), 80, new Location(2,2), Direction.WEST);
 		board = new BoardState();
 	}
 

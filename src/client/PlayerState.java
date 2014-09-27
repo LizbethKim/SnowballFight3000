@@ -22,6 +22,13 @@ public class PlayerState {
 	private Direction d; 	// the direction the player is facing
 	private Sprites sprite;
 
+	public PlayerState(List<Objects> inventory, int health, Location l, Direction d) {
+		this.inventory = inventory;
+		this.health = health;
+		this.l = l;
+		this.d = d;
+	}
+	
 	protected void update(List<Objects> inventory, int health, Location l, Direction d) {
 		this.inventory = inventory;
 		this.health = health;

@@ -69,7 +69,7 @@ public class Main {
 //			}			
 //		}
 	}
-	
+	 
 	/*
 	 * In terms of client/server, I think the clients should have a tick that
 	 * calls repaint on the UI/graphics, and the server should have one that
