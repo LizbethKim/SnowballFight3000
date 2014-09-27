@@ -101,11 +101,10 @@ public class HUDPanel extends JPanel {
 		final int yPos = this.getHeight() / 20;
 		final int width = this.getWidth() / 3;
 		final int height = this.getHeight() / 11;
-		final int healthXPos = xPos + (width / 4);
+		final int healthXPos = xPos + (2*width / 7);
 		final int healthYPos = yPos + (height / 4);
-		final int xDifference = healthXPos - xPos;
 		final double healthProportion = client.getPlayer().getHealth() / maxHealth;
-		final int healthWidth = (int)((width - xDifference) * healthProportion);
+		final int healthWidth = (int)(width * 7/10 * healthProportion);
 		final int healthHeight = height * 3 / 5;
 
 		Image base = healthBase.getScaledInstance(width, height, 0);
