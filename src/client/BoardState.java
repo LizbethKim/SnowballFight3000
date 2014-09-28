@@ -99,7 +99,15 @@ public class BoardState {
 		for (int x = 0; x < entities.length; x++) {
 			for (int y = 0; y < entities[0].length; y++) {
 				entitiesCopy[x][y] = entities[x][y];
+				// ====== get rid of this n=====
+				if (entities[x][y] == Objects.PLAYER1) {
+					System.out.print('p');
+				} else {
+					System.out.print('-');
+				}
+				// =============================
 			}
+			System.out.println();
 		}
 		return entitiesCopy;
 	}
@@ -112,14 +120,15 @@ public class BoardState {
 //		return Collections.unmodifiableCollection(players.values());
 //	}
 
-	public static void main (String[] args) {
-		new BoardState();
-	}
+//	public static void main (String[] args) {
+//		new BoardState();
+//	}
 
 
 	protected void update(Terrain[][] newBoard, Objects[][] newEntities) {
 		this.board = newBoard;
 		this.entities = newEntities;
+		System.out.println("updated");
 	}
 
 	protected void rotateClockwise() {

@@ -36,7 +36,7 @@ public class SinglePlayerGame extends ClientGame {
 		display = new UI(this);
 		player = new Player(1, new Location(2, 2), "");
 		playerIDs.put(this.playerID, player);
-		this.update = new Updater(board, playerIDs, projectiles);
+		this.update = new Updater(board, playerIDs, projectiles, boardState, display);
 	}
 
 
@@ -57,6 +57,7 @@ public class SinglePlayerGame extends ClientGame {
 	}
 
 	public void move (Direction d) {
+		// KTC check if it's off the edge of the board
 		if (player.getDirection() == d) {
 			Location newLoc;
 			if (d == Direction.NORTH) {

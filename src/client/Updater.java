@@ -3,6 +3,7 @@ package client;
 import java.util.List;
 import java.util.Map;
 
+import ui.UI;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
@@ -23,12 +24,14 @@ public class Updater {
 	private List<Snowball> projectiles;
 
 	private BoardState bs;	// KTC to do update this after updating.
+	private UI display;
 
-	public Updater(Board b, Map<Integer, Player> players, List<Snowball> projectiles) {
+	public Updater(Board b, Map<Integer, Player> players, List<Snowball> projectiles, BoardState bs, UI display) {
 		this.board = b;
 		this.playerIDs = players;
 		this.projectiles = projectiles;
-		this.bs = new BoardState();
+		this.bs = bs;
+		this.display = display;
 		updateBoardState();
 	}
 
@@ -68,6 +71,8 @@ public class Updater {
 //			}
 		}
 		bs.update(board.convertToEnums(), items);
+		display.repaint();
+
 	}
 
 	// KTC etc.
