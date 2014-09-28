@@ -45,7 +45,7 @@ public class CheatsPopup extends JPanel{
 	
 	private void addCheat(String cheat, CheatSwitch c){
 		JLabel a = new JLabel(cheat);
-		a.setPreferredSize(new Dimension(250,30));
+		a.setPreferredSize(new Dimension(250,25));
 		a.setFont(new Font("Verdana", Font.BOLD, 18));
 		actions.add(a);
 		switches.add(c);

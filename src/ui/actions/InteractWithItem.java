@@ -1,4 +1,5 @@
 package ui.actions;
+import ui.ContainerPopup;
 import client.ClientGame;
 import gameworld.world.Board;
 
@@ -11,7 +12,7 @@ public class InteractWithItem extends KeyAction{
 	
 	@Override
 	protected void execute() {
-		System.out.println("Interacting");
+		new ContainerPopup().show();
 		//RB: client.interactWithItem();
 	}
 

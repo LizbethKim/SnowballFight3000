@@ -15,7 +15,7 @@ public abstract class CheatSwitch extends JPanel {
 	private static final Image onSwitch = HUDPanel.loadImage("OnSwitch.png");
 	private static final Image offSwitch = HUDPanel.loadImage("OffSwitch.png");
 	private static final int SWITCH_WIDTH = 50;
-	private static final int SWITCH_HEIGHT = 30;
+	private static final int SWITCH_HEIGHT = 25;
 
 	private boolean switchedOn;
 	private ClientGame client;
