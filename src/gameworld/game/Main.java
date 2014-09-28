@@ -60,16 +60,16 @@ public class Main {
 	private static void singlePlayerGame() {
 
 		Tile[][] boardArray = new Tile[10][10];
-		for (int row = 1; row < 9; row++) {
-			boardArray[row][0] = new Tile(new Location(row, 0), Terrain.GRASS, null);
-			boardArray[row][9] = new Tile(new Location(row, 9), Terrain.GRASS, null);
-			for (int col = 1; col < 9; col++) {
-				boardArray[row][col] = new Tile(new Location(row, col), Terrain.SNOW, null);
+		for (int x = 1; x < 9; x++) {
+			boardArray[x][0] = new Tile(new Location(x, 0), Terrain.GRASS, null);
+			boardArray[x][9] = new Tile(new Location(x, 9), Terrain.GRASS, null);
+			for (int y = 1; y < 9; y++) {
+				boardArray[x][y] = new Tile(new Location(x, y), Terrain.SNOW, null);
 			}
 		}
-		for (int col = 0; col < 10; col++) {
-			boardArray[0][col] = new Tile(new Location(0, col), Terrain.GRASS, null);
-			boardArray[9][col] = new Tile(new Location(9, col), Terrain.GRASS, null);
+		for (int y = 0; y < 10; y++) {
+			boardArray[0][y] = new Tile(new Location(0, y), Terrain.GRASS, null);
+			boardArray[9][y] = new Tile(new Location(9, y), Terrain.GRASS, null);
 		}
 
 		boardArray[0][0].place(new Furniture("A tree", Objects.TREE));

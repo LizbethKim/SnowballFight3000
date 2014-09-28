@@ -93,8 +93,8 @@ public class Client {
 	 * @param cont
 	 * @return
 	 */
-	public List<Objects> getContents(Objects cont) {
-		// KTC
+	public List<Objects> getContents() {
+		// KTC do it for the object in front of them.
 		return null;
 	}
 

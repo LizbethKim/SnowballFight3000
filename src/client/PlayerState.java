@@ -67,14 +67,6 @@ public class PlayerState {
 		return l;
 	}
 
-//	public Sprites getSprite() {
-//		return sprite;
-//	}
-
-//	public void setSprite(Sprites sprite) {
-//		this.sprite = sprite;
-//	}
-
 	public Direction getDirection() {
 		return d;
 	}

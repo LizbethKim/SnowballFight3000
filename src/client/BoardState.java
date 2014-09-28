@@ -50,11 +50,11 @@ public class BoardState {
 
 		// Prints to the UI. Just to see if it works.
 		System.out.println("Board:");
-		for (int row = 0; row < board.length; row++) {
-			for (int col = 0; col < board[0].length; col++) {
-				if (board[row][col] == Terrain.GRASS) {
+		for (int x = 0; x < board.length; x++) {
+			for (int y = 0; y < board[0].length; y++) {
+				if (board[x][y] == Terrain.GRASS) {
 					System.out.print("G");
-				} else if (board[row][col] == Terrain.SNOW) {
+				} else if (board[x][y] == Terrain.SNOW) {
 					System.out.print("S");
 				}
 			}
@@ -63,11 +63,11 @@ public class BoardState {
 
 		System.out.println("");
 		System.out.println("Entities:");
-		for (int row = 0; row < board.length; row++) {
-			for (int col = 0; col < board[0].length; col++) {
-				if (entities[row][col] == Objects.TREE) {
+		for (int x = 0; x < board.length; x++) {
+			for (int y = 0; y < board[0].length; y++) {
+				if (entities[x][y] == Objects.TREE) {
 					System.out.print("T");
-				} else if (entities[row][col] == Objects.BUSH) {
+				} else if (entities[x][y] == Objects.BUSH) {
 					System.out.print("B");
 				} else {
 					System.out.print('-');
@@ -86,9 +86,9 @@ public class BoardState {
 	// Getter methods for EK
 	public Terrain[][] getArea() {
 		Terrain[][] boardCopy = new Terrain[board.length][board[0].length];
-		for (int row = 0; row < board.length; row++) {
-			for (int col = 0; col < board[0].length; col++) {
-				boardCopy[row][col] = board[row][col];
+		for (int x = 0; x < board.length; x++) {
+			for (int y = 0; y < board[0].length; y++) {
+				boardCopy[x][y] = board[x][y];
 			}
 		}
 		return boardCopy;
@@ -96,9 +96,9 @@ public class BoardState {
 
 	public Objects[][] getObjects() {
 		Objects[][] entitiesCopy = new Objects[entities.length][entities[0].length];
-		for (int row = 0; row < entities.length; row++) {
-			for (int col = 0; col < entities[0].length; col++) {
-				entitiesCopy[row][col] = entities[row][col];
+		for (int x = 0; x < entities.length; x++) {
+			for (int y = 0; y < entities[0].length; y++) {
+				entitiesCopy[x][y] = entities[x][y];
 			}
 		}
 		return entitiesCopy;

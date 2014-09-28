@@ -10,7 +10,7 @@ import graphics.assets.Terrain;
  */
 public class Board {
 	// KTC add more
-	private Tile[][] board; 	// board[row][column] will access correctly.
+	private Tile[][] board; 	// board[x][y] will access correctly. (same x and y as in location)
 
 
 	public Board(Tile[][] board) {
@@ -39,9 +39,9 @@ public class Board {
 
 	public Terrain[][] convertToEnums () {
 		Terrain[][] enumTiles = new Terrain[board.length][board[0].length];
-		for (int row = 0; row < board.length; row++) {
-			for (int col = 0; col < board[0].length; col++) {
-				enumTiles[row][col] = board[row][col].getType();
+		for (int x = 0; x < board.length; x++) {
+			for (int y = 0; y < board[0].length; y++) {
+				enumTiles[x][y] = board[x][y].getType();
 			}
 		}
 		return enumTiles;
@@ -49,20 +49,20 @@ public class Board {
 
 	public Objects[][] itemEnums () {
 		Objects[][] enumObjects = new Objects[board.length][board[0].length];
-		for (int row = 0; row < board.length; row++) {
-			for (int col = 0; col < board[0].length; col++) {
-				InanimateEntity on = board[row][col].getOn();
+		for (int x = 0; x < board.length; x++) {
+			for (int y = 0; y < board[0].length; y++) {
+				InanimateEntity on = board[x][y].getOn();
 				if (on != null) {
 					if (on instanceof Key) {
-						enumObjects[row][col] = Objects.KEY;
+						enumObjects[x][y] = Objects.KEY;
 					} else if (on instanceof Map) {
-						enumObjects[row][col] = Objects.MAP;
+						enumObjects[x][y] = Objects.MAP;
 					} else if (on instanceof Powerup) {
-						enumObjects[row][col] = Objects.POWERUP;
+						enumObjects[x][y] = Objects.POWERUP;
 					} else if (on instanceof Chest) {
-						enumObjects[row][col] = Objects.CHEST;
+						enumObjects[x][y] = Objects.CHEST;
 					} else if (on instanceof Furniture) {
-						enumObjects[row][col] = ((Furniture)on).getType();
+						enumObjects[x][y] = ((Furniture)on).getType();
 					}
 				}
 			}

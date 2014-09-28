@@ -17,37 +17,37 @@ import javax.imageio.ImageIO;
  *
  */
 public enum Objects {
-	KEY("", "", "", "", Direction.NORTH), 	// EK add the image names here if you find some
-	POWERUP("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png", Direction.NORTH),
-	CHEST("", "", "", "", Direction.NORTH),
-	MAP("", "", "", "", Direction.NORTH),
-	TREE("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png", Direction.NORTH),
-	TABLE("", "", "", "", Direction.NORTH),
-	WALL_E_W("", "", "", "", Direction.NORTH),
-	WALL_N_S("", "", "", "", Direction.NORTH),
-	SNOWBALL("", "", "", "", Direction.NORTH),
-	BUSH("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png", Direction.NORTH),
-	PLAYER1("PlayerHoldingPosition.png", "PlayerHoldingPosition.png", "PlayerHoldingPosition.png", "PlayerHoldingPosition.png", Direction.NORTH);
+	KEY("", "", "", ""), 	// EK add the image names here if you find some
+	POWERUP("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png"),
+	CHEST("", "", "", ""),
+	MAP("", "", "", ""),
+	TREE("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png"),
+	TABLE("", "", "", ""),
+	WALL_E_W("", "", "", ""),
+	WALL_N_S("", "", "", ""),
+	SNOWBALL("", "", "", ""),
+	BUSH("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png"),
+	PLAYER_N("", "", "", ""),
+	PLAYER_E("", "", "", ""),
+	PLAYER_S("", "", "", ""),
+	PLAYER_W("", "", "", ""),
+	PLAYER1("PlayerHoldingPosition.png", "PlayerHoldingPosition.png", "PlayerHoldingPosition.png", "PlayerHoldingPosition.png");
 
-	public final Image north;
-	public final Image south;
-	public final Image east;
-	public final Image west;
-	public final Direction d;
+	public final Image[] imgs;	// KTC make unmodifiable
 
 	/**
 	 * Creates the enumeration and gives it the associated image.
 	 * @param resourceName
 	 */
-	Objects(String resourceNameNorth, String resourceNameSouth, String resourceNameWest, String resourceNameEast, Direction d) {
+	Objects(String resourceNameNorth, String resourceNameSouth, String resourceNameWest, String resourceNameEast) {
 		try {
-			north = ImageIO.read(Objects.class.getResource(resourceNameNorth));
-			south = ImageIO.read(Objects.class.getResource(resourceNameSouth));
-			east = ImageIO.read(Objects.class.getResource(resourceNameEast));
-			west = ImageIO.read(Objects.class.getResource(resourceNameWest));
-
-			this.d = d;
+			imgs = new Image[4];
+			imgs[0] = ImageIO.read(Objects.class.getResource(resourceNameNorth));
+			imgs[1] = ImageIO.read(Objects.class.getResource(resourceNameSouth));
+			imgs[2] = ImageIO.read(Objects.class.getResource(resourceNameEast));
+			imgs[3] = ImageIO.read(Objects.class.getResource(resourceNameWest));
 		}
 		catch (IOException e) { throw new Error ("Error in image loading."); }
 	}
+
 }
