@@ -44,9 +44,9 @@ import client.Client;
  * listens to all user inputs and sends them to the board where they can be
  * dealt with. It holds the canvas for the game to be displayed on and controls
  * the pop-up windows related to the game.
- * 
+ *
  * @author Ryan Burnell, 300279172
- * 
+ *
  */
 public class UI extends JFrame {
 
@@ -91,20 +91,20 @@ public class UI extends JFrame {
 		setupResizing();
 		add(gamePanel);
 	}
-	
+
 	@Override
 	public void paint(Graphics g){
 		System.out.println("Repainting whole frame");
 		hudPanel.inventorySize();
 		super.paint(g);
 	}
-	
+
 	private void setupGraphics(){
 		graphicsPanel = new GraphicsPane(2, client.getBoard());
 		gamePanel.add(graphicsPanel);
 		graphicsPanel.setBounds(0, 0, DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
 	}
-	
+
 	/**
 	 * method to set up the HUD
 	 */
@@ -115,7 +115,7 @@ public class UI extends JFrame {
 		//hudPanel.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
 		hudPanel.setupInventory(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
 		//hudPanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT));
-		
+
 	}
 
 	private void setupResizing() {
@@ -128,15 +128,15 @@ public class UI extends JFrame {
 	}
 
 	private void resizeToRatio(ComponentEvent e){
-		
+
 		int width = e.getComponent().getWidth();
 		int height = e.getComponent().getHeight();
-		
+
 		Dimension newSize = getMaximumAspectSize(width, height);
 		graphicsPanel.setSize(newSize.width,newSize.height);
 		hudPanel.setSize(newSize.width,newSize.height);
 	}
-	
+
 	private Dimension getMaximumAspectSize(int width, int height){
 		if(width/ASPECT_RATIO<height){
 			return new Dimension(width, (int) (width/ASPECT_RATIO));
@@ -144,7 +144,7 @@ public class UI extends JFrame {
 			return new Dimension((int) (height*ASPECT_RATIO), height);
 		}
 	}
-	
+
 	/**
 	 * sets up the window to respond to key presses using a key binding system
 	 */
@@ -164,7 +164,7 @@ public class UI extends JFrame {
 				KeyEvent.VK_SPACE);
 		addKeyBinding("Inspect", new InspectItem(client), KeyEvent.VK_I);
 		addKeyBinding("Interact", new InteractWithItem(client), KeyEvent.VK_Q);
-		
+
 		addKeyBinding("RotateClockwise", new RotateClockwise(client), KeyEvent.VK_P);
 		addKeyBinding("RotateAntiClockwise", new RotateAntiClockwise(client), KeyEvent.VK_O);
 
@@ -183,7 +183,7 @@ public class UI extends JFrame {
 
 	/**
 	 * Sets up key bindings for given keyConstants
-	 * 
+	 *
 	 * @param actionString
 	 *            the action string to be used in the action map
 	 * @param action
@@ -216,7 +216,7 @@ public class UI extends JFrame {
 		menu.setFocusable(false);
 		final JMenu fileMenu = new JMenu("File");
 		final JMenu helpMenu = new JMenu("Help");
-		
+
 		final JMenuItem newGame = new JMenuItem("New Game");
 		final JMenuItem quit = new JMenuItem("Quit");
 		final JMenuItem controls = new JMenuItem("Show Controls");
@@ -228,11 +228,11 @@ public class UI extends JFrame {
 		menu.add(fileMenu);
 		fileMenu.add(newGame);
 		fileMenu.add(quit);
-		
+
 		menu.add(helpMenu);
 		helpMenu.add(controls);
 		helpMenu.add(cheats);
-		
+
 		setJMenuBar(menu);
 		// setup listeners for the menu
 		quit.addActionListener(new ActionListener() {
@@ -241,21 +241,21 @@ public class UI extends JFrame {
 				System.exit(EXIT_ON_CLOSE);
 			}
 		});
-		
+
 		newGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//RB: client.newGame()?
 			}
 		});
-		
+
 		controls.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controlsPopup.showControls();
 			}
 		});
-		
+
 		cheats.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -264,20 +264,20 @@ public class UI extends JFrame {
 		});
 	}
 
-	public static void main(String[] args) {
-		try {
-			for (UIManager.LookAndFeelInfo info : UIManager
-					.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-
-			}
-		} catch (Exception e) {
-			// do nothing
-		}
-		UI tester = new UI(new Client(1));
-	}
+//	public static void main(String[] args) {
+//		try {
+//			for (UIManager.LookAndFeelInfo info : UIManager
+//					.getInstalledLookAndFeels()) {
+//				if ("Nimbus".equals(info.getName())) {
+//					UIManager.setLookAndFeel(info.getClassName());
+//					break;
+//				}
+//
+//			}
+//		} catch (Exception e) {
+//			// do nothing
+//		}
+//		UI tester = new UI(new Client(1));
+//	}
 
 }

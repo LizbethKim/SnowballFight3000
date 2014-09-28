@@ -58,7 +58,6 @@ public class Main {
 	 * Everything else will be event-driven (at least, in my mind).
 	 */
 	private static void singlePlayerGame() {
-		client.Client c = new client.Client(100);
 
 		Tile[][] boardArray = new Tile[10][10];
 		for (int row = 1; row < 9; row++) {
@@ -79,8 +78,8 @@ public class Main {
 		boardArray[2][7].place(new Furniture("A bush", Objects.BUSH));
 
 		Board board = new Board(boardArray); // createBoardFromFile(filename);
+		SinglePlayerGame game = new SinglePlayerGame(board);
 
-		SinglePlayerGame game = new SinglePlayerGame(board, c);
 
 		//	PROBABLY REDUNDANT
 		 	// This is where I'll hook in Ryan's code.

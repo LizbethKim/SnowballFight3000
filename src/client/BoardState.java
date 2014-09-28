@@ -77,9 +77,10 @@ public class BoardState {
 		}
 	}
 
-	public BoardState(Map<Integer, PlayerState> players) {
-		board = new Terrain[10][10];
+	public BoardState(Map<Integer, PlayerState> players, Terrain[][] board, Objects[][] entities) {
+		this.board = board;
 		this.players = players;
+		this.entities = entities;
 	}
 
 	// Getter methods for EK

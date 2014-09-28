@@ -7,6 +7,7 @@ import gameworld.world.Player;
 import gameworld.world.Snowball;
 import gameworld.world.SnowballFactory;
 import gameworld.world.SnowballFactory.SnowballType;
+import graphics.assets.Objects;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,13 +21,14 @@ public class SinglePlayerGame {
 	private SnowballFactory snowballFactory;
 	private Client client;
 
-	public SinglePlayerGame(Board b, Client c) {
+	public SinglePlayerGame(Board b) {
 		this.board = b;
-		client = c;
+		client = new Client(100, board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
 		playerIDs.put(client.getPlayerID(), new Player(1, new Location(2,2), "Bob"));
 		projectiles = new ArrayList<Snowball>();
-		updateClientBoard(c.getPlayerID());
+
+		updateClientBoard(client.getPlayerID());
 	}
 
 	// examples of methods that will be in here
@@ -77,6 +79,10 @@ public class SinglePlayerGame {
 
 
 	public void updateClientBoard(int playerID) {
+		Objects[][] items = board.itemEnums();
+		for (Player p: playerIDs.values()) {
+
+		}
 		client.getBoard().update(board.convertToEnums(), board.itemEnums(), playerIDs.get(playerID).getDirection());
 	}
 
