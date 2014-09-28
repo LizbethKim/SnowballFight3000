@@ -44,8 +44,11 @@ public class GraphicsPane extends JPanel {
 						+ (currentBoard.length / 1.75) * (int) width / 13;
 				double y = (i * 0.5 * height / (currentBoard[0].length*1.5)) + (j * 0.5 * height / (currentBoard[0].length*1.5))
 						+ (currentBoard[0].length / 3) * (int) height / 21;
-				g.drawImage(currentBoard[i][j].img, (int) x, (int) y, (int) width / 10,
+				if (currentBoard[i][j] != null) g.drawImage(currentBoard[i][j].img, (int) x, (int) y, (int) width / 10,
 						(int) height / 15, null);
+				else {
+					System.out.println("THIS SHIT IS NULL NIGGA");
+				}
 			}
 		}
 
@@ -57,7 +60,7 @@ public class GraphicsPane extends JPanel {
 				double y = (i * 0.5 * height / (currentBoard[0].length*1.5)) + (j * 0.5 * height / (currentBoard[0].length * 1.5))
 						+ (currentBoard[0].length / 3) * (int) height / 21 - (0.25 * height/(currentBoard[0].length*1.5));
 				if (currentObjects[i][j + 1] != null){
-					g.drawImage(currentObjects[i][j + 1].img, (int) x, (int) y, (int) (currentObjects[i][j + 1].img.getWidth(null)* (width/startingWidth)),(int) (currentObjects[i][j + 1].img.getHeight(null)* (height/startingHeight)), null);
+					g.drawImage(currentObjects[i][j + 1].north, (int) x, (int) y, (int) (currentObjects[i][j + 1].north.getWidth(null)* (width/startingWidth)),(int) (currentObjects[i][j + 1].north.getHeight(null)* (height/startingHeight)), null);
 				}
 			}
 		}
