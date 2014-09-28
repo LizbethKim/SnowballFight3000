@@ -16,8 +16,7 @@ public class RightClickMenu extends JPopupMenu {
 	
 	public RightClickMenu(Client cl){
 		this.client = cl;
-		
-	
+		setupMenu();
 	}
 	
 	private void setupMenu(){

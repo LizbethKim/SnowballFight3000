@@ -24,6 +24,7 @@ public class RightClickListener extends MouseAdapter{
     }
 
     private void doPop(MouseEvent e){
+    	System.out.println("showing popup");
         RightClickMenu menu = new RightClickMenu(client);
         menu.show(e.getComponent(), e.getX(), e.getY());
     }
