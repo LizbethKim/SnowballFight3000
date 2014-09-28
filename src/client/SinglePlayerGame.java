@@ -82,7 +82,16 @@ public class SinglePlayerGame {
 	public void updateClientBoard(int playerID) {
 		Objects[][] items = board.itemEnums();
 		for (Player p: playerIDs.values()) {
-
+			items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER1;
+//			if (p.getDirection() == Direction.NORTH) { KTC uncomment later
+//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_N;
+//			} else if (p.getDirection() == Direction.EAST) {
+//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_E;
+//			} else if (p.getDirection() == Direction.EAST) {
+//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_S;
+//			} else {
+//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_W;
+//			}
 		}
 		client.getBoard().update(board.convertToEnums(), board.itemEnums(), playerIDs.get(playerID).getDirection());
 	}
