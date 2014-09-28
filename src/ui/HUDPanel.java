@@ -71,7 +71,7 @@ public class HUDPanel extends JPanel {
 		setInventoryBounds();
 	}
 
-	private void setInventoryBounds() {
+	public void setInventoryBounds() {
 		int xPos = 0;
 		System.out.println("height = "+getHeight());
 		int yPos = (int) (getHeight() - getHeight()*inventoryYProportion);

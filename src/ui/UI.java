@@ -73,26 +73,13 @@ public class UI extends JFrame {
 		setupKeyBindings();
 		setupGamePanel();
 		setupHUD();
-//		hudPanel.inventorySize();
 		setupGraphics();
-		hudPanel.inventorySize();
 		System.out.println("hudPanel size is: "+hudPanel.getWidth()+", "+hudPanel.getHeight());
 		// pack and Display window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//hudPanel.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
-		hudPanel.inventorySize();
-		System.out.println("hudPanel size is: "+hudPanel.getWidth()+", "+hudPanel.getHeight());
 		setResizable(true);
 		setVisible(true);
-		//hudPanel.inventorySize();
-		
 	}
 
 	private void setupGamePanel() {
