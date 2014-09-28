@@ -1,5 +1,6 @@
 package gameworld.game;
 
+import client.SinglePlayerGame;
 import server.Client;
 import server.Server;
 import ui.UI;
@@ -45,19 +46,9 @@ public class Main {
 
 			// KTC currently only a test board. need to really load in from file.
 
-			Tile[][] boardArray = new Tile[20][15];
-			for (int row = 0; row < 20; row++) {
-				for (int col = 0; col < 15; col++) {
-					boardArray[row][col] = new Tile(new Location(row, col), Terrain.SNOW, null);
-				}
-			}
-			boardArray[9][12].place(new Furniture("A tree", Objects.TREE));
-			boardArray[2][3].place(new Furniture("A tree", Objects.TREE));
-			boardArray[18][4].place(new Furniture("A tree", Objects.TREE));
-			boardArray[7][7].place(new Furniture("A bush", Objects.BUSH));
-			Board board = new Board(boardArray); // createBoardFromFile(filename);
-			Game game = new Game(board);
-			singlePlayerGame(game);
+			singlePlayerGame();
+
+
 		}
 	}
 
@@ -68,9 +59,31 @@ public class Main {
 	 * so it knows to increment projectiles and other time-based things.
 	 * Everything else will be event-driven (at least, in my mind).
 	 */
-	private static void singlePlayerGame(Game game) {
+	private static void singlePlayerGame() {
+		client.Client c = new client.Client(100);
+
+		Tile[][] boardArray = new Tile[10][10];
+		for (int row = 1; row < 9; row++) {
+			boardArray[row][0] = new Tile(new Location(row, 0), Terrain.GRASS, null);
+			boardArray[row][9] = new Tile(new Location(row, 9), Terrain.GRASS, null);
+			for (int col = 1; col < 9; col++) {
+				boardArray[row][col] = new Tile(new Location(row, col), Terrain.SNOW, null);
+			}
+		}
+		for (int col = 0; col < 10; col++) {
+			boardArray[0][col] = new Tile(new Location(0, col), Terrain.GRASS, null);
+			boardArray[9][col] = new Tile(new Location(9, col), Terrain.GRASS, null);
+		}
+
+		boardArray[0][0].place(new Furniture("A tree", Objects.TREE));
+		boardArray[4][2].place(new Furniture("A tree", Objects.TREE));
+		boardArray[5][3].place(new Furniture("A tree", Objects.TREE));
+		boardArray[2][7].place(new Furniture("A bush", Objects.BUSH));
+		Board board = new Board(boardArray); // createBoardFromFile(filename);
+
+		SinglePlayerGame game = new SinglePlayerGame(board, c);
 		//	PROBABLY REDUNDANT
-		UI display = new UI(new client.Client(100)); 	// This is where I'll hook in Ryan's code.
+		 	// This is where I'll hook in Ryan's code.
 		// This should create the window etc.
 		// Also of course appropriate parameters.
 

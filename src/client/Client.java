@@ -5,13 +5,16 @@ import gameworld.world.Location;
 import graphics.assets.Objects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import server.events.MoveEvent;
 import server.events.TurnEvent;
+import ui.UI;
 
 /**
- * Current reprentation of the model on the client. Deals with the 
+ * Current reprentation of the model on the client. Deals with the
  * network and sends and receives updates to/from the server.
  * @author Kelsey Jack 300275851
  *
@@ -19,9 +22,10 @@ import server.events.TurnEvent;
 public class Client {
 	private PlayerState player;
 	private BoardState board;
-	
-	// RB for you
+
 	private int playerID;
+
+	private UI display;
 
 
 	public Client (int playerID) {
@@ -30,7 +34,10 @@ public class Client {
 		playerInventory.add(Objects.KEY);
 		playerInventory.add(Objects.POWERUP);
 		this.player = new PlayerState(new ArrayList<Objects>(), 80, new Location(2,2), Direction.WEST);
-		board = new BoardState();
+		Map<Integer, PlayerState> playerIDs = new HashMap<Integer, PlayerState>();
+		playerIDs.put(playerID, this.player);
+		board = new BoardState(playerIDs);
+		display = new UI(this);
 	}
 
 	public PlayerState getPlayer() {
@@ -50,7 +57,7 @@ public class Client {
 			}
 			new MoveEvent(newLoc);
 			// network.send( new MoveEvent(newLoc);
-			// Ok, BF, I need a way to send this through the network. I think I just need 
+			// Ok, BF, I need a way to send this through the network. I think I just need
 			// a MoveEvent class? Which takes a playerID (possibly) and the new location.
 		} else {
 			new TurnEvent(d);
@@ -61,13 +68,14 @@ public class Client {
 	public void rotateClockwise() {
 		player.rotateClockwise();
 	}
-	
+
 	public void rotateAnticlockwise() {
 		player.rotateAnticlockwise();
 	}
-	
+
 	public void throwSnowball () {
-		// KTC
+		// KTC send a fire snowball method through the network with playerID.
+		// not sure how to extend for non-standard snowballs.
 	}
 
 	public String inspectItem() {
@@ -96,6 +104,10 @@ public class Client {
 
 	public BoardState getBoard() {
 		return board;
+	}
+
+	public void refresh() {
+		display.repaint();
 	}
 
 }

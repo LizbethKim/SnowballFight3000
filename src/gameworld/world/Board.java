@@ -37,6 +37,37 @@ public class Board {
 		return board[l.x][l.y].removeOn();
 	}
 
+	public Terrain[][] convertToEnums () {
+		Terrain[][] enumTiles = new Terrain[board.length][board[0].length];
+		for (int row = 0; row < board.length; row++) {
+			for (int col = 0; col < board[0].length; col++) {
+				enumTiles[row][col] = board[row][col].getType();
+			}
+		}
+		return enumTiles;
+	}
 
+	public Objects[][] itemEnums () {
+		Objects[][] enumObjects = new Objects[board.length][board[0].length];
+		for (int row = 0; row < board.length; row++) {
+			for (int col = 0; col < board[0].length; col++) {
+				InanimateEntity on = board[row][col].getOn();
+				if (on != null) {
+					if (on instanceof Key) {
+						enumObjects[row][col] = Objects.KEY;
+					} else if (on instanceof Map) {
+						enumObjects[row][col] = Objects.MAP;
+					} else if (on instanceof Powerup) {
+						enumObjects[row][col] = Objects.POWERUP;
+					} else if (on instanceof Chest) {
+						enumObjects[row][col] = Objects.CHEST;
+					} else if (on instanceof Furniture) {
+						enumObjects[row][col] = ((Furniture)on).getType();
+					}
+				}
+			}
+		}
+		return enumObjects;
+	}
 
 }

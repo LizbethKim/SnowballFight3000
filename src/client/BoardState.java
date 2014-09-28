@@ -1,9 +1,13 @@
 package client;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import gameworld.world.Direction;
+import gameworld.world.Location;
 import graphics.assets.Objects;
 import graphics.assets.Terrain;
 
@@ -16,7 +20,7 @@ import graphics.assets.Terrain;
 public class BoardState {
 	private Terrain[][] board;
 	private Objects[][] entities;
-	private List<PlayerState> players;
+	private Map<Integer, PlayerState> players;
 	private Direction d;	// The direction that the board is oriented. (Possibly something RB should store)
 
 	/*
@@ -73,17 +77,42 @@ public class BoardState {
 		}
 	}
 
+	public BoardState(Map<Integer, PlayerState> players) {
+		board = new Terrain[10][10];
+		this.players = players;
+	}
+
 	// Getter methods for EK
 	public Terrain[][] getArea() {
-		return board;
+		Terrain[][] boardCopy = new Terrain[board.length][board[0].length];
+		for (int row = 0; row < board.length; row++) {
+			for (int col = 0; col < board[0].length; col++) {
+				boardCopy[row][col] = board[row][col];
+			}
+		}
+		return boardCopy;
 	}
 
 	public Objects[][] getObjects() {
-		return entities;
+		Objects[][] entitiesCopy = new Objects[entities.length][entities[0].length];
+		for (int row = 0; row < entities.length; row++) {
+			for (int col = 0; col < entities[0].length; col++) {
+				entitiesCopy[row][col] = entities[row][col];
+			}
+		}
+		return entitiesCopy;
 	}
 
 	public Direction getDirection() {
 		return d;
+	}
+
+	public Collection<PlayerState> getPlayers() {
+		return Collections.unmodifiableCollection(players.values());
+	}
+
+	public static void main (String[] args) {
+		new BoardState();
 	}
 
 
@@ -93,13 +122,17 @@ public class BoardState {
 		this.d = d;
 	}
 
-	public List<PlayerState> getPlayers() {
-		return Collections.unmodifiableList(players);
+	protected void updatePlayerDirection(int playerID, Direction d) {
+		PlayerState p = players.get(playerID);
+		p.updateDir(d);
 	}
 
-	public static void main (String[] args) {
-		new BoardState();
+	protected void updatePlayerLocation(int playerID, Location l) {
+		PlayerState p = players.get(playerID);
+		p.updateLoc(l);
 	}
 
+
+	// KTC do we want a method to edit health? Do we need to see other players' health?
 }
 

@@ -12,10 +12,10 @@ import java.util.List;
  *
  */
 public class PlayerInventory implements Inventory {
-	public static final int DEFAULT_LIMIT = 10; // KTC change perhaps 
+	public static final int DEFAULT_LIMIT = 9; // KTC change perhaps
 	private int itemLimit;
 	private List<Item> contents;
-	
+
 	/**
 	 * Creates an empty inventory
 	 */
@@ -30,7 +30,7 @@ public class PlayerInventory implements Inventory {
 	public PlayerInventory(Collection<Item> contents) {
 		this.contents = new ArrayList<Item>(contents);
 	}
-	
+
 	/**
 	 * Allows the limit on the number of items to be changed.
 	 * @param limit The new item limit
@@ -38,11 +38,11 @@ public class PlayerInventory implements Inventory {
 	public void setLimit(int limit) {
 		this.itemLimit = limit;
 	}
-	
+
 	public void resetLimit() {
 		this.itemLimit = PlayerInventory.DEFAULT_LIMIT;
 	}
-	
+
 	@Override
 	public boolean addItem(Item i) {
 		if (contents.size() < itemLimit) {
@@ -62,6 +62,6 @@ public class PlayerInventory implements Inventory {
 		return Collections.unmodifiableCollection(contents);
 	}
 
-	
-	
+
+
 }

@@ -1,7 +1,4 @@
-package gameworld.game;
-
-import java.util.List;
-import java.util.Map;
+package client;
 
 import gameworld.world.Board;
 import gameworld.world.Direction;
@@ -11,20 +8,25 @@ import gameworld.world.Snowball;
 import gameworld.world.SnowballFactory;
 import gameworld.world.SnowballFactory.SnowballType;
 
-/**
- * Main game logic class. Interacts with the network on the server side.
- * @author Kelsey Jack 300275851
- *
- */
-public class Game {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class SinglePlayerGame {
 	private Board board;
 	private Map<Integer, Player> playerIDs;
 	private List<Snowball> projectiles;
 	private SnowballFactory snowballFactory;
+	private Client client;
 
-	public Game(Board b) {
+	public SinglePlayerGame(Board b, Client c) {
 		this.board = b;
-		// AUTO
+		client = c;
+		playerIDs = new HashMap<Integer, Player>();
+		playerIDs.put(client.getPlayerID(), new Player(1, new Location(2,2), "Bob"));
+		projectiles = new ArrayList<Snowball>();
+		updateClientBoard(c.getPlayerID());
 	}
 
 	// examples of methods that will be in here
@@ -32,9 +34,8 @@ public class Game {
 		Player p = playerIDs.get(playerID);
 		if (board.canTraverse(l) && p != null) {
 			if (p.move(l)) {
-				// KTC only here do you send out an update. (TO ALL CLIENTS).
-				// This will consist of the player id and the new position.
-				// on the other end, it will search for the playerState that has this ID and update it.
+				client.getBoard().updatePlayerLocation(playerID, l);
+				client.refresh();
 			}
 		}
 	}
@@ -43,7 +44,8 @@ public class Game {
 		Player p = playerIDs.get(playerID);
 		if (p != null) {
 			p.setDirection(d);
-			// KTC send back the update. this will consist of the player id and the new direction.
+			client.getBoard().updatePlayerDirection(playerID, d);
+			client.refresh();
 		}
 	}
 
@@ -72,4 +74,10 @@ public class Game {
 		// KTC update projectiles, possibly do time logic.
 		// check for collisions and remove projectiles that have hit something.
 	}
+
+
+	public void updateClientBoard(int playerID) {
+		client.getBoard().update(board.convertToEnums(), board.itemEnums(), playerIDs.get(playerID).getDirection());
+	}
+
 }

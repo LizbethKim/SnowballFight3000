@@ -28,22 +28,34 @@ public class PlayerState {
 		this.l = l;
 		this.d = d;
 	}
-	
-	protected void update(List<Objects> inventory, int health, Location l, Direction d) {
+
+	// UPDATE METHODS
+	protected void updateInventory (List<Objects> inventory) {
 		this.inventory = inventory;
+	}
+
+	protected void updateHealth(int health) {
 		this.health = health;
+	}
+
+	protected void updateDir(Direction d) {
+		this.d = d;
+	}
+
+	protected void updateLoc(Location l) {
 		this.l = l;
 	}
-	
+
 	protected void rotateClockwise() {
 		d = Direction.values()[(d.ordinal() + 1) % 4];
 	}
-	
+
 	protected void rotateAnticlockwise() {
 		// goes forward 3 clockwise - same as going one anticlockwise.
 		d = Direction.values()[(d.ordinal() + 3) % 4];
 	}
 
+	// GETTERS
 	public List<Objects> getInventory() {
 		return Collections.unmodifiableList(inventory);
 	}
