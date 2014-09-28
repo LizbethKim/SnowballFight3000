@@ -44,8 +44,6 @@ public class Main {
 
 			// KH, this is where I'll need dataloading methods
 
-			// KTC currently only a test board. need to really load in from file.
-
 			singlePlayerGame();
 
 
@@ -79,9 +77,11 @@ public class Main {
 		boardArray[4][2].place(new Furniture("A tree", Objects.TREE));
 		boardArray[5][3].place(new Furniture("A tree", Objects.TREE));
 		boardArray[2][7].place(new Furniture("A bush", Objects.BUSH));
+
 		Board board = new Board(boardArray); // createBoardFromFile(filename);
 
 		SinglePlayerGame game = new SinglePlayerGame(board, c);
+
 		//	PROBABLY REDUNDANT
 		 	// This is where I'll hook in Ryan's code.
 		// This should create the window etc.

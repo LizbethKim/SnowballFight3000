@@ -55,12 +55,12 @@ public class Client {
 			} else {
 				newLoc = new Location(player.getL().x - 1, player.getL().y);
 			}
-			new MoveEvent(newLoc);
+			new MoveEvent(playerID, newLoc);
 			// network.send( new MoveEvent(newLoc);
 			// Ok, BF, I need a way to send this through the network. I think I just need
 			// a MoveEvent class? Which takes a playerID (possibly) and the new location.
 		} else {
-			new TurnEvent(d);
+			new TurnEvent(playerID, d);
 			// KTC send this through the network.
 		}
 	}

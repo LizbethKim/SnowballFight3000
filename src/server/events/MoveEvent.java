@@ -4,7 +4,7 @@ import gameworld.world.Location;
 
 public class MoveEvent {
 
-	public MoveEvent(Location l) {
+	public MoveEvent(int ID, Location l) {
 		// AUTO
 	}
 
