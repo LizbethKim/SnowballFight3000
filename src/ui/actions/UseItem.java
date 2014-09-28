@@ -1,12 +1,12 @@
 package ui.actions;
-import client.Client;
+import client.ClientGame;
 import gameworld.world.Board;
 
 
 public class UseItem extends KeyAction{
 	private int inventoryNumber;
 
-	public UseItem(Client cl, int inventoryNumber){
+	public UseItem(ClientGame cl, int inventoryNumber){
 		super(cl);
 		this.inventoryNumber = inventoryNumber;
 	}

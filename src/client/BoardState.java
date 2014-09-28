@@ -117,10 +117,18 @@ public class BoardState {
 	}
 
 
-	protected void update(Terrain[][] newBoard, Objects[][] newEntities, Direction d) {
+	protected void update(Terrain[][] newBoard, Objects[][] newEntities) {
 		this.board = newBoard;
 		this.entities = newEntities;
-		this.d = d;
+	}
+
+	protected void rotateClockwise() {
+		d = Direction.values()[(d.ordinal() + 1) % 4];
+	}
+
+	protected void rotateAnticlockwise() {
+		// goes forward 3 clockwise - same as going one anticlockwise.
+		d = Direction.values()[(d.ordinal() + 3) % 4];
 	}
 
 //	protected void updatePlayerDirection(int playerID, Direction d) {

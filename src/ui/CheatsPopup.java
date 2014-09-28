@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import client.Client;
+import client.ClientGame;
 import ui.cheats.CheatSwitch;
 import ui.cheats.Invincibility;
 import ui.cheats.OneHitKill;
@@ -24,9 +24,9 @@ public class CheatsPopup extends JPanel{
 	
 	private JPanel actions;
 	private JPanel switches;
-	private Client client;
+	private ClientGame client;
 
-	public CheatsPopup(Client cl){
+	public CheatsPopup(ClientGame cl){
 		this.client = cl;
 		setLayout(new FlowLayout());
 		actions = new JPanel();

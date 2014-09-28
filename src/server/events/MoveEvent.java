@@ -8,10 +8,10 @@ import gameworld.world.Location;
 public class MoveEvent implements UpdateEvent {
 	int playerID;
 	Location location;
+
 	public MoveEvent(int playerID, Location l) {
 		this.playerID=playerID;
 		this.location=l;
-		// AUTO
 	}
 
 	@Override

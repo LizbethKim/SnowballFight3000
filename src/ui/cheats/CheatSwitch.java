@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 import ui.HUDPanel;
-import client.Client;
+import client.ClientGame;
 
 public abstract class CheatSwitch extends JPanel {
 	private static final Image onSwitch = HUDPanel.loadImage("OnSwitch.png");
@@ -18,9 +18,9 @@ public abstract class CheatSwitch extends JPanel {
 	private static final int SWITCH_HEIGHT = 30;
 
 	private boolean switchedOn;
-	private Client client;
+	private ClientGame client;
 
-	public CheatSwitch(Client cl) {
+	public CheatSwitch(ClientGame cl) {
 		this.client = cl;
 		this.switchedOn = false;
 		setOpaque(false);

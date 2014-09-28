@@ -1,10 +1,10 @@
 package ui.cheats;
 
-import client.Client;
+import client.ClientGame;
 
 public class OneHitKill extends CheatSwitch {
 
-	public OneHitKill(Client cl) {
+	public OneHitKill(ClientGame cl) {
 		super(cl);
 	}
 

@@ -3,12 +3,12 @@ package ui;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import client.Client;
+import client.ClientGame;
 
 public class RightClickListener extends MouseAdapter{
-	private Client client;
+	private ClientGame client;
 	
-	public RightClickListener(Client c){
+	public RightClickListener(ClientGame c){
 		super();
 		client = c;
 	}

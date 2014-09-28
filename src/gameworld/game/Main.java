@@ -1,5 +1,6 @@
 package gameworld.game;
 
+import client.ClientGame;
 import client.SinglePlayerGame;
 import server.Client;
 import server.Server;
@@ -40,6 +41,8 @@ public class Main {
 			Client client = new Client("127.0.0.1"); //connect to localhost for testing, you can put a different address here
 			//this function creates a new thread for itself
 			client.startReceiving();
+			Board b = new Board();	// This should be new from file - the first file to come through the network perhaps
+			new ClientGame(b, client);
 		} else { // debug single-player testing dev mode
 
 			// KH, this is where I'll need dataloading methods
@@ -58,26 +61,7 @@ public class Main {
 	 * Everything else will be event-driven (at least, in my mind).
 	 */
 	private static void singlePlayerGame() {
-
-		Tile[][] boardArray = new Tile[10][10];
-		for (int x = 1; x < 9; x++) {
-			boardArray[x][0] = new Tile(new Location(x, 0), Terrain.GRASS, null);
-			boardArray[x][9] = new Tile(new Location(x, 9), Terrain.GRASS, null);
-			for (int y = 1; y < 9; y++) {
-				boardArray[x][y] = new Tile(new Location(x, y), Terrain.SNOW, null);
-			}
-		}
-		for (int y = 0; y < 10; y++) {
-			boardArray[0][y] = new Tile(new Location(0, y), Terrain.GRASS, null);
-			boardArray[9][y] = new Tile(new Location(9, y), Terrain.GRASS, null);
-		}
-
-		boardArray[0][0].place(new Furniture("A tree", Objects.TREE));
-		boardArray[4][2].place(new Furniture("A tree", Objects.TREE));
-		boardArray[5][3].place(new Furniture("A tree", Objects.TREE));
-		boardArray[2][7].place(new Furniture("A bush", Objects.BUSH));
-
-		Board board = new Board(boardArray); // createBoardFromFile(filename);
+		Board board = new Board(); // createBoardFromFile(filename);
 		SinglePlayerGame game = new SinglePlayerGame(board);
 
 

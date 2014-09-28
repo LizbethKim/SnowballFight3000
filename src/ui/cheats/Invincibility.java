@@ -1,10 +1,10 @@
 package ui.cheats;
 
-import client.Client;
+import client.ClientGame;
 
 public class Invincibility extends CheatSwitch {
 
-	public Invincibility(Client cl) {
+	public Invincibility(ClientGame cl) {
 		super(cl);
 	}
 

@@ -1,10 +1,10 @@
 package ui.cheats;
 
-import client.Client;
+import client.ClientGame;
 
 public class UnlimitedSnowballs extends CheatSwitch {
 
-	public UnlimitedSnowballs(Client cl) {
+	public UnlimitedSnowballs(ClientGame cl) {
 		super(cl);
 	}
 

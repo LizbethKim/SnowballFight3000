@@ -1,11 +1,11 @@
 package ui.actions;
-import client.Client;
+import client.ClientGame;
 import gameworld.world.Board;
 
 
 public class InteractWithItem extends KeyAction{
 
-	public InteractWithItem(Client cl){
+	public InteractWithItem(ClientGame cl){
 		super(cl);
 	}
 	

@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import client.Client;
+import client.ClientGame;
 
 public class InventoryPanel extends JPanel{
 	private static final Image inventorySlot = HUDPanel.loadImage("InventorySlot.png");
@@ -20,9 +20,9 @@ public class InventoryPanel extends JPanel{
 	private static final double showHideXProportion = 1.0 / 20.0;
 	private boolean inventoryHidden;
 	
-	private Client client;
+	private ClientGame client;
 	
-	public InventoryPanel(Client cl){
+	public InventoryPanel(ClientGame cl){
 		client = cl;
 		inventoryHidden = false;
 		setOpaque(false);

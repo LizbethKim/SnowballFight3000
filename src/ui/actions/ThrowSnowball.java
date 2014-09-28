@@ -1,11 +1,11 @@
 package ui.actions;
-import client.Client;
+import client.ClientGame;
 import gameworld.world.Board;
 
 
 public class ThrowSnowball extends KeyAction{
 
-	public ThrowSnowball(Client cl){
+	public ThrowSnowball(ClientGame cl){
 		super(cl);
 	}
 	
