@@ -23,7 +23,8 @@ public class SinglePlayerGame {
 
 	public SinglePlayerGame(Board b) {
 		this.board = b;
-		client = new Client(100, board.convertToEnums(), board.itemEnums());
+		BoardState bs = new BoardState(board.convertToEnums(), board.itemEnums());
+		client = new Client(100, bs);
 		playerIDs = new HashMap<Integer, Player>();
 		playerIDs.put(client.getPlayerID(), new Player(1, new Location(2,2), "Bob"));
 		projectiles = new ArrayList<Snowball>();
@@ -36,8 +37,8 @@ public class SinglePlayerGame {
 		Player p = playerIDs.get(playerID);
 		if (board.canTraverse(l) && p != null) {
 			if (p.move(l)) {
-				client.getBoard().updatePlayerLocation(playerID, l);
-				client.refresh();
+//				client.getBoard().updatePlayerLocation(playerID, l);
+//				client.refresh();
 			}
 		}
 	}
@@ -46,8 +47,8 @@ public class SinglePlayerGame {
 		Player p = playerIDs.get(playerID);
 		if (p != null) {
 			p.setDirection(d);
-			client.getBoard().updatePlayerDirection(playerID, d);
-			client.refresh();
+//			client.getBoard().updatePlayerDirection(playerID, d);
+//			client.refresh();
 		}
 	}
 

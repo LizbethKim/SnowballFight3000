@@ -20,7 +20,7 @@ import graphics.assets.Terrain;
 public class BoardState {
 	private Terrain[][] board;
 	private Objects[][] entities;
-	private Map<Integer, PlayerState> players;
+	//private Map<Integer, PlayerState> players; KTC get rid of this
 	private Direction d;	// The direction that the board is oriented. (Possibly something RB should store)
 
 	/*
@@ -77,9 +77,9 @@ public class BoardState {
 		}
 	}
 
-	public BoardState(Map<Integer, PlayerState> players, Terrain[][] board, Objects[][] entities) {
+	public BoardState(Terrain[][] board, Objects[][] entities) {
 		this.board = board;
-		this.players = players;
+		//this.players = players;
 		this.entities = entities;
 	}
 
@@ -108,9 +108,9 @@ public class BoardState {
 		return d;
 	}
 
-	public Collection<PlayerState> getPlayers() {
-		return Collections.unmodifiableCollection(players.values());
-	}
+//	public Collection<PlayerState> getPlayers() {
+//		return Collections.unmodifiableCollection(players.values());
+//	}
 
 	public static void main (String[] args) {
 		new BoardState();
@@ -123,15 +123,15 @@ public class BoardState {
 		this.d = d;
 	}
 
-	protected void updatePlayerDirection(int playerID, Direction d) {
-		PlayerState p = players.get(playerID);
-		p.updateDir(d);
-	}
+//	protected void updatePlayerDirection(int playerID, Direction d) {
+//		PlayerState p = players.get(playerID);
+//		p.updateDir(d);
+//	}
 
-	protected void updatePlayerLocation(int playerID, Location l) {
-		PlayerState p = players.get(playerID);
-		p.updateLoc(l);
-	}
+//	protected void updatePlayerLocation(int playerID, Location l) {
+//		PlayerState p = players.get(playerID);
+//		p.updateLoc(l);
+//	}
 
 
 	// KTC do we want a method to edit health? Do we need to see other players' health?

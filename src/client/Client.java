@@ -29,15 +29,14 @@ public class Client {
 	private UI display;
 
 
-	public Client (int playerID, Terrain[][] tiles, Objects[][] entities) {
+	public Client (int playerID, BoardState b) {
 		this.playerID = playerID;
+
 		List<Objects> playerInventory = new ArrayList<Objects>();
 		playerInventory.add(Objects.KEY);
 		playerInventory.add(Objects.POWERUP);
 		this.player = new PlayerState(new ArrayList<Objects>(), 80, new Location(2,2), Direction.WEST);
-		Map<Integer, PlayerState> playerIDs = new HashMap<Integer, PlayerState>();
-		playerIDs.put(playerID, this.player);
-		board = new BoardState(playerIDs, tiles, entities);
+		board = b;
 		display = new UI(this);
 	}
 
