@@ -100,7 +100,6 @@ public class BoardState {
 			for (int y = 0; y < entities[0].length; y++) {
 				entitiesCopy[x][y] = entities[x][y];
 			}
-			System.out.println();
 		}
 		return entitiesCopy;
 	}
