@@ -23,10 +23,9 @@ public class ControlsPopup extends JPanel{
 		setupLabels();
 		add(actions);
 		add(controls);
-		showControls();
 	}
 	
-	private void showControls(){
+	public void showControls(){
 		JOptionPane.showMessageDialog(null, this, "Game Controls",JOptionPane.PLAIN_MESSAGE);
 	}
 	

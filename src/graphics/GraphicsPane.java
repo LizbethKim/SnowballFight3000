@@ -35,10 +35,10 @@ public class GraphicsPane extends JPanel {
 		width = getWidth();
 		height = getHeight();
 		g.fillRect(0, 0, (int)width, (int)height);
-		System.out.println("Width + Tile Width | " + width + " "
+	/*	System.out.println("Width + Tile Width | " + width + " "
 				+ currentBoard[0][0].img.getWidth());
 		System.out.println("Height + Tile Height | " + height + " "
-				+ currentBoard[0][0].img.getHeight());
+				+ currentBoard[0][0].img.getHeight());*/
 		for (int i = 0; i < currentBoard.length; i++) {
 			for (int j = 0; j < currentBoard[0].length; j++) {
 				double x = (i * 0.5 * width / currentBoard.length) - (j * 0.5 * width / currentBoard.length)

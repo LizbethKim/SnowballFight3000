@@ -37,10 +37,9 @@ public class CheatsPopup extends JPanel{
 		setupLabels();
 		add(actions);
 		add(switches);
-		showCheats();
 	}
 	
-	private void showCheats(){
+	public void showCheats(){
 		JOptionPane.showMessageDialog(null, this, "Enable/Disable Cheats",JOptionPane.PLAIN_MESSAGE);
 	}
 	

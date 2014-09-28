@@ -56,45 +56,43 @@ public class UI extends JFrame {
 
 	// Fields
 	private Client client;
-	private JPanel hudPanel;
+	private HUDPanel hudPanel;
 	private JPanel graphicsPanel;
 	private JLayeredPane gamePanel;
-	private int currentWidth;
-	private int currentHeight;
+	private CheatsPopup cheatsPopup;
+	private ControlsPopup controlsPopup;
 
 	public UI(Client cl) {
 
 		// initialise UI
 		super();
 		client = cl;
-		// setLayout(new BorderLayout());
 
 		// setup components
-
 		setupFileBar();
 		setupKeyBindings();
-		setupCanvas();
-		setupGraphics();
 		setupGamePanel();
-
-		// set initial size
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Dimension scrnsize = toolkit.getScreenSize();
-		setBounds((scrnsize.width - getWidth()) / 2,
-				(scrnsize.height - getHeight()) / 2, getWidth(), getHeight());
-		currentWidth = getWidth();
-		currentHeight = getHeight();
-
-		setupResizing();
-
-		System.out.println("WHOLE WIDTH = " + getWidth());
-		System.out.println("WHOLE HEIGHT = " + getHeight());
-
+		setupHUD();
+//		hudPanel.inventorySize();
+		setupGraphics();
+		hudPanel.inventorySize();
+		System.out.println("hudPanel size is: "+hudPanel.getWidth()+", "+hudPanel.getHeight());
 		// pack and Display window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//hudPanel.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
+		hudPanel.inventorySize();
+		System.out.println("hudPanel size is: "+hudPanel.getWidth()+", "+hudPanel.getHeight());
 		setResizable(true);
 		setVisible(true);
+		//hudPanel.inventorySize();
+		
 	}
 
 	private void setupGamePanel() {
@@ -103,16 +101,34 @@ public class UI extends JFrame {
 
 		gamePanel = new JLayeredPane();
 		gamePanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT));
-		gamePanel.add(hudPanel);
-		gamePanel.add(graphicsPanel);
-		// gamePanel.setBounds(0,0,GAME_WIDTH, GAME_HEIGHT);
-		graphicsPanel.setBounds(0, 0, DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
-		hudPanel.setBounds(0, 0, DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
+		setupResizing();
 		add(gamePanel);
 	}
-
-	private void setupGraphics() {
-		graphicsPanel = new GraphicsPane(2, client.getBoard()); // temporaryBoardState);
+	
+	@Override
+	public void paint(Graphics g){
+		System.out.println("Repainting whole frame");
+		hudPanel.inventorySize();
+		super.paint(g);
+	}
+	
+	private void setupGraphics(){
+		graphicsPanel = new GraphicsPane(2, client.getBoard());
+		gamePanel.add(graphicsPanel);
+		graphicsPanel.setBounds(0, 0, DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
+	}
+	
+	/**
+	 * method to set up the HUD
+	 */
+	private void setupHUD() {
+		hudPanel = new HUDPanel(client, ASPECT_RATIO);
+		gamePanel.add(hudPanel);
+		hudPanel.setOpaque(false);
+		//hudPanel.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
+		hudPanel.setupInventory(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
+		//hudPanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT));
+		
 	}
 
 	private void setupResizing() {
@@ -125,11 +141,6 @@ public class UI extends JFrame {
 	}
 
 	private void resizeToRatio(ComponentEvent e){
-		final int QUIT_BAR_SIZE = 54;
-		final int RESIZE_EDGE_SIZE = 8;
-		
-		int windowXBorder = QUIT_BAR_SIZE + RESIZE_EDGE_SIZE;
-		int windowYBorder = RESIZE_EDGE_SIZE + RESIZE_EDGE_SIZE;
 		
 		int width = e.getComponent().getWidth();
 		int height = e.getComponent().getHeight();
@@ -223,6 +234,8 @@ public class UI extends JFrame {
 		final JMenuItem quit = new JMenuItem("Quit");
 		final JMenuItem controls = new JMenuItem("Show Controls");
 		final JMenuItem cheats = new JMenuItem("Enable Cheats");
+		cheatsPopup = new CheatsPopup(client);
+		controlsPopup = new ControlsPopup();
 
 		// add menu and items
 		menu.add(fileMenu);
@@ -252,27 +265,16 @@ public class UI extends JFrame {
 		controls.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new ControlsPopup();
+				controlsPopup.showControls();
 			}
 		});
 		
 		cheats.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new CheatsPopup(client);
+				cheatsPopup.showCheats();
 			}
 		});
-	}
-
-	/**
-	 * temporary method to set up the canvas until the proper graphical window
-	 * is developed
-	 */
-	private void setupCanvas() {
-		hudPanel = new HUDPanel(client, ASPECT_RATIO);
-		hudPanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT));
-		hudPanel.setOpaque(false);
-		// add(gameCanvas);
 	}
 
 	public static void main(String[] args) {
