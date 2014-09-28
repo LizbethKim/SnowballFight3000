@@ -20,7 +20,8 @@ public class TurnEvent implements UpdateEvent {
 	public void writeTo(OutputStream out) throws IOException {
 		// TODO Auto-generated method stub
 		out.write(0x02);
-		out.write(0x02);
+		out.write(playerID);
+		out.write(direction.ordinal());
 	}
 
 }
