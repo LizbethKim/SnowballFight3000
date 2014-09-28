@@ -5,16 +5,12 @@ import java.io.OutputStream;
 
 import gameworld.world.Location;
 
-<<<<<<< HEAD
-	public MoveEvent(int ID, Location l) {
-=======
 public class MoveEvent implements UpdateEvent {
 	int playerID;
 	Location location;
 	public MoveEvent(int playerID, Location l) {
 		this.playerID=playerID;
 		this.location=l;
->>>>>>> server
 		// AUTO
 	}
 
