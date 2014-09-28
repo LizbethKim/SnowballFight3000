@@ -48,33 +48,33 @@ public class BoardState {
 		entities[8][5] = Objects.TREE;
 		this.d = Direction.NORTH;
 
-		// Prints to the UI. Just to see if it works.
-		System.out.println("Board:");
-		for (int x = 0; x < board.length; x++) {
-			for (int y = 0; y < board[0].length; y++) {
-				if (board[x][y] == Terrain.GRASS) {
-					System.out.print("G");
-				} else if (board[x][y] == Terrain.SNOW) {
-					System.out.print("S");
-				}
-			}
-			System.out.println("");
-		}
-
-		System.out.println("");
-		System.out.println("Entities:");
-		for (int x = 0; x < board.length; x++) {
-			for (int y = 0; y < board[0].length; y++) {
-				if (entities[x][y] == Objects.TREE) {
-					System.out.print("T");
-				} else if (entities[x][y] == Objects.BUSH) {
-					System.out.print("B");
-				} else {
-					System.out.print('-');
-				}
-			}
-			System.out.println("");
-		}
+//		// Prints to the UI. Just to see if it works.
+//		System.out.println("Board:");
+//		for (int x = 0; x < board.length; x++) {
+//			for (int y = 0; y < board[0].length; y++) {
+//				if (board[x][y] == Terrain.GRASS) {
+//					System.out.print("G");
+//				} else if (board[x][y] == Terrain.SNOW) {
+//					System.out.print("S");
+//				}
+//			}
+//			System.out.println("");
+//		}
+//
+//		System.out.println("");
+//		System.out.println("Entities:");
+//		for (int x = 0; x < board.length; x++) {
+//			for (int y = 0; y < board[0].length; y++) {
+//				if (entities[x][y] == Objects.TREE) {
+//					System.out.print("T");
+//				} else if (entities[x][y] == Objects.BUSH) {
+//					System.out.print("B");
+//				} else {
+//					System.out.print('-');
+//				}
+//			}
+//			System.out.println("");
+//		}
 	}
 
 	public BoardState(Terrain[][] board, Objects[][] entities) {
@@ -99,13 +99,6 @@ public class BoardState {
 		for (int x = 0; x < entities.length; x++) {
 			for (int y = 0; y < entities[0].length; y++) {
 				entitiesCopy[x][y] = entities[x][y];
-				// ====== get rid of this n=====
-				if (entities[x][y] == Objects.PLAYER1) {
-					System.out.print('p');
-				} else {
-					System.out.print('-');
-				}
-				// =============================
 			}
 			System.out.println();
 		}
@@ -128,7 +121,6 @@ public class BoardState {
 	protected void update(Terrain[][] newBoard, Objects[][] newEntities) {
 		this.board = newBoard;
 		this.entities = newEntities;
-		System.out.println("updated");
 	}
 
 	protected void rotateClockwise() {

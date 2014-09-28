@@ -58,7 +58,6 @@ public class Updater {
 	public void updateBoardState() {
 		Objects[][] items = board.itemEnums();
 		for (Player p: playerIDs.values()) {
-			System.out.println("a player! (" + p.getLocation().x + ", " + p.getLocation().y + ")");
 			items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER1;
 //			if (p.getDirection() == Direction.NORTH) { KTC uncomment later
 //				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_N;
