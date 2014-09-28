@@ -24,7 +24,8 @@ public enum Objects {
 	WALL_E_W(""),
 	WALL_N_S(""),
 	SNOWBALL(""),
-	BUSH("PowerUp.png");
+	BUSH("PowerUp.png"),
+	PLAYER1("PlayerHoldingPosition.png");
 
 	public final Image img;
 

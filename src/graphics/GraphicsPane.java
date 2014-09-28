@@ -9,13 +9,12 @@ import javax.swing.JPanel;
 
 import client.BoardState;
 import graphics.assets.Objects;
-import graphics.assets.Sprites;
 import graphics.assets.Terrain;
 
 public class GraphicsPane extends JPanel {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -2715513999456707521L;
 	private double width;
@@ -49,7 +48,7 @@ public class GraphicsPane extends JPanel {
 						(int) height / 15, null);
 			}
 		}
-		
+
 		Objects[][] currentObjects = boardState.getObjects();
 		for (int i = 0; i < currentBoard.length; i++){
 			for (int j = -1; j < currentBoard[0].length -1; j++){

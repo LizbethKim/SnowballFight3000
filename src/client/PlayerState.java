@@ -3,7 +3,7 @@ package client;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import graphics.assets.Objects;
-import graphics.assets.Sprites;
+//import graphics.assets.Sprites;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +20,6 @@ public class PlayerState {
 	private int health;
 	private Location l;
 	private Direction d; 	// the direction the player is facing
-	private Sprites sprite;
 
 	public PlayerState(List<Objects> inventory, int health, Location l, Direction d) {
 		this.inventory = inventory;
@@ -68,13 +67,13 @@ public class PlayerState {
 		return l;
 	}
 
-	public Sprites getSprite() {
-		return sprite;
-	}
+//	public Sprites getSprite() {
+//		return sprite;
+//	}
 
-	public void setSprite(Sprites sprite) {
-		this.sprite = sprite;
-	}
+//	public void setSprite(Sprites sprite) {
+//		this.sprite = sprite;
+//	}
 
 	public Direction getDirection() {
 		return d;
