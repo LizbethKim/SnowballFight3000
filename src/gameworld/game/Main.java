@@ -2,6 +2,7 @@ package gameworld.game;
 
 import client.ClientGame;
 import client.SinglePlayerGame;
+import client.Updater;
 import server.Client;
 import server.Server;
 import storage.LoadGame;
@@ -30,7 +31,9 @@ public class Main {
 	public static void main (String[] args) {
 		System.out.println(args[0]);
 		if (args[0].equals("server")) {
-			Server server = new Server();
+			// KTC put an Updater in this function:
+			Updater u = null;
+			Server server = new Server(u);
 			// start server connection accepting thread
 			new Thread(server).start();
 			// currently, the server hogs the current thread (this function runs a while(true) statement)
@@ -45,8 +48,9 @@ public class Main {
 			new ClientGame(b, client);
 			//this function creates a new thread for itself
 			
-			// KH put an Updater in this function:
-			//client.startReceiving();
+			// KTC put an Updater in this function:
+			Updater u = null;
+			client.startReceiving(u);
 		} else { // debug single-player testing dev mode
 
 			// KH, this is where I'll need dataloading methods

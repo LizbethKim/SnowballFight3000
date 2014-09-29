@@ -12,6 +12,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import client.Updater;
+
 import server.events.UpdateEvent;
 
 public class Server implements Runnable {
@@ -19,8 +21,10 @@ public class Server implements Runnable {
 	private BlockingQueue<RemotePlayer> updateQueue;
 	private Map<Integer, RemotePlayer> playersByID;
 	
+	private Updater updater;
 
-	public Server() {
+	public Server(Updater u) {
+		updater = u;
 		try {
 			server = new ServerSocket(6015);
 		} catch (IOException e) {
@@ -62,7 +66,7 @@ public class Server implements Runnable {
 				Socket newSocket = server.accept();
 				newSocket.setTcpNoDelay(true); // stops TCP from combining packets, reduces latency
 				int id = generatePlayerID();
-				RemotePlayer newPlayer = new RemotePlayer(id, newSocket);
+				RemotePlayer newPlayer = new RemotePlayer(id, newSocket, updater);
 				playersByID.put(id, newPlayer);
 				//create and start a new thread, running the socket worker code
 				new Thread(newPlayer).start();
