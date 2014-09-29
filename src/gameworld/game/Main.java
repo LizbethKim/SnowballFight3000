@@ -26,7 +26,8 @@ public class Main {
 	}
 
 	public static void main (String[] args) {
-		if (SERVER) {
+		System.out.println(args[0]);
+		if (args[0].equals("server")) {
 			Server server = new Server();
 			// start server connection accepting thread
 			new Thread(server).start();
@@ -36,7 +37,7 @@ public class Main {
 			// (since the tick stuff should happen in another thread anyway)
 			// the only caveat is a client probably can't be a server as well
 			// if you don't like this, I can change it and make it more multithreaded
-		} else if (CLIENT) {
+		} else if (args[0].equals("client")) {
 			Client client = new Client("127.0.0.1"); //connect to localhost for testing, you can put a different address here
 			//this function creates a new thread for itself
 			client.startReceiving();

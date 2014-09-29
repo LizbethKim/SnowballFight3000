@@ -14,17 +14,17 @@ public class RemotePlayer implements Runnable {
 	private int id;
 	private Socket connection;
 	private Queue<UpdateEvent> queuedEvents;
-	
+
 	public RemotePlayer(int id, Socket sock) {
 		this.id = id;
-		this.connection = connection;
+		this.connection = sock;
 		queuedEvents = new LinkedList<UpdateEvent>();
 	}
-	
+
 	public void queueEvent(UpdateEvent e) {
 		queuedEvents.offer(e);
 	}
-	
+
 	public void sendUpdates() {
 		try {
 			//write each queued event to output
@@ -39,7 +39,7 @@ public class RemotePlayer implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void run() {
 		try {
@@ -48,7 +48,7 @@ public class RemotePlayer implements Runnable {
 				//switch by packet ID
 				switch (readFromSocket()) {
 				case 1:
-				
+
 				}
 			}
 		} catch (IOException e) {
@@ -91,7 +91,7 @@ public class RemotePlayer implements Runnable {
 		}
 		return s;
 	}
-	
+
 	public int getID() {
 		return id;
 	}
