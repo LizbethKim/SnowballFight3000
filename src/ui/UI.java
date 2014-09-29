@@ -15,6 +15,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 
 import gameworld.world.Board;
 import graphics.GraphicsPane;
@@ -26,6 +27,7 @@ import javax.swing.BoxLayout;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -205,6 +207,14 @@ public class UI extends JFrame {
 		// now tie the action to the action string
 		am.put(actionString, action);
 	}
+	
+	private void saveGame(){
+		JFileChooser fileChooser = new JFileChooser();
+		if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+		  File file = fileChooser.getSelectedFile();
+		  //KTC save to file  client.save(file) or equivalent, change to whatever when implemented
+		}
+	}
 
 	/**
 	 * Sets up the file menu and listeners
@@ -218,6 +228,8 @@ public class UI extends JFrame {
 		final JMenu helpMenu = new JMenu("Help");
 
 		final JMenuItem newGame = new JMenuItem("New Game");
+		final JMenuItem save = new JMenuItem("Save Game");
+		//final JMenuItem load = new JMenuItem("Load Game");
 		final JMenuItem quit = new JMenuItem("Quit");
 		final JMenuItem controls = new JMenuItem("Show Controls");
 		final JMenuItem cheats = new JMenuItem("Enable Cheats");
@@ -227,6 +239,7 @@ public class UI extends JFrame {
 		// add menu and items
 		menu.add(fileMenu);
 		fileMenu.add(newGame);
+		fileMenu.add(save);
 		fileMenu.add(quit);
 
 		menu.add(helpMenu);
@@ -260,6 +273,13 @@ public class UI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cheatsPopup.showCheats();
+			}
+		});
+		
+		save.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				saveGame();
 			}
 		});
 	}
