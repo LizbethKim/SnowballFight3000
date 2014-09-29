@@ -20,6 +20,12 @@ public class Player implements Entity {
 		this.inventory = new PlayerInventory();
 	}
 
+	public Player (int team, String name) {
+		this.team = team;
+		this.name = name;
+		this.inventory = new PlayerInventory();
+	}
+
 	/**
 	 * Moves a character to a new location. Only moves them if the new location is
 	 * one step away.
@@ -33,6 +39,12 @@ public class Player implements Entity {
 			return true;
 		}
 		return false;
+	}
+
+	public void spawn(Location l) {
+		if (this.loc == null) {
+			this.loc = l;
+		}
 	}
 
 	public Location getLocation() {
