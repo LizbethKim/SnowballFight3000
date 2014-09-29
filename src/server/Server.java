@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
@@ -17,6 +18,7 @@ public class Server implements Runnable {
 	private ServerSocket server;
 	private BlockingQueue<RemotePlayer> updateQueue;
 	private Map<Integer, RemotePlayer> playersByID;
+	
 
 	public Server() {
 		try {

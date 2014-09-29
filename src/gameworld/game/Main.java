@@ -41,10 +41,12 @@ public class Main {
 			// if you don't like this, I can change it and make it more multithreaded
 		} else if (args[0].equals("client")) {
 			Client client = new Client("127.0.0.1"); //connect to localhost for testing, you can put a different address here
-			//this function creates a new thread for itself
-			client.startReceiving();
 			Board b = new Board();	// This should be new from file - the first file to come through the network perhaps
 			new ClientGame(b, client);
+			//this function creates a new thread for itself
+			
+			// KH put an Updater in this function:
+			//client.startReceiving();
 		} else { // debug single-player testing dev mode
 
 			// KH, this is where I'll need dataloading methods
