@@ -12,6 +12,7 @@ public class Player implements Entity {
 	public final String name;	// KTC necessary?
 	private Inventory inventory;
 	private Direction d = Direction.NORTH;
+	private int ID;
 
 	public Player (int team, Location l, String name) {
 		this.loc = l;
@@ -20,8 +21,8 @@ public class Player implements Entity {
 		this.inventory = new PlayerInventory();
 	}
 
-	public Player (int team, String name) {
-		this.team = team;
+	public Player (String name, int ID) {
+		this.ID = ID;
 		this.name = name;
 		this.inventory = new PlayerInventory();
 	}
@@ -88,6 +89,20 @@ public class Player implements Entity {
 
 	public void setDirection(Direction d) {
 		this.d = d;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
+	public void setTeam(int team) {
+		if (team == 0) {
+			this.team = team;
+		}
 	}
 
 }
