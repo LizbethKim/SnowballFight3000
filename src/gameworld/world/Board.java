@@ -96,4 +96,8 @@ public class Board {
 		return null;	// KTC
 	}
 
+	public boolean containsLocation(Location newLoc) {
+		return newLoc.x >= 0 && newLoc.x < board.length && newLoc.y >= 0 && newLoc.y < board[0].length;
+	}
+
 }

@@ -83,7 +83,7 @@ public class SinglePlayerGame extends ClientGame {
 			} else {
 				newLoc = new Location(player.getLocation().x - 1, player.getLocation().y);
 			}
-			if (board.canTraverse(newLoc)) {
+			if (board.containsLocation(newLoc) && board.canTraverse(newLoc)) {
 				update.movePlayer(playerID, newLoc);
 			}
 		} else {
