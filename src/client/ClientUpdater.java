@@ -25,8 +25,21 @@ public class ClientUpdater {
 
 	private BoardState bs;	// KTC to do update this after updating.
 	private UI display;
+	private ClientGame clientGame;
 
-	public ClientUpdater(Board b, Map<Integer, Player> players, List<Snowball> projectiles, BoardState bs, UI display) {
+	public ClientUpdater(ClientGame g, Board b, Map<Integer, Player> players, List<Snowball> projectiles, BoardState bs, UI display) {
+		this.clientGame = g;
+		this.board = b;
+		this.playerIDs = players;
+		this.projectiles = projectiles;
+		this.bs = bs;
+		this.display = display;
+		updateBoardState();
+	}
+	
+	
+	// Only for single-player mode
+	public ClientUpdater( Board b, Map<Integer, Player> players, List<Snowball> projectiles, BoardState bs, UI display) {
 		this.board = b;
 		this.playerIDs = players;
 		this.projectiles = projectiles;
@@ -40,7 +53,7 @@ public class ClientUpdater {
 	}
 	
 	public void createLocalPlayer(int id) {
-		// KTC to do
+		clientGame.setID(id);
 	}
 
 	public void movePlayer(int id, Location l) {

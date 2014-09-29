@@ -32,8 +32,8 @@ public class Main {
 		System.out.println(args[0]);
 		if (args[0].equals("server")) {
 			// KTC put an Updater in this function:
-			ClientUpdater u = null;
-			Server server = new Server(u);
+			ServerGame g = new ServerGame(new Board());
+			Server server = new Server(g);
 			// start server connection accepting thread
 			new Thread(server).start();
 			// currently, the server hogs the current thread (this function runs a while(true) statement)

@@ -1,5 +1,6 @@
 package server;
 
+import gameworld.game.ServerGame;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 
@@ -12,17 +13,16 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import client.ClientUpdater;
-
 import server.events.UpdateEvent;
 
 public class RemotePlayer implements Runnable {
 	private int id;
 	private Socket connection;
 	private Queue<UpdateEvent> queuedEvents;
-	private ClientUpdater updater;
+	private ServerGame game;
 
-	public RemotePlayer(int id, Socket sock, ClientUpdater u) {
-		this.updater = u;
+	public RemotePlayer(int id, Socket sock, ServerGame g) {
+		this.game = g;
 		this.id = id;
 		this.connection = sock;
 		queuedEvents = new LinkedList<UpdateEvent>();
@@ -84,12 +84,12 @@ public class RemotePlayer implements Runnable {
 	private void readMove() throws IOException, SocketClosedException {
 		int x = readFromSocket() + readFromSocket()>>8;
 		int y = readFromSocket() + readFromSocket()>>8;
-		updater.movePlayer(id, new Location(x,y));
+		game.movePlayer(id, new Location(x,y));
 	}
 	
 	private void readTurn() throws IOException, SocketClosedException {
 		int dir = readFromSocket();
-		updater.turnPlayer(id, Direction.values()[dir]);
+		game.turnPlayer(id, Direction.values()[dir]);
 	}
 	
 	// TODO functions here will be made as needed as we develop the protocol

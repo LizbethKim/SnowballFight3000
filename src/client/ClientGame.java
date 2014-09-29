@@ -48,8 +48,7 @@ public class ClientGame {
 		playerIDs = new HashMap<Integer, Player>();
 		projectiles = new ArrayList<Snowball>();
 		display = new UI(this);
-		player = new Player(1, new Location(2, 2), "");		// KTC can't stay like this. need to set up differently.
-		
+		player = new Player("", 0);
 	}
 	
 	public ClientGame(){
@@ -60,6 +59,8 @@ public class ClientGame {
 //		return player;
 //	}
 
+	
+	
 	public int getPlayerHealth() {
 		return player.getHealth();
 	}
@@ -90,9 +91,6 @@ public class ClientGame {
 			}
 			if (board.containsLocation(newLoc) && board.canTraverse(newLoc)) {
 				client.sendMove(newLoc);
-				// network.send( new MoveEvent(newLoc);
-				// Ok, BF, I need a way to send this through the network. I think I just need
-				// a MoveEvent class? Which takes a playerID (possibly) and the new location.
 			}
 		} else {
 			client.sendTurn(d);
@@ -144,8 +142,13 @@ public class ClientGame {
 		display.repaint();
 	}
 	
+	public void setID(int ID) {
+		this.playerID = ID;
+		this.player.setID(ID);
+	}
+	
 	public ClientUpdater makeUpdater() {
-		return new ClientUpdater(board, playerIDs, projectiles, boardState, display);
+		return new ClientUpdater(this, board, playerIDs, projectiles, boardState, display);
 	}
 
 }

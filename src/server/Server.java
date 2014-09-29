@@ -1,5 +1,7 @@
 package server;
 
+import gameworld.game.ServerGame;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,7 +15,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 import client.ClientUpdater;
-
 import server.events.UpdateEvent;
 
 public class Server implements Runnable {
@@ -21,10 +22,11 @@ public class Server implements Runnable {
 	private BlockingQueue<RemotePlayer> updateQueue;
 	private Map<Integer, RemotePlayer> playersByID;
 	
-	private ClientUpdater updater;
+	private ServerGame game;
 
-	public Server(ClientUpdater u) {
-		updater = u;
+	public Server(ServerGame g) {
+		game = g;
+		g.setServer(this);
 		try {
 			server = new ServerSocket(6015);
 		} catch (IOException e) {
@@ -66,7 +68,7 @@ public class Server implements Runnable {
 				Socket newSocket = server.accept();
 				newSocket.setTcpNoDelay(true); // stops TCP from combining packets, reduces latency
 				int id = generatePlayerID();
-				RemotePlayer newPlayer = new RemotePlayer(id, newSocket, updater);
+				RemotePlayer newPlayer = new RemotePlayer(id, newSocket, game);
 				playersByID.put(id, newPlayer);
 				//create and start a new thread, running the socket worker code
 				new Thread(newPlayer).start();
