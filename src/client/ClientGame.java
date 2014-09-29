@@ -48,7 +48,8 @@ public class ClientGame {
 		playerIDs = new HashMap<Integer, Player>();
 		projectiles = new ArrayList<Snowball>();
 		display = new UI(this);
-		player = new Player("", 0);
+		client.sendName("name goes here");
+		player = new Player("name goes here", 0);
 	}
 	
 	public ClientGame(){

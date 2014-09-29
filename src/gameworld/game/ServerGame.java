@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import server.Server;
+import server.events.CreatePlayerEvent;
 import server.events.MoveEvent;
 import server.events.TurnEvent;
 import gameworld.world.Board;
@@ -79,6 +80,9 @@ public class ServerGame {
 	
 	public void addPlayer(int playerID, String name) {
 		playerIDs.put(playerID, new Player(name, playerID));
+		for (int id: playerIDs.keySet()) {
+			server.queuePlayerUpdate(new CreatePlayerEvent(playerID, name), playerID);
+		}
 	}
 	
 	
