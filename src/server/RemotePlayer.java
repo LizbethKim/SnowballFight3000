@@ -1,5 +1,8 @@
 package server;
 
+import gameworld.world.Direction;
+import gameworld.world.Location;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
@@ -8,14 +11,18 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import client.Updater;
+
 import server.events.UpdateEvent;
 
 public class RemotePlayer implements Runnable {
 	private int id;
 	private Socket connection;
 	private Queue<UpdateEvent> queuedEvents;
+	private Updater updater;
 
-	public RemotePlayer(int id, Socket sock) {
+	public RemotePlayer(int id, Socket sock, Updater u) {
+		this.updater = u;
 		this.id = id;
 		this.connection = sock;
 		queuedEvents = new LinkedList<UpdateEvent>();
@@ -43,12 +50,18 @@ public class RemotePlayer implements Runnable {
 	@Override
 	public void run() {
 		try {
-			InputStream in = connection.getInputStream();
+			InputStream input = connection.getInputStream();
 			while (!connection.isClosed()) {
 				//switch by packet ID
-				switch (readFromSocket()) {
-				case 1:
-
+				byte in =  readFromSocket();
+				if(in==0x01) {
+					readMove();
+				}
+				else if(in==0x02) {
+					readTurn();
+				}
+				else if(in==0x05) {
+					// BF write receive name code
 				}
 			}
 		} catch (IOException e) {
@@ -67,6 +80,28 @@ public class RemotePlayer implements Runnable {
 		}
 
 	}
+	
+	private void readMove() throws IOException, SocketClosedException {
+		int x = readFromSocket() + readFromSocket()>>8;
+		int y = readFromSocket() + readFromSocket()>>8;
+		updater.movePlayer(id, new Location(x,y));
+	}
+	
+	private void readTurn() throws IOException, SocketClosedException {
+		int dir = readFromSocket();
+		updater.turnPlayer(id, Direction.values()[dir]);
+	}
+	
+	// TODO functions here will be made as needed as we develop the protocol
+
+	private String readString() throws IOException, SocketClosedException {
+		String output = "";
+		int len = readFromSocket();
+		for(int i=0;i<len;i++) {
+			output = output + (char)readFromSocket();
+		}
+		return output;
+	}
 
 	private byte readFromSocket() throws IOException, SocketClosedException {
 		//I hate java
@@ -76,22 +111,7 @@ public class RemotePlayer implements Runnable {
 		}
 		return (byte) input;
 	}
-
-	// TODO functions here will be made as needed as we develop the protocol
-
-	private String readStr(InputStream in) throws IOException,
-			SocketClosedException {
-		String s = "";
-		while (true) {
-			char next = (char) readFromSocket();
-			if ((byte) next == 0) {
-				break;
-			}
-			s = s + next;
-		}
-		return s;
-	}
-
+	
 	public int getID() {
 		return id;
 	}
