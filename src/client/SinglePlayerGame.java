@@ -27,7 +27,7 @@ public class SinglePlayerGame extends ClientGame {
 	private int playerID;
 
 	private UI display;
-	private Updater update;
+	private ClientUpdater update;
 
 	public SinglePlayerGame (Board b) {
 		// Somewhere in here I'll need a client object. probably
@@ -39,7 +39,8 @@ public class SinglePlayerGame extends ClientGame {
 		display = new UI(this);
 		player = new Player(1, new Location(2, 2), "");
 		playerIDs.put(this.playerID, player);
-		this.update = new Updater(board, playerIDs, projectiles, boardState, display);
+		projectiles = new ArrayList<Snowball>();
+		this.update = new ClientUpdater(board, playerIDs, projectiles, boardState, display);
 	}
 
 	public SinglePlayerGame(StoredGame g) {
@@ -50,7 +51,7 @@ public class SinglePlayerGame extends ClientGame {
 		playerIDs.put(100, player);
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		display = new UI(this);
-		this.update = new Updater(board, playerIDs, projectiles, boardState, display);
+		this.update = new ClientUpdater(board, playerIDs, projectiles, boardState, display);
 	}
 
 
@@ -136,7 +137,7 @@ public class SinglePlayerGame extends ClientGame {
 		display.repaint();
 	}
 
-	// KH this is where I'll saving, dunno if it makes sense but.
+	// KH this is where I'll do saving, dunno if it makes sense but.
 	public void save() {
 		SaveGame saver = new SaveGame();
 		List<Player> ps = new ArrayList<Player>();

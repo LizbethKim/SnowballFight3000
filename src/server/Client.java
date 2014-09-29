@@ -10,12 +10,12 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import client.Updater;
+import client.ClientUpdater;
 
 public class Client implements Runnable {
 	private final String host;
 
-	private Updater updater;
+	private ClientUpdater updater;
 
 	private Socket connection;
 
@@ -118,7 +118,7 @@ public class Client implements Runnable {
 		}
 	}
 	
-	public void startReceiving(Updater c) {
+	public void startReceiving(ClientUpdater c) {
 		this.updater = c;
 		Thread t = new Thread(this);
 		t.start();

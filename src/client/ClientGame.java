@@ -39,7 +39,6 @@ public class ClientGame {
 
 	private UI display;
 
-
 	public ClientGame (Board b, Client c) {
 		// Somewhere in here I'll need a client object. probably
 		this.board = b;
@@ -47,9 +46,12 @@ public class ClientGame {
 		//this.playerID = KTC to do
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
+		projectiles = new ArrayList<Snowball>();
 		display = new UI(this);
-		player = new Player(1, new Location(2, 2), "");
+		player = new Player(1, new Location(2, 2), "");		// KTC can't stay like this. need to set up differently.
+		
 	}
+	
 	public ClientGame(){
 		// TEMP 
 	}
@@ -86,15 +88,14 @@ public class ClientGame {
 			} else {
 				newLoc = new Location(player.getLocation().x - 1, player.getLocation().y);
 			}
-			if (board.canTraverse(newLoc)) {
-				new MoveEvent(playerID, newLoc);
+			if (board.containsLocation(newLoc) && board.canTraverse(newLoc)) {
+				client.sendMove(newLoc);
 				// network.send( new MoveEvent(newLoc);
 				// Ok, BF, I need a way to send this through the network. I think I just need
 				// a MoveEvent class? Which takes a playerID (possibly) and the new location.
 			}
 		} else {
-			new TurnEvent(playerID, d);
-			// KTC send this through the network.
+			client.sendTurn(d);
 		}
 	}
 
@@ -141,6 +142,10 @@ public class ClientGame {
 
 	public void refresh() {
 		display.repaint();
+	}
+	
+	public ClientUpdater makeUpdater() {
+		return new ClientUpdater(board, playerIDs, projectiles, boardState, display);
 	}
 
 }

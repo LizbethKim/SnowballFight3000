@@ -2,7 +2,7 @@ package gameworld.game;
 
 import client.ClientGame;
 import client.SinglePlayerGame;
-import client.Updater;
+import client.ClientUpdater;
 import server.Client;
 import server.Server;
 import storage.LoadGame;
@@ -32,7 +32,7 @@ public class Main {
 		System.out.println(args[0]);
 		if (args[0].equals("server")) {
 			// KTC put an Updater in this function:
-			Updater u = null;
+			ClientUpdater u = null;
 			Server server = new Server(u);
 			// start server connection accepting thread
 			new Thread(server).start();
@@ -45,11 +45,10 @@ public class Main {
 		} else if (args[0].equals("client")) {
 			Client client = new Client("127.0.0.1"); //connect to localhost for testing, you can put a different address here
 			Board b = new Board();	// This should be new from file - the first file to come through the network perhaps
-			new ClientGame(b, client);
+			ClientGame g = new ClientGame(b, client);
 			//this function creates a new thread for itself
 			
-			// KTC put an Updater in this function:
-			Updater u = null;
+			ClientUpdater u = g.makeUpdater();
 			client.startReceiving(u);
 		} else { // debug single-player testing dev mode
 

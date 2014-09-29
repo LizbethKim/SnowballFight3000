@@ -17,7 +17,7 @@ import graphics.assets.Objects;
  * @author Kelsey Jack 300275851
  *
  */
-public class Updater {
+public class ClientUpdater {
 	private SnowballFactory snowballFactory;
 	private Board board;
 	private Map<Integer, Player> playerIDs;
@@ -26,7 +26,7 @@ public class Updater {
 	private BoardState bs;	// KTC to do update this after updating.
 	private UI display;
 
-	public Updater(Board b, Map<Integer, Player> players, List<Snowball> projectiles, BoardState bs, UI display) {
+	public ClientUpdater(Board b, Map<Integer, Player> players, List<Snowball> projectiles, BoardState bs, UI display) {
 		this.board = b;
 		this.playerIDs = players;
 		this.projectiles = projectiles;
@@ -37,6 +37,10 @@ public class Updater {
 
 	public void addPlayer(int id, Player p) {
 		playerIDs.put(id, p);
+	}
+	
+	public void createLocalPlayer(int id) {
+		// KTC to do
 	}
 
 	public void movePlayer(int id, Location l) {

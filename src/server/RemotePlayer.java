@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import client.Updater;
+import client.ClientUpdater;
 
 import server.events.UpdateEvent;
 
@@ -19,9 +19,9 @@ public class RemotePlayer implements Runnable {
 	private int id;
 	private Socket connection;
 	private Queue<UpdateEvent> queuedEvents;
-	private Updater updater;
+	private ClientUpdater updater;
 
-	public RemotePlayer(int id, Socket sock, Updater u) {
+	public RemotePlayer(int id, Socket sock, ClientUpdater u) {
 		this.updater = u;
 		this.id = id;
 		this.connection = sock;

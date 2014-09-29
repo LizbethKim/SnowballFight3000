@@ -12,7 +12,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import client.Updater;
+import client.ClientUpdater;
 
 import server.events.UpdateEvent;
 
@@ -21,9 +21,9 @@ public class Server implements Runnable {
 	private BlockingQueue<RemotePlayer> updateQueue;
 	private Map<Integer, RemotePlayer> playersByID;
 	
-	private Updater updater;
+	private ClientUpdater updater;
 
-	public Server(Updater u) {
+	public Server(ClientUpdater u) {
 		updater = u;
 		try {
 			server = new ServerSocket(6015);
