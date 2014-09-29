@@ -3,6 +3,7 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
@@ -16,7 +17,7 @@ public class Server implements Runnable {
 	private ServerSocket server;
 	private BlockingQueue<RemotePlayer> updateQueue;
 	private Map<Integer, RemotePlayer> playersByID;
-	
+
 	public Server() {
 		try {
 			server = new ServerSocket(6015);
@@ -25,8 +26,9 @@ public class Server implements Runnable {
 			e.printStackTrace();
 		}
 		updateQueue = new LinkedBlockingQueue<RemotePlayer>();
+		playersByID = new HashMap<Integer, RemotePlayer>();
 	}
-	
+
 	public void sendLoop() {
 		while(true) {
 			try {
@@ -38,7 +40,7 @@ public class Server implements Runnable {
 			}
 		}
 	}
-	
+
 	public void queuePlayerUpdate(UpdateEvent event, int playerID) {
 		RemotePlayer playerUpdates = playersByID.get(playerID);
 		playerUpdates.queueEvent(event);
@@ -50,7 +52,7 @@ public class Server implements Runnable {
 		//BF make this method less stupid
 		return (int) (Math.random()*1000000);
 	}
-	
+
 	@Override
 	public void run() {
 		while(true) {
@@ -59,8 +61,8 @@ public class Server implements Runnable {
 				newSocket.setTcpNoDelay(true); // stops TCP from combining packets, reduces latency
 				int id = generatePlayerID();
 				RemotePlayer newPlayer = new RemotePlayer(id, newSocket);
-				playersByID.put(id, new RemotePlayer(id, newSocket));
-				//create and start a new thread, running the socket worker code 
+				playersByID.put(id, newPlayer);
+				//create and start a new thread, running the socket worker code
 				new Thread(newPlayer).start();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
