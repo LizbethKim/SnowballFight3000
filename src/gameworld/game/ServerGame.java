@@ -16,13 +16,13 @@ import gameworld.world.SnowballFactory.SnowballType;
  * @author Kelsey Jack 300275851
  *
  */
-public class Game {
+public class ServerGame {
 	private Board board;
 	private Map<Integer, Player> playerIDs;
 	private List<Snowball> projectiles;
 	private SnowballFactory snowballFactory;
 
-	public Game(Board b) {
+	public ServerGame(Board b) {
 		this.board = b;
 		// AUTO
 	}
@@ -47,7 +47,7 @@ public class Game {
 		}
 	}
 
-	public void pickUpItemAt (String player, Location l) {
+	public void pickUpItemAt (int playerID, Location l) {
 		// KTC make this work
 	}
 

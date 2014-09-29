@@ -37,7 +37,7 @@ import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
 import client.BoardState;
-import client.Client;
+import client.ClientGame;
 
 /**
  * The UI class encompasses the application window to display the game. It
@@ -55,14 +55,14 @@ public class UI extends JFrame {
 	public static final double ASPECT_RATIO = 1.0*DEFAULT_GAME_WIDTH/DEFAULT_GAME_HEIGHT;
 
 	// Fields
-	private Client client;
+	private ClientGame client;
 	private HUDPanel hudPanel;
 	private JPanel graphicsPanel;
 	private JLayeredPane gamePanel;
 	private CheatsPopup cheatsPopup;
 	private ControlsPopup controlsPopup;
 
-	public UI(Client cl) {
+	public UI(ClientGame cl) {
 
 		// initialise UI
 		super();

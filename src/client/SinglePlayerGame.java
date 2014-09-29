@@ -1,99 +1,125 @@
 package client;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
 import gameworld.world.Snowball;
-import gameworld.world.SnowballFactory;
-import gameworld.world.SnowballFactory.SnowballType;
 import graphics.assets.Objects;
+import ui.UI;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public class SinglePlayerGame {
+public class SinglePlayerGame extends ClientGame {
 	private Board board;
 	private Map<Integer, Player> playerIDs;
 	private List<Snowball> projectiles;
-	private SnowballFactory snowballFactory;
-	private Client client;
 
-	public SinglePlayerGame(Board b) {
+
+	private Player player;
+	private BoardState boardState;
+
+	private int playerID;
+
+	private UI display;
+	private Updater update;
+
+	public SinglePlayerGame (Board b) {
+		// Somewhere in here I'll need a client object. probably
 		this.board = b;
-		BoardState bs = new BoardState(board.convertToEnums(), board.itemEnums());
-		client = new Client(100, bs);
+		//this.playerID = KTC to do
+		this.playerID = 100;
+		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
-		playerIDs.put(client.getPlayerID(), new Player(1, new Location(2,2), "Bob"));
-		projectiles = new ArrayList<Snowball>();
-
-		updateClientBoard(client.getPlayerID());
+		display = new UI(this);
+		player = new Player(1, new Location(2, 2), "");
+		playerIDs.put(this.playerID, player);
+		this.update = new Updater(board, playerIDs, projectiles, boardState, display);
 	}
 
-	// examples of methods that will be in here
-	public void movePlayer (int playerID, Location l) {
-		Player p = playerIDs.get(playerID);
-		if (board.canTraverse(l) && p != null) {
-			if (p.move(l)) {
-//				client.getBoard().updatePlayerLocation(playerID, l);
-//				client.refresh();
+
+	public int getPlayerHealth() {
+		return player.getHealth();
+	}
+
+	public List<Objects> getPlayerInventory() {
+		return null;	// KTC to do
+	}
+
+	public Location getPlayerLocation() {
+		return player.getLocation();
+	}
+
+	public Direction getPlayerDirection() {
+		return player.getDirection();
+	}
+
+	public void move (Direction d) {
+		// KTC check if it's off the edge of the board
+		if (player.getDirection() == d) {
+			Location newLoc;
+			if (d == Direction.NORTH) {
+				newLoc = new Location(player.getLocation().x, player.getLocation().y - 1);
+			} else if (d == Direction.SOUTH) {
+				newLoc = new Location(player.getLocation().x, player.getLocation().y + 1);
+			} else if (d == Direction.EAST) {
+				newLoc = new Location(player.getLocation().x + 1, player.getLocation().y);
+			} else {
+				newLoc = new Location(player.getLocation().x - 1, player.getLocation().y);
 			}
+			if (board.canTraverse(newLoc)) {
+				update.movePlayer(playerID, newLoc);
+			}
+		} else {
+			update.turnPlayer(playerID, d);
 		}
 	}
 
-	public void turnPlayer(int playerID, Direction d) {
-		Player p = playerIDs.get(playerID);
-		if (p != null) {
-			p.setDirection(d);
-//			client.getBoard().updatePlayerDirection(playerID, d);
-//			client.refresh();
-		}
+	public void rotateClockwise() {
+		boardState.rotateClockwise();
 	}
 
-	public void pickUpItemAt (String player, Location l) {
-		// KTC make this work
+	public void rotateAnticlockwise() {
+		boardState.rotateAnticlockwise();
 	}
 
-	public void throwSnowball(int playerID) {
-		Player thrower = playerIDs.get(playerID);
-		if (board.tileAt(thrower.getLocation()).isSnow()) {
-			projectiles.add(snowballFactory.makeSnowball(thrower.getLocation(), thrower.getDirection(), SnowballType.NORMAL));
-		}
+	public void throwSnowball () {
+		// KTC send a fire snowball method through the network with playerID.
+		// not sure how to extend for non-standard snowballs.
 	}
 
-	public Player playerAt(Location l) {
-		// Possibly not a good idea, depends on encapsulation and mutability of Player
+	public String inspectItem() {
+		// KTC inspect the item in front of them.
+		return "";
+	}
+
+	/*
+	 * RB with the current system, where items are enums, there will be no
+	 * way to tell if they are a container. But you can just call this method
+	 * if the user tries to access the contents of something (so you might
+	 * want an 'open' button or something) and it will just return an empty
+	 * list/null if it's not a container. Does that sound ok?
+	 *
+	 * @param cont
+	 * @return
+	 */
+	public List<Objects> getContents() {
+		// KTC do it for the object in front of them.
 		return null;
 	}
 
-	public void clockTick() {
-		for (Snowball s: projectiles) {
-			s.clockTick();
-			// if it has collided with anything, make it hit that, and then
-			// delete it from the list.
-		}
-		// KTC update projectiles, possibly do time logic.
-		// check for collisions and remove projectiles that have hit something.
+	public int getPlayerID() {
+		return playerID;
 	}
 
+	public BoardState getBoard() {
+		return boardState;
+	}
 
-	public void updateClientBoard(int playerID) {
-		Objects[][] items = board.itemEnums();
-		for (Player p: playerIDs.values()) {
-			items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER1;
-//			if (p.getDirection() == Direction.NORTH) { KTC uncomment later
-//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_N;
-//			} else if (p.getDirection() == Direction.EAST) {
-//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_E;
-//			} else if (p.getDirection() == Direction.EAST) {
-//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_S;
-//			} else {
-//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_W;
-//			}
-		}
-		client.getBoard().update(board.convertToEnums(), board.itemEnums(), playerIDs.get(playerID).getDirection());
+	public void refresh() {
+		display.repaint();
 	}
 
 }

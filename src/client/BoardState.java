@@ -48,33 +48,33 @@ public class BoardState {
 		entities[8][5] = Objects.TREE;
 		this.d = Direction.NORTH;
 
-		// Prints to the UI. Just to see if it works.
-		System.out.println("Board:");
-		for (int x = 0; x < board.length; x++) {
-			for (int y = 0; y < board[0].length; y++) {
-				if (board[x][y] == Terrain.GRASS) {
-					System.out.print("G");
-				} else if (board[x][y] == Terrain.SNOW) {
-					System.out.print("S");
-				}
-			}
-			System.out.println("");
-		}
-
-		System.out.println("");
-		System.out.println("Entities:");
-		for (int x = 0; x < board.length; x++) {
-			for (int y = 0; y < board[0].length; y++) {
-				if (entities[x][y] == Objects.TREE) {
-					System.out.print("T");
-				} else if (entities[x][y] == Objects.BUSH) {
-					System.out.print("B");
-				} else {
-					System.out.print('-');
-				}
-			}
-			System.out.println("");
-		}
+//		// Prints to the UI. Just to see if it works.
+//		System.out.println("Board:");
+//		for (int x = 0; x < board.length; x++) {
+//			for (int y = 0; y < board[0].length; y++) {
+//				if (board[x][y] == Terrain.GRASS) {
+//					System.out.print("G");
+//				} else if (board[x][y] == Terrain.SNOW) {
+//					System.out.print("S");
+//				}
+//			}
+//			System.out.println("");
+//		}
+//
+//		System.out.println("");
+//		System.out.println("Entities:");
+//		for (int x = 0; x < board.length; x++) {
+//			for (int y = 0; y < board[0].length; y++) {
+//				if (entities[x][y] == Objects.TREE) {
+//					System.out.print("T");
+//				} else if (entities[x][y] == Objects.BUSH) {
+//					System.out.print("B");
+//				} else {
+//					System.out.print('-');
+//				}
+//			}
+//			System.out.println("");
+//		}
 	}
 
 	public BoardState(Terrain[][] board, Objects[][] entities) {
@@ -112,15 +112,23 @@ public class BoardState {
 //		return Collections.unmodifiableCollection(players.values());
 //	}
 
-	public static void main (String[] args) {
-		new BoardState();
-	}
+//	public static void main (String[] args) {
+//		new BoardState();
+//	}
 
 
-	protected void update(Terrain[][] newBoard, Objects[][] newEntities, Direction d) {
+	protected void update(Terrain[][] newBoard, Objects[][] newEntities) {
 		this.board = newBoard;
 		this.entities = newEntities;
-		this.d = d;
+	}
+
+	protected void rotateClockwise() {
+		d = Direction.values()[(d.ordinal() + 1) % 4];
+	}
+
+	protected void rotateAnticlockwise() {
+		// goes forward 3 clockwise - same as going one anticlockwise.
+		d = Direction.values()[(d.ordinal() + 3) % 4];
 	}
 
 //	protected void updatePlayerDirection(int playerID, Direction d) {

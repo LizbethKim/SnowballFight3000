@@ -1,5 +1,7 @@
 package gameworld.world;
 
+import java.io.File;
+
 import graphics.assets.Objects;
 import graphics.assets.Terrain;
 
@@ -15,6 +17,26 @@ public class Board {
 
 	public Board(Tile[][] board) {
 		this.board = board;
+	}
+
+	public Board() {
+		board = new Tile[10][10];
+		for (int x = 1; x < 9; x++) {
+			board[x][0] = new Tile(new Location(x, 0), Terrain.GRASS, null);
+			board[x][9] = new Tile(new Location(x, 9), Terrain.GRASS, null);
+			for (int y = 1; y < 9; y++) {
+				board[x][y] = new Tile(new Location(x, y), Terrain.SNOW, null);
+			}
+		}
+		for (int y = 0; y < 10; y++) {
+			board[0][y] = new Tile(new Location(0, y), Terrain.GRASS, null);
+			board[9][y] = new Tile(new Location(9, y), Terrain.GRASS, null);
+		}
+
+		board[0][0].place(new Furniture("A tree", Objects.TREE));
+		board[4][2].place(new Furniture("A tree", Objects.TREE));
+		board[5][3].place(new Furniture("A tree", Objects.TREE));
+		board[2][7].place(new Furniture("A bush", Objects.BUSH));
 	}
 
 	public Tile tileAt(Location l) {
@@ -68,6 +90,10 @@ public class Board {
 			}
 		}
 		return enumObjects;
+	}
+
+	public static Board boardFromFile(File f) {
+		return null;	// KTC
 	}
 
 }

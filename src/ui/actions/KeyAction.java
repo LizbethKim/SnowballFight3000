@@ -6,13 +6,13 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import client.Client;
+import client.ClientGame;
 
 public abstract class KeyAction extends AbstractAction {
 
-	protected Client client;
+	protected ClientGame client;
 
-    public KeyAction(Client client) {
+    public KeyAction(ClientGame client) {
         this.client = client;
     }
 

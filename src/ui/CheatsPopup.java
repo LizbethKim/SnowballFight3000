@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import client.Client;
+import client.ClientGame;
 import ui.cheats.CheatSwitch;
 import ui.cheats.Invincibility;
 import ui.cheats.OneHitKill;
@@ -24,9 +24,9 @@ public class CheatsPopup extends JPanel{
 	
 	private JPanel actions;
 	private JPanel switches;
-	private Client client;
+	private ClientGame client;
 
-	public CheatsPopup(Client cl){
+	public CheatsPopup(ClientGame cl){
 		this.client = cl;
 		setLayout(new FlowLayout());
 		actions = new JPanel();
@@ -45,7 +45,7 @@ public class CheatsPopup extends JPanel{
 	
 	private void addCheat(String cheat, CheatSwitch c){
 		JLabel a = new JLabel(cheat);
-		a.setPreferredSize(new Dimension(250,30));
+		a.setPreferredSize(new Dimension(250,25));
 		a.setFont(new Font("Verdana", Font.BOLD, 18));
 		actions.add(a);
 		switches.add(c);

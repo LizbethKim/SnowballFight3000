@@ -1,12 +1,12 @@
 package ui.actions;
 
-import client.Client;
+import client.ClientGame;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 
 public class RotateClockwise extends KeyAction{
 	
-	public RotateClockwise(Client cl){
+	public RotateClockwise(ClientGame cl){
 		super(cl);
 	}
 

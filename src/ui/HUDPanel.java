@@ -24,7 +24,7 @@ import java.util.HashSet;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import client.Client;
+import client.ClientGame;
 
 public class HUDPanel extends JPanel {
 	public static final String IMAGE_PATH = "src/ui/HUDAssets/";
@@ -37,10 +37,10 @@ public class HUDPanel extends JPanel {
 	private boolean inventoryHidden = false;
 	private final double aspectRatio;
 
-	private final Client client;
+	private final ClientGame client;
 	private InventoryPanel inventoryPanel;
 
-	public HUDPanel(Client cl, double aspectRatio) {
+	public HUDPanel(ClientGame cl, double aspectRatio) {
 		this.client = cl;
 		this.aspectRatio = aspectRatio;
 	}
@@ -50,7 +50,7 @@ public class HUDPanel extends JPanel {
 		add(inventoryPanel);
 		setInventoryBounds();
 		//inventoryPanel.setPreferredSize(new Dimension(bounds.width, bounds.height));
-		
+
 	}
 
 	@Override
@@ -58,13 +58,13 @@ public class HUDPanel extends JPanel {
 		super.setSize(width, height);
 		setInventoryBounds();
 		System.out.println("resizing inventory, height = "+inventoryPanel.getHeight()+", width = "+inventoryPanel.getWidth());
-		
+
 	}
-	
+
 	public void inventorySize(){
 		System.out.println("inventory size is: height = "+inventoryPanel.getHeight()+", width = "+inventoryPanel.getWidth());
 	}
-	
+
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
 		super.setBounds(x, y, width, height);
@@ -80,17 +80,17 @@ public class HUDPanel extends JPanel {
 		System.out.println("YPos = "+yPos);
 		inventoryPanel.setBounds(xPos, yPos, width, height);
 	}
-	
+
 	@Override public void paintComponent(Graphics g){
 		System.out.println("repainting HUD");
 		paintHealthBar(g);
 	}
-	
+
 	@Override public void paint(Graphics g){
 		System.out.println("calling paint on HUD");
 		setInventoryBounds();
 		super.paint(g);
-		
+
 	}
 
 	private void paintHealthBar(Graphics g) {
@@ -100,7 +100,7 @@ public class HUDPanel extends JPanel {
 		final int height = this.getHeight() / 11;
 		final int healthXPos = xPos + (2 * width / 7);
 		final int healthYPos = yPos + (height / 4);
-		final double healthProportion = client.getPlayer().getHealth()
+		final double healthProportion = client.getPlayerHealth()
 				/ maxHealth;
 		final int healthWidth = (int) (width * 7 / 10 * healthProportion);
 		final int healthHeight = height * 3 / 5;
@@ -115,7 +115,7 @@ public class HUDPanel extends JPanel {
 
 	/**
 	 * Load an image from the file system, using a given filename.
-	 * 
+	 *
 	 * @param filename
 	 * @return
 	 */

@@ -1,10 +1,10 @@
 package ui.actions;
 
-import client.Client;
+import client.ClientGame;
 
 public class RotateAntiClockwise extends KeyAction{
 	
-	public RotateAntiClockwise(Client cl){
+	public RotateAntiClockwise(ClientGame cl){
 		super(cl);
 	}
 

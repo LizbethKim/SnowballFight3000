@@ -1,7 +1,11 @@
 package client;
 
+import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
+import gameworld.world.Player;
+import gameworld.world.Snowball;
+import gameworld.world.SnowballFactory;
 import graphics.assets.Objects;
 import graphics.assets.Terrain;
 
@@ -10,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import server.Client;
 import server.events.MoveEvent;
 import server.events.TurnEvent;
 import ui.UI;
@@ -20,45 +25,73 @@ import ui.UI;
  * @author Kelsey Jack 300275851
  *
  */
-public class Client {
-	private PlayerState player;
-	private BoardState board;
+public class ClientGame {
+	private Board board;
+	private Map<Integer, Player> playerIDs;
+	private List<Snowball> projectiles;
+
+
+	private Player player;
+	private BoardState boardState;
+	private Client client;
 
 	private int playerID;
 
 	private UI display;
 
 
-	public Client (int playerID, BoardState b) {
-		this.playerID = playerID;
-
-		List<Objects> playerInventory = new ArrayList<Objects>();
-		playerInventory.add(Objects.KEY);
-		playerInventory.add(Objects.POWERUP);
-		this.player = new PlayerState(new ArrayList<Objects>(), 80, new Location(2,2), Direction.WEST);
-		board = b;
+	public ClientGame (Board b, Client c) {
+		// Somewhere in here I'll need a client object. probably
+		this.board = b;
+		this.client = c;
+		//this.playerID = KTC to do
+		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
+		playerIDs = new HashMap<Integer, Player>();
 		display = new UI(this);
+		player = new Player(1, new Location(2, 2), "");
+	}
+	public ClientGame(){
+		// TEMP 
 	}
 
-	public PlayerState getPlayer() {
-		return player;
+//	public PlayerState getPlayer() {
+//		return player;
+//	}
+
+	public int getPlayerHealth() {
+		return player.getHealth();
 	}
+
+	public List<Objects> getPlayerInventory() {
+		return null;	// KTC to do
+	}
+
+	public Location getPlayerLocation() {
+		return player.getLocation();
+	}
+
+	public Direction getPlayerDirection() {
+		return player.getDirection();
+	}
+
 	public void move (Direction d) {
 		if (player.getDirection() == d) {
 			Location newLoc;
 			if (d == Direction.NORTH) {
-				newLoc = new Location(player.getL().x, player.getL().y - 1);
+				newLoc = new Location(player.getLocation().x, player.getLocation().y - 1);
 			} else if (d == Direction.SOUTH) {
-				newLoc = new Location(player.getL().x, player.getL().y + 1);
+				newLoc = new Location(player.getLocation().x, player.getLocation().y + 1);
 			} else if (d == Direction.EAST) {
-				newLoc = new Location(player.getL().x + 1, player.getL().y);
+				newLoc = new Location(player.getLocation().x + 1, player.getLocation().y);
 			} else {
-				newLoc = new Location(player.getL().x - 1, player.getL().y);
+				newLoc = new Location(player.getLocation().x - 1, player.getLocation().y);
 			}
-			new MoveEvent(playerID, newLoc);
-			// network.send( new MoveEvent(newLoc);
-			// Ok, BF, I need a way to send this through the network. I think I just need
-			// a MoveEvent class? Which takes a playerID (possibly) and the new location.
+			if (board.canTraverse(newLoc)) {
+				new MoveEvent(playerID, newLoc);
+				// network.send( new MoveEvent(newLoc);
+				// Ok, BF, I need a way to send this through the network. I think I just need
+				// a MoveEvent class? Which takes a playerID (possibly) and the new location.
+			}
 		} else {
 			new TurnEvent(playerID, d);
 			// KTC send this through the network.
@@ -66,11 +99,11 @@ public class Client {
 	}
 
 	public void rotateClockwise() {
-		player.rotateClockwise();
+		boardState.rotateClockwise();
 	}
 
 	public void rotateAnticlockwise() {
-		player.rotateAnticlockwise();
+		boardState.rotateAnticlockwise();
 	}
 
 	public void throwSnowball () {
@@ -103,7 +136,7 @@ public class Client {
 	}
 
 	public BoardState getBoard() {
-		return board;
+		return boardState;
 	}
 
 	public void refresh() {

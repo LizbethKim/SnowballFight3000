@@ -6,15 +6,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import client.Client;
+import client.ClientGame;
 
 public class RightClickMenu extends JPopupMenu {
-	private Client client;
+	private ClientGame client;
 	private JMenuItem drop;
 	private JMenuItem use;
 	private JMenuItem inspect;
 	
-	public RightClickMenu(Client cl){
+	public RightClickMenu(ClientGame cl){
 		this.client = cl;
 		setupMenu();
 	}

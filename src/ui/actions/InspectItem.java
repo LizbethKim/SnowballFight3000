@@ -1,11 +1,11 @@
 package ui.actions;
-import client.Client;
+import client.ClientGame;
 import gameworld.world.Board;
 
 
 public class InspectItem extends KeyAction{
 
-	public InspectItem(Client cl){
+	public InspectItem(ClientGame cl){
 		super(cl);
 	}
 	
