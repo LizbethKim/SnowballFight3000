@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package storage;
 
@@ -9,4 +9,8 @@ package storage;
  */
 public class SaveGame {
 
+
+	public void save(StoredGame sg) {
+		// TODO just here so my code compiles
+	}
 }

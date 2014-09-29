@@ -4,6 +4,7 @@ import client.ClientGame;
 import client.SinglePlayerGame;
 import server.Client;
 import server.Server;
+import storage.LoadGame;
 import ui.UI;
 import gameworld.world.Board;
 import gameworld.world.Furniture;
@@ -61,6 +62,9 @@ public class Main {
 	 * Everything else will be event-driven (at least, in my mind).
 	 */
 	private static void singlePlayerGame() {
+//		LoadGame lg = new LoadGame();
+//		SinglePlayerGame game = new SinglePlayerGame(lg.loadGame(""));	//KTC add default game-file here KH uncomment to test
+
 		Board board = new Board(); // createBoardFromFile(filename);
 		SinglePlayerGame game = new SinglePlayerGame(board);
 

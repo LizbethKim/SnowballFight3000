@@ -1,5 +1,6 @@
 package client;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,8 @@ import gameworld.world.Location;
 import gameworld.world.Player;
 import gameworld.world.Snowball;
 import graphics.assets.Objects;
+import storage.SaveGame;
+import storage.StoredGame;
 import ui.UI;
 
 public class SinglePlayerGame extends ClientGame {
@@ -36,6 +39,17 @@ public class SinglePlayerGame extends ClientGame {
 		display = new UI(this);
 		player = new Player(1, new Location(2, 2), "");
 		playerIDs.put(this.playerID, player);
+		this.update = new Updater(board, playerIDs, projectiles, boardState, display);
+	}
+
+	public SinglePlayerGame(StoredGame g) {
+		this.board = g.getBoard();
+		this.player = g.getPlayers().get(0);
+		playerID = 100;
+		playerIDs = new HashMap<Integer, Player>();
+		playerIDs.put(100, player);
+		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
+		display = new UI(this);
 		this.update = new Updater(board, playerIDs, projectiles, boardState, display);
 	}
 
@@ -120,6 +134,15 @@ public class SinglePlayerGame extends ClientGame {
 
 	public void refresh() {
 		display.repaint();
+	}
+
+	// KH this is where I'll saving, dunno if it makes sense but.
+	public void save() {
+		SaveGame saver = new SaveGame();
+		List<Player> ps = new ArrayList<Player>();
+		ps.addAll(playerIDs.values());
+		StoredGame sg = new StoredGame(this.board, ps);
+		saver.save(sg);
 	}
 
 }
