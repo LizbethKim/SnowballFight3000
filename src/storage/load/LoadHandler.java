@@ -3,7 +3,14 @@
  */
 package storage.load;
 
-import gameworld.world.*;
+import gameworld.world.Board;
+import gameworld.world.Location;
+import gameworld.world.Player;
+import gameworld.world.Tile;
+import graphics.assets.Terrain;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -16,16 +23,37 @@ import storage.StoredGame;
  *
  */
 public class LoadHandler extends DefaultHandler{
-	private StoredGame game;
 	
+	private StoredGame game;
+	private Board board;
+	private Tile[][] tiles;
+	private List<Player> players;
 	private Player curPlayer;
-	private boolean playerStart = false;
+	private Tile curTile;
+	
+	private boolean tileLoad = false;
+	private boolean playerLoad = false;
+	private boolean inventoryLoad = false;
+	private boolean boardLoad = false;
+	
+	private int charDepth;
+	
+	
+	private static final List<Terrain> terrains = new ArrayList<Terrain>(){ //would be unnecessary if terrain had int values
+		{
+			add(Terrain.SNOW); 
+			add(Terrain.FLOOR);
+			add(Terrain.GRASS);
+			add(Terrain.DIRT);
+			add(Terrain.TESTTILE);
+		}
+	};
 	
 	/**
 	 * Creates a new StoredGame and loads the parsed XML into it.
 	 */
 	public LoadHandler() {
-		game = new StoredGame();
+		System.out.println("New LoadHandler created");
 	}
 	
 	
@@ -47,15 +75,15 @@ public class LoadHandler extends DefaultHandler{
 		if(qName.equalsIgnoreCase("game")){
 			
 		} else if(qName.equalsIgnoreCase("players")){
-			game.newPlayerList();
+			players = new ArrayList<>();
 		} else if(qName.equalsIgnoreCase("player")){
-			playerStart = true;
+			playerLoad = true;
 		} else if(qName.equalsIgnoreCase("inventory")){
-			
-		} else if(qName.equalsIgnoreCase("map")){
-			
+			inventoryLoad = true;
+		} else if(qName.equalsIgnoreCase("board")){
+			boardLoad = true;
 		} else if(qName.equalsIgnoreCase("tile")){
-			
+			tileLoad = true;
 		}
 	}
 	
@@ -64,15 +92,35 @@ public class LoadHandler extends DefaultHandler{
 	 */
 	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException {
-		System.out.println("start characters : " + new String(ch, start, length));
-		if(playerStart == true){
-			int team = Integer.parseInt(new String(ch, start, 1));
-			int x = Integer.parseInt(new String(ch, start+2, 3));
-			int y = Integer.parseInt(new String(ch, start+6, 3));
-			String name = new String (ch, start+10,length-12);//extra letter off length is \n character
-			curPlayer = new Player(team, new Location(x, y), name);
-			playerStart = false;
+		charDepth = start;
+		if(playerLoad == true){
+			int team = Integer.parseInt(new String(ch, charDepth, 1));
+			charDepth=charDepth+2;
+			Location loc = parseLoc(ch,charDepth);
+			String name = new String(ch, charDepth,length-charDepth);
+			curPlayer = new Player(team, loc, name);
+			playerLoad = false;
+			
+		} else if(tileLoad == true){
+			int terrain = Integer.parseInt(new String(ch, charDepth, 1));
+			charDepth=charDepth+2;
+			Location loc = parseLoc(ch,charDepth);
+			String name = new String(ch, charDepth,length-9);
+			curTile = new Tile(loc,terrains.get(terrain),null);
+			tileLoad = false;
+			
+		} else if(boardLoad == true){
+			Location boardSize = parseLoc(ch,charDepth);
+			tiles = new Tile[boardSize.x][boardSize.y];
+			boardLoad = false;
 		}
+	}
+	
+	private Location parseLoc(char[] str, int start){
+		int x = Integer.parseInt(new String(str, start, 3));
+		int y = Integer.parseInt(new String(str, start+4, 3));
+		charDepth= charDepth+8;
+		return new Location(x, y);
 	}
 	
 	
@@ -83,18 +131,18 @@ public class LoadHandler extends DefaultHandler{
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		System.out.println("end element	 : " + qName);
 		if(qName.equalsIgnoreCase("game")){
-			//GAME IS COMPLETELY LOADED!!!!
+			//GAME IS COMPLETELY LOADED!!!! (Ideally)
 		} else if(qName.equalsIgnoreCase("players")){
 			//Players are loaded
 		} else if(qName.equalsIgnoreCase("player")){ //curPlayer is finished
-			game.addPlayer(curPlayer);
+			players.add(curPlayer);
 			System.out.println("ADDED PLAYER: "+curPlayer.name+" team:"+curPlayer.getTeam()+" location:"+curPlayer.getLocation().x+","+curPlayer.getLocation().y);
 		} else if(qName.equalsIgnoreCase("inventory")){
 			
-		} else if(qName.equalsIgnoreCase("map")){
-			
+		} else if(qName.equalsIgnoreCase("board")){
+			board = new Board(tiles);
 		} else if(qName.equalsIgnoreCase("tile")){
-			
+			tiles[curTile.getCoords().x][curTile.getCoords().y] = curTile;
 		}
 	}
 	
@@ -107,10 +155,10 @@ public class LoadHandler extends DefaultHandler{
 	}
 
 	/**
-	 * @return
+	 * Returns a fully loaded StoredGame file containing a Board and Player list
+	 * @return 
 	 */
 	public StoredGame buildGame() {
-		game.playerCount = 5;
-		return game;
+		return new StoredGame(board, players);
 	}
 }

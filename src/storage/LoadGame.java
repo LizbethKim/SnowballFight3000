@@ -20,6 +20,7 @@ import storage.load.LoadHandler;
  *
  */
 public class LoadGame{
+	private StoredGame game;
 	
 	public LoadGame(){
 		
@@ -31,14 +32,14 @@ public class LoadGame{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-	    SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+		SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
 	    try {
 	        SAXParser saxParser = saxParserFactory.newSAXParser();
 	        LoadHandler handler = new LoadHandler();
-	        saxParser.parse(new File("src/storage/testgame.xml"), handler);
+	        saxParser.parse(new File("src/storage/defaultBoard.xml"), handler);
 	         
-	        StoredGame game = handler.buildGame();
-	        System.out.println("Game Player count: "+ game.playerCount);
+	        StoredGame testGame = handler.buildGame();
+	        System.out.println("Game Loaded by loader");
 	        
 	    } catch (ParserConfigurationException | SAXException | IOException e) {
 	        e.printStackTrace();
@@ -46,8 +47,19 @@ public class LoadGame{
 	}
 	
 	public StoredGame loadGame(String filename){
-		
-		return new StoredGame();
+		SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+	    try {
+	        SAXParser saxParser = saxParserFactory.newSAXParser();
+	        LoadHandler handler = new LoadHandler();
+	        saxParser.parse(new File("src/storage/"+filename), handler);
+	         
+	        game = handler.buildGame();
+	        System.out.println("Game Loaded by main");
+	        
+	    } catch (ParserConfigurationException | SAXException | IOException e) {
+	        e.printStackTrace();
+	    }
+		return game;
 
 	}
 

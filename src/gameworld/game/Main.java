@@ -68,8 +68,8 @@ public class Main {
 	 * Everything else will be event-driven (at least, in my mind).
 	 */
 	private static void singlePlayerGame() {
-//		LoadGame lg = new LoadGame();
-//		SinglePlayerGame game = new SinglePlayerGame(lg.loadGame(""));	//KTC add default game-file here KH uncomment to test
+		//LoadGame lg = new LoadGame();
+		//SinglePlayerGame game = new SinglePlayerGame(lg.loadGame("defaultBoard.xml"));	//KTC add default game-file here KH uncomment to test
 
 		Board board = new Board(); // createBoardFromFile(filename);
 		SinglePlayerGame game = new SinglePlayerGame(board);
