@@ -37,7 +37,8 @@ public class RemotePlayer implements Runnable {
 		try {
 			//write each queued event to output
 			while(queuedEvents.size()>0) {
-					queuedEvents.poll().writeTo(connection.getOutputStream());
+				System.out.println(queuedEvents.peek());
+				queuedEvents.poll().writeTo(connection.getOutputStream());
 			}
 			//flush the data
 			connection.getOutputStream().flush();
@@ -55,13 +56,14 @@ public class RemotePlayer implements Runnable {
 			while (!connection.isClosed()) {
 				//switch by packet ID
 				byte in =  readFromSocket();
+				System.out.println(in);
 				if(in==0x01) {
 					readMove();
 				}
 				else if(in==0x02) {
 					readTurn();
 				}
-				else if(in==0x05) {
+				else if(in==0x06) {
 					readName();
 				}
 			}
@@ -106,7 +108,9 @@ public class RemotePlayer implements Runnable {
 		int len = readFromSocket();
 		for(int i=0;i<len;i++) {
 			output = output + (char)readFromSocket();
+			System.out.println("READING SHIT");
 		}
+		System.out.println("asd");
 		return output;
 	}
 

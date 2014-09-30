@@ -50,6 +50,7 @@ public class Server implements Runnable {
 	}
 
 	public void queuePlayerUpdate(UpdateEvent event, int playerID) {
+		System.out.println("WHAT THE SHIT");
 		RemotePlayer playerUpdates = playersByID.get(playerID);
 		playerUpdates.queueEvent(event);
 		playersByID.put(playerID, playerUpdates);
