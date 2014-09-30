@@ -61,9 +61,11 @@ public class RemotePlayer implements Runnable {
 					readTurn();
 				}
 				else if(in==0x05) {
+
 					// BF write receive name code
 					// game.addPlayer(id, name);
 					// queueEvent(createLocalPlayerEvent(id);
+
 				}
 			}
 		} catch (IOException e) {
@@ -82,18 +84,23 @@ public class RemotePlayer implements Runnable {
 		}
 
 	}
-	
+
 	private void readMove() throws IOException, SocketClosedException {
 		int x = readFromSocket() + readFromSocket()>>8;
 		int y = readFromSocket() + readFromSocket()>>8;
 		game.movePlayer(id, new Location(x,y));
 	}
-	
+
 	private void readTurn() throws IOException, SocketClosedException {
 		int dir = readFromSocket();
 		game.turnPlayer(id, Direction.values()[dir]);
 	}
-	
+
+	private void readName() throws IOException, SocketClosedException {
+		String name = readString();
+		game.addPlayer(id, name);
+	}
+
 	// TODO functions here will be made as needed as we develop the protocol
 
 	private String readString() throws IOException, SocketClosedException {
@@ -113,7 +120,7 @@ public class RemotePlayer implements Runnable {
 		}
 		return (byte) input;
 	}
-	
+
 	public int getID() {
 		return id;
 	}

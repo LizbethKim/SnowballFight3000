@@ -21,7 +21,7 @@ public class Server implements Runnable {
 	private ServerSocket server;
 	private BlockingQueue<RemotePlayer> updateQueue;
 	private Map<Integer, RemotePlayer> playersByID;
-	
+
 	private ServerGame game;
 
 	public Server(ServerGame g) {
@@ -58,7 +58,11 @@ public class Server implements Runnable {
 
 	public int generatePlayerID() {
 		//BF make this method less stupid
-		return (int) (Math.random()*1000000);
+		int id = (int) (Math.random()*1000000);
+		while(playersByID.containsKey(id)) {
+			id = (int) (Math.random()*1000000);
+		}
+		return id;
 	}
 
 	@Override

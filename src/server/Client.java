@@ -61,9 +61,9 @@ public class Client implements Runnable {
 				// create local player
 				else if (in == 0x06) {
 					int id = readFromSocket();
-					// BF add updater function here
+					updater.createLocalPlayer(id);
 				}
-				
+
 
 				System.out.println(in);
 			} catch (IOException e) {
@@ -91,7 +91,7 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void sendTurn(Direction d) {
 		try {
 			connection.getOutputStream().write(0x02);
@@ -117,13 +117,13 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void startReceiving(ClientUpdater c) {
 		this.updater = c;
 		Thread t = new Thread(this);
 		t.start();
 	}
-	
+
 	private String readString() throws IOException, SocketClosedException {
 		String output = "";
 		int len = readFromSocket();
