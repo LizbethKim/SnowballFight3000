@@ -61,11 +61,7 @@ public class RemotePlayer implements Runnable {
 					readTurn();
 				}
 				else if(in==0x05) {
-
-					// BF write receive name code
-					// game.addPlayer(id, name);
-					// queueEvent(createLocalPlayerEvent(id);
-
+					readName();
 				}
 			}
 		} catch (IOException e) {
