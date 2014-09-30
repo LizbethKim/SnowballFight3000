@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import gameworld.game.ServerGame;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
@@ -28,6 +29,7 @@ public class SinglePlayerGame extends ClientGame {
 
 	private UI display;
 	private ClientUpdater update;
+	private long lastMovedTime;
 
 	public SinglePlayerGame (Board b) {
 		// Somewhere in here I'll need a client object. probably
@@ -72,23 +74,26 @@ public class SinglePlayerGame extends ClientGame {
 	}
 
 	public void move (Direction d) {
-		// KTC check if it's off the edge of the board
-		if (player.getDirection() == d) {
-			Location newLoc;
-			if (d == Direction.NORTH) {
-				newLoc = new Location(player.getLocation().x, player.getLocation().y - 1);
-			} else if (d == Direction.SOUTH) {
-				newLoc = new Location(player.getLocation().x, player.getLocation().y + 1);
-			} else if (d == Direction.EAST) {
-				newLoc = new Location(player.getLocation().x + 1, player.getLocation().y);
+		if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
+			// KTC check if it's off the edge of the board
+			if (player.getDirection() == d) {
+				Location newLoc;
+				if (d == Direction.NORTH) {
+					newLoc = new Location(player.getLocation().x, player.getLocation().y - 1);
+				} else if (d == Direction.SOUTH) {
+					newLoc = new Location(player.getLocation().x, player.getLocation().y + 1);
+				} else if (d == Direction.EAST) {
+					newLoc = new Location(player.getLocation().x + 1, player.getLocation().y);
+				} else {
+					newLoc = new Location(player.getLocation().x - 1, player.getLocation().y);
+				}
+				if (board.containsLocation(newLoc) && board.canTraverse(newLoc)) {
+					update.movePlayer(playerID, newLoc);
+				}
 			} else {
-				newLoc = new Location(player.getLocation().x - 1, player.getLocation().y);
+				update.turnPlayer(playerID, d);
 			}
-			if (board.containsLocation(newLoc) && board.canTraverse(newLoc)) {
-				update.movePlayer(playerID, newLoc);
-			}
-		} else {
-			update.turnPlayer(playerID, d);
+			lastMovedTime = System.currentTimeMillis();
 		}
 	}
 
