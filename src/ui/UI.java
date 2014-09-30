@@ -76,7 +76,7 @@ public class UI extends JFrame {
 		setupGamePanel();
 		setupHUD();
 		setupGraphics();
-		System.out.println("hudPanel size is: "+hudPanel.getWidth()+", "+hudPanel.getHeight());
+		
 		// pack and Display window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
@@ -92,13 +92,6 @@ public class UI extends JFrame {
 		gamePanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT));
 		setupResizing();
 		add(gamePanel);
-	}
-
-	@Override
-	public void paint(Graphics g){
-		System.out.println("Repainting whole frame");
-		hudPanel.inventorySize();
-		super.paint(g);
 	}
 
 	private void setupGraphics(){
