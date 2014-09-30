@@ -6,7 +6,6 @@ package storage;
 import gameworld.world.Board;
 import gameworld.world.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,25 +15,13 @@ import java.util.List;
  *
  */
 public class StoredGame {
+	
 	private Board board;
-	public int playerCount; //just used for testing access
 	private List<Player> players;
 
 	public StoredGame(Board b, List<Player> ps){
 		this.board = b;
 		this.players = ps;
-	}
-
-	public StoredGame() {
-
-	}
-
-	public void addPlayer(Player p){
-		players.add(p);
-	}
-
-	public void newPlayerList(){
-		players = new ArrayList<Player>();
 	}
 
 	public Board getBoard() {
