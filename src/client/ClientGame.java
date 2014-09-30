@@ -51,17 +51,17 @@ public class ClientGame {
 		client.sendName("name goes here");
 		player = new Player("name goes here", 0);
 	}
-	
+
 	public ClientGame(){
-		// TEMP 
+		// TEMP
 	}
 
 //	public PlayerState getPlayer() {
 //		return player;
 //	}
 
-	
-	
+
+
 	public int getPlayerHealth() {
 		return player.getHealth();
 	}
@@ -142,12 +142,16 @@ public class ClientGame {
 	public void refresh() {
 		display.repaint();
 	}
-	
+
 	public void setID(int ID) {
 		this.playerID = ID;
 		this.player.setID(ID);
 	}
-	
+
+	public void save() {
+		// KTC to do add client.save() request to server or something....?
+	}
+
 	public ClientUpdater makeUpdater() {
 		return new ClientUpdater(this, board, playerIDs, projectiles, boardState, display);
 	}

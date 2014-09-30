@@ -47,7 +47,7 @@ public class Main {
 			Board b = new Board();	// This should be new from file - the first file to come through the network perhaps
 			ClientGame g = new ClientGame(b, client);
 			//this function creates a new thread for itself
-			
+
 			ClientUpdater u = g.makeUpdater();
 			client.startReceiving(u);
 		} else { // debug single-player testing dev mode
@@ -68,11 +68,11 @@ public class Main {
 	 * Everything else will be event-driven (at least, in my mind).
 	 */
 	private static void singlePlayerGame() {
-		//LoadGame lg = new LoadGame();
-		//SinglePlayerGame game = new SinglePlayerGame(lg.loadGame("defaultBoard.xml"));	//KTC add default game-file here KH uncomment to test
+		LoadGame lg = new LoadGame();
+		SinglePlayerGame game = new SinglePlayerGame(lg.loadGame("defaultBoard.xml"));	//KTC add default game-file here KH uncomment to test
 
-		Board board = new Board(); // createBoardFromFile(filename);
-		SinglePlayerGame game = new SinglePlayerGame(board);
+//		Board board = new Board(); // createBoardFromFile(filename);
+//		SinglePlayerGame game = new SinglePlayerGame(board);
 
 
 		//	PROBABLY REDUNDANT

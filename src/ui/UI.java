@@ -207,11 +207,12 @@ public class UI extends JFrame {
 		// now tie the action to the action string
 		am.put(actionString, action);
 	}
-	
+
 	private void saveGame(){
 		JFileChooser fileChooser = new JFileChooser();
 		if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 		  File file = fileChooser.getSelectedFile();
+		  client.save();
 		  //KTC save to file  client.save(file) or equivalent, change to whatever when implemented
 		}
 	}
@@ -275,7 +276,7 @@ public class UI extends JFrame {
 				cheatsPopup.showCheats();
 			}
 		});
-		
+
 		save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
