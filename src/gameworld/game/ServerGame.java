@@ -23,6 +23,8 @@ import gameworld.world.SnowballFactory.SnowballType;
  *
  */
 public class ServerGame {
+	public static final long MOVE_DELAY = 300;
+
 	private Board board;
 	private Map<Integer, Player> playerIDs;
 	private List<Snowball> projectiles;
@@ -77,15 +79,15 @@ public class ServerGame {
 		// Possibly not a good idea, depends on encapsulation and mutability of Player
 		return null;
 	}
-	
+
 	public void addPlayer(int playerID, String name) {
 		playerIDs.put(playerID, new Player(name, playerID));
 		for (int id: playerIDs.keySet()) {
 			server.queuePlayerUpdate(new CreatePlayerEvent(playerID, name), playerID);
 		}
 	}
-	
-	
+
+
 	public void setServer(Server s) {
 		this.server = s;
 	}
