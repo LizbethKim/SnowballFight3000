@@ -27,10 +27,10 @@ public enum Objects {
 	WALL_N_S("", "", "", ""),
 	SNOWBALL("", "", "", ""),
 	BUSH("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png"),
-	PLAYER_N("", "", "", ""),
-	PLAYER_E("", "", "", ""),
-	PLAYER_S("", "", "", ""),
-	PLAYER_W("", "", "", ""),
+	PLAYER_N("PlayerNorth.png", "PlayerSouth.png", "PlayerWest.png", "PlayerEast.png"),
+	PLAYER_E("PlayerWest.png", "PlayerEast.png", "PlayerSouth.png", "PlayerNorth.png"),
+	PLAYER_S("PlayerSouth.png", "PlayerNorth.png", "PlayerEast.png", "PlayerWest.png"),
+	PLAYER_W("PlayerEast.png", "PlayerWest.png", "PlayerNorth.png", "PlayerSouth.png"),
 	PLAYER1("PlayerNorth.png", "PlayerSouth.png", "PlayerWest.png", "PlayerEast.png");
 
 	public final Image[] imgs;	// KTC make unmodifiable
