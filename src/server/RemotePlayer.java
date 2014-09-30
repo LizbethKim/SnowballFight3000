@@ -13,6 +13,7 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import client.ClientUpdater;
+import server.events.CreateLocalPlayerEvent;
 import server.events.UpdateEvent;
 
 public class RemotePlayer implements Runnable {
@@ -95,6 +96,7 @@ public class RemotePlayer implements Runnable {
 	private void readName() throws IOException, SocketClosedException {
 		String name = readString();
 		game.addPlayer(id, name);
+		this.queueEvent(new CreateLocalPlayerEvent(id));
 	}
 
 	// TODO functions here will be made as needed as we develop the protocol
