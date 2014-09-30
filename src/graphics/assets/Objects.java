@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
  *  WALL_N_S is a wall going north to south. RB, also stores the associated images,
  *  accessed through the img field.
  *  KTC EK we may need to add extra wall types, such as corners/doors.
- * @author jackkels
+ * @author jackkels + kimeliz1
  *
  */
 public enum Objects {
@@ -31,7 +31,7 @@ public enum Objects {
 	PLAYER_E("", "", "", ""),
 	PLAYER_S("", "", "", ""),
 	PLAYER_W("", "", "", ""),
-	PLAYER1("PlayerHoldingPosition.png", "PlayerHoldingPosition.png", "PlayerHoldingPosition.png", "PlayerHoldingPosition.png");
+	PLAYER1("PlayerNorth.png", "PlayerSouth.png", "PlayerWest.png", "PlayerEast.png");
 
 	public final Image[] imgs;	// KTC make unmodifiable
 
