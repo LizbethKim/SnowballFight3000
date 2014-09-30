@@ -23,7 +23,7 @@ import gameworld.world.SnowballFactory.SnowballType;
  *
  */
 public class ServerGame {
-	public static final long MOVE_DELAY = 300;
+	public static final long MOVE_DELAY = 200;
 
 	private Board board;
 	private Map<Integer, Player> playerIDs;
