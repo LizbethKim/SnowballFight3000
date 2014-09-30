@@ -49,7 +49,9 @@ public class ClientUpdater {
 	}
 
 	public void addPlayer(String name, int id) {
-		playerIDs.put(id, new Player(name, id));
+		if (playerIDs.get(id) == null) {
+			playerIDs.put(id, new Player(name, id));
+		}
 	}
 
 	public void createLocalPlayer(int id) {
