@@ -51,6 +51,7 @@ public class ClientGame {
 		display = new UI(this);
 		client.sendName("name goes here");
 		player = new Player("name goes here", 0);
+		System.out.println("new game created");
 	}
 
 	public ClientGame() {

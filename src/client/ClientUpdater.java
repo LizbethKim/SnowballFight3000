@@ -77,15 +77,17 @@ public class ClientUpdater {
 	public void updateBoardState() {
 		Objects[][] items = board.itemEnums();
 		for (Player p: playerIDs.values()) {
-			//items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER1;
-			if (p.getDirection() == Direction.NORTH) {
-				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_N;
-			} else if (p.getDirection() == Direction.EAST) {
-				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_E;
-			} else if (p.getDirection() == Direction.SOUTH) {
-				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_S;
-			} else {
-				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_W;
+			if (p.getLocation() != null) {
+				//items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER1;
+				if (p.getDirection() == Direction.NORTH) {
+					items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_N;
+				} else if (p.getDirection() == Direction.EAST) {
+					items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_E;
+				} else if (p.getDirection() == Direction.SOUTH) {
+					items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_S;
+				} else {
+					items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_W;
+				}
 			}
 		}
 		bs.update(board.convertToEnums(), items);
