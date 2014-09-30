@@ -96,7 +96,7 @@ public class RemotePlayer implements Runnable {
 	private void readName() throws IOException, SocketClosedException {
 		String name = readString();
 		game.addPlayer(id, name);
-		this.queueEvent(new CreateLocalPlayerEvent(id));
+		System.out.println("Name recieved "+name);
 	}
 
 	// TODO functions here will be made as needed as we develop the protocol
