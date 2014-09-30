@@ -36,8 +36,8 @@ public class ClientUpdater {
 		this.display = display;
 		updateBoardState();
 	}
-	
-	
+
+
 	// Only for single-player mode
 	public ClientUpdater( Board b, Map<Integer, Player> players, List<Snowball> projectiles, BoardState bs, UI display) {
 		this.board = b;
@@ -51,7 +51,7 @@ public class ClientUpdater {
 	public void addPlayer(int id, Player p) {
 		playerIDs.put(id, p);
 	}
-	
+
 	public void createLocalPlayer(int id) {
 		clientGame.setID(id);
 	}
@@ -75,16 +75,16 @@ public class ClientUpdater {
 	public void updateBoardState() {
 		Objects[][] items = board.itemEnums();
 		for (Player p: playerIDs.values()) {
-			items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER1;
-//			if (p.getDirection() == Direction.NORTH) { KTC uncomment later
-//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_N;
-//			} else if (p.getDirection() == Direction.EAST) {
-//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_E;
-//			} else if (p.getDirection() == Direction.EAST) {
-//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_S;
-//			} else {
-//				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_W;
-//			}
+			//items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER1;
+			if (p.getDirection() == Direction.NORTH) {
+				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_N;
+			} else if (p.getDirection() == Direction.EAST) {
+				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_E;
+			} else if (p.getDirection() == Direction.EAST) {
+				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_S;
+			} else {
+				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_W;
+			}
 		}
 		bs.update(board.convertToEnums(), items);
 		display.repaint();
