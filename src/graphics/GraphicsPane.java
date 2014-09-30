@@ -86,7 +86,6 @@ public class GraphicsPane extends JPanel {
 							(int) (currentObjects[i][j + 1].imgs[0]
 									.getHeight(null) * (height / startingHeight)),
 							null);
-					System.out.println(currentObjects[i][j + 1]);
 				}
 			}
 		}
