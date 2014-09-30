@@ -80,7 +80,7 @@ public class ClientUpdater {
 				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_N;
 			} else if (p.getDirection() == Direction.EAST) {
 				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_E;
-			} else if (p.getDirection() == Direction.EAST) {
+			} else if (p.getDirection() == Direction.SOUTH) {
 				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_S;
 			} else {
 				items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_W;
