@@ -1,5 +1,6 @@
 package client;
 
+import gameworld.game.ServerGame;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
@@ -38,6 +39,8 @@ public class ClientGame {
 	private int playerID;
 
 	private UI display;
+	private long lastMovedTime;
+
 
 	public ClientGame (Board b, Client c) {
 		// Somewhere in here I'll need a client object. probably
@@ -79,22 +82,25 @@ public class ClientGame {
 	}
 
 	public void move (Direction d) {
-		if (player.getDirection() == d) {
-			Location newLoc;
-			if (d == Direction.NORTH) {
-				newLoc = new Location(player.getLocation().x, player.getLocation().y - 1);
-			} else if (d == Direction.SOUTH) {
-				newLoc = new Location(player.getLocation().x, player.getLocation().y + 1);
-			} else if (d == Direction.EAST) {
-				newLoc = new Location(player.getLocation().x + 1, player.getLocation().y);
+		if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
+			if (player.getDirection() == d) {
+				Location newLoc;
+				if (d == Direction.NORTH) {
+					newLoc = new Location(player.getLocation().x, player.getLocation().y - 1);
+				} else if (d == Direction.SOUTH) {
+					newLoc = new Location(player.getLocation().x, player.getLocation().y + 1);
+				} else if (d == Direction.EAST) {
+					newLoc = new Location(player.getLocation().x + 1, player.getLocation().y);
+				} else {
+					newLoc = new Location(player.getLocation().x - 1, player.getLocation().y);
+				}
+				if (board.containsLocation(newLoc) && board.canTraverse(newLoc)) {
+					client.sendMove(newLoc);
+				}
 			} else {
-				newLoc = new Location(player.getLocation().x - 1, player.getLocation().y);
+				client.sendTurn(d);
 			}
-			if (board.containsLocation(newLoc) && board.canTraverse(newLoc)) {
-				client.sendMove(newLoc);
-			}
-		} else {
-			client.sendTurn(d);
+			lastMovedTime = System.currentTimeMillis();
 		}
 	}
 
