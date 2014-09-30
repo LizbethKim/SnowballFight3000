@@ -83,6 +83,7 @@ public class ServerGame {
 
 	public void addPlayer(int playerID, String name) {
 		server.queuePlayerUpdate(new CreateLocalPlayerEvent(playerID), playerID);
+		server.queuePlayerUpdate(new MoveEvent(playerID, new Location (0,1)), playerID);
 		playerIDs.put(playerID, new Player(name, playerID));
 		for (int id: playerIDs.keySet()) {
 			server.queuePlayerUpdate(new CreatePlayerEvent(playerID, name), playerID);

@@ -150,6 +150,7 @@ public class ClientGame {
 	public void setID(int ID) {
 		this.playerID = ID;
 		this.player.setID(ID);
+		this.playerIDs.put(ID, this.player);
 	}
 
 	public void save() {

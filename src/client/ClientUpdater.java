@@ -53,7 +53,9 @@ public class ClientUpdater {
 	}
 
 	public void createLocalPlayer(int id) {
+		System.out.println("created player with id: " + id);
 		clientGame.setID(id);
+		this.updateBoardState();
 	}
 
 	public void movePlayer(int id, Location l) {
