@@ -4,9 +4,12 @@
 package storage.load;
 
 import gameworld.world.Board;
+import gameworld.world.Furniture;
+import gameworld.world.InanimateEntity;
 import gameworld.world.Location;
 import gameworld.world.Player;
 import gameworld.world.Tile;
+import graphics.assets.Objects;
 import graphics.assets.Terrain;
 
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import storage.StoredGame;
 
 /**
+ * Handles the parsing of the XML file into a board and player list, ready to be loaded in game
  * @author Kate Henderson
  *
  */
@@ -97,7 +101,7 @@ public class LoadHandler extends DefaultHandler{
 			int team = Integer.parseInt(new String(ch, charDepth, 1));
 			charDepth=charDepth+2;
 			Location loc = parseLoc(ch,charDepth);
-			String name = new String(ch, charDepth,length-charDepth);
+			String name = new String(ch, charDepth,length-9);
 			curPlayer = new Player(team, loc, name);
 			playerLoad = false;
 			
@@ -105,8 +109,12 @@ public class LoadHandler extends DefaultHandler{
 			int terrain = Integer.parseInt(new String(ch, charDepth, 1));
 			charDepth=charDepth+2;
 			Location loc = parseLoc(ch,charDepth);
-			String name = new String(ch, charDepth,length-9);
-			curTile = new Tile(loc,terrains.get(terrain),null);
+			String name = new String(ch, charDepth,length-10);
+			System.out.println("NAME HERE!!!!!! "+name);
+			InanimateEntity entity = null;
+			if (name.equals("tree"))
+				entity = new Furniture("default tree", Objects.TREE);
+			curTile = new Tile(loc,terrains.get(terrain),entity);
 			tileLoad = false;
 			
 		} else if(boardLoad == true){
