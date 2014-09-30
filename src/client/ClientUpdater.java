@@ -48,8 +48,8 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
-	public void addPlayer(int id, Player p) {
-		playerIDs.put(id, p);
+	public void addPlayer(String name, int id) {
+		playerIDs.put(id, new Player(name, id));
 	}
 
 	public void createLocalPlayer(int id) {

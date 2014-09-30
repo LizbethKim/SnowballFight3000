@@ -43,6 +43,7 @@ public class Client implements Runnable {
 					int id = readFromSocket();
 					int x = readFromSocket() + readFromSocket() >> 8;
 					int y = readFromSocket() + readFromSocket() >> 8;
+					System.out.println("Moved player to: " + x + " " + y);
 					updater.movePlayer(id, new Location(x, y));
 				}
 				// turn player
@@ -56,7 +57,7 @@ public class Client implements Runnable {
 					int id = readFromSocket();
 					String name = readString();
 					// still pretty pissed about this
-					updater.addPlayer(id, new Player(name, id));
+					updater.addPlayer(name, id);
 				}
 				// create local player
 				else if (in == 0x06) {
