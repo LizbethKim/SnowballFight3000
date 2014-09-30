@@ -51,6 +51,8 @@ public class Main {
 
 				ClientUpdater u = g.makeUpdater();
 				client.startReceiving(u);
+			} else {
+				singlePlayerGame();
 			}
 		}
 		else { // debug single-player testing dev mode

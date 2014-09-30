@@ -21,8 +21,8 @@ import server.events.TurnEvent;
 import ui.UI;
 
 /**
- * Current reprentation of the model on the client. Deals with the
- * network and sends and receives updates to/from the server.
+ * Current reprentation of the model on the client. Deals with the network and sends and receives updates to/from the server.
+ *
  * @author Kelsey Jack 300275851
  *
  */
@@ -30,7 +30,6 @@ public class ClientGame {
 	private Board board;
 	private Map<Integer, Player> playerIDs;
 	private List<Snowball> projectiles;
-
 
 	private Player player;
 	private BoardState boardState;
@@ -41,12 +40,11 @@ public class ClientGame {
 	private UI display;
 	private long lastMovedTime;
 
-
-	public ClientGame (Board b, Client c) {
+	public ClientGame(Board b, Client c) {
 		// Somewhere in here I'll need a client object. probably
 		this.board = b;
 		this.client = c;
-		//this.playerID = KTC to do
+		// this.playerID = KTC to do
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
 		projectiles = new ArrayList<Snowball>();
@@ -55,22 +53,20 @@ public class ClientGame {
 		player = new Player("name goes here", 0);
 	}
 
-	public ClientGame(){
+	public ClientGame() {
 		// TEMP
 	}
 
-//	public PlayerState getPlayer() {
-//		return player;
-//	}
-
-
+	// public PlayerState getPlayer() {
+	// return player;
+	// }
 
 	public int getPlayerHealth() {
 		return player.getHealth();
 	}
 
 	public List<Objects> getPlayerInventory() {
-		return null;	// KTC to do
+		return null; // KTC to do
 	}
 
 	public Location getPlayerLocation() {
@@ -81,26 +77,30 @@ public class ClientGame {
 		return player.getDirection();
 	}
 
-	public void move (Direction d) {
-		if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
-			if (player.getDirection() == d) {
+	public void move(Direction d) {
+		if (player.getDirection() == d) {
+			if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
 				Location newLoc;
 				if (d == Direction.NORTH) {
-					newLoc = new Location(player.getLocation().x, player.getLocation().y - 1);
+					newLoc = new Location(player.getLocation().x,
+							player.getLocation().y - 1);
 				} else if (d == Direction.SOUTH) {
-					newLoc = new Location(player.getLocation().x, player.getLocation().y + 1);
+					newLoc = new Location(player.getLocation().x,
+							player.getLocation().y + 1);
 				} else if (d == Direction.EAST) {
-					newLoc = new Location(player.getLocation().x + 1, player.getLocation().y);
+					newLoc = new Location(player.getLocation().x + 1,
+							player.getLocation().y);
 				} else {
-					newLoc = new Location(player.getLocation().x - 1, player.getLocation().y);
+					newLoc = new Location(player.getLocation().x - 1,
+							player.getLocation().y);
 				}
 				if (board.containsLocation(newLoc) && board.canTraverse(newLoc)) {
 					client.sendMove(newLoc);
 				}
-			} else {
-				client.sendTurn(d);
 			}
 			lastMovedTime = System.currentTimeMillis();
+		} else {
+			client.sendTurn(d);
 		}
 	}
 
@@ -112,7 +112,7 @@ public class ClientGame {
 		boardState.rotateAnticlockwise();
 	}
 
-	public void throwSnowball () {
+	public void throwSnowball() {
 		// KTC send a fire snowball method through the network with playerID.
 		// not sure how to extend for non-standard snowballs.
 	}
@@ -123,13 +123,11 @@ public class ClientGame {
 	}
 
 	/*
-	 * RB with the current system, where items are enums, there will be no
-	 * way to tell if they are a container. But you can just call this method
-	 * if the user tries to access the contents of something (so you might
-	 * want an 'open' button or something) and it will just return an empty
-	 * list/null if it's not a container. Does that sound ok?
+	 * RB with the current system, where items are enums, there will be no way to tell if they are a container. But you can just call this method if the user tries to access the contents of something
+	 * (so you might want an 'open' button or something) and it will just return an empty list/null if it's not a container. Does that sound ok?
 	 *
 	 * @param cont
+	 *
 	 * @return
 	 */
 	public List<Objects> getContents() {
@@ -159,7 +157,8 @@ public class ClientGame {
 	}
 
 	public ClientUpdater makeUpdater() {
-		return new ClientUpdater(this, board, playerIDs, projectiles, boardState, display);
+		return new ClientUpdater(this, board, playerIDs, projectiles,
+				boardState, display);
 	}
 
 }
