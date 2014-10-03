@@ -40,6 +40,7 @@ public class GraphicsPane extends JPanel {
 		Direction d = boardState.getDirection();
 		switch (d){
 		case SOUTH: drawSouth(currentBoard, currentObjects, g);
+		break;
 		default: drawNorth(currentBoard, currentObjects, g);
 		break;
 		}
@@ -80,8 +81,8 @@ public class GraphicsPane extends JPanel {
 							* (int) height
 							/ 21
 							+ (0.25 * height / currentBoard[0].length * 1.5)
-							- (0.5 * currentObjects[i][j + 1].imgs[0]
-									.getHeight(null) * (height / startingHeight));
+							- (currentObjects[i][j + 1].imgs[0]
+									.getHeight(null) * (height / startingHeight) - 0.5*currentBoard[i][j + 1].img.getHeight(null));
 					g.drawImage(
 							currentObjects[i][j + 1].imgs[0],
 							(int) x,
@@ -131,8 +132,8 @@ public class GraphicsPane extends JPanel {
 							* (int) height
 							/ 21
 							+ (0.25 * height / currentBoard[0].length * 1.5)
-							- (0.5 * currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - (j + 1)].imgs[0]
-									.getHeight(null) * (height / startingHeight));
+							- (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - (j + 1)].imgs[0]
+									.getHeight(null) * (height / startingHeight) - 0.5 * currentBoard[i][j + 1].img.getHeight(null));
 					g.drawImage(
 							currentObjects[currentObjects.length - i - 1][currentObjects[0].length - (j + 1) - 1].imgs[0],
 							(int) x,
