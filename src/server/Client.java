@@ -41,8 +41,10 @@ public class Client implements Runnable {
 				// move player
 				if (in == 0x01) {
 					int id = readFromSocket();
-					int x = readFromSocket() + readFromSocket() >> 8;
-					int y = readFromSocket() + readFromSocket() >> 8;
+					int x = readFromSocket();
+					x += readFromSocket() << 8;
+					int y = readFromSocket();
+					y += readFromSocket() << 8;
 					System.out.println("Moved player to: " + x + " " + y);
 					updater.movePlayer(id, new Location(x, y));
 				}
@@ -83,7 +85,7 @@ public class Client implements Runnable {
 		try {
 			connection.getOutputStream().write(0x01);
 			connection.getOutputStream().write(l.x);
-			connection.getOutputStream().write(l.x>>8);
+			connection.getOutputStream().write(l.x<<8);
 			connection.getOutputStream().write(l.y);
 			connection.getOutputStream().write(l.y>>8);
 			connection.getOutputStream().flush();

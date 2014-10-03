@@ -85,8 +85,8 @@ public class RemotePlayer implements Runnable {
 	}
 
 	private void readMove() throws IOException, SocketClosedException {
-		int x = readFromSocket() + readFromSocket()>>8;
-		int y = readFromSocket() + readFromSocket()>>8;
+		int x = readFromSocket() + readFromSocket()<<8;
+		int y = readFromSocket() + readFromSocket()<<8;
 		game.movePlayer(id, new Location(x,y));
 	}
 
