@@ -89,6 +89,7 @@ public class RemotePlayer implements Runnable {
 		x += readFromSocket()<<8;
 		int y = readFromSocket();
 		y += readFromSocket()<<8;
+		System.out.println(""+x+" "+y);
 		game.movePlayer(id, new Location(x,y));
 	}
 

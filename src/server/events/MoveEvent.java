@@ -20,6 +20,7 @@ public class MoveEvent implements UpdateEvent {
 		System.out.println("Writing out moveEvent to " + location.x + " " + location.y);
 		out.write(0x01);
 		out.write(playerID);
+		System.out.println(location);
 		out.write(location.x);
 		out.write(location.x>>8);
 		out.write(location.y);

@@ -121,6 +121,16 @@ public class Client implements Runnable {
 		}
 	}
 
+	public void sendMapRequest() {
+		try {
+			connection.getOutputStream().write(0x07);
+			connection.getOutputStream().flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public void startReceiving(ClientUpdater c) {
 		this.updater = c;
 		Thread t = new Thread(this);
