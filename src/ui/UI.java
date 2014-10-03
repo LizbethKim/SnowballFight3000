@@ -70,7 +70,8 @@ public class UI extends JFrame {
 		// initialise UI
 		super();
 		client = cl;
-
+		
+		//setupGame();
 		
 		startGame();
 		
@@ -79,6 +80,11 @@ public class UI extends JFrame {
 		pack();
 		setResizable(true);
 		setVisible(true);
+	}
+	
+	private void setupGame(){
+		gameSetup = new GameSetup(ASPECT_RATIO);
+		//gameSetup.setSize(, arg1);
 	}
 	
 	private void startGame(){

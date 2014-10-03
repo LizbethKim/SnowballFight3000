@@ -28,21 +28,20 @@ import client.ClientGame;
 
 public class GameSetup extends JPanel {
 
-	private static final double inventoryYProportion = 1.0 / 10.0;
+	private static final Image welcomeImage = HUDPanel.loadImage("WelcomeImage.png");
 	private static final double maxHealth = 100.0;
 
 	private final double aspectRatio;
-
-	private final ClientGame client;
-
-	public GameSetup(ClientGame cl, double aspectRatio) {
-		this.client = cl;
+	
+	public GameSetup(double aspectRatio) {
 		this.aspectRatio = aspectRatio;
 	}
+	
+	
 
 	@Override
 	public void paintComponent(Graphics g) {
-		
+		g.drawImage(welcomeImage, 0, 0, getHeight(), getWidth(), null);
 	}
 
 }
