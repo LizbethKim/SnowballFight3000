@@ -44,8 +44,9 @@ public class Main {
 				// the only caveat is a client probably can't be a server as well
 				// if you don't like this, I can change it and make it more multithreaded
 			} else if (args[0].equals("client")) {
+				Client c = new Client("127.0.0.1");
 				Board b = new Board();	// This should be new from file - the first file to come through the network perhaps
-				ClientGame g = new ClientGame(b, "127.0.0.1");
+				ClientGame g = new ClientGame(b, c);
 				//this function creates a new thread for itself
 
 			} else {
