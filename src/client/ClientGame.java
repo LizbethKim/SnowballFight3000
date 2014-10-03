@@ -79,6 +79,10 @@ public class ClientGame {
 	}
 
 	public void move(Direction d) {
+		Direction up = boardState.getDirection();
+		d = Direction.values()[(d.ordinal() - up.ordinal() + 4)%4];
+
+
 		if (player.getDirection() == d) {
 			if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
 				Location newLoc;

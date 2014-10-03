@@ -21,7 +21,7 @@ public class BoardState {
 	private Terrain[][] board;
 	private Objects[][] entities;
 	//private Map<Integer, PlayerState> players; KTC get rid of this
-	private Direction d;	// The direction that the board is oriented. (Possibly something RB should store)
+	private Direction d = Direction.NORTH;	// The direction that the board is oriented. (Possibly something RB should store)
 
 	/*
 	 * EK This is for you, sets up a plain boring board for testing purposes.

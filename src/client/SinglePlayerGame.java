@@ -74,6 +74,11 @@ public class SinglePlayerGame extends ClientGame {
 	}
 
 	public void move (Direction d) {
+		Direction up = boardState.getDirection();
+		d = Direction.values()[(d.ordinal() - up.ordinal() + 4)%4];
+
+
+
 		if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
 			// KTC check if it's off the edge of the board
 			if (player.getDirection() == d) {
