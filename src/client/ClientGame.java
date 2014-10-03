@@ -40,10 +40,10 @@ public class ClientGame {
 	private UI display;
 	private long lastMovedTime;
 
-	public ClientGame(Board b, Client c) {
+	public ClientGame(Board b, String IP) {
 		// Somewhere in here I'll need a client object. probably
 		this.board = b;
-		this.client = c;
+		this.client = new Client(IP);
 		// this.playerID = KTC to do
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
@@ -51,6 +51,9 @@ public class ClientGame {
 		display = new UI(this);
 		client.sendName("name goes here");
 		player = new Player("name goes here", 0);
+
+		ClientUpdater u = this.makeUpdater();
+		client.startReceiving(u);
 		System.out.println("new game created");
 	}
 
@@ -111,10 +114,12 @@ public class ClientGame {
 
 	public void rotateClockwise() {
 		boardState.rotateClockwise();
+		refresh();
 	}
 
 	public void rotateAnticlockwise() {
 		boardState.rotateAnticlockwise();
+		refresh();
 	}
 
 	public void throwSnowball() {

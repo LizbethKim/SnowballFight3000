@@ -104,10 +104,12 @@ public class SinglePlayerGame extends ClientGame {
 
 	public void rotateClockwise() {
 		boardState.rotateClockwise();
+		refresh();
 	}
 
 	public void rotateAnticlockwise() {
 		boardState.rotateAnticlockwise();
+		refresh();
 	}
 
 	public void throwSnowball () {
