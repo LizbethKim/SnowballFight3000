@@ -63,6 +63,7 @@ public class UI extends JFrame {
 	private JLayeredPane gamePanel;
 	private CheatsPopup cheatsPopup;
 	private ControlsPopup controlsPopup;
+	private GameSetup gameSetup;
 
 	public UI(ClientGame cl) {
 
@@ -70,18 +71,23 @@ public class UI extends JFrame {
 		super();
 		client = cl;
 
-		// setup components
-		setupFileBar();
-		setupKeyBindings();
-		setupGamePanel();
-		setupHUD();
-		setupGraphics();
+		
+		startGame();
 		
 		// pack and Display window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setResizable(true);
 		setVisible(true);
+	}
+	
+	private void startGame(){
+		// setup components
+				setupFileBar();
+				setupKeyBindings();
+				setupGamePanel();
+				setupHUD();
+				setupGraphics();
 	}
 
 	private void setupGamePanel() {
@@ -128,8 +134,10 @@ public class UI extends JFrame {
 		int height = e.getComponent().getHeight();
 
 		Dimension newSize = getMaximumAspectSize(width, height);
-		graphicsPanel.setSize(newSize.width,newSize.height);
-		hudPanel.setSize(newSize.width,newSize.height);
+		int xBorder = (width - newSize.width)/2;
+		int yBorder = (height - newSize.height)/2;
+		graphicsPanel.setBounds(xBorder, yBorder, newSize.width,newSize.height);
+		hudPanel.setBounds(xBorder, yBorder, newSize.width,newSize.height);
 	}
 
 	private Dimension getMaximumAspectSize(int width, int height){
