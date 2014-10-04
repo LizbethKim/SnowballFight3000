@@ -34,6 +34,9 @@ public class RemotePlayer implements Runnable {
 	}
 
 	public void sendUpdates() {
+		if(connection.isClosed()) {
+			// BF put socket removal method here
+		}
 		try {
 			//write each queued event to output
 			while(queuedEvents.size()>0) {
@@ -68,6 +71,10 @@ public class RemotePlayer implements Runnable {
 				}
 				else if(in==0x07) {
 					// BF put code for sending map file here
+				}
+				else if(in==0x09) {
+					int id = readFromSocket();
+					// BF put code for removing player here
 				}
 			}
 		} catch (IOException e) {
