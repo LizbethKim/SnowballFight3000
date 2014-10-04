@@ -39,8 +39,11 @@ public class GameSetup extends JPanel {
 	private static final double helpYStartProportion = 5.0 / 7.0;
 
 	private final double aspectRatio;
+	
+	private UI ui;
 
-	public GameSetup(double aspectRatio) {
+	public GameSetup(UI ui, double aspectRatio) {
+		this.ui = ui;
 		this.aspectRatio = aspectRatio;
 		setupListeners();
 	}
@@ -58,7 +61,7 @@ public class GameSetup extends JPanel {
 
 	private void dealWithClick(int x, int y){
 		if(onStartGame(x,y)){
-			new InputPopup();
+			new InputPopup(ui);
 		} else if(onControls(x,y)){
 			
 		} else if(onHelp(x,y)){
