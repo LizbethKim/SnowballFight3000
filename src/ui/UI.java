@@ -47,9 +47,9 @@ import client.ClientGame;
  * listens to all user inputs and sends them to the board where they can be
  * dealt with. It holds the canvas for the game to be displayed on and controls
  * the pop-up windows related to the game.
- * 
+ *
  * @author Ryan Burnell, 300279172
- * 
+ *
  */
 public class UI extends JFrame {
 
@@ -228,7 +228,7 @@ public class UI extends JFrame {
 
 	/**
 	 * Sets up key bindings for given keyConstants
-	 * 
+	 *
 	 * @param actionString
 	 *            the action string to be used in the action map
 	 * @param action

@@ -12,8 +12,8 @@ import javax.imageio.ImageIO;
  *  - this can be furniture, items, etc. WALL_E_W is a wall going east to west,
  *  WALL_N_S is a wall going north to south. RB, also stores the associated images,
  *  accessed through the img field.
- *  KTC EK we may need to add extra wall types, such as corners/doors.
- * @author jackkels + kimeliz1
+ * EK we may need to add extra wall types, such as corners/doors.
+ * @author Kelsey Jack (300275851) + kimeliz1
  *
  */
 public enum Objects {

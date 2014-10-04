@@ -20,8 +20,7 @@ import graphics.assets.Terrain;
 public class BoardState {
 	private Terrain[][] board;
 	private Objects[][] entities;
-	//private Map<Integer, PlayerState> players; KTC get rid of this
-	private Direction d = Direction.NORTH;	// The direction that the board is oriented. (Possibly something RB should store)
+	private Direction orientation = Direction.NORTH;	// The direction that the board is oriented. (Possibly something RB should store)
 
 	/*
 	 * EK This is for you, sets up a plain boring board for testing purposes.
@@ -46,7 +45,7 @@ public class BoardState {
 		entities[5][3] = Objects.BUSH;
 		entities[2][7] = Objects.BUSH;
 		entities[8][5] = Objects.TREE;
-		this.d = Direction.NORTH;
+		this.orientation = Direction.NORTH;
 
 //		// Prints to the UI. Just to see if it works.
 //		System.out.println("Board:");
@@ -105,7 +104,7 @@ public class BoardState {
 	}
 
 	public Direction getDirection() {
-		return d;
+		return orientation;
 	}
 
 //	public Collection<PlayerState> getPlayers() {
@@ -123,12 +122,12 @@ public class BoardState {
 	}
 
 	protected void rotateClockwise() {
-		d = Direction.values()[(d.ordinal() + 1) % 4];
+		orientation = Direction.values()[(orientation.ordinal() + 1) % 4];
 	}
 
 	protected void rotateAnticlockwise() {
 		// goes forward 3 clockwise - same as going one anticlockwise.
-		d = Direction.values()[(d.ordinal() + 3) % 4];
+		orientation = Direction.values()[(orientation.ordinal() + 3) % 4];
 	}
 
 //	protected void updatePlayerDirection(int playerID, Direction d) {
@@ -140,8 +139,5 @@ public class BoardState {
 //		PlayerState p = players.get(playerID);
 //		p.updateLoc(l);
 //	}
-
-
-	// KTC do we want a method to edit health? Do we need to see other players' health?
 }
 
