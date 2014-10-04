@@ -103,5 +103,4 @@ public class ClientUpdater {
 
 	}
 
-	// KTC etc.
 }

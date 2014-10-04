@@ -6,7 +6,7 @@ package gameworld.world;
  */
 public class Player implements Entity {
 	private Location loc;
-	private int team;	// KTC maybe change to enum?
+	private Team team;	// KTC maybe change to enum?
 	private int score = 0;
 	private int health = 100;	// From 0 to 100. 0 is frozen.
 	public final String name;	// KTC necessary?
@@ -14,7 +14,7 @@ public class Player implements Entity {
 	private Direction d = Direction.NORTH;
 	private int ID;
 
-	public Player (int team, Location l, String name) {
+	public Player (Team team, Location l, String name) {
 		this.loc = l;
 		this.team = team;
 		this.name = name;
@@ -67,7 +67,7 @@ public class Player implements Entity {
 		return health;
 	}
 
-	public int getTeam() {
+	public Team getTeam() {
 		return team;
 	}
 
@@ -99,10 +99,8 @@ public class Player implements Entity {
 		ID = iD;
 	}
 
-	public void setTeam(int team) {
-		if (team == 0) {
+	public void setTeam(Team team) {
 			this.team = team;
-		}
 	}
 
 }

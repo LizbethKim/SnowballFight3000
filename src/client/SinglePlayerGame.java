@@ -11,6 +11,7 @@ import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
 import gameworld.world.Snowball;
+import gameworld.world.Team;
 import graphics.assets.Objects;
 import storage.SaveGame;
 import storage.StoredGame;
@@ -39,7 +40,7 @@ public class SinglePlayerGame extends ClientGame {
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
 		display = new UI(this);
-		player = new Player(1, new Location(2, 2), "");
+		player = new Player(Team.RED, new Location(2, 2), "");
 		playerIDs.put(this.playerID, player);
 		projectiles = new ArrayList<Snowball>();
 		this.update = new ClientUpdater(board, playerIDs, projectiles, boardState, display);
@@ -80,7 +81,6 @@ public class SinglePlayerGame extends ClientGame {
 
 
 		if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
-			// KTC check if it's off the edge of the board
 			if (player.getDirection() == d) {
 				Location newLoc;
 				if (d == Direction.NORTH) {
