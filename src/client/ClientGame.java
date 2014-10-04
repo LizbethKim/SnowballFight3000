@@ -54,7 +54,7 @@ public class ClientGame {
 		System.out.println("new game created");
 	}
 
-	public ClientGame(String name, String IP, Team team) {
+	public ClientGame(String name, String IP, Team team, UI display) {
 		// Somewhere in here I'll need a client object. probably
 		this.client = new Client(IP);
 		StoredGame sb = new LoadGame().loadGame("defaultBoard.xml");
@@ -65,7 +65,7 @@ public class ClientGame {
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
 		projectiles = new ArrayList<Snowball>();
-		display = new UI(this);
+		this.display = display;
 		client.sendName(name);
 		player = new Player(name, 0);
 
@@ -117,7 +117,7 @@ public class ClientGame {
 					newLoc = new Location(player.getLocation().x - 1,
 							player.getLocation().y);
 				}
-				if (board.containsLocation(newLoc) && board.canTraverse(newLoc)) {
+				if (board.containsLocation(newLoc) && board.canTraverse(newLoc) && this.isFree(newLoc)) {
 					client.sendMove(newLoc);
 				}
 
@@ -186,6 +186,15 @@ public class ClientGame {
 	public ClientUpdater makeUpdater() {
 		return new ClientUpdater(this, board, playerIDs, projectiles,
 				boardState, display);
+	}
+
+	private boolean isFree(Location l) {
+		for (Player p: playerIDs.values()) {
+			if (p.getLocation().equals(l)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
