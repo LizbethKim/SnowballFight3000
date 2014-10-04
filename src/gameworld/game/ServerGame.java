@@ -11,6 +11,7 @@ import server.events.CreatePlayerEvent;
 import server.events.MoveEvent;
 import server.events.RemovePlayerEvent;
 import server.events.TurnEvent;
+import gameworld.world.Area;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
