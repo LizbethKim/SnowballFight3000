@@ -34,10 +34,7 @@ public class Player implements Entity {
 	 * @return	true if they moved, false otherwise
 	 */
 	public boolean move(Location l) {
-		if (this.loc == null) {
-			this.loc = l;	// KTC TEMP
-		}
-		if ((Math.abs(l.x - loc.x) == 1) != (Math.abs(l.y - loc.y) == 1)) {
+		if ( this.loc == null || (Math.abs(l.x - loc.x) == 1) != (Math.abs(l.y - loc.y) == 1)) {
 			// if exactly one step in a cardinal direction has been taken
 			loc = l;
 			return true;

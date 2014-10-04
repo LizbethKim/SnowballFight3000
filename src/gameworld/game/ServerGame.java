@@ -41,10 +41,13 @@ public class ServerGame {
 
 	// examples of methods that will be in here
 	public void movePlayer (int playerID, Location l) {
+		// System.out.println("received moveEvent to " + l.x + " " + l.y);
 		Player p = playerIDs.get(playerID);
 		if (board.canTraverse(l) && p != null) {
 			if (p.move(l)) {
+				System.out.println("Moved player to " + l.x + " " + l.y);
 				for (int id: playerIDs.keySet()) {
+					System.out.println("Queued move to: " + l.x + " " + l.y);
 					server.queuePlayerUpdate(new MoveEvent(playerID, l), id);
 				}
 				// KTC only here do you send out an update. (TO ALL CLIENTS).

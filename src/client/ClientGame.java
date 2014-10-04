@@ -66,12 +66,11 @@ public class ClientGame {
 		playerIDs = new HashMap<Integer, Player>();
 		projectiles = new ArrayList<Snowball>();
 		display = new UI(this);
-		client.sendName("name goes here");
-		player = new Player("name goes here", 0);
+		client.sendName(name);
+		player = new Player(name, 0);
 
 		ClientUpdater u = this.makeUpdater();
 		client.startReceiving(u);
-		System.out.println("new game created");
 	}
 
 	public ClientGame() {
@@ -102,9 +101,8 @@ public class ClientGame {
 		Direction up = boardState.getDirection();
 		d = Direction.values()[(d.ordinal() - up.ordinal() + 4)%4];
 
-
-		if (player.getDirection() == d) {
-			if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
+		if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
+			if (player.getDirection() == d) {
 				Location newLoc;
 				if (d == Direction.NORTH) {
 					newLoc = new Location(player.getLocation().x,
@@ -122,10 +120,11 @@ public class ClientGame {
 				if (board.containsLocation(newLoc) && board.canTraverse(newLoc)) {
 					client.sendMove(newLoc);
 				}
+
+			} else {
+				client.sendTurn(d);
 			}
-			lastMovedTime = System.currentTimeMillis();
-		} else {
-			client.sendTurn(d);
+		lastMovedTime = System.currentTimeMillis();
 		}
 	}
 
