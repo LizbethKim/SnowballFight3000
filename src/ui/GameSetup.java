@@ -32,7 +32,7 @@ public class GameSetup extends JPanel {
 			.loadImage("WelcomeImage.png");
 	private static final double buttonXStartProportion = 1.0 / 4.0;
 	private static final double buttonWidthProportion = 1.0 / 2.0;
-	private static final double buttonHeightProportion = 1.0 / 7.0;
+	private static final double buttonHeightProportion = 1.0 / 8.0;
 
 	private static final double startGameYStartProportion = 3.0 / 7.0;
 	private static final double controlsYStartProportion = 4.0 / 7.0;
@@ -63,7 +63,7 @@ public class GameSetup extends JPanel {
 		if(onStartGame(x,y)){
 			new InputPopup(ui);
 		} else if(onControls(x,y)){
-			
+			new ControlsPopup().showControls();
 		} else if(onHelp(x,y)){
 			
 		}
