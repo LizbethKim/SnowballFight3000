@@ -57,7 +57,8 @@ public class ClientGame {
 	public ClientGame(String name, String IP, Team team) {
 		// Somewhere in here I'll need a client object. probably
 		this.client = new Client(IP);
-		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
+		StoredGame sb = new LoadGame().loadGame("defaultBoard.xml");
+		//StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
 		// this.playerID = KTC to do
 		this.board = sb.getBoard();
 
