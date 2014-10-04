@@ -80,6 +80,15 @@ public class Client implements Runnable {
 					}
 					this.notify();
 				}
+				// update projectile positions
+				else if (in == 0x08) {
+					// BF write some code here
+				}
+				// remove player
+				else if (in == 0x09) {
+					int id = readFromSocket();
+					updater.removePlayer(id);
+				}
 				System.out.println(in);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
