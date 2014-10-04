@@ -72,6 +72,7 @@ public class ClientUpdater {
 
 	public void removePlayer(int id) {
 		this.playerIDs.remove(id);
+		updateBoardState();
 	}
 
 	public void turnPlayer(int id, Direction d) {
@@ -79,7 +80,7 @@ public class ClientUpdater {
 		if (p != null) {
 			p.setDirection(d);
 		}
-		updateBoardState();
+		updateBoardState();	// KTC call this inside a loop, perhaps?
 	}
 
 	public void updateBoardState() {
