@@ -41,13 +41,10 @@ public class ServerGame {
 
 	// examples of methods that will be in here
 	public void movePlayer (int playerID, Location l) {
-		// System.out.println("received moveEvent to " + l.x + " " + l.y);
 		Player p = playerIDs.get(playerID);
 		if (board.canTraverse(l) && p != null) {
 			if (p.move(l)) {
-				System.out.println("Moved player to " + l.x + " " + l.y);
 				for (int id: playerIDs.keySet()) {
-					System.out.println("Queued move to: " + l.x + " " + l.y);
 					server.queuePlayerUpdate(new MoveEvent(playerID, l), id);
 				}
 				// KTC only here do you send out an update. (TO ALL CLIENTS).
@@ -79,17 +76,23 @@ public class ServerGame {
 		}
 	}
 
-	public Player playerAt(Location l) {
-		// Possibly not a good idea, depends on encapsulation and mutability of Player
-		return null;
-	}
+//	public Player playerAt(Location l) {
+//		// Possibly not a good idea, depends on encapsulation and mutability of Player
+//		return null;
+//	}
 
 	public void addPlayer(int playerID, String name) {
+		Location spawnLoc = new Location(3,3); 	// KTC change to something meaningful later
 		server.queuePlayerUpdate(new CreateLocalPlayerEvent(playerID), playerID);
-		server.queuePlayerUpdate(new MoveEvent(playerID, new Location (3,3)), playerID);
-		playerIDs.put(playerID, new Player(name, playerID));
+		Player p = new Player(name, playerID);
+		p.move(spawnLoc);
+		server.queuePlayerUpdate(new MoveEvent(playerID, spawnLoc), playerID);
+		playerIDs.put(playerID, p);
 		for (int id: playerIDs.keySet()) {
-			server.queuePlayerUpdate(new CreatePlayerEvent(playerID, name), playerID);
+			server.queuePlayerUpdate(new CreatePlayerEvent(id, playerIDs.get(id).name), playerID);
+			server.queuePlayerUpdate(new MoveEvent(id, playerIDs.get(id).getLocation()), playerID);
+			server.queuePlayerUpdate(new CreatePlayerEvent(playerID, name), id);
+			server.queuePlayerUpdate(new MoveEvent(playerID, new Location(3,3)), id);
 		}
 	}
 

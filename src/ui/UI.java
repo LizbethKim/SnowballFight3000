@@ -3,6 +3,7 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -71,9 +72,9 @@ public class UI extends JFrame {
 		super();
 		client = cl;
 		
-		//setupGame();
+		setupGame();
 		
-		startGame();
+		//startGame();
 		
 		// pack and Display window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,16 +83,14 @@ public class UI extends JFrame {
 		setVisible(true);
 	}
 	
-	private void setupGame(){
-		gameSetup = new GameSetup(ASPECT_RATIO);
-		//gameSetup.setSize(, arg1);
-	}
 	
-	private void startGame(){
+	
+	private void setupGame(){
 		// setup components
 				setupFileBar();
 				setupKeyBindings();
 				setupGamePanel();
+				//setupWelcome();
 				setupHUD();
 				setupGraphics();
 	}
@@ -104,6 +103,12 @@ public class UI extends JFrame {
 		gamePanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT));
 		setupResizing();
 		add(gamePanel);
+	}
+	
+	private void setupWelcome(){
+		gameSetup = new GameSetup(ASPECT_RATIO);
+		gamePanel.add(gameSetup);
+		gameSetup.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_WIDTH);
 	}
 
 	private void setupGraphics(){
@@ -142,8 +147,14 @@ public class UI extends JFrame {
 		Dimension newSize = getMaximumAspectSize(width, height);
 		int xBorder = (width - newSize.width)/2;
 		int yBorder = (height - newSize.height)/2;
-		graphicsPanel.setBounds(xBorder, yBorder, newSize.width,newSize.height);
-		hudPanel.setBounds(xBorder, yBorder, newSize.width,newSize.height);
+		setGameBounds(xBorder, yBorder, newSize.width,newSize.height);
+		//hudPanel.setBounds(xBorder, yBorder, newSize.width,newSize.height);
+	}
+	
+	private void setGameBounds(int x, int y, int width, int height){
+		for(Component c: gamePanel.getComponents()){
+			c.setBounds(x, y, width, height);
+		}
 	}
 
 	private Dimension getMaximumAspectSize(int width, int height){
