@@ -50,8 +50,10 @@ public class ClientUpdater {
 
 	public void addPlayer(String name, int id) {
 		if (playerIDs.get(id) == null) {
+			System.out.println("Adding new player with name " + name + " and ID " + id);
 			playerIDs.put(id, new Player(name, id));
 		}
+		updateBoardState();
 	}
 
 	public void createLocalPlayer(int id) {

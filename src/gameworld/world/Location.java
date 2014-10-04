@@ -7,10 +7,15 @@ package gameworld.world;
 public class Location {
 	public final int x;	// The bigger the x, the more east we are
 	public final int y;	// The bigger the y, the further south (EK, does that make sense?)
-	
+
 	public Location(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
+	@Override
+	public String toString() {
+		return "(" + x + ", " + y + ")";
+	}
 }
+
