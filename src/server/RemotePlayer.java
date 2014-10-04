@@ -66,6 +66,9 @@ public class RemotePlayer implements Runnable {
 				else if(in==0x06) {
 					readName();
 				}
+				else if(in==0x07) {
+					// BF put code for sending map file here
+				}
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

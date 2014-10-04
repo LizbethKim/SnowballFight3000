@@ -19,6 +19,8 @@ public class Client implements Runnable {
 
 	private Socket connection;
 
+	private Byte mapBytes[];
+
 	public Client(String host) {
 		this.host = host;
 		try {
@@ -66,8 +68,18 @@ public class Client implements Runnable {
 					int id = readFromSocket();
 					updater.createLocalPlayer(id);
 				}
-
-
+				// read map file
+				else if (in == 0x07) {
+					int len = readFromSocket();
+					len += readFromSocket()<<8;
+					len += readFromSocket()<<16;
+					len += readFromSocket()<<24;
+					mapBytes = new Byte[len];
+					for(int i=0;i<len;i++) {
+						mapBytes[i] = (byte) readFromSocket();
+					}
+					this.notify();
+				}
 				System.out.println(in);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -121,7 +133,7 @@ public class Client implements Runnable {
 		}
 	}
 
-	public void sendMapRequest() {
+	public Byte[] sendMapRequest() {
 		try {
 			connection.getOutputStream().write(0x07);
 			connection.getOutputStream().flush();
@@ -129,6 +141,8 @@ public class Client implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.wait();
+		return mapBytes;
 	}
 
 	public void startReceiving(ClientUpdater c) {
