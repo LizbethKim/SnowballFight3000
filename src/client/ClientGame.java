@@ -6,9 +6,8 @@ import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
 import gameworld.world.Snowball;
-import gameworld.world.SnowballFactory;
+import gameworld.world.Team;
 import graphics.assets.Objects;
-import graphics.assets.Terrain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,10 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import server.Client;
-import server.events.MoveEvent;
-import server.events.TurnEvent;
-import storage.LoadGame;
-import storage.StoredGame;
 import ui.UI;
 
 /**
@@ -57,7 +52,7 @@ public class ClientGame {
 		System.out.println("new game created");
 	}
 
-	public ClientGame(String name, String IP) {
+	public ClientGame(String name, String IP, Team team) {
 		// Somewhere in here I'll need a client object. probably
 		this.client = new Client(IP);
 		//StoredGame sb = new LoadGame().load(client.requestFile());
