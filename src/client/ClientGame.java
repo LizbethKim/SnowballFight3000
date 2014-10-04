@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 import server.Client;
+import storage.LoadGame;
+import storage.StoredGame;
 import ui.UI;
 
 /**
@@ -55,8 +57,10 @@ public class ClientGame {
 	public ClientGame(String name, String IP, Team team) {
 		// Somewhere in here I'll need a client object. probably
 		this.client = new Client(IP);
-		//StoredGame sb = new LoadGame().load(client.requestFile());
+		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
 		// this.playerID = KTC to do
+		this.board = sb.getBoard();
+
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
 		projectiles = new ArrayList<Snowball>();

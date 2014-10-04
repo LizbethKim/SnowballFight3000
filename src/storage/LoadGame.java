@@ -63,8 +63,9 @@ public class LoadGame{
 
 	}
 
-	public StoredGame loadGame(File f) {
-		// KH, I'll probably need this.
+	public StoredGame loadGame(Byte[] map) {
+		// KH, I'll probably need this. Bryden is sending the map through the network in a
+		// array of bytes. So it'd be cool if you could load a game from one.
 		return null;
 	}
 
