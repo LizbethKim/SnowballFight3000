@@ -9,6 +9,7 @@ import server.Server;
 import server.events.CreateLocalPlayerEvent;
 import server.events.CreatePlayerEvent;
 import server.events.MoveEvent;
+import server.events.RemovePlayerEvent;
 import server.events.TurnEvent;
 import gameworld.world.Board;
 import gameworld.world.Direction;
@@ -47,9 +48,6 @@ public class ServerGame {
 				for (int id: playerIDs.keySet()) {
 					server.queuePlayerUpdate(new MoveEvent(playerID, l), id);
 				}
-				// KTC only here do you send out an update. (TO ALL CLIENTS).
-				// This will consist of the player id and the new position.
-				// on the other end, it will search for the playerState that has this ID and update it.
 			}
 		}
 	}
@@ -61,7 +59,6 @@ public class ServerGame {
 			for (int id: playerIDs.keySet()) {
 				server.queuePlayerUpdate(new TurnEvent(playerID, d), id);
 			}
-			// KTC send back the update. this will consist of the player id and the new direction.
 		}
 	}
 
@@ -96,6 +93,12 @@ public class ServerGame {
 		}
 	}
 
+	public void removePlayer(int playerID) {
+		playerIDs.remove(playerID);
+		for (int id: playerIDs.keySet()) {
+			server.queuePlayerUpdate(new RemovePlayerEvent(playerID), id);
+		}
+	}
 
 	public void setServer(Server s) {
 		this.server = s;

@@ -54,9 +54,6 @@ public class Main {
 			}
 		}
 		else { // debug single-player testing dev mode
-
-			// KH, this is where I'll need dataloading methods
-
 			singlePlayerGame();
 
 
@@ -72,16 +69,12 @@ public class Main {
 	 */
 	private static void singlePlayerGame() {
 //		LoadGame lg = new LoadGame();
-//		SinglePlayerGame game = new SinglePlayerGame(lg.loadGame("defaultBoard.xml"));	//KTC add default game-file here KH uncomment to test
+//		SinglePlayerGame game = new SinglePlayerGame(lg.loadGame("defaultBoard.xml"));	// uncomment to test
 
 		Board board = new Board(); // createBoardFromFile(filename);
 		SinglePlayerGame game = new SinglePlayerGame(board);
+	}
 
-
-		//	PROBABLY REDUNDANT
-		 	// This is where I'll hook in Ryan's code.
-		// This should create the window etc.
-		// Also of course appropriate parameters.
 
 //		while (true) {	// KTC perhaps change to "playing", allow game to finish.
 //			// Loop forever
@@ -95,7 +88,6 @@ public class Main {
 //				// should never happen KTC perhaps do something here
 //			}
 //		}
-	}
 
 	/*
 	 * In terms of client/server, I think the clients should have a tick that

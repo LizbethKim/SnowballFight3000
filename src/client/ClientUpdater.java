@@ -70,6 +70,10 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
+	public void removePlayer(int id) {
+		this.playerIDs.remove(id);
+	}
+
 	public void turnPlayer(int id, Direction d) {
 		Player p = playerIDs.get(id);
 		if (p != null) {

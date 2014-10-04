@@ -12,7 +12,7 @@ import java.util.List;
  *
  */
 public class PlayerInventory implements Inventory {
-	public static final int DEFAULT_LIMIT = 9; // KTC change perhaps
+	public static final int DEFAULT_LIMIT = 9;
 	private int itemLimit;
 	private List<Item> contents;
 

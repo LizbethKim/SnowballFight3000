@@ -11,7 +11,6 @@ import graphics.assets.Terrain;
  *
  */
 public class Board {
-	// KTC add more
 	private Tile[][] board; 	// board[x][y] will access correctly. (same x and y as in location)
 
 
@@ -93,10 +92,6 @@ public class Board {
 			}
 		}
 		return enumObjects;
-	}
-
-	public static Board boardFromFile(File f) {
-		return null;	// KTC
 	}
 
 	public boolean containsLocation(Location newLoc) {
