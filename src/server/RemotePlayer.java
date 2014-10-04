@@ -89,7 +89,6 @@ public class RemotePlayer implements Runnable {
 		x += readFromSocket()<<8;
 		int y = readFromSocket();
 		y += readFromSocket()<<8;
-		System.out.println(""+x+" "+y);
 		game.movePlayer(id, new Location(x,y));
 	}
 
@@ -101,7 +100,6 @@ public class RemotePlayer implements Runnable {
 	private void readName() throws IOException, SocketClosedException {
 		String name = readString();
 		game.addPlayer(id, name);
-		System.out.println("Name recieved "+name);
 	}
 
 	// TODO functions here will be made as needed as we develop the protocol
@@ -111,9 +109,7 @@ public class RemotePlayer implements Runnable {
 		int len = readFromSocket();
 		for(int i=0;i<len;i++) {
 			output = output + (char)readFromSocket();
-			System.out.println("READING SHIT");
 		}
-		System.out.println("asd");
 		return output;
 	}
 
