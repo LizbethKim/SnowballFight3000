@@ -85,7 +85,7 @@ public class Client implements Runnable {
 		try {
 			connection.getOutputStream().write(0x01);
 			connection.getOutputStream().write(l.x);
-			connection.getOutputStream().write(l.x<<8);
+			connection.getOutputStream().write(l.x>>8);
 			connection.getOutputStream().write(l.y);
 			connection.getOutputStream().write(l.y>>8);
 			connection.getOutputStream().flush();
