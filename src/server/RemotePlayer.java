@@ -41,7 +41,6 @@ public class RemotePlayer implements Runnable {
 		try {
 			//write each queued event to output
 			while(queuedEvents.size()>0) {
-				System.out.println(queuedEvents.peek());
 				queuedEvents.poll().writeTo(connection.getOutputStream());
 			}
 			//flush the data
