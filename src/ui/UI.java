@@ -111,15 +111,15 @@ public class UI extends JFrame {
 	}
 
 	public void startGame(String name, String IP, gameworld.world.Team t) {
-		client = new ClientGame(name, IP, t);
+		client = new ClientGame(name, IP, t, this);
+		gamePanel.remove(gameSetup);
+		gameSetup = null;
+		//setupGamePanel();
 		setupHUD();
 		setupGraphics();
 	}
 
 	private void setupGamePanel() {
-		// final int defaultWidth = 500;
-		// final int defaultHeight = 500;
-
 		gamePanel = new JLayeredPane();
 		gamePanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH,
 				DEFAULT_GAME_HEIGHT));

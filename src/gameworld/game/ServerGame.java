@@ -42,7 +42,7 @@ public class ServerGame {
 	// examples of methods that will be in here
 	public void movePlayer (int playerID, Location l) {
 		Player p = playerIDs.get(playerID);
-		if (board.canTraverse(l) && p != null) {
+		if (board.canTraverse(l) && p != null && this.isFree(l)) {
 			if (p.move(l)) {
 				for (int id: playerIDs.keySet()) {
 					server.queuePlayerUpdate(new MoveEvent(playerID, l), id);
@@ -110,4 +110,14 @@ public class ServerGame {
 		// KTC update projectiles, possibly do time logic.
 		// check for collisions and remove projectiles that have hit something.
 	}
+
+	private boolean isFree(Location l) {
+		for (Player p: playerIDs.values()) {
+			if (p.getLocation().equals(l)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }
