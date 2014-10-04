@@ -35,12 +35,12 @@ public class RemotePlayer implements Runnable {
 
 	public void sendUpdates() {
 		if(connection.isClosed()) {
-			// BF put socket removal method here
+			System.out.println("Why are you updating a closed socket?");
+			return;
 		}
 		try {
 			//write each queued event to output
 			while(queuedEvents.size()>0) {
-				System.out.println(queuedEvents.peek());
 				queuedEvents.poll().writeTo(connection.getOutputStream());
 			}
 			//flush the data
@@ -74,7 +74,7 @@ public class RemotePlayer implements Runnable {
 				}
 				else if(in==0x09) {
 					int id = readFromSocket();
-					// BF put code for removing player here
+					game.removePlayer(id);
 				}
 			}
 		} catch (IOException e) {
@@ -91,7 +91,7 @@ public class RemotePlayer implements Runnable {
 				}
 			}
 		}
-
+		game.removePlayer(id);
 	}
 
 	private void readMove() throws IOException, SocketClosedException {

@@ -17,7 +17,6 @@ public class MoveEvent implements UpdateEvent {
 	@Override
 	public void writeTo(OutputStream out) throws IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Writing out moveEvent to " + location.x + " " + location.y);
 		out.write(0x01);
 		out.write(playerID);
 		System.out.println(location);
