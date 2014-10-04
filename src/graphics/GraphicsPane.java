@@ -240,10 +240,10 @@ public class GraphicsPane extends JPanel {
 			for (int j = 0; j < currentBoard[0].length; j++) {
 				double x = (i * 0.5 * width / currentBoard.length)
 						- (j * 0.5 * width / currentBoard.length)
-						+ (currentBoard.length / 1.75) * (int) width / 13;
+						+ ((currentBoard.length / 1.75) - (currentBoard[i][j].img.getWidth(null) * (currentBoard.length - 10)))* (int) width / 13;
 				double y = (i * 0.5 * height / (currentBoard[0].length * 1.5))
 						+ (j * 0.5 * height / (currentBoard[0].length * 1.5))
-						+ (currentBoard[0].length / 3) * (int) height / 21;
+						+ ((currentBoard[0].length / 3)  - (currentBoard[i][j].img.getHeight(null) * (currentBoard[0].length - 10)))* (int) height / 21;
 				if (currentBoard[currentBoard[0].length - 1 - j][i] != null)
 					g.drawImage(
 							currentBoard[currentBoard[0].length - 1 - j][i].img, (int) x, (int) y,
