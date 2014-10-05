@@ -64,9 +64,15 @@ public class GraphicsPane extends JPanel {
 				double y = (i * 0.5 * height / 15)
 						+ (j * 0.5 * height / 15)
 						+ (10 / 3) * (int) height / 21;
+				System.out.println(i + " i " + j + " j " + x + " x " + y + " y ");
 				if (currentBoard[i][j] != null)
-					g.drawImage(currentBoard[i][j].img, (int) x, (int) y,
-							(int) width / 10, (int) height / 15, null);
+					g.drawImage(
+							currentBoard[i][j].img,
+							(int) x,
+							(int) y,
+							(int) width/10,
+							(int) height/15,
+							null);
 				else {
 					System.out.println("THIS SHIT IS NULL NIGGA");
 				}
@@ -74,33 +80,24 @@ public class GraphicsPane extends JPanel {
 		}
 
 		for (int i = 0; i < currentBoard.length; i++) {
-			for (int j = -1; j < currentBoard[0].length - 1; j++) {
-				if (currentObjects[i][j + 1] != null) {
+			for (int j = 0; j < currentBoard[0].length; j++) {
+				if (currentObjects[i][j] != null) {
 					double x = (i * 0.5 * width / 10)
 							- (j * 0.5 * width / 10)
-							+ (10 / 1.75)
-							* (int) width
-							/ 13
-							- (0.25 * width / 10)
-							- (0.125 * currentObjects[i][j + 1].imgs[0]
-									.getWidth(null) * (width / startingWidth));
+							+ (10 / 1.75) * (int) width / 13
+							- (currentObjects[i][j].imgs[0].getWidth(null) * (width / startingWidth) - width/10)/2;
 					double y = (i * 0.5 * height / 15)
 							+ (j * 0.5 * height / 15)
-							+ (10 / 3)
-							* (int) height
-							/ 21
-							+ (0.25 * height / 15)
-							- (currentObjects[i][j + 1].imgs[0].getHeight(null)
-									* (height / startingHeight) - currentBoard[i][j + 1].img
-											.getHeight(null)
-									* (height / startingHeight));
+							+ (10 / 3) * (int) height / 21
+							+ (0.75 * height / 15) - (currentObjects[i][j].imgs[0].getHeight(null) * (height / startingHeight));
+					System.out.println(i + " i " + j + " j " + x + " x " + y + " y ");
 					g.drawImage(
-							currentObjects[i][j + 1].imgs[0],
+							currentObjects[i][j].imgs[0],
 							(int) x,
 							(int) y,
-							(int) (currentObjects[i][j + 1].imgs[0]
+							(int) (currentObjects[i][j].imgs[0]
 									.getWidth(null) * (width / startingWidth)),
-							(int) (currentObjects[i][j + 1].imgs[0]
+							(int) (currentObjects[i][j].imgs[0]
 									.getHeight(null) * (height / startingHeight)),
 							null);
 				}
@@ -131,39 +128,25 @@ public class GraphicsPane extends JPanel {
 		}
 
 		for (int i = 0; i < currentBoard.length; i++) {
-			for (int j = -1; j < currentBoard[0].length - 1; j++) {
-				if (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length
-						- 1 - (j + 1)] != null) {
+			for (int j = 0; j < currentBoard[0].length; j++) {
+				if (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - j] != null) {
 					double x = (i * 0.5 * width / 10)
 							- (j * 0.5 * width / 10)
-							+ (10 / 1.75)
-							* (int) width
-							/ 13
-							- (0.25 * width / 10)
-							- (0.125 * currentObjects[currentObjects.length - 1
-									- i][currentObjects[0].length - 1 - (j + 1)].imgs[0]
-									.getWidth(null) * (width / startingWidth));
+							+ (10 / 1.75) * (int) width / 13
+							- (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - j].imgs[1].getWidth(null) * (width / startingWidth) - width/10)/2;
 					double y = (i * 0.5 * height / 15)
 							+ (j * 0.5 * height / 15)
-							+ (10 / 3)
-							* (int) height
-							/ 21
-							+ (0.25 * height / 15)
-							- (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length
-									- 1 - (j + 1)].imgs[0].getHeight(null)
-									* (height / startingHeight) - 0.5
-									* currentBoard[i][j + 1].img
-											.getHeight(null)
-									* (height / startingHeight));
+							+ (10 / 3) * (int) height / 21
+							+ (0.75 * height / 15) - (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - j].imgs[1].getHeight(null) * (height / startingHeight));
+					System.out.println(i + " i " + j + " j " + x + " x " + y + " y ");
 					g.drawImage(
-							currentObjects[currentObjects.length - i - 1][currentObjects[0].length
-									- (j + 1) - 1].imgs[1],
+							currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - j].imgs[1],
 							(int) x,
 							(int) y,
-							(int) (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length
-									- 1 - (j + 1)].imgs[0].getWidth(null) * (width / startingWidth)),
-							(int) (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length
-									- 1 - (j + 1)].imgs[0].getHeight(null) * (height / startingHeight)),
+							(int) (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - j].imgs[1]
+									.getWidth(null) * (width / startingWidth)),
+							(int) (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - j].imgs[1]
+									.getHeight(null) * (height / startingHeight)),
 							null);
 				}
 			}
@@ -172,18 +155,19 @@ public class GraphicsPane extends JPanel {
 	
 	private void drawEast(Terrain[][] currentBoard,
 			Objects[][] currentObjects, Graphics g) {
-		for (int i = 0; i < currentBoard[0].length; i++) {
-			for (int j = 0; j < currentBoard.length; j++) {
+		for (int i = 0; i < currentBoard.length; i++) {
+			for (int j = 0; j < currentBoard[0].length; j++) {
 				double x = (i * 0.5 * width / 10)
 						- (j * 0.5 * width / 10)
 						+ (10 / 1.75) * (int) width / 13;
 				double y = (i * 0.5 * height / (15))
 						+ (j * 0.5 * height / (15))
 						+ (10 / 3) * (int) height / 21;
-				if (currentBoard[j][currentBoard[0].length - 1 - i] != null)
+				if (currentBoard[i][currentBoard[0].length
+						- 1 - j] != null)
 					g.drawImage(
-							currentBoard[j][currentBoard[0].length
-									- 1 - i].img, (int) x, (int) y,
+							currentBoard[i][currentBoard[0].length
+									- 1 - j].img, (int) x, (int) y,
 							(int) width / 10, (int) height / 15, null);
 				else {
 					System.out.println("THIS SHIT IS NULL NIGGA");
@@ -191,39 +175,26 @@ public class GraphicsPane extends JPanel {
 			}
 		}
 
-		for (int i = 0; i < currentBoard[0].length; i++) {
-			for (int j = -1; j < currentBoard.length - 1; j++) {
-				if (currentObjects[j + 1][currentObjects[0].length
-						- 1 - i] != null) {
+		for (int i = 0; i < currentBoard.length; i++) {
+			for (int j = 0; j < currentBoard[0].length; j++) {
+				if (currentObjects[i][currentObjects[0].length - 1 - j] != null) {
 					double x = (i * 0.5 * width / 10)
 							- (j * 0.5 * width / 10)
-							+ (currentBoard.length / 1.75)
-							* (int) width
-							/ 13
-							- (0.25 * width / 10)
-							- (0.125 * currentObjects[j + 1][currentObjects[0].length - 1 - i].imgs[3]
-									.getWidth(null) * (width / startingWidth));
+							+ (10 / 1.75) * (int) width / 13
+							- (currentObjects[i][currentObjects[0].length - 1 - j].imgs[2].getWidth(null) * (width / startingWidth) - width/10)/2;
 					double y = (i * 0.5 * height / 15)
 							+ (j * 0.5 * height / 15)
-							+ (10 / 3)
-							* (int) height
-							/ 21
-							+ (0.25 * height / 15)
-							- (currentObjects[j + 1][currentObjects[0].length
-									- 1 - i].imgs[0].getHeight(null)
-									* (height / startingHeight) - 0.5
-									* currentBoard[j + 1][i].img
-											.getHeight(null)
-									* (height / startingHeight));
+							+ (10 / 3) * (int) height / 21
+							+ (0.75 * height / 15) - (currentObjects[i][currentObjects[0].length - 1 - j].imgs[2].getHeight(null) * (height / startingHeight));
+					System.out.println(i + " i " + j + " j " + x + " x " + y + " y ");
 					g.drawImage(
-							currentObjects[j + 1][currentObjects[0].length
-									- i - 1].imgs[2],
+							currentObjects[i][currentObjects[0].length - 1 - j].imgs[2],
 							(int) x,
 							(int) y,
-							(int) (currentObjects[j + 1][currentObjects[0].length
-									- 1 - i].imgs[0].getWidth(null) * (width / startingWidth)),
-							(int) (currentObjects[j + 1][currentObjects[0].length
-									- 1 - i].imgs[0].getHeight(null) * (height / startingHeight)),
+							(int) (currentObjects[i][currentObjects[0].length - 1 - j].imgs[2]
+									.getWidth(null) * (width / startingWidth)),
+							(int) (currentObjects[i][currentObjects[0].length - 1 - j].imgs[2]
+									.getHeight(null) * (height / startingHeight)),
 							null);
 				}
 			}
@@ -232,17 +203,17 @@ public class GraphicsPane extends JPanel {
 	
 	private void drawWest(Terrain[][] currentBoard,
 			Objects[][] currentObjects, Graphics g) {
-		for (int i = 0; i < currentBoard[0].length; i++) {
-			for (int j = 0; j < currentBoard.length; j++) {
+		for (int i = 0; i < currentBoard.length; i++) {
+			for (int j = 0; j < currentBoard[0].length; j++) {
 				double x = (i * 0.5 * width / 10)
 						- (j * 0.5 * width / 10)
 						+ (10 / 1.75) * (int) width / 13;
 				double y = (i * 0.5 * height / (15))
 						+ (j * 0.5 * height / (15))
 						+ (10 / 3) * (int) height / 21;
-				if (currentBoard[currentBoard.length - 1 - j][i] != null)
+				if (currentBoard[currentBoard.length - 1 - i][j] != null)
 					g.drawImage(
-							currentBoard[currentBoard.length - 1 - j][i].img, (int) x, (int) y,
+							currentBoard[currentBoard.length - 1 - i][j].img, (int) x, (int) y,
 							(int) width / 10, (int) height / 15, null);
 				else {
 					System.out.println("THIS SHIT IS NULL NIGGA");
@@ -250,34 +221,26 @@ public class GraphicsPane extends JPanel {
 			}
 		}
 
-		for (int i = 0; i < currentBoard[0].length; i++) {
-			for (int j = -1; j < currentBoard.length - 1; j++) {
-				if (currentObjects[currentObjects.length - 1 - (j + 1)][i] != null) {
+		for (int i = 0; i < currentBoard.length; i++) {
+			for (int j = 0; j < currentBoard[0].length; j++) {
+				if (currentObjects[currentObjects.length - 1 - i][j] != null) {
 					double x = (i * 0.5 * width / 10)
 							- (j * 0.5 * width / 10)
-							+ (10 / 1.75)
-							* (int) width
-							/ 13
-							- (0.25 * width / 10)
-							- (0.125 * currentObjects[currentObjects.length - 1 - (j + 1)][i].imgs[3]
-									.getWidth(null) * (width / startingWidth));
+							+ (10 / 1.75) * (int) width / 13
+							- (currentObjects[currentObjects.length - 1 - i][j].imgs[3].getWidth(null) * (width / startingWidth) - width/10)/2;
 					double y = (i * 0.5 * height / 15)
 							+ (j * 0.5 * height / 15)
-							+ (10 / 3)
-							* (int) height
-							/ 21
-							+ (0.25 * height / 15)
-							- (currentObjects[currentObjects.length - 1 - (j + 1)][i].imgs[0].getHeight(null)
-									* (height / startingHeight) - 0.5
-									* currentBoard[i][j + 1].img
-											.getHeight(null)
-									* (height / startingHeight));
+							+ (10 / 3) * (int) height / 21
+							+ (0.75 * height / 15) - (currentObjects[currentObjects.length - 1 - i][j].imgs[3].getHeight(null) * (height / startingHeight));
+					System.out.println(i + " i " + j + " j " + x + " x " + y + " y ");
 					g.drawImage(
-							currentObjects[currentObjects.length - 1 - (j + 1)][i].imgs[3],
+							currentObjects[currentObjects.length - 1 - i][j].imgs[3],
 							(int) x,
 							(int) y,
-							(int) (currentObjects[currentObjects.length - 1 - (j + 1)][i].imgs[0].getWidth(null) * (width / startingWidth)),
-							(int) (currentObjects[currentObjects.length - 1 - (j + 1)][i].imgs[0].getHeight(null) * (height / startingHeight)),
+							(int) (currentObjects[currentObjects.length - 1 - i][j].imgs[3]
+									.getWidth(null) * (width / startingWidth)),
+							(int) (currentObjects[currentObjects.length - 1 - i][j].imgs[3]
+									.getHeight(null) * (height / startingHeight)),
 							null);
 				}
 			}
