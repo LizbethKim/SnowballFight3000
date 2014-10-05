@@ -68,7 +68,7 @@ public class UI extends JFrame {
 	private ControlsPopup controlsPopup;
 	private GameSetup gameSetup;
 	
-	private final boolean debugMode = true;
+	private final boolean debugMode = false;
 	
 
 	public UI(ClientGame cl) {
