@@ -167,4 +167,21 @@ public class Board {
 		return newLoc.x >= 0 && newLoc.x < board.length && newLoc.y >= 0 && newLoc.y < board[0].length;
 	}
 
+	//KTC Kate added these for board storage help, feel free to change if needed
+	/**
+	 * Gets max X coordinate on board
+	 * @return
+	 */
+	public int getXMax() {
+		return board.length;
+	}
+
+	/**
+	 * Gets max Y coordinate on board
+	 * @return
+	 */
+	public int getYMax() {
+		return board[0].length;
+	}
+
 }
