@@ -48,9 +48,9 @@ import client.ClientGame;
  * listens to all user inputs and sends them to the board where they can be
  * dealt with. It holds the canvas for the game to be displayed on and controls
  * the pop-up windows related to the game.
- *
+ * 
  * @author Ryan Burnell, 300279172
- *
+ * 
  */
 public class UI extends JFrame {
 
@@ -67,9 +67,9 @@ public class UI extends JFrame {
 	private CheatsPopup cheatsPopup;
 	private ControlsPopup controlsPopup;
 	private GameSetup gameSetup;
-	
+	private JFrame frame;
+
 	private final boolean debugMode = false;
-	
 
 	public UI(ClientGame cl) {
 
@@ -77,18 +77,18 @@ public class UI extends JFrame {
 		super();
 		client = cl;
 
-		if(debugMode){
+		if (debugMode) {
 			setupGame();
+			// pack and Display window
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			pack();
+			setResizable(true);
+			setVisible(true);
 		} else {
-		setupWelcome();
+			setupWelcome();
 		}
 		// startGame();
 
-		// pack and Display window
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pack();
-		setResizable(true);
-		setVisible(true);
 	}
 
 	public UI() {
@@ -96,20 +96,20 @@ public class UI extends JFrame {
 		// initialise UI
 		super();
 
-		if(debugMode){
+		if (debugMode) {
 			Client c = new Client("127.0.0.1");
-			Board b = new Board();	// This should be new from file - the first file to come through the network perhaps
+			Board b = new Board(); // This should be new from file - the first
+									// file to come through the network perhaps
 			client = new ClientGame(b, c);
 			setupGame();
+			// pack and Display window
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			pack();
+			setResizable(true);
+			setVisible(true);
 		} else {
-		setupWelcome();
+			setupWelcome();
 		}
-
-		// pack and Display window
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pack();
-		setResizable(true);
-		setVisible(true);
 	}
 
 	private void setupGame() {
@@ -123,12 +123,20 @@ public class UI extends JFrame {
 
 	public void startGame(String name, String IP, gameworld.world.Team t) {
 		client = new ClientGame(name, IP, t, this);
-		//setupGamePanel();
+		// setupGamePanel();
 		setupFileBar();
 		setupKeyBindings();
 		setupGamePanel();
 		setupHUD();
 		setupGraphics();
+		// pack and Display window
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
+		setResizable(true);
+		
+		frame.setVisible(false);
+		frame.dispose();
+		setVisible(true);
 	}
 
 	private void setupGamePanel() {
@@ -140,13 +148,14 @@ public class UI extends JFrame {
 	}
 
 	private void setupWelcome() {
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
 		gameSetup = new GameSetup(this, ASPECT_RATIO);
 		frame.add(gameSetup);
-		gameSetup.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH, DEFAULT_GAME_WIDTH));
+		gameSetup.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH,
+				DEFAULT_GAME_WIDTH));
 		frame.pack();
-	//	setResizable(true);
+		// setResizable(true);
 		frame.setVisible(true);
 	}
 
@@ -245,7 +254,7 @@ public class UI extends JFrame {
 
 	/**
 	 * Sets up key bindings for given keyConstants
-	 *
+	 * 
 	 * @param actionString
 	 *            the action string to be used in the action map
 	 * @param action
