@@ -3,21 +3,21 @@
       <player>1 005 002 Player1
         <inventory>p1 items</inventory>
       </player>
-      <player>2 006 010 Player2
+      <player>0 006 010 Player2
         <inventory>p1 items</inventory>
       </player>
-      <player>4 007 100 Player3
+      <player>0 007 100 Player3
         <inventory>p1 items</inventory>
       </player>
-      <player>5 008 200 Player4
+      <player>1 008 200 Player4
         <inventory>p1 items</inventory>
       </player>
-      <player>3 009 267 Player5
+      <player>1 009 267 Player5
         <inventory>p1 items</inventory>
       </player>
     </players>
     <board>010 010
-        <tile>2 000 000 tree</tile>
+        <tile>2 000 000 4</tile>
         <tile>2 001 000 </tile>
         <tile>2 002 000 </tile>
         <tile>2 003 000 </tile>
@@ -25,7 +25,7 @@
         <tile>2 005 000 </tile>
         <tile>2 006 000 </tile>
         <tile>2 007 000 </tile>
-        <tile>2 008 000 tree</tile>
+        <tile>2 008 000 4</tile>
         <tile>2 009 000 </tile>
         <tile>2 000 001 </tile>
         <tile>0 001 001 </tile>
@@ -39,7 +39,7 @@
         <tile>2 009 001 </tile>
         <tile>2 000 002 </tile>
         <tile>0 001 002 </tile>
-        <tile>0 002 002 tree</tile>
+        <tile>0 002 002 4</tile>
         <tile>0 003 002 </tile>
         <tile>0 004 002 </tile>
         <tile>0 005 002 </tile>
@@ -51,7 +51,7 @@
         <tile>0 001 003 </tile>
         <tile>0 002 003 </tile>
         <tile>0 003 003 </tile>
-        <tile>0 004 003 tree</tile>
+        <tile>0 004 003 4</tile>
         <tile>0 005 003 </tile>
         <tile>0 006 003 </tile>
         <tile>0 007 003 </tile>
@@ -67,7 +67,7 @@
         <tile>0 007 004 </tile>
         <tile>0 008 004 </tile>
         <tile>2 009 004 </tile>
-        <tile>2 000 005 tree</tile>
+        <tile>2 000 005 4</tile>
         <tile>0 001 005 </tile>
         <tile>0 002 005 </tile>
         <tile>0 003 005 </tile>
