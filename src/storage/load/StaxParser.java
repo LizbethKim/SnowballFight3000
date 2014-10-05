@@ -141,6 +141,10 @@ public class StaxParser {
 						tiles[curTile.getCoords().x][curTile.getCoords().y] = curTile;
 						continue;
 					}
+					if (elemName.equals(BOARD)) {
+						board = new Board(tiles);
+						continue;
+					}
 				}
 
 			}
