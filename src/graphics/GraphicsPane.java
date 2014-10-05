@@ -64,7 +64,6 @@ public class GraphicsPane extends JPanel {
 				double y = (i * 0.5 * height / 15)
 						+ (j * 0.5 * height / 15)
 						+ (10 / 3) * (int) height / 21;
-				System.out.println(i + " i " + j + " j " + x + " x " + y + " y ");
 				if (currentBoard[i][j] != null)
 					g.drawImage(
 							currentBoard[i][j].img,
@@ -90,7 +89,6 @@ public class GraphicsPane extends JPanel {
 							+ (j * 0.5 * height / 15)
 							+ (10 / 3) * (int) height / 21
 							+ (0.75 * height / 15) - (currentObjects[i][j].imgs[0].getHeight(null) * (height / startingHeight));
-					System.out.println(i + " i " + j + " j " + x + " x " + y + " y ");
 					g.drawImage(
 							currentObjects[i][j].imgs[0],
 							(int) x,
@@ -138,7 +136,6 @@ public class GraphicsPane extends JPanel {
 							+ (j * 0.5 * height / 15)
 							+ (10 / 3) * (int) height / 21
 							+ (0.75 * height / 15) - (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - j].imgs[1].getHeight(null) * (height / startingHeight));
-					System.out.println(i + " i " + j + " j " + x + " x " + y + " y ");
 					g.drawImage(
 							currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - j].imgs[1],
 							(int) x,
@@ -186,7 +183,6 @@ public class GraphicsPane extends JPanel {
 							+ (i * 0.5 * height / 15)
 							+ (10 / 3) * (int) height / 21
 							+ (0.75 * height / 15) - (currentObjects[i][currentObjects[0].length - 1 - j].imgs[2].getHeight(null) * (height / startingHeight));
-					System.out.println(i + " i " + j + " j " + x + " x " + y + " y ");
 					g.drawImage(
 							currentObjects[i][currentObjects[0].length - 1 - j].imgs[2],
 							(int) x,
@@ -232,7 +228,6 @@ public class GraphicsPane extends JPanel {
 							+ (i * 0.5 * height / 15)
 							+ (10 / 3) * (int) height / 21
 							+ (0.75 * height / 15) - (currentObjects[currentObjects.length - 1 - i][j].imgs[3].getHeight(null) * (height / startingHeight));
-					System.out.println(i + " i " + j + " j " + x + " x " + y + " y ");
 					g.drawImage(
 							currentObjects[currentObjects.length - 1 - i][j].imgs[3],
 							(int) x,
