@@ -6,7 +6,7 @@ package gameworld.world;
  */
 public class Player implements Entity {
 	private Location loc;
-	private Team team;	// KTC maybe change to enum?
+	private Team team;
 	private int score = 0;
 	private int health = 100;	// From 0 to 100. 0 is frozen.
 	public final String name;	// KTC necessary?
