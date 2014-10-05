@@ -20,6 +20,7 @@ import java.io.File;
 
 import gameworld.world.Board;
 import graphics.GraphicsPane;
+import server.Client;
 import ui.actions.*;
 
 import javax.swing.ActionMap;
@@ -66,6 +67,9 @@ public class UI extends JFrame {
 	private CheatsPopup cheatsPopup;
 	private ControlsPopup controlsPopup;
 	private GameSetup gameSetup;
+	
+	private final boolean debugMode = true;
+	
 
 	public UI(ClientGame cl) {
 
@@ -73,8 +77,11 @@ public class UI extends JFrame {
 		super();
 		client = cl;
 
-		setupGame();
-
+		if(debugMode){
+			setupGame();
+		} else {
+		setupWelcome();
+		}
 		// startGame();
 
 		// pack and Display window
@@ -89,9 +96,14 @@ public class UI extends JFrame {
 		// initialise UI
 		super();
 
-		setupGame();
-
-		// startGame();
+		if(debugMode){
+			Client c = new Client("127.0.0.1");
+			Board b = new Board();	// This should be new from file - the first file to come through the network perhaps
+			client = new ClientGame(b, c);
+			setupGame();
+		} else {
+		setupWelcome();
+		}
 
 		// pack and Display window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,16 +117,16 @@ public class UI extends JFrame {
 		setupFileBar();
 		setupKeyBindings();
 		setupGamePanel();
-		//setupWelcome();
 		setupHUD();
 		setupGraphics();
 	}
 
 	public void startGame(String name, String IP, gameworld.world.Team t) {
 		client = new ClientGame(name, IP, t, this);
-		gamePanel.remove(gameSetup);
-		gameSetup = null;
 		//setupGamePanel();
+		setupFileBar();
+		setupKeyBindings();
+		setupGamePanel();
 		setupHUD();
 		setupGraphics();
 	}
@@ -128,9 +140,14 @@ public class UI extends JFrame {
 	}
 
 	private void setupWelcome() {
+		JFrame frame = new JFrame();
+		frame.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
 		gameSetup = new GameSetup(this, ASPECT_RATIO);
-		gamePanel.add(gameSetup);
-		gameSetup.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_WIDTH);
+		frame.add(gameSetup);
+		gameSetup.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH, DEFAULT_GAME_WIDTH));
+		frame.pack();
+	//	setResizable(true);
+		frame.setVisible(true);
 	}
 
 	private void setupGraphics() {
