@@ -2,6 +2,7 @@ package gameworld.game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -107,8 +108,23 @@ public class ServerGame {
 	}
 
 	public void clockTick() {
-		for (Snowball s: projectiles) {
+		// KTC recode this prettier later
+		Iterator<Snowball> it = projectiles.iterator();
+		while (it.hasNext()) {
+			Snowball s = it.next();
 			s.clockTick();
+			if (!board.canTraverse(s.getLocation())) {
+				it.remove();
+				continue;
+			}
+			for (Player p: playerIDs.values()) {
+				if (p.getLocation().equals(s.getLocation())) {
+					s.hit(p);
+					// KTC update that the player was hit
+					it.remove();
+					break;
+				}
+			}
 			// if it has collided with anything, make it hit that, and then
 			// delete it from the list.
 		}
