@@ -8,16 +8,16 @@ import gameworld.world.SnowballFactory.SnowballType;
  *
  */
 public class Snowball implements Entity {
-	
+
 	public final Direction d;
 	private Location l;
 	public final int damage;
 	public final double ticksPerSquare;
 	private double ticksSinceLast = 0;
 	public final SnowballType type;
-	
+
 	/**
-	 * Creates a new snowball and starts it one square in 
+	 * Creates a new snowball and starts it one square in
 	 * direction d from where it was thrown.
 	 * @param thrownAt
 	 * @param d
@@ -33,7 +33,7 @@ public class Snowball implements Entity {
 
 	/* Move forward one square. May be different to the clockTick,
 	 * as it may tick multiple times before moving.
-	 */	 
+	 */
 	private void moveForward() {
 		if (d == Direction.NORTH) {
 			l = new Location(l.x - 1, l.y);
@@ -46,7 +46,7 @@ public class Snowball implements Entity {
 		}
 	}
 
-	
+
 	/**
 	 * Damages the player it hits. KTC right now friendly fire can hurt
 	 * @param p The player hit
@@ -64,6 +64,10 @@ public class Snowball implements Entity {
 			moveForward();
 			ticksSinceLast -= ticksPerSquare;
 		}
+	}
+
+	public Location getLocation() {
+		return l;
 	}
 
 }

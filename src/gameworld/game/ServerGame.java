@@ -11,6 +11,7 @@ import server.events.CreatePlayerEvent;
 import server.events.MoveEvent;
 import server.events.RemovePlayerEvent;
 import server.events.TurnEvent;
+import server.events.UpdateProjectilePositionsEvent;
 import gameworld.world.Area;
 import gameworld.world.Board;
 import gameworld.world.Direction;
@@ -110,6 +111,15 @@ public class ServerGame {
 			s.clockTick();
 			// if it has collided with anything, make it hit that, and then
 			// delete it from the list.
+		}
+		Location[] snowballLocs = new Location[projectiles.size()];
+		int i = 0;
+		for (Snowball s: projectiles) {
+			snowballLocs[i] = s.getLocation();
+			i++;
+		}
+		for(int id: playerIDs.keySet()) {
+			server.queuePlayerUpdate(new UpdateProjectilePositionsEvent(snowballLocs), id);
 		}
 		// KTC update projectiles, possibly do time logic.
 		// check for collisions and remove projectiles that have hit something.
