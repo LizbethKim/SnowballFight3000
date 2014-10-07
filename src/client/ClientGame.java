@@ -8,11 +8,14 @@ import gameworld.world.Player;
 import gameworld.world.Team;
 import graphics.assets.Objects;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import server.Client;
+import storage.SaveGame;
+import storage.StoredGame;
 import ui.UI;
 
 /**
@@ -65,6 +68,7 @@ public class ClientGame {
 		this.display = display;
 		client.sendName(name);
 		player = new Player(name, 0);
+		player.setTeam(team);
 
 		ClientUpdater u = this.makeUpdater();
 		client.startReceiving(u);
@@ -177,7 +181,11 @@ public class ClientGame {
 	}
 
 	public void save() {
-		// KTC to do add client.save() request to server or something....?
+		SaveGame saver = new SaveGame();
+		List<Player> ps = new ArrayList<Player>();
+		ps.addAll(playerIDs.values());
+		StoredGame sg = new StoredGame(this.board, ps);
+		saver.save(sg);
 	}
 
 	public ClientUpdater makeUpdater() {

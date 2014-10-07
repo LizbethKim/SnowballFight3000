@@ -110,7 +110,11 @@ public class ClientUpdater {
 				}
 			}
 		}
-		bs.update(board.convertToEnums(), items, playerIDs.get(playerID).getLocation());
+		if (playerIDs.get(playerID) == null) {
+			bs.update(board.convertToEnums(), items, new Location(3,3));		// KTC temp
+		} else {
+			bs.update(board.convertToEnums(), items, playerIDs.get(playerID).getLocation());
+		}
 		display.repaint();
 
 	}
