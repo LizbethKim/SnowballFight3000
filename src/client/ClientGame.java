@@ -183,7 +183,7 @@ public class ClientGame {
 	}
 
 	public void setLocalLocation(Location l) {
-
+		this.player.setLocation(l);
 	}
 
 	public void save() {
