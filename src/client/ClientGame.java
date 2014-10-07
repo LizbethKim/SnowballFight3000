@@ -32,6 +32,7 @@ public class ClientGame {
 	private Player player;
 	private BoardState boardState;
 	private Client client;
+	private ClientUpdater updater;
 
 	private int playerID;
 
@@ -48,8 +49,8 @@ public class ClientGame {
 		client.sendName("name goes here");
 		player = new Player("name goes here", 0);
 
-		ClientUpdater u = this.makeUpdater();
-		client.startReceiving(u);
+		updater = this.getUpdater();
+		client.startReceiving(updater);
 		System.out.println("new game created");
 	}
 
@@ -59,9 +60,9 @@ public class ClientGame {
 		//StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
 		// this.playerID = KTC to do
 		//this.board = sb.getBoard();
-		
+
 		this.board = new Board();
-		
+
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
 		//projectiles = new ArrayList<Snowball>();
@@ -70,7 +71,7 @@ public class ClientGame {
 		player = new Player(name, 0);
 		player.setTeam(team);
 
-		ClientUpdater u = this.makeUpdater();
+		ClientUpdater u = this.getUpdater();
 		client.startReceiving(u);
 	}
 
@@ -178,6 +179,7 @@ public class ClientGame {
 		this.playerID = ID;
 		this.player.setID(ID);
 		this.playerIDs.put(ID, this.player);
+		updater.setID(ID);
 	}
 
 	public void save() {
@@ -188,7 +190,10 @@ public class ClientGame {
 		saver.save(sg);
 	}
 
-	public ClientUpdater makeUpdater() {
+	public ClientUpdater getUpdater() {
+		if (this.updater != null) {
+			return updater;
+		}
 		return new ClientUpdater(this, board, playerIDs,
 				boardState, display, playerID);
 	}

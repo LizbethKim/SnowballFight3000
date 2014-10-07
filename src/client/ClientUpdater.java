@@ -35,7 +35,7 @@ public class ClientUpdater {
 		this.bs = bs;
 		this.display = display;
 		updateBoardState();
-		
+
 	}
 
 
@@ -83,17 +83,21 @@ public class ClientUpdater {
 		}
 		updateBoardState();	// KTC call this inside a loop, perhaps?
 	}
-	
+
 	public void updateProjectiles(Location[] snowballPositions) {
 		this.snowballPositions = snowballPositions;
 		this.updateBoardState();
+	}
+
+	protected void setID(int playerID) {
+		this.playerID = playerID;
 	}
 
 	public void updateBoardState() {
 		Objects[][] items = board.itemEnums();
 		for (Location l: snowballPositions) {
 			if (l != null) {
-				items[l.x][l.y] = Objects.SNOWBALL; 
+				items[l.x][l.y] = Objects.SNOWBALL;
 			}
 		}
 		for (Player p: playerIDs.values()) {
@@ -112,6 +116,7 @@ public class ClientUpdater {
 		}
 		if (playerIDs.get(playerID) == null) {
 			bs.update(board.convertToEnums(), items, new Location(3,3));		// KTC temp
+			System.out.println("Player is null");
 		} else {
 			bs.update(board.convertToEnums(), items, playerIDs.get(playerID).getLocation());
 		}
