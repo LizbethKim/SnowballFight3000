@@ -3,6 +3,7 @@ package server;
 import gameworld.game.ServerGame;
 import gameworld.world.Direction;
 import gameworld.world.Location;
+import gameworld.world.Team;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,7 +68,7 @@ public class RemotePlayer implements Runnable {
 					readTurn();
 				}
 				else if(in==0x06) {
-					readName();
+					readNameAndTeam();
 				}
 				else if(in==0x07) {
 					// BF put code for sending map file here
@@ -107,9 +108,10 @@ public class RemotePlayer implements Runnable {
 		game.turnPlayer(id, Direction.values()[dir]);
 	}
 
-	private void readName() throws IOException, SocketClosedException {
+	private void readNameAndTeam() throws IOException, SocketClosedException {
 		String name = readString();
-		game.addPlayer(id, name);
+		Team team = Team.values()[readFromSocket()];
+		game.addPlayer(id, name, team);
 	}
 
 	// TODO functions here will be made as needed as we develop the protocol

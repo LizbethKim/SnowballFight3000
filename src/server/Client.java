@@ -3,6 +3,7 @@ package server;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
+import gameworld.world.Team;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,7 +65,8 @@ public class Client implements Runnable {
 					x += readFromSocket() << 8;
 					int y = readFromSocket();
 					y += readFromSocket() << 8;
-					updater.addPlayer(name, id, new Location(x,y));
+					Team team = Team.values()[readFromSocket()];
+					updater.addPlayer(name,team, id, new Location(x,y));
 				}
 				// create local player
 				else if (in == 0x06) {
@@ -135,10 +137,11 @@ public class Client implements Runnable {
 	}
 
 
-	public void sendName(String name) {
+	public void sendNameAndTeam(String name, Team team) {
 		try {
 			connection.getOutputStream().write(0x06);
 			connection.getOutputStream().write(name.length());
+			connection.getOutputStream().write(team.ordinal());
 			for(int i=0;i<name.length();i++) {
 				connection.getOutputStream().write(name.getBytes()[i]);
 			}
