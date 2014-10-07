@@ -21,7 +21,7 @@ public enum Objects {
 	POWERUP("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png"),
 	CHEST("", "", "", ""),
 	MAP("", "", "", ""),
-	TREE("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png"),
+	TREE("tree.png", "tree.png", "tree.png", "tree.png"),
 	TABLE("", "", "", ""),
 	WALL_E_W("", "", "", ""),
 	WALL_N_S("", "", "", ""),
