@@ -91,8 +91,9 @@ public class ServerGame {
 		//server.queuePlayerUpdate(new MoveEvent(playerID, spawnLoc), playerID);
 		playerIDs.put(playerID, p);
 		for (int id: playerIDs.keySet()) {
-			server.queuePlayerUpdate(new CreatePlayerEvent(id, playerIDs.get(id).name, playerIDs.get(id).getLocation()), playerID);
-			server.queuePlayerUpdate(new CreatePlayerEvent(playerID, name, spawnLoc), id);
+			Player other = playerIDs.get(id);
+			server.queuePlayerUpdate(new CreatePlayerEvent(id, other.name, other.getLocation(), other.getTeam()), playerID);
+			server.queuePlayerUpdate(new CreatePlayerEvent(playerID, name, spawnLoc, t), id);
 		}
 	}
 
