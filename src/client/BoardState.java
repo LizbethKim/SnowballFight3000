@@ -21,7 +21,8 @@ public class BoardState {
 	private Terrain[][] board;
 	private Objects[][] entities;
 	private Direction orientation = Direction.NORTH;	// The direction that the board is oriented. (Possibly something RB should store)
-
+	private Location playerCoords;
+	
 	/*
 	 * EK This is for you, sets up a plain boring board for testing purposes.
 	 */
@@ -46,6 +47,8 @@ public class BoardState {
 		entities[2][7] = Objects.BUSH;
 		entities[8][5] = Objects.TREE;
 		this.orientation = Direction.NORTH;
+		
+		playerCoords = new Location(3,3);
 
 //		// Prints to the UI. Just to see if it works.
 //		System.out.println("Board:");
@@ -102,6 +105,10 @@ public class BoardState {
 		}
 		return entitiesCopy;
 	}
+	
+	public Location getPlayerCoords() {
+		return playerCoords;
+	}
 
 	public Direction getDirection() {
 		return orientation;
@@ -116,9 +123,10 @@ public class BoardState {
 //	}
 
 
-	protected void update(Terrain[][] newBoard, Objects[][] newEntities) {
+	protected void update(Terrain[][] newBoard, Objects[][] newEntities, Location playerCoords) {
 		this.board = newBoard;
 		this.entities = newEntities;
+		this.playerCoords = playerCoords;
 	}
 
 	protected void rotateClockwise() {

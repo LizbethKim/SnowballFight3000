@@ -182,7 +182,7 @@ public class ClientGame {
 
 	public ClientUpdater makeUpdater() {
 		return new ClientUpdater(this, board, playerIDs,
-				boardState, display);
+				boardState, display, playerID);
 	}
 
 	private boolean isFree(Location l) {

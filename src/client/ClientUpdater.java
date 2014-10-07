@@ -18,6 +18,7 @@ public class ClientUpdater {
 	//private SnowballFactory snowballFactory;
 	private Board board;
 	private Map<Integer, Player> playerIDs;
+	private int playerID;
 	//private List<Snowball> projectiles;
 
 	private BoardState bs;	// KTC to do update this after updating.
@@ -25,14 +26,16 @@ public class ClientUpdater {
 	private ClientGame clientGame;
 	private Location[] snowballPositions = new Location[1];
 
-	public ClientUpdater(ClientGame g, Board b, Map<Integer, Player> players, BoardState bs, UI display) {
+	public ClientUpdater(ClientGame g, Board b, Map<Integer, Player> players, BoardState bs, UI display, int playerID) {
 		this.clientGame = g;
 		this.board = b;
 		this.playerIDs = players;
+		this.playerID = playerID;
 		//this.projectiles = projectiles;
 		this.bs = bs;
 		this.display = display;
 		updateBoardState();
+		
 	}
 
 
@@ -107,7 +110,7 @@ public class ClientUpdater {
 				}
 			}
 		}
-		bs.update(board.convertToEnums(), items);
+		bs.update(board.convertToEnums(), items, playerIDs.get(playerID).getLocation());
 		display.repaint();
 
 	}
