@@ -7,42 +7,45 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
 import client.ClientGame;
 
-public class InventoryPanel extends JPanel{
-	private static final Image inventorySlot = HUDPanel.loadImage("InventorySlot.png");
+public class InventoryPanel extends JPanel {
+	private static final Image inventorySlot = HUDPanel
+			.loadImage("InventorySlot.png");
 	private static final Image hideItems = HUDPanel.loadImage("HideItems.png");
 	private static final Image showItems = HUDPanel.loadImage("ShowItems.png");
-	
+
 	private static final double showHideXProportion = 1.0 / 20.0;
 	private boolean inventoryHidden;
-	
+
 	private ClientGame client;
-	
-	public InventoryPanel(ClientGame cl){
+
+	public InventoryPanel(ClientGame cl) {
 		client = cl;
 		inventoryHidden = false;
 		setOpaque(false);
 		super.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		setupListeners();
-		
+
 	}
-	
+
 	@Override
-	public void paintComponent(Graphics g){
-		System.out.println("repainting inventory, height = "+getHeight()+", width = "+getWidth());
-		if(getHeight() == 0 || getWidth() == 0)
+	public void paintComponent(Graphics g) {
+		System.out.println("repainting inventory, height = " + getHeight()
+				+ ", width = " + getWidth());
+		if (getHeight() == 0 || getWidth() == 0)
 			return;
 		paintShowHideButton(g);
-		if(!inventoryHidden){
-		paintInventory(g);
-		super.paintComponent(g);
+		if (!inventoryHidden) {
+			paintInventory(g);
+			super.paintComponent(g);
 		}
 	}
-	
+
 	private void paintShowHideButton(Graphics g) {
 		final int width = getShowHideWidth();
 		final int height = getHeight();
@@ -74,16 +77,15 @@ public class InventoryPanel extends JPanel{
 			xPos += size;
 		}
 	}
-	
-	private int getShowHideWidth(){
-			return Math.max(1, (int) (this.getWidth() * showHideXProportion));
+
+	private int getShowHideWidth() {
+		return Math.max(1, (int) (this.getWidth() * showHideXProportion));
 	}
-	
+
 	private boolean onShowHideButton(int x, int y) {
-		return y > 0 && x > 0 && y < getHeight()
-				&& x < getShowHideWidth();
+		return y > 0 && x > 0 && y < getHeight() && x < getShowHideWidth();
 	}
-	
+
 	private void dealWithClick(MouseEvent e) {
 		// RB: Fix mouse hover when window is resized
 		System.out.println("dealing with click");
@@ -95,13 +97,31 @@ public class InventoryPanel extends JPanel{
 			repaint();
 		}
 	}
-	
+
 	private void setupListeners() {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dealWithClick(e);
 			}
+		});
+
+		addMouseMotionListener(new MouseMotionListener() {
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// do nothing
+			}
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				if (onShowHideButton(e.getX(), e.getY())) {
+					setCursor(new Cursor(Cursor.HAND_CURSOR));
+				} else {
+					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				}
+			}
+
 		});
 
 		addMouseListener(new RightClickListener(client));

@@ -1,10 +1,12 @@
 package ui.cheats;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
@@ -41,6 +43,20 @@ public abstract class CheatSwitch extends JPanel {
 	protected abstract void changeState();
 	
 	private void setupListener() {
+		addMouseMotionListener(new MouseMotionListener(){
+
+			@Override
+			public void mouseDragged(MouseEvent arg0) {
+				//do nothing
+			}
+
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+			
+		});
+		
 		addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
