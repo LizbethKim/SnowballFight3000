@@ -21,8 +21,8 @@ public class Player implements Entity {
 		this.inventory = new PlayerInventory();
 	}
 
-	public Player (String name, int ID) {
-		this.loc = new Location(3,3);
+	public Player (String name, Team t, int ID, Location l) {
+		this.loc = l;
 		this.ID = ID;
 		this.name = name;
 		this.inventory = new PlayerInventory();

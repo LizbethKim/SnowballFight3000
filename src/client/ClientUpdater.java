@@ -7,6 +7,7 @@ import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
+import gameworld.world.Team;
 import graphics.assets.Objects;
 
 /**
@@ -49,10 +50,10 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
-	public void addPlayer(String name, int id) {
+	public void addPlayer(String name, Team t, int id, Location l) {
 		if (playerIDs.get(id) == null) {
 			System.out.println("Adding new player with name " + name + " and ID " + id);
-			playerIDs.put(id, new Player(name, id));
+			playerIDs.put(id, new Player(name, t, id, l));
 		}
 		updateBoardState();
 	}
