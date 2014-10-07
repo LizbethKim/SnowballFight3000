@@ -60,13 +60,20 @@ public class Client implements Runnable {
 				else if (in == 0x05) {
 					int id = readFromSocket();
 					String name = readString();
-					// still pretty pissed about this
-					updater.addPlayer(name, id);
+					int x = readFromSocket();
+					x += readFromSocket() << 8;
+					int y = readFromSocket();
+					y += readFromSocket() << 8;
+					updater.addPlayer(name, id, new Location(x,y));
 				}
 				// create local player
 				else if (in == 0x06) {
 					int id = readFromSocket();
-					updater.createLocalPlayer(id);
+					int x = readFromSocket();
+					x += readFromSocket() << 8;
+					int y = readFromSocket();
+					y += readFromSocket() << 8;
+					updater.createLocalPlayer(id, new Location(x,y));
 				}
 				// read map file
 				else if (in == 0x07) {
