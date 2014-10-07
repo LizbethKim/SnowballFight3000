@@ -40,23 +40,22 @@ public class ClientGame {
 	private UI display;
 	private long lastMovedTime;
 
-//	public ClientGame(Board b, Client c){
-//		this.board = b;
-//		this.client = c;
-//		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
-//		playerIDs = new HashMap<Integer, Player>();
-//		//projectiles = new ArrayList<Snowball>();
-//		display = new UI(this);
-//		client.sendName("name goes here");
-//		player = new Player("name goes here", 0);
-//
-//		updater = this.getUpdater();
-//		client.startReceiving(updater);
-//		System.out.println("new game created");
-//	}
+	public ClientGame(Board b, Client c){
+		this.board = b;
+		this.client = c;
+		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
+		playerIDs = new HashMap<Integer, Player>();
+		//projectiles = new ArrayList<Snowball>();
+		display = new UI(this);
+		client.sendName("name goes here");
+		player = new Player("name goes here", Team.BLUE, 0, new Location(3,3));
+
+		updater = this.getUpdater();
+		client.startReceiving(updater);
+		System.out.println("new game created");
+	}
 
 	public ClientGame(String name, String IP, Team team, UI display) {
-		// Somewhere in here I'll need a client object. probably
 		this.client = new Client(IP);
 		//StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
 		// this.playerID = KTC to do
@@ -66,10 +65,8 @@ public class ClientGame {
 
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
-		//projectiles = new ArrayList<Snowball>();
 		this.display = display;
 		client.sendName(name);
-		// client.sendTeam();
 		player = new Player(name, team, 0, new NullLocation());
 
 		ClientUpdater u = this.getUpdater();
