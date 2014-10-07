@@ -1,6 +1,5 @@
 package client;
 
-import java.util.List;
 import java.util.Map;
 
 import ui.UI;
@@ -8,8 +7,6 @@ import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
-import gameworld.world.Snowball;
-import gameworld.world.SnowballFactory;
 import graphics.assets.Objects;
 
 /**
@@ -18,20 +15,21 @@ import graphics.assets.Objects;
  *
  */
 public class ClientUpdater {
-	private SnowballFactory snowballFactory;
+	//private SnowballFactory snowballFactory;
 	private Board board;
 	private Map<Integer, Player> playerIDs;
-	private List<Snowball> projectiles;
+	//private List<Snowball> projectiles;
 
 	private BoardState bs;	// KTC to do update this after updating.
 	private UI display;
 	private ClientGame clientGame;
+	private Location[] snowballPositions = new Location[1];
 
-	public ClientUpdater(ClientGame g, Board b, Map<Integer, Player> players, List<Snowball> projectiles, BoardState bs, UI display) {
+	public ClientUpdater(ClientGame g, Board b, Map<Integer, Player> players, BoardState bs, UI display) {
 		this.clientGame = g;
 		this.board = b;
 		this.playerIDs = players;
-		this.projectiles = projectiles;
+		//this.projectiles = projectiles;
 		this.bs = bs;
 		this.display = display;
 		updateBoardState();
@@ -39,10 +37,10 @@ public class ClientUpdater {
 
 
 	// Only for single-player mode
-	public ClientUpdater( Board b, Map<Integer, Player> players, List<Snowball> projectiles, BoardState bs, UI display) {
+	public ClientUpdater( Board b, Map<Integer, Player> players, BoardState bs, UI display) {
 		this.board = b;
 		this.playerIDs = players;
-		this.projectiles = projectiles;
+		//this.projectiles = projectiles;
 		this.bs = bs;
 		this.display = display;
 		updateBoardState();
@@ -82,9 +80,19 @@ public class ClientUpdater {
 		}
 		updateBoardState();	// KTC call this inside a loop, perhaps?
 	}
+	
+	public void updateProjectiles(Location[] snowballPositions) {
+		this.snowballPositions = snowballPositions;
+		this.updateBoardState();
+	}
 
 	public void updateBoardState() {
 		Objects[][] items = board.itemEnums();
+		for (Location l: snowballPositions) {
+			if (l != null) {
+				items[l.x][l.y] = Objects.SNOWBALL; 
+			}
+		}
 		for (Player p: playerIDs.values()) {
 			if (p.getLocation() != null) {
 				//items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER1;

@@ -20,7 +20,7 @@ import ui.UI;
 public class SinglePlayerGame extends ClientGame {
 	private Board board;
 	private Map<Integer, Player> playerIDs;
-	private List<Snowball> projectiles;
+	//private List<Snowball> projectiles;
 
 
 	private Player player;
@@ -42,8 +42,8 @@ public class SinglePlayerGame extends ClientGame {
 		display = new UI(this);
 		player = new Player(Team.RED, new Location(2, 2), "");
 		playerIDs.put(this.playerID, player);
-		projectiles = new ArrayList<Snowball>();
-		this.update = new ClientUpdater(board, playerIDs, projectiles, boardState, display);
+		//projectiles = new ArrayList<Snowball>();
+		this.update = new ClientUpdater(board, playerIDs, boardState, display);
 	}
 
 	public SinglePlayerGame(StoredGame g) {
@@ -54,7 +54,7 @@ public class SinglePlayerGame extends ClientGame {
 		playerIDs.put(100, player);
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		display = new UI(this);
-		this.update = new ClientUpdater(board, playerIDs, projectiles, boardState, display);
+		this.update = new ClientUpdater(board, playerIDs, boardState, display);
 	}
 
 

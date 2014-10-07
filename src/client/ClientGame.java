@@ -1,23 +1,18 @@
 package client;
 
 import gameworld.game.ServerGame;
-import gameworld.world.Area;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
-import gameworld.world.Snowball;
 import gameworld.world.Team;
 import graphics.assets.Objects;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import server.Client;
-import storage.LoadGame;
-import storage.StoredGame;
 import ui.UI;
 
 /**
@@ -29,7 +24,7 @@ import ui.UI;
 public class ClientGame {
 	private Board board;
 	private Map<Integer, Player> playerIDs;
-	private List<Snowball> projectiles;
+	//private List<Snowball> projectiles;
 
 	private Player player;
 	private BoardState boardState;
@@ -45,7 +40,7 @@ public class ClientGame {
 		this.client = c;
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
-		projectiles = new ArrayList<Snowball>();
+		//projectiles = new ArrayList<Snowball>();
 		display = new UI(this);
 		client.sendName("name goes here");
 		player = new Player("name goes here", 0);
@@ -66,7 +61,7 @@ public class ClientGame {
 		
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
-		projectiles = new ArrayList<Snowball>();
+		//projectiles = new ArrayList<Snowball>();
 		this.display = display;
 		client.sendName(name);
 		player = new Player(name, 0);
@@ -186,7 +181,7 @@ public class ClientGame {
 	}
 
 	public ClientUpdater makeUpdater() {
-		return new ClientUpdater(this, board, playerIDs, projectiles,
+		return new ClientUpdater(this, board, playerIDs,
 				boardState, display);
 	}
 
