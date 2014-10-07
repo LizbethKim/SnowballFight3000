@@ -84,8 +84,6 @@ public class ServerGame {
 
 	public void addPlayer(int playerID, String name, Team t) {
 		Location spawnLoc = new Location(3,3); 	// KTC change to something meaningful later
-
-
 		server.queuePlayerUpdate(new CreateLocalPlayerEvent(playerID, spawnLoc), playerID);
 		Player p = new Player(name, t, playerID, spawnLoc);
 		//server.queuePlayerUpdate(new MoveEvent(playerID, spawnLoc), playerID);

@@ -141,10 +141,10 @@ public class Client implements Runnable {
 		try {
 			connection.getOutputStream().write(0x06);
 			connection.getOutputStream().write(name.length());
-			connection.getOutputStream().write(team.ordinal());
 			for(int i=0;i<name.length();i++) {
 				connection.getOutputStream().write(name.getBytes()[i]);
 			}
+			connection.getOutputStream().write(team.ordinal());
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

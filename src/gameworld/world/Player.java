@@ -25,6 +25,7 @@ public class Player implements Entity {
 		this.loc = l;
 		this.ID = ID;
 		this.name = name;
+		this.team = t;
 		this.inventory = new PlayerInventory();
 	}
 

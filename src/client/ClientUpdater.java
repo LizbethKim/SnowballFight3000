@@ -57,7 +57,6 @@ public class ClientUpdater {
 
 	public void createLocalPlayer(int id, Location l) {
 		this.playerID = id;
-		System.out.println("created player with id: " + id);
 		clientGame.setID(id);
 		clientGame.setLocalLocation(l);
 		this.updateBoardState();
@@ -98,18 +97,29 @@ public class ClientUpdater {
 		}
 		for (Player p: playerIDs.values()) {
 			if (p.getLocation() != null) {
-				if (p.getDirection() == Direction.NORTH) {
-					items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_N;
-				} else if (p.getDirection() == Direction.EAST) {
-					items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_E;
-				} else if (p.getDirection() == Direction.SOUTH) {
-					items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_S;
+				if (p.getTeam() == Team.RED) {
+					if (p.getDirection() == Direction.NORTH) {
+						items[p.getLocation().x][p.getLocation().y] = Objects.REDPLAYER_N;
+					} else if (p.getDirection() == Direction.EAST) {
+						items[p.getLocation().x][p.getLocation().y] = Objects.REDPLAYER_E;
+					} else if (p.getDirection() == Direction.SOUTH) {
+						items[p.getLocation().x][p.getLocation().y] = Objects.REDPLAYER_S;
+					} else {
+						items[p.getLocation().x][p.getLocation().y] = Objects.REDPLAYER_W;
+					}
 				} else {
-					items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_W;
+					if (p.getDirection() == Direction.NORTH) {
+						items[p.getLocation().x][p.getLocation().y] = Objects.BLUEPLAYER_N;
+					} else if (p.getDirection() == Direction.EAST) {
+						items[p.getLocation().x][p.getLocation().y] = Objects.BLUEPLAYER_E;
+					} else if (p.getDirection() == Direction.SOUTH) {
+						items[p.getLocation().x][p.getLocation().y] = Objects.BLUEPLAYER_S;
+					} else {
+						items[p.getLocation().x][p.getLocation().y] = Objects.BLUEPLAYER_W;
+					}
 				}
 			}
 		}
-		System.out.println("Id is" + playerID);
 		if (playerIDs.get(playerID) == null) {
 			bs.update(board.convertToEnums(), items, new NullLocation());		// KTC temp
 			System.out.println("Player is null");

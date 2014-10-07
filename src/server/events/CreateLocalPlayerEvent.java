@@ -11,6 +11,7 @@ public class CreateLocalPlayerEvent implements UpdateEvent {
 
 	public CreateLocalPlayerEvent(int id, Location l) {
 		this.id = id;
+		this.location = l;
 	}
 
 	@Override
