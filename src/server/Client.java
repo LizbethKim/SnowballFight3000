@@ -137,6 +137,10 @@ public class Client implements Runnable {
 	}
 
 
+	private void throwSnowball() {
+		// BF do shit
+	}
+
 	public void sendNameAndTeam(String name, Team team) {
 		try {
 			connection.getOutputStream().write(0x06);
