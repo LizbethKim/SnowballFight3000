@@ -21,6 +21,7 @@ import gameworld.world.Player;
 import gameworld.world.Snowball;
 import gameworld.world.SnowballFactory;
 import gameworld.world.SnowballFactory.SnowballType;
+import gameworld.world.Team;
 
 /**
  * Main game logic class. Interacts with the network on the server side.
@@ -81,18 +82,17 @@ public class ServerGame {
 //		return null;
 //	}
 
-	public void addPlayer(int playerID, String name) {
+	public void addPlayer(int playerID, String name, Team t) {
 		Location spawnLoc = new Location(3,3); 	// KTC change to something meaningful later
-		server.queuePlayerUpdate(new CreateLocalPlayerEvent(playerID), playerID);
-		Player p = new Player(name, playerID);
-		p.move(spawnLoc);
-		server.queuePlayerUpdate(new MoveEvent(playerID, spawnLoc), playerID);
+
+
+		server.queuePlayerUpdate(new CreateLocalPlayerEvent(playerID, spawnLoc), playerID);
+		Player p = new Player(name, t, playerID, spawnLoc);
+		//server.queuePlayerUpdate(new MoveEvent(playerID, spawnLoc), playerID);
 		playerIDs.put(playerID, p);
 		for (int id: playerIDs.keySet()) {
-			server.queuePlayerUpdate(new CreatePlayerEvent(id, playerIDs.get(id).name), playerID);
-			server.queuePlayerUpdate(new MoveEvent(id, playerIDs.get(id).getLocation()), playerID);
-			server.queuePlayerUpdate(new CreatePlayerEvent(playerID, name), id);
-			server.queuePlayerUpdate(new MoveEvent(playerID, new Location(3,3)), id);
+			server.queuePlayerUpdate(new CreatePlayerEvent(id, playerIDs.get(id).name, playerIDs.get(id).getLocation()), playerID);
+			server.queuePlayerUpdate(new CreatePlayerEvent(playerID, name, spawnLoc), id);
 		}
 	}
 

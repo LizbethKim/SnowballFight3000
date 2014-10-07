@@ -4,6 +4,7 @@ import gameworld.game.ServerGame;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
+import gameworld.world.NullLocation;
 import gameworld.world.Player;
 import gameworld.world.Team;
 import graphics.assets.Objects;
@@ -47,7 +48,7 @@ public class ClientGame {
 		//projectiles = new ArrayList<Snowball>();
 		display = new UI(this);
 		client.sendName("name goes here");
-		player = new Player("name goes here", 0);
+		player = new Player("name goes here", Team.BLUE, 0, new Location(3,3));
 
 		updater = this.getUpdater();
 		client.startReceiving(updater);
@@ -55,7 +56,6 @@ public class ClientGame {
 	}
 
 	public ClientGame(String name, String IP, Team team, UI display) {
-		// Somewhere in here I'll need a client object. probably
 		this.client = new Client(IP);
 		//StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
 		// this.playerID = KTC to do
@@ -65,12 +65,9 @@ public class ClientGame {
 
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
-		//projectiles = new ArrayList<Snowball>();
 		this.display = display;
 		client.sendName(name);
-		// client.sendTeam();
-		player = new Player(name, 0);
-		player.setTeam(team);
+		player = new Player(name, team, 0, new NullLocation());
 
 		ClientUpdater u = this.getUpdater();
 		client.startReceiving(u);
@@ -180,6 +177,10 @@ public class ClientGame {
 		this.playerID = ID;
 		this.player.setID(ID);
 		this.playerIDs.put(ID, this.player);
+	}
+
+	public void setLocalLocation(Location l) {
+		this.player.setLocation(l);
 	}
 
 	public void save() {

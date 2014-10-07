@@ -6,7 +6,9 @@ import ui.UI;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
+import gameworld.world.NullLocation;
 import gameworld.world.Player;
+import gameworld.world.Team;
 import graphics.assets.Objects;
 
 /**
@@ -15,13 +17,11 @@ import graphics.assets.Objects;
  *
  */
 public class ClientUpdater {
-	//private SnowballFactory snowballFactory;
 	private Board board;
 	private Map<Integer, Player> playerIDs;
 	private int playerID;
-	//private List<Snowball> projectiles;
 
-	private BoardState bs;	// KTC to do update this after updating.
+	private BoardState bs;
 	private UI display;
 	private ClientGame clientGame;
 	private Location[] snowballPositions = new Location[1];
@@ -31,7 +31,6 @@ public class ClientUpdater {
 		this.board = b;
 		this.playerIDs = players;
 		this.playerID = playerID;
-		//this.projectiles = projectiles;
 		this.bs = bs;
 		this.display = display;
 		updateBoardState();
@@ -43,24 +42,24 @@ public class ClientUpdater {
 	public ClientUpdater( Board b, Map<Integer, Player> players, BoardState bs, UI display) {
 		this.board = b;
 		this.playerIDs = players;
-		//this.projectiles = projectiles;
 		this.bs = bs;
 		this.display = display;
 		updateBoardState();
 	}
 
-	public void addPlayer(String name, int id) {
+	public void addPlayer(String name, Team t, int id, Location l) {
 		if (playerIDs.get(id) == null) {
 			System.out.println("Adding new player with name " + name + " and ID " + id);
-			playerIDs.put(id, new Player(name, id));
+			playerIDs.put(id, new Player(name, t, id, l));
 		}
 		updateBoardState();
 	}
 
-	public void createLocalPlayer(int id) {
+	public void createLocalPlayer(int id, Location l) {
 		this.playerID = id;
 		System.out.println("created player with id: " + id);
 		clientGame.setID(id);
+		clientGame.setLocalLocation(l);
 		this.updateBoardState();
 	}
 
@@ -99,7 +98,6 @@ public class ClientUpdater {
 		}
 		for (Player p: playerIDs.values()) {
 			if (p.getLocation() != null) {
-				//items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER1;
 				if (p.getDirection() == Direction.NORTH) {
 					items[p.getLocation().x][p.getLocation().y] = Objects.PLAYER_N;
 				} else if (p.getDirection() == Direction.EAST) {
@@ -113,7 +111,7 @@ public class ClientUpdater {
 		}
 		System.out.println("Id is" + playerID);
 		if (playerIDs.get(playerID) == null) {
-			bs.update(board.convertToEnums(), items, new Location(3,3));		// KTC temp
+			bs.update(board.convertToEnums(), items, new NullLocation());		// KTC temp
 			System.out.println("Player is null");
 		} else {
 			bs.update(board.convertToEnums(), items, playerIDs.get(playerID).getLocation());
