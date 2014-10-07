@@ -68,6 +68,7 @@ public class ClientGame {
 		//projectiles = new ArrayList<Snowball>();
 		this.display = display;
 		client.sendName(name);
+		// client.sendTeam();
 		player = new Player(name, 0);
 		player.setTeam(team);
 
