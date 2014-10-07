@@ -58,6 +58,7 @@ public class ClientUpdater {
 	}
 
 	public void createLocalPlayer(int id) {
+		this.playerID = id;
 		System.out.println("created player with id: " + id);
 		clientGame.setID(id);
 		this.updateBoardState();
@@ -89,10 +90,6 @@ public class ClientUpdater {
 		this.updateBoardState();
 	}
 
-	protected void setID(int playerID) {
-		this.playerID = playerID;
-	}
-
 	public void updateBoardState() {
 		Objects[][] items = board.itemEnums();
 		for (Location l: snowballPositions) {
@@ -114,6 +111,7 @@ public class ClientUpdater {
 				}
 			}
 		}
+		System.out.println("Id is" + playerID);
 		if (playerIDs.get(playerID) == null) {
 			bs.update(board.convertToEnums(), items, new Location(3,3));		// KTC temp
 			System.out.println("Player is null");

@@ -22,7 +22,7 @@ public class Player implements Entity {
 	}
 
 	public Player (String name, int ID) {
-		this.loc = new Location(0,0);
+		this.loc = new Location(3,3);
 		this.ID = ID;
 		this.name = name;
 		this.inventory = new PlayerInventory();
@@ -43,11 +43,10 @@ public class Player implements Entity {
 		return false;
 	}
 
-	public void spawn(Location l) {
-		if (this.loc == null) {
-			this.loc = l;
-		}
+	public void setLocation(Location l) {
+		this.loc = l;
 	}
+
 
 	public Location getLocation() {
 		return loc;

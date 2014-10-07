@@ -180,7 +180,6 @@ public class ClientGame {
 		this.playerID = ID;
 		this.player.setID(ID);
 		this.playerIDs.put(ID, this.player);
-		updater.setID(ID);
 	}
 
 	public void save() {
