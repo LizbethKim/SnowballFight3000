@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import client.BoardState;
 import gameworld.world.Direction;
 import gameworld.world.Location;
+import gameworld.world.NullLocation;
 import graphics.assets.Objects;
 import graphics.assets.Terrain;
 
@@ -39,19 +40,24 @@ public class GraphicsPane extends JPanel {
 		height = getHeight();
 		g.fillRect(0, 0, (int) width, (int) height);
 		Direction d = boardState.getDirection();
-		switch (d) {
-		case SOUTH:
-			drawSouth(currentBoard, currentObjects, g);
-			break;
-		case EAST:
-			drawEast(currentBoard, currentObjects, g);
-			break;
-		case WEST:
-			drawWest(currentBoard, currentObjects, g);
-			break;
-		default:
-			drawNorth(currentBoard, currentObjects, g);
-			break;
+		Location playerDir = boardState.getPlayerCoords();
+		if (!(playerDir instanceof NullLocation)){
+			switch (d) {
+			case SOUTH:
+				drawSouth(currentBoard, currentObjects, g);
+				break;
+			case EAST:
+				drawEast(currentBoard, currentObjects, g);
+				break;
+			case WEST:
+				drawWest(currentBoard, currentObjects, g);
+				break;
+			default:
+				drawNorth(currentBoard, currentObjects, g);
+				break;
+			}
+		} else {
+			System.out.println("LOADING IMAGE HERE"); //Insert Loading Music
 		}
 	}
 

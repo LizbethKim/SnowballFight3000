@@ -27,11 +27,14 @@ public enum Objects {
 	WALL_N_S("", "", "", ""),
 	SNOWBALL("", "", "", ""),
 	BUSH("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png"),
-	PLAYER_N("PlayerNorth.png", "PlayerSouth.png", "PlayerWest.png", "PlayerEast.png"),
-	PLAYER_E("PlayerEast.png", "PlayerWest.png", "PlayerNorth.png", "PlayerSouth.png"),
-	PLAYER_S("PlayerSouth.png", "PlayerNorth.png", "PlayerEast.png", "PlayerWest.png"),
-	PLAYER_W("PlayerWest.png", "PlayerEast.png", "PlayerSouth.png", "PlayerNorth.png"),
-	PLAYER1("PlayerNorth.png", "PlayerSouth.png", "PlayerWest.png", "PlayerEast.png");
+	REDPLAYER_N("RedPlayerNorth.png", "RedPlayerSouth.png", "RedPlayerWest.png", "RedPlayerEast.png"),
+	REDPLAYER_E("RedPlayerEast.png", "RedPlayerWest.png", "RedPlayerNorth.png", "RedPlayerSouth.png"),
+	REDPLAYER_S("RedPlayerSouth.png", "RedPlayerNorth.png", "RedPlayerEast.png", "RedPlayerWest.png"),
+	REDPLAYER_W("RedPlayerWest.png", "RedPlayerEast.png", "RedPlayerSouth.png", "RedPlayerNorth.png"),
+	BLUEPLAYER_N("BluePlayerNorth.png", "BluePlayerSouth.png", "BluePlayerWest.png", "BluePlayerEast.png"),
+	BLUEPLAYER_E("BluePlayerEast.png", "BluePlayerWest.png", "BluePlayerNorth.png", "BluePlayerSouth.png"),
+	BLUEPLAYER_S("BluePlayerSouth.png", "BluePlayerNorth.png", "BluePlayerEast.png", "BluePlayerWest.png"),
+	BLUEPLAYER_W("BluePlayerWest.png", "BluePlayerEast.png", "BluePlayerSouth.png", "BluePlayerNorth.png");
 
 	public final Image[] imgs;	// KTC make unmodifiable
 

@@ -47,7 +47,7 @@ public class ClientGame {
 		playerIDs = new HashMap<Integer, Player>();
 		//projectiles = new ArrayList<Snowball>();
 		display = new UI(this);
-		client.sendName("name goes here");
+		client.sendNameAndTeam("name goes here", Team.BLUE);
 		player = new Player("name goes here", Team.BLUE, 0, new Location(3,3));
 
 		updater = this.getUpdater();
@@ -66,7 +66,7 @@ public class ClientGame {
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
 		this.display = display;
-		client.sendName(name);
+		client.sendNameAndTeam(name, team);
 		player = new Player(name, team, 0, new NullLocation());
 
 		ClientUpdater u = this.getUpdater();
