@@ -232,12 +232,12 @@ public class UI extends JFrame {
 		addKeyBinding("ThrowSnowball", new ThrowSnowball(client),
 				KeyEvent.VK_SPACE);
 		addKeyBinding("Inspect", new InspectItem(client), KeyEvent.VK_I);
-		addKeyBinding("Interact", new InteractWithItem(client), KeyEvent.VK_Q);
+		addKeyBinding("Interact", new InteractWithItem(client), KeyEvent.VK_F);
 
 		addKeyBinding("RotateClockwise", new RotateClockwise(client),
-				KeyEvent.VK_P);
+				KeyEvent.VK_E);
 		addKeyBinding("RotateAntiClockwise", new RotateAntiClockwise(client),
-				KeyEvent.VK_O);
+				KeyEvent.VK_Q);
 
 		// setup item hotkeys
 		addKeyBinding("UseItem1", new UseItem(client, 1), KeyEvent.VK_1);
