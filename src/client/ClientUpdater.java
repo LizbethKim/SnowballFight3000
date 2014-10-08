@@ -49,7 +49,6 @@ public class ClientUpdater {
 
 	public void addPlayer(String name, Team t, int id, Location l) {
 		if (playerIDs.get(id) == null) {
-			System.out.println("Adding new player with name " + name + " and ID " + id);
 			playerIDs.put(id, new Player(name, t, id, l));
 		}
 		updateBoardState();
@@ -121,8 +120,7 @@ public class ClientUpdater {
 			}
 		}
 		if (playerIDs.get(playerID) == null) {
-			bs.update(board.convertToEnums(), items, new NullLocation());		// KTC temp
-			System.out.println("Player is null");
+			bs.update(board.convertToEnums(), items, new NullLocation());
 		} else {
 			bs.update(board.convertToEnums(), items, playerIDs.get(playerID).getLocation());
 		}

@@ -66,7 +66,6 @@ public class ClientGame {
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
 		this.display = display;
-		System.out.println(team);
 		client.sendNameAndTeam(name, team);
 		player = new Player(name, team, 0, new NullLocation());
 

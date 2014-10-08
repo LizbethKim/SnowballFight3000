@@ -48,7 +48,6 @@ public class Client implements Runnable {
 					x += readFromSocket() << 8;
 					int y = readFromSocket();
 					y += readFromSocket() << 8;
-					System.out.println("Moved player to: " + x + " " + y);
 					updater.movePlayer(id, new Location(x, y));
 				}
 				// turn player
@@ -98,7 +97,6 @@ public class Client implements Runnable {
 					int id = readFromSocket();
 					updater.removePlayer(id);
 				}
-				System.out.println(in);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

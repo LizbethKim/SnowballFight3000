@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package storage.load;
 
@@ -44,7 +44,7 @@ public class StaxParser {
 	static final String BOARD = "board";
 	static final String TILE = "tile";
 	static final String INVENTORY= "inventory";
-	
+
 	static final String DELIMITER = "\\s+";
 
 	private Board board;
@@ -56,7 +56,7 @@ public class StaxParser {
 	/**
 	 * @param file
 	 */
-	public StoredGame parse(File file) {	
+	public StoredGame parse(File file) {
 		try {
 			// XMLInputFactory, used to process input
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
@@ -71,17 +71,17 @@ public class StaxParser {
 				if (event.isStartElement()) {
 					StartElement startElement = event.asStartElement();
 					String elemName = startElement.getName().getLocalPart();
-					
+
 					if (elemName.equals(GAME)) {
 						//Could add Name of the game or something here
 						continue;
 					}
-					
+
 					if (elemName.equals(PLAYERS)) {
 						players = new ArrayList<>();
 						continue;
 					}
-					
+
 					if (elemName.equals(PLAYER)) {
 						event = eventReader.nextEvent();
 						String[] values = event.asCharacters().getData().split(DELIMITER);
@@ -99,7 +99,7 @@ public class StaxParser {
 						tiles = new Tile[boardSize.x][boardSize.y];
 						continue;
 					}
-					
+
 					if (elemName.equals(TILE)) {
 						event = eventReader.nextEvent();
 						String[] values = event.asCharacters().getData().split(DELIMITER);
@@ -108,10 +108,10 @@ public class StaxParser {
 						InanimateEntity entity = null;
 						if(values.length>3){	//there is something on the tile
 							int obj = Integer.parseInt(values[3]);
-							
+
 							if (obj==4)
 								entity = new Furniture("default tree", Objects.values()[4]);
-						}			
+						}
 						curTile = new Tile(loc,Terrain.values()[terrain], entity);
 						continue;
 					}
@@ -123,9 +123,9 @@ public class StaxParser {
 						}*/
 						continue;
 					}
-				
+
 				}
-				
+
 				if (event.isEndElement()) {
 					EndElement endElement = event.asEndElement();
 					String elemName = endElement.getName().getLocalPart();
@@ -153,7 +153,7 @@ public class StaxParser {
 		}
 
 		return new StoredGame(board, players);
-		
+
 	}
 
 	private Location parseLoc(String xStr, String yStr){
@@ -161,4 +161,4 @@ public class StaxParser {
 		int y = Integer.parseInt(yStr);
 		return new Location(x, y);
 	}
-} 
+}
