@@ -88,6 +88,7 @@ public class ClientUpdater {
 	}
 
 	public void updateBoardState() {
+		// KTC change to use the asEnum() methods
 		Objects[][] items = board.itemEnums();
 		for (Location l: snowballPositions) {
 			if (l != null) {
