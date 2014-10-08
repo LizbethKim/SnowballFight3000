@@ -26,7 +26,7 @@ public enum Objects {
 	WALL_E_W("", "", "", ""),
 	WALL_N_S("", "", "", ""),
 	SNOWBALL("", "", "", ""),
-	BUSH("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png"),
+	BUSH("Bush.png", "Bush.png", "Bush.png", "Bush.png"),
 	REDPLAYER_N("RedPlayerNorth.png", "RedPlayerSouth.png", "RedPlayerWest.png", "RedPlayerEast.png"),
 	REDPLAYER_E("RedPlayerEast.png", "RedPlayerWest.png", "RedPlayerNorth.png", "RedPlayerSouth.png"),
 	REDPLAYER_S("RedPlayerSouth.png", "RedPlayerNorth.png", "RedPlayerEast.png", "RedPlayerWest.png"),

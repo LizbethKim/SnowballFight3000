@@ -16,7 +16,10 @@ public enum Terrain {
 	FLOOR("Floor.png"), 
 	GRASS("Grass.png"),
 	DIRT("Dirt.png"),
-	TESTTILE("TileTemplate.png");
+	TESTTILE("TileTemplate.png"),
+	ICE("Ice.png"),
+	SAND("Sand.png"),
+	WATER("Water.png");
 	
 	public final BufferedImage img;
 
@@ -27,13 +30,5 @@ public enum Terrain {
 	Terrain(String resourceName) {
 		try { img = ImageIO.read(Objects.class.getResource(resourceName)); }
 		catch (IOException e) { throw new Error ("Error in image loading."); }
-	}
-
-	public static BufferedImage getImage(String terrain){
-		switch(terrain){
-			case "snow": return SNOW.img;
-			case "dirt": return DIRT.img;
-			default: return TESTTILE.img;
-		}
 	}
 }
