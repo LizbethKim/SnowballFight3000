@@ -1,5 +1,7 @@
 package gameworld.world;
 
+import graphics.assets.Objects;
+
 /**
  * Represents players in the world
  * @author Kelsey Jack 300275851
@@ -102,6 +104,12 @@ public class Player implements Entity {
 
 	public void setTeam(Team team) {
 			this.team = team;
+	}
+
+	@Override
+	public Objects asEnum() {
+		// KTC move logic here
+		return null;
 	}
 
 }

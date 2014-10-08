@@ -1,5 +1,7 @@
 package gameworld.world;
 
+import graphics.assets.Objects;
+
 /**
  * "Magic" items. May have some effect on the player who uses it
  * and/or the player it's used on.
@@ -8,5 +10,10 @@ package gameworld.world;
  *
  */
 public class Powerup extends Item {
+
+	@Override
+	public Objects asEnum() {
+		return Objects.POWERUP;
+	}
 
 }

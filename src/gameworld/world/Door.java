@@ -1,13 +1,15 @@
 package gameworld.world;
 
+import graphics.assets.Objects;
+
 /**
- * 
+ *
  * @author Kelsey Jack 300275851
  *
  */
 public class Door implements Lockable {
 	private boolean locked;
-	
+
 	public Door() {
 		// AUTO
 	}
@@ -29,5 +31,10 @@ public class Door implements Lockable {
 		return !locked;
 	}
 
-	
+	@Override
+	public Objects asEnum() {
+		return Objects.DOOR;
+	}
+
+
 }

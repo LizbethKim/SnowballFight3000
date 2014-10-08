@@ -1,28 +1,24 @@
 package client;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import graphics.assets.Objects;
 import graphics.assets.Terrain;
 
 /**
- * Represents the state of the board on the clients so that it can be
- * rendered
+ * Represents the state of the board so that it can be
+ * rendered. Consists of an orientation, the location of
+ * the player it's centred on, the tiles and the objects on
+ * the tiles.
  * @author Kelsey Jack 300275851
  *
  */
 public class BoardState {
 	private Terrain[][] board;
 	private Objects[][] entities;
-	private Direction orientation = Direction.NORTH;	// The direction that the board is oriented. (Possibly something RB should store)
+	private Direction orientation = Direction.NORTH;
 	private Location playerCoords;
-	
+
 	/*
 	 * EK This is for you, sets up a plain boring board for testing purposes.
 	 */
@@ -47,7 +43,7 @@ public class BoardState {
 		entities[2][7] = Objects.BUSH;
 		entities[8][5] = Objects.TREE;
 		this.orientation = Direction.NORTH;
-		
+
 		playerCoords = new Location(3,3);
 
 //		// Prints to the UI. Just to see if it works.
@@ -79,13 +75,17 @@ public class BoardState {
 //		}
 	}
 
+
 	public BoardState(Terrain[][] board, Objects[][] entities) {
 		this.board = board;
-		//this.players = players;
 		this.entities = entities;
 	}
 
-	// Getter methods for EK
+	// Getter methods for rendering
+
+	/**
+	 * @return A copy of the double array of Terrain enums to be rendered.
+	 */
 	public Terrain[][] getArea() {
 		Terrain[][] boardCopy = new Terrain[board.length][board[0].length];
 		for (int x = 0; x < board.length; x++) {
@@ -96,6 +96,9 @@ public class BoardState {
 		return boardCopy;
 	}
 
+	/**
+	 * @return A double array of Objects enums to be rendered on the tiles.
+	 */
 	public Objects[][] getObjects() {
 		Objects[][] entitiesCopy = new Objects[entities.length][entities[0].length];
 		for (int x = 0; x < entities.length; x++) {
@@ -105,23 +108,22 @@ public class BoardState {
 		}
 		return entitiesCopy;
 	}
-	
+
+	/**
+	 * @return The coordinates of the player to centre on.
+	 */
 	public Location getPlayerCoords() {
 		return playerCoords;
 	}
 
+	/**
+	 * @return The direction that the board is oriented.
+	 */
 	public Direction getDirection() {
 		return orientation;
 	}
 
-//	public Collection<PlayerState> getPlayers() {
-//		return Collections.unmodifiableCollection(players.values());
-//	}
-
-//	public static void main (String[] args) {
-//		new BoardState();
-//	}
-
+	// Methods to update the state
 
 	protected void update(Terrain[][] newBoard, Objects[][] newEntities, Location playerCoords) {
 		this.board = newBoard;
@@ -137,15 +139,4 @@ public class BoardState {
 		// goes forward 3 clockwise - same as going one anticlockwise.
 		orientation = Direction.values()[(orientation.ordinal() + 3) % 4];
 	}
-
-//	protected void updatePlayerDirection(int playerID, Direction d) {
-//		PlayerState p = players.get(playerID);
-//		p.updateDir(d);
-//	}
-
-//	protected void updatePlayerLocation(int playerID, Location l) {
-//		PlayerState p = players.get(playerID);
-//		p.updateLoc(l);
-//	}
 }
-

@@ -121,7 +121,7 @@ public class Board {
 					} else if (on instanceof Chest) {
 						enumObjects[x][y] = Objects.CHEST;
 					} else if (on instanceof Furniture) {
-						enumObjects[x][y] = ((Furniture)on).getType();
+						enumObjects[x][y] = ((Furniture)on).asEnum();
 					}
 				}
 			}
@@ -152,7 +152,7 @@ public class Board {
 							} else if (on instanceof Chest) {
 								enumObjects[x][y] = Objects.CHEST;
 							} else if (on instanceof Furniture) {
-								enumObjects[x][y] = ((Furniture)on).getType();
+								enumObjects[x][y] = ((Furniture)on).asEnum();
 							}
 						}
 					}

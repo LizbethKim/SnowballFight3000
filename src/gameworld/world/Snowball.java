@@ -1,6 +1,7 @@
 package gameworld.world;
 
 import gameworld.world.SnowballFactory.SnowballType;
+import graphics.assets.Objects;
 
 /**
  * Represents a projectile, eg a snowball.
@@ -68,6 +69,11 @@ public class Snowball implements Entity {
 
 	public Location getLocation() {
 		return l;
+	}
+
+	@Override
+	public Objects asEnum() {
+		return Objects.SNOWBALL;
 	}
 
 }

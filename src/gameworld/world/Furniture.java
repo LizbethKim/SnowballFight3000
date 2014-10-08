@@ -6,22 +6,22 @@ import java.util.EnumSet;
 
 /**
  * A decorative object that can only be inspected, not interacted
- * with. Blocks the tile it's on. 
+ * with. Blocks the tile it's on.
  * @author Kelsey Jack 300275851
  *
  */
 public class Furniture implements StaticEntity {
-	
-	private static EnumSet<Objects> FURNITURE = EnumSet.of(Objects.BUSH, 
+
+	private static EnumSet<Objects> FURNITURE = EnumSet.of(Objects.BUSH,
 			Objects.TABLE, Objects.TREE, Objects.WALL_E_W, Objects.WALL_N_S);
-	
+
 	private String description;
 	private Objects type;
-	
+
 	public Furniture(String description, Objects type) {
 		if (!FURNITURE.contains(type)) {
 			throw new IllegalArgumentException("That type is not furniture.");
-		} 
+		}
 		this.description = description;
 		this.type = type;
 	}
@@ -35,7 +35,8 @@ public class Furniture implements StaticEntity {
 		return description;
 	}
 
-	public Objects getType() {
+	public Objects asEnum() {
 		return type;
 	}
+
 }

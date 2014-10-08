@@ -1,5 +1,7 @@
 package gameworld.world;
 
+import graphics.assets.Objects;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -60,6 +62,13 @@ public class PlayerInventory implements Inventory {
 	@Override
 	public Collection<Item> getContents() {
 		return Collections.unmodifiableCollection(contents);
+	}
+
+	@Override
+	public Collection<Objects> getContentsAsEnums() {
+		// KTC finish this
+		List<Objects> ans = new ArrayList<Objects>();
+		return null;
 	}
 
 

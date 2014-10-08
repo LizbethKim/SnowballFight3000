@@ -10,6 +10,7 @@ import gameworld.world.Team;
 import graphics.assets.Objects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,12 +41,12 @@ public class ClientGame {
 	private UI display;
 	private long lastMovedTime;
 
+	// Only used for single player
 	public ClientGame(Board b, Client c){
 		this.board = b;
 		this.client = c;
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
-		//projectiles = new ArrayList<Snowball>();
 		display = new UI(this);
 		client.sendNameAndTeam("name goes here", Team.BLUE);
 		player = new Player("name goes here", Team.BLUE, 0, new Location(3,3));
@@ -76,10 +77,6 @@ public class ClientGame {
 	public ClientGame() {
 		// TEMP
 	}
-
-	// public PlayerState getPlayer() {
-	// return player;
-	// }
 
 	public int getPlayerHealth() {
 		return player.getHealth();
