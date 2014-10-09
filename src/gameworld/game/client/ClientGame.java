@@ -3,6 +3,8 @@ package gameworld.game.client;
 import gameworld.game.server.ServerGame;
 import gameworld.world.Board;
 import gameworld.world.Direction;
+import gameworld.world.InanimateEntity;
+import gameworld.world.Inventory;
 import gameworld.world.Location;
 import gameworld.world.NullLocation;
 import gameworld.world.Player;
@@ -10,6 +12,7 @@ import gameworld.world.Team;
 import graphics.assets.Objects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -144,17 +147,22 @@ public class ClientGame {
 		return "";
 	}
 
-	/*
-	 * RB with the current system, where items are enums, there will be no way to tell if they are a container. But you can just call this method if the user tries to access the contents of something
-	 * (so you might want an 'open' button or something) and it will just return an empty list/null if it's not a container. Does that sound ok?
-	 *
-	 * @param cont
-	 *
-	 * @return
+	/**
+	 * Gets the contents of the inventory (if there is one) in front of where the 
+	 * player is standing. If there is none, it returns an empty list.
+	 * RB should it return null actually? Because an empty container is
+	 * different to not a container...
+	 * @return An unmodifiable list of enums representing the objects in the inventory.
 	 */
 	public List<Objects> getContents() {
-		// KTC do it for the object in front of them.
-		return null;
+		Location containerLoc = Location.locationInFrontOf(player.getLocation(), player.getDirection()); 
+		if (board.containsLocation(containerLoc)) {
+			InanimateEntity on = board.tileAt(containerLoc).getOn();
+			if (on != null && on instanceof Inventory) {
+				return ((Inventory)on).getContentsAsEnums();
+			}
+		}
+		return Collections.unmodifiableList(new ArrayList<Objects>());
 	}
 
 	public int getPlayerID() {

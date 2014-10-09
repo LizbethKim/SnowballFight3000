@@ -42,7 +42,17 @@ public class Location {
 			return false;
 		return true;
 	}
-
-
+	
+	public static Location locationInFrontOf (Location l, Direction d) {
+		if (d == Direction.NORTH) {
+			return new Location (l.x, l.y - 1);
+		} else if (d == Direction.SOUTH) {
+			return new Location (l.x, l.y + 1);
+		} else if (d == Direction.WEST) {
+			return new Location (l.x - 1, l.y);
+		} else {
+			return new Location (l.x + 1, l.y);
+		}
+	}
 }
 
