@@ -10,7 +10,6 @@ import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
-import gameworld.world.Snowball;
 import gameworld.world.Team;
 import graphics.assets.Objects;
 import storage.SaveGame;

@@ -1,19 +1,11 @@
 package gameworld.game;
 
-import client.ClientGame;
 import client.SinglePlayerGame;
-import client.ClientUpdater;
-import server.Client;
 import server.Server;
 import storage.LoadGame;
 import storage.StoredGame;
 import ui.UI;
 import gameworld.world.Board;
-import gameworld.world.Furniture;
-import gameworld.world.Location;
-import gameworld.world.Tile;
-import graphics.assets.Objects;
-import graphics.assets.Terrain;
 
 /**
  * Main game loop.

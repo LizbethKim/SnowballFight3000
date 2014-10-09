@@ -60,15 +60,17 @@ public class PlayerInventory implements Inventory {
 	}
 
 	@Override
-	public Collection<Item> getContents() {
-		return Collections.unmodifiableCollection(contents);
+	public List<Item> getContents() {
+		return Collections.unmodifiableList(contents);
 	}
 
 	@Override
-	public Collection<Objects> getContentsAsEnums() {
-		// KTC finish this
+	public List<Objects> getContentsAsEnums() {
 		List<Objects> ans = new ArrayList<Objects>();
-		return null;
+		for (Item i: contents) {
+			ans.add(i.asEnum());
+		}
+		return Collections.unmodifiableList(ans);
 	}
 
 

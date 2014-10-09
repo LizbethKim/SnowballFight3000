@@ -108,8 +108,27 @@ public class Player implements Entity {
 
 	@Override
 	public Objects asEnum() {
-		// KTC move logic here
-		return null;
+		if (this.team == Team.RED) {
+			if (this.d == Direction.NORTH) {
+				return Objects.REDPLAYER_N;
+			} else if (this.d== Direction.EAST) {
+				return Objects.REDPLAYER_E;
+			} else if (this.d == Direction.SOUTH) {
+				return Objects.REDPLAYER_S;
+			} else {
+				return Objects.REDPLAYER_W;
+			}
+		} else {
+			if (this.d == Direction.NORTH) {
+				return Objects.BLUEPLAYER_N;
+			} else if (this.d == Direction.EAST) {
+				return Objects.BLUEPLAYER_E;
+			} else if (this.d == Direction.SOUTH) {
+				return Objects.BLUEPLAYER_S;
+			} else {
+				return Objects.BLUEPLAYER_W;
+			}
+		}
 	}
 
 }

@@ -12,7 +12,8 @@ import gameworld.world.Team;
 import graphics.assets.Objects;
 
 /**
- * Class that modifies the state of the model on the clients.
+ * Class that modifies the state of the model on the clients. Used by the Client
+ * component of the network to update according to commands from the server.
  * @author Kelsey Jack 300275851
  *
  */
@@ -20,11 +21,10 @@ public class ClientUpdater {
 	private Board board;
 	private Map<Integer, Player> playerIDs;
 	private int playerID;
-
+	private Location[] snowballPositions = new Location[1];
+	private ClientGame clientGame;
 	private BoardState bs;
 	private UI display;
-	private ClientGame clientGame;
-	private Location[] snowballPositions = new Location[1];
 
 	public ClientUpdater(ClientGame g, Board b, Map<Integer, Player> players, BoardState bs, UI display, int playerID) {
 		this.clientGame = g;
@@ -36,7 +36,6 @@ public class ClientUpdater {
 		updateBoardState();
 
 	}
-
 
 	// Only for single-player mode
 	public ClientUpdater( Board b, Map<Integer, Player> players, BoardState bs, UI display) {
@@ -88,7 +87,6 @@ public class ClientUpdater {
 	}
 
 	public void updateBoardState() {
-		// KTC change to use the asEnum() methods
 		Objects[][] items = board.itemEnums();
 		for (Location l: snowballPositions) {
 			if (l != null) {
@@ -97,27 +95,7 @@ public class ClientUpdater {
 		}
 		for (Player p: playerIDs.values()) {
 			if (p.getLocation() != null) {
-				if (p.getTeam() == Team.RED) {
-					if (p.getDirection() == Direction.NORTH) {
-						items[p.getLocation().x][p.getLocation().y] = Objects.REDPLAYER_N;
-					} else if (p.getDirection() == Direction.EAST) {
-						items[p.getLocation().x][p.getLocation().y] = Objects.REDPLAYER_E;
-					} else if (p.getDirection() == Direction.SOUTH) {
-						items[p.getLocation().x][p.getLocation().y] = Objects.REDPLAYER_S;
-					} else {
-						items[p.getLocation().x][p.getLocation().y] = Objects.REDPLAYER_W;
-					}
-				} else {
-					if (p.getDirection() == Direction.NORTH) {
-						items[p.getLocation().x][p.getLocation().y] = Objects.BLUEPLAYER_N;
-					} else if (p.getDirection() == Direction.EAST) {
-						items[p.getLocation().x][p.getLocation().y] = Objects.BLUEPLAYER_E;
-					} else if (p.getDirection() == Direction.SOUTH) {
-						items[p.getLocation().x][p.getLocation().y] = Objects.BLUEPLAYER_S;
-					} else {
-						items[p.getLocation().x][p.getLocation().y] = Objects.BLUEPLAYER_W;
-					}
-				}
+				items[p.getLocation().x][p.getLocation().y] = p.asEnum();
 			}
 		}
 		if (playerIDs.get(playerID) == null) {
@@ -126,7 +104,6 @@ public class ClientUpdater {
 			bs.update(board.convertToEnums(), items, playerIDs.get(playerID).getLocation());
 		}
 		display.repaint();
-
 	}
 
 }

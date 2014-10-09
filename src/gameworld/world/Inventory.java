@@ -1,8 +1,7 @@
 package gameworld.world;
 
 import graphics.assets.Objects;
-
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Can contain items. May be an Item itself (eg a wallet, backpack) or
@@ -27,7 +26,7 @@ public interface Inventory {
 	 * @return True for successful removal, false if the item wasn't present.
 	 */
 	public boolean removeItem(Item i);
-	public Collection<Item> getContents();
-	public Collection<Objects> getContentsAsEnums();
+	public List<Item> getContents();
+	public List<Objects> getContentsAsEnums();
 
 }

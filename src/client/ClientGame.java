@@ -10,7 +10,6 @@ import gameworld.world.Team;
 import graphics.assets.Objects;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +82,7 @@ public class ClientGame {
 	}
 
 	public List<Objects> getPlayerInventory() {
-		return null; // KTC to do
+		return player.getInventory().getContentsAsEnums();
 	}
 
 	public Location getPlayerLocation() {

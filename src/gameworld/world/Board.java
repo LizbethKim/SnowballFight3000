@@ -1,6 +1,5 @@
 package gameworld.world;
 
-import java.io.File;
 import java.util.List;
 
 import graphics.assets.Objects;
@@ -112,17 +111,7 @@ public class Board {
 			for (int y = 0; y < board[0].length; y++) {
 				InanimateEntity on = board[x][y].getOn();
 				if (on != null) {
-					if (on instanceof Key) {
-						enumObjects[x][y] = Objects.KEY;
-					} else if (on instanceof Map) {
-						enumObjects[x][y] = Objects.MAP;
-					} else if (on instanceof Powerup) {
-						enumObjects[x][y] = Objects.POWERUP;
-					} else if (on instanceof Chest) {
-						enumObjects[x][y] = Objects.CHEST;
-					} else if (on instanceof Furniture) {
-						enumObjects[x][y] = ((Furniture)on).asEnum();
-					}
+					enumObjects[x][y] = on.asEnum();
 				}
 			}
 		}
@@ -143,17 +132,7 @@ public class Board {
 					for (int y = 0; y < board[0].length; y++) {
 						InanimateEntity on = board[x][y].getOn();
 						if (on != null && a.contains(board[x][y])) {
-							if (on instanceof Key) {
-								enumObjects[x][y] = Objects.KEY;
-							} else if (on instanceof Map) {
-								enumObjects[x][y] = Objects.MAP;
-							} else if (on instanceof Powerup) {
-								enumObjects[x][y] = Objects.POWERUP;
-							} else if (on instanceof Chest) {
-								enumObjects[x][y] = Objects.CHEST;
-							} else if (on instanceof Furniture) {
-								enumObjects[x][y] = ((Furniture)on).asEnum();
-							}
+							enumObjects[x][y] = on.asEnum();
 						}
 					}
 				}
@@ -167,7 +146,7 @@ public class Board {
 		return newLoc.x >= 0 && newLoc.x < board.length && newLoc.y >= 0 && newLoc.y < board[0].length;
 	}
 
-	//KTC Kate added these for board storage help, feel free to change if needed
+	// For board storage help
 	/**
 	 * Gets max X coordinate on board
 	 * @return

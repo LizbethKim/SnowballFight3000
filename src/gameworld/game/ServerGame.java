@@ -13,7 +13,6 @@ import server.events.MoveEvent;
 import server.events.RemovePlayerEvent;
 import server.events.TurnEvent;
 import server.events.UpdateProjectilePositionsEvent;
-import gameworld.world.Area;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;
