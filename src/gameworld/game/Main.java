@@ -63,7 +63,7 @@ public class Main {
 	private static void singlePlayerGame() {
 		LoadGame lg = new LoadGame();
 		StoredGame sg = lg.loadGame("defaultBoard.xml");
-		SinglePlayerGame game = new SinglePlayerGame(sg);	// uncomment to test
+		new SinglePlayerGame(sg);	// uncomment to test
 
 //		Board board = new Board(); // createBoardFromFile(filename);
 //		SinglePlayerGame game = new SinglePlayerGame(board);
