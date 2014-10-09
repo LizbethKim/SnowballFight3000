@@ -1,5 +1,7 @@
 package ui.cheats;
 
+import gameworld.game.client.ClientGame;
+
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -11,7 +13,6 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 
 import ui.HUDPanel;
-import client.ClientGame;
 
 public abstract class CheatSwitch extends JPanel {
 	private static final Image onSwitch = HUDPanel.loadImage("OnSwitch.png");

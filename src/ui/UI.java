@@ -18,6 +18,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 
+import gameworld.game.client.BoardState;
+import gameworld.game.client.ClientGame;
 import gameworld.world.Board;
 import graphics.GraphicsPane;
 import server.Client;
@@ -39,9 +41,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
-
-import client.BoardState;
-import client.ClientGame;
 
 /**
  * The UI class encompasses the application window to display the game. It

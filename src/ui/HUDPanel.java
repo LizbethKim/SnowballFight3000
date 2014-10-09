@@ -1,5 +1,6 @@
 package ui;
 
+import gameworld.game.client.ClientGame;
 import gameworld.world.Board;
 
 import java.awt.Canvas;
@@ -23,8 +24,6 @@ import java.util.HashSet;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
-import client.ClientGame;
 
 public class HUDPanel extends JPanel {
 	public static final String IMAGE_PATH = "src/ui/HUDAssets/";

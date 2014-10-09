@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import client.BoardState;
+import gameworld.game.client.BoardState;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.NullLocation;

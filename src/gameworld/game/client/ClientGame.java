@@ -1,6 +1,6 @@
-package client;
+package gameworld.game.client;
 
-import gameworld.game.ServerGame;
+import gameworld.game.server.ServerGame;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;

@@ -1,6 +1,7 @@
 package server;
 
-import gameworld.game.ServerGame;
+import gameworld.game.client.ClientUpdater;
+import gameworld.game.server.ServerGame;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Team;
@@ -13,7 +14,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import client.ClientUpdater;
 import server.events.CreateLocalPlayerEvent;
 import server.events.UpdateEvent;
 

@@ -1,9 +1,9 @@
 package ui;
 
+import gameworld.game.client.ClientGame;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import client.ClientGame;
 
 public class RightClickListener extends MouseAdapter{
 	private ClientGame client;

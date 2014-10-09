@@ -1,12 +1,12 @@
 package ui;
 
+import gameworld.game.client.ClientGame;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-
-import client.ClientGame;
 
 public class RightClickMenu extends JPopupMenu {
 	private ClientGame client;

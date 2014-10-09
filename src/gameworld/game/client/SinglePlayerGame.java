@@ -1,11 +1,11 @@
-package client;
+package gameworld.game.client;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import gameworld.game.ServerGame;
+import gameworld.game.server.ServerGame;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.Location;

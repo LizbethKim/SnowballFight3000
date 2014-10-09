@@ -1,4 +1,4 @@
-package client;
+package gameworld.game.client;
 
 import java.util.Map;
 

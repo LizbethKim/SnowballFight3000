@@ -1,6 +1,6 @@
 package ui.actions;
 
-import client.ClientGame;
+import gameworld.game.client.ClientGame;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 

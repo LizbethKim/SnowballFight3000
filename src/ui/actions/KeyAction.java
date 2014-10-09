@@ -1,12 +1,11 @@
 package ui.actions;
 
+import gameworld.game.client.ClientGame;
 import gameworld.world.Board;
 
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-
-import client.ClientGame;
 
 public abstract class KeyAction extends AbstractAction {
 

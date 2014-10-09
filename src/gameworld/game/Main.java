@@ -1,10 +1,11 @@
 package gameworld.game;
 
-import client.SinglePlayerGame;
 import server.Server;
 import storage.LoadGame;
 import storage.StoredGame;
 import ui.UI;
+import gameworld.game.client.SinglePlayerGame;
+import gameworld.game.server.ServerGame;
 import gameworld.world.Board;
 
 /**

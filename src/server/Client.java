@@ -1,5 +1,6 @@
 package server;
 
+import gameworld.game.client.ClientUpdater;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.Player;
@@ -10,8 +11,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
-import client.ClientUpdater;
 
 public class Client implements Runnable {
 	private final String host;

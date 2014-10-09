@@ -1,4 +1,4 @@
-package client;
+package gameworld.game.client;
 
 import gameworld.world.Direction;
 import gameworld.world.Location;

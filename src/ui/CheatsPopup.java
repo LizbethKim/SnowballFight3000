@@ -1,5 +1,7 @@
 package ui;
 
+import gameworld.game.client.ClientGame;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -12,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import client.ClientGame;
 import ui.cheats.CheatSwitch;
 import ui.cheats.Invincibility;
 import ui.cheats.OneHitKill;

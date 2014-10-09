@@ -1,4 +1,4 @@
-package gameworld.game;
+package gameworld.game.server;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package server;
 
-import gameworld.game.ServerGame;
+import gameworld.game.server.ServerGame;
 
 import java.io.IOException;
 import java.net.ServerSocket;

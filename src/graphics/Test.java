@@ -1,8 +1,8 @@
 package graphics;
 
-import javax.swing.JFrame;
+import gameworld.game.client.BoardState;
 
-import client.BoardState;
+import javax.swing.JFrame;
 
 public class Test extends JFrame{
 	

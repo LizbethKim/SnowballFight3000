@@ -1,6 +1,6 @@
 package ui.actions;
 
-import client.ClientGame;
+import gameworld.game.client.ClientGame;
 
 public class RotateAntiClockwise extends KeyAction{
 	

@@ -1,6 +1,6 @@
 package ui.cheats;
 
-import client.ClientGame;
+import gameworld.game.client.ClientGame;
 
 public class Invincibility extends CheatSwitch {
 
