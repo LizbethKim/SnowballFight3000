@@ -102,20 +102,7 @@ public class ClientGame {
 
 		if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
 			if (player.getDirection() == d) {
-				Location newLoc;
-				if (d == Direction.NORTH) {
-					newLoc = new Location(player.getLocation().x,
-							player.getLocation().y - 1);
-				} else if (d == Direction.SOUTH) {
-					newLoc = new Location(player.getLocation().x,
-							player.getLocation().y + 1);
-				} else if (d == Direction.EAST) {
-					newLoc = new Location(player.getLocation().x + 1,
-							player.getLocation().y);
-				} else {
-					newLoc = new Location(player.getLocation().x - 1,
-							player.getLocation().y);
-				}
+				Location newLoc = Location.locationInFrontOf(player.getLocation(), d);
 				if (board.containsLocation(newLoc) && board.canTraverse(newLoc) && this.isFree(newLoc)) {
 					client.sendMove(newLoc);
 				}
