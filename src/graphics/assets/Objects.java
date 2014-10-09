@@ -17,7 +17,8 @@ import javax.imageio.ImageIO;
  *
  */
 public enum Objects {
-	KEY("", "", "", ""), 	// EK add the image names here if you find some
+	REDFLAG("RedFlag.png", "RedFlag.png", "RedFlag.png", "RedFlag.png"),
+	BLUEFLAG("BlueFlag.png", "BlueFlag.png", "BlueFlag.png", "BlueFlag.png"),
 	POWERUP("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png"),
 	CHEST("", "", "", ""),
 	MAP("", "", "", ""),
@@ -25,7 +26,7 @@ public enum Objects {
 	TABLE("", "", "", ""),
 	WALL_E_W("", "", "", ""),
 	WALL_N_S("", "", "", ""),
-	SNOWBALL("", "", "", ""),
+	SNOWBALL("Snowball.png", "Snowball.png", "Snowball.png", "Snowball.png"),
 	BUSH("Bush.png", "Bush.png", "Bush.png", "Bush.png"),
 	REDPLAYER_N("RedPlayerNorth.png", "RedPlayerSouth.png", "RedPlayerWest.png", "RedPlayerEast.png"),
 	REDPLAYER_E("RedPlayerEast.png", "RedPlayerWest.png", "RedPlayerNorth.png", "RedPlayerSouth.png"),
@@ -35,7 +36,8 @@ public enum Objects {
 	BLUEPLAYER_E("BluePlayerEast.png", "BluePlayerWest.png", "BluePlayerNorth.png", "BluePlayerSouth.png"),
 	BLUEPLAYER_S("BluePlayerSouth.png", "BluePlayerNorth.png", "BluePlayerEast.png", "BluePlayerWest.png"),
 	BLUEPLAYER_W("BluePlayerWest.png", "BluePlayerEast.png", "BluePlayerSouth.png", "BluePlayerNorth.png"),
-	DOOR("", "", "", "");
+	DOOR("", "", "", ""),
+	SNOWMAN("Snowman.png", "Snowman.png", "Snowman.png", "Snowman.png");
 
 	public final Image[] imgs;	// KTC make unmodifiable
 
