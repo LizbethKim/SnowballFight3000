@@ -34,7 +34,6 @@ public class SinglePlayerGame extends ClientGame {
 	public SinglePlayerGame (Board b) {
 		// Somewhere in here I'll need a client object. probably
 		this.board = b;
-		//this.playerID = KTC to do
 		this.playerID = 100;
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();

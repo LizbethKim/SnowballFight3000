@@ -6,15 +6,11 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import client.ClientUpdater;
 import server.events.UpdateEvent;
 
 public class Server implements Runnable {
@@ -38,6 +34,9 @@ public class Server implements Runnable {
 	}
 
 	public void sendLoop() {
+		// BF, could I (Kelsey) please get you to tick the game here too? Doesn't make
+		// sense to have two loops when one will do.
+		// Just call game.tick() every x milliseconds.
 		while(true) {
 			try {
 				//get next player and get them to send queued updates

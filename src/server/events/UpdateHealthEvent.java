@@ -3,10 +3,10 @@ package server.events;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class UpdateHeathEvent implements UpdateEvent {
+public class UpdateHealthEvent implements UpdateEvent {
 	private int health;
 
-	public UpdateHeathEvent(int health) {
+	public UpdateHealthEvent(int health) {
 		this.health=health;
 	}
 

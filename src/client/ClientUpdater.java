@@ -57,7 +57,7 @@ public class ClientUpdater {
 		this.playerID = id;
 		clientGame.setID(id);
 		clientGame.setLocalLocation(l);
-		this.updateBoardState();
+		updateBoardState();
 	}
 
 	public void movePlayer(int id, Location l) {
@@ -83,10 +83,11 @@ public class ClientUpdater {
 
 	public void updateProjectiles(Location[] snowballPositions) {
 		this.snowballPositions = snowballPositions;
-		this.updateBoardState();
+		updateBoardState();
 	}
 
-	public void updateBoardState() {
+	// Updates the boardState after other methods are called.
+	private void updateBoardState() {
 		Objects[][] items = board.itemEnums();
 		for (Location l: snowballPositions) {
 			if (l != null) {

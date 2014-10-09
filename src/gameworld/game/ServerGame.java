@@ -12,6 +12,7 @@ import server.events.CreatePlayerEvent;
 import server.events.MoveEvent;
 import server.events.RemovePlayerEvent;
 import server.events.TurnEvent;
+import server.events.UpdateHealthEvent;
 import server.events.UpdateProjectilePositionsEvent;
 import gameworld.world.Board;
 import gameworld.world.Direction;
@@ -118,13 +119,14 @@ public class ServerGame {
 			for (Player p: playerIDs.values()) {
 				if (p.getLocation().equals(s.getLocation())) {
 					s.hit(p);
-					// KTC update that the player was hit
+					server.queuePlayerUpdate(new UpdateHealthEvent(p.getHealth()), p.getID());
+					if (p.isFrozen()) {
+						// KTC update freezing.
+					}
 					it.remove();
 					break;
 				}
 			}
-			// if it has collided with anything, make it hit that, and then
-			// delete it from the list.
 		}
 		Location[] snowballLocs = new Location[projectiles.size()];
 		int i = 0;
@@ -135,8 +137,7 @@ public class ServerGame {
 		for(int id: playerIDs.keySet()) {
 			server.queuePlayerUpdate(new UpdateProjectilePositionsEvent(snowballLocs), id);
 		}
-		// KTC update projectiles, possibly do time logic.
-		// check for collisions and remove projectiles that have hit something.
+		// KTC possibly do time logic too.
 	}
 
 	private boolean isFree(Location l) {
