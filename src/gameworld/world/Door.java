@@ -7,34 +7,30 @@ import graphics.assets.Objects;
  * @author Kelsey Jack 300275851
  *
  */
-public class Door implements Lockable {
+public class Door extends Furniture implements Lockable {
 	private boolean locked;
+	private Key key;
 
-	public Door() {
-		// AUTO
+	public Door(String description, Key k) {
+		super(description, Objects.DOOR);
 	}
 
 	@Override
 	public boolean unlock(Key k) {
-		// AUTO
+		if (k.equals(key)) {	// KTC ??
+			this.locked = false;
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public Key getKey() {
-		// AUTO
-		return null;
+		return key;
 	}
 
 	@Override
 	public boolean canMoveThrough() {
 		return !locked;
 	}
-
-	@Override
-	public Objects asEnum() {
-		return Objects.DOOR;
-	}
-
-
 }

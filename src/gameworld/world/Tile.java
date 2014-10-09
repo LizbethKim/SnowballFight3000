@@ -11,7 +11,6 @@ public class Tile {
 	private Location coords;
 	private Terrain type;	// the image won't be used internally
 	private InanimateEntity on;
-	private boolean isSnow;
 
 
 	public Tile(Location c, Terrain type, InanimateEntity on) {
@@ -53,7 +52,7 @@ public class Tile {
 	}
 
 	public boolean isSnow() {
-		return isSnow;
+		return type == Terrain.SNOW;
 	}
 
 	/**
