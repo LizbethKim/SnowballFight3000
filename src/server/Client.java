@@ -110,9 +110,17 @@ public class Client implements Runnable {
 					int hp = readFromSocket();
 					// BF add take damage stuff here
 				}
+				// freeze player
 				else if (in == 0x0B) {
 					int id = readFromSocket();
 					// BF add freeze player stuff here
+				}
+				// add item to inventory
+				else if (in == 0x0C) {
+					int x = readFromSocket();
+					x += readFromSocket() << 8;
+					int y = readFromSocket();
+					y += readFromSocket() << 8;
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
