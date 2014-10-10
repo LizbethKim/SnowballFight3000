@@ -74,6 +74,7 @@ public class RemotePlayer implements Runnable {
 					// BF put code for sending map file here
 				}
 				else if(in==0x08) {
+					game.throwSnowball(id);
 					// BF put attack recieve code here
 				}
 				else if(in==0x09) {

@@ -142,8 +142,8 @@ public class Board {
 		return itemEnums();
 	}
 
-	public boolean containsLocation(Location newLoc) {
-		return newLoc.x >= 0 && newLoc.x < board.length && newLoc.y >= 0 && newLoc.y < board[0].length;
+	public boolean containsLocation(Location l) {
+		return l.x >= 0 && l.x < board.length && l.y >= 0 && l.y < board[0].length;
 	}
 
 	// For board storage help
