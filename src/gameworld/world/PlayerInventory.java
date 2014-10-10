@@ -23,6 +23,8 @@ public class PlayerInventory implements Inventory {
 	 */
 	public PlayerInventory() {
 		this.contents = new ArrayList<Item>();
+		this.contents.add(new Key());
+		this.contents.add(new Key());
 	}
 
 	/**
