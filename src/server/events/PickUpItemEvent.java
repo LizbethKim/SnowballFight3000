@@ -9,7 +9,7 @@ public class PickUpItemEvent extends LocationEvent {
 
 	private Location location;
 	
-	private PickUpItemEvent(Location l) {
+	public PickUpItemEvent(Location l) {
 		this.location = l;
 	}
 	
