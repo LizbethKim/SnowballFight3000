@@ -31,7 +31,6 @@ import ui.UI;
 public class ClientGame {
 	private Board board;
 	private Map<Integer, Player> playerIDs;
-	//private List<Snowball> projectiles;
 
 	private Player player;
 	private BoardState boardState;
@@ -126,7 +125,7 @@ public class ClientGame {
 	}
 
 	public void throwSnowball() {
-		if (System.currentTimeMillis() - lastMovedTime > ServerGame.THROW_DELAY) {
+		if (System.currentTimeMillis() - lastFiredTime > ServerGame.THROW_DELAY) {
 			client.throwSnowball();
 			lastFiredTime = System.currentTimeMillis();
 		}
