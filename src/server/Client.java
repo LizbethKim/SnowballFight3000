@@ -89,12 +89,26 @@ public class Client implements Runnable {
 				}
 				// update projectile positions
 				else if (in == 0x08) {
-					// BF write some code here
+					int numProjectiles = readFromSocket();
+					Location projectileLocations[] = new Location[numProjectiles]; 
+					for(int i=0;i<numProjectiles;i++) {
+						int x = readFromSocket();
+						x += readFromSocket() << 8;
+						int y = readFromSocket();
+						y += readFromSocket() << 8;
+						projectileLocations[i] = new Location(x,y);
+					}
+					updater.updateProjectiles(projectileLocations);
 				}
 				// remove player
 				else if (in == 0x09) {
 					int id = readFromSocket();
 					updater.removePlayer(id);
+				}
+				// take damage
+				else if (in == 0x0A) {
+					int hp = readFromSocket();
+					// BF add take damage stuff here
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
