@@ -2,8 +2,6 @@ package gameworld.game.client;
 
 import java.util.Map;
 
-import com.sun.org.apache.xpath.internal.operations.Plus;
-
 import ui.UI;
 import gameworld.world.Board;
 import gameworld.world.Direction;

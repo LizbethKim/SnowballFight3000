@@ -1,9 +1,27 @@
 package gameworld.tests;
 
+import org.junit.Test;
+
 public class ItemTests {
 
-	public ItemTests() {
-		// AUTO
+	@Test
+	public void testInventory() {
+		
+	}
+	
+	@Test
+	public void testSnowball() {
+		
+	}
+	
+	@Test
+	public void testKey() {
+		
+	}
+	
+	@Test 
+	public void testFurniture() {
+		
 	}
 
 }
