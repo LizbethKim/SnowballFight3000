@@ -34,6 +34,8 @@ import gameworld.world.Team;
 public class ServerGame {
 	public static final long MOVE_DELAY = 200;
 
+	public static final long THROW_DELAY = 200;
+
 	private Board board;
 	private Map<Integer, Player> playerIDs;
 	private List<Snowball> projectiles;

@@ -24,8 +24,6 @@ public class PlayerInventory implements Inventory {
 	public PlayerInventory() {
 		this.itemLimit = DEFAULT_LIMIT;
 		this.contents = new ArrayList<Item>();
-		this.contents.add(new Key());
-		this.contents.add(new Key());
 	}
 
 	/**

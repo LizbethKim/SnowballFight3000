@@ -42,6 +42,7 @@ public class ClientGame {
 
 	private UI display;
 	private long lastMovedTime;
+	private long lastFiredTime;
 
 	// Only used for single player
 	public ClientGame(Board b, Client c){
@@ -125,7 +126,10 @@ public class ClientGame {
 	}
 
 	public void throwSnowball() {
-		client.throwSnowball();
+		if (System.currentTimeMillis() - lastMovedTime > ServerGame.THROW_DELAY) {
+			client.throwSnowball();
+			lastFiredTime = System.currentTimeMillis();
+		}
 	}
 
 	public String inspectItem() {
