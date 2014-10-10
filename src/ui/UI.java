@@ -231,8 +231,8 @@ public class UI extends JFrame {
 		addKeyBinding("ThrowSnowball", new ThrowSnowball(client),
 				KeyEvent.VK_SPACE);
 		addKeyBinding("Inspect", new InspectItem(client), KeyEvent.VK_I);
-		addKeyBinding("Interact", new InteractWithItem(client), KeyEvent.VK_F);
-
+		addKeyBinding("OpenChest", new InteractWithItem(client), KeyEvent.VK_Z);
+		addKeyBinding("Pickup", new InteractWithItem(client), KeyEvent.VK_Z);
 		addKeyBinding("RotateClockwise", new RotateClockwise(client),
 				KeyEvent.VK_E);
 		addKeyBinding("RotateAntiClockwise", new RotateAntiClockwise(client),
