@@ -69,11 +69,12 @@ public class ServerGame {
 		}
 	}
 
-	public void pickUpItemAt (int playerID, Location l) {
-		if (board.containsLocation(l)) {
+	public void pickUpItem (int playerID) {
+		Player p = this.playerIDs.get(playerID);
+		if (p != null) {
+			Location l = Location.locationInFrontOf(p.getLocation(), p.getDirection());
 			InanimateEntity on = board.tileAt(l).getOn();
-			Player p = this.playerIDs.get(playerID);
-			if (on != null && p != null && on instanceof Item) {
+			if (on != null && on instanceof Item) {
 				p.getInventory().addItem((Item)on);
 				board.tileAt(l).removeOn();
 				server.queuePlayerUpdate(new PickUpItemEvent(l), playerID);

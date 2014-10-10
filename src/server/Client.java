@@ -106,6 +106,7 @@ public class Client implements Runnable {
 				// add item to inventory
 				else if (in == 0x0C) {
 					Location loc = readLocation();
+					updater.pickupItemAt(loc);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

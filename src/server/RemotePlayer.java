@@ -75,13 +75,14 @@ public class RemotePlayer implements Runnable {
 				}
 				else if(in==0x08) {
 					game.throwSnowball(id);
-					// BF put attack recieve code here
+					// BF I've added this, feel free to change
 				}
 				else if(in==0x09) {
 					game.removePlayer(id);
 				}
 				else if(in==0x0C) {
-					// BF put item pick up code here
+					game.pickUpItem(id);
+					// BF I've added this, feel free to change if you need.
 				}
 			}
 		} catch (IOException e) {

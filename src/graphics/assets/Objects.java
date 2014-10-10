@@ -1,7 +1,5 @@
 package graphics.assets;
 
-import gameworld.world.Direction;
-
 import java.awt.Image;
 import java.io.IOException;
 
