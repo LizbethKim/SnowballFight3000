@@ -134,6 +134,7 @@ public class ClientGame {
 	}
 	
 	public void pickUpItem() {
+		// KTC check if there's something there first?
 		client.pickUpItem();
 	}
 

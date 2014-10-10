@@ -22,6 +22,7 @@ public class PlayerInventory implements Inventory {
 	 * Creates an empty inventory
 	 */
 	public PlayerInventory() {
+		this.itemLimit = DEFAULT_LIMIT;
 		this.contents = new ArrayList<Item>();
 		this.contents.add(new Key());
 		this.contents.add(new Key());

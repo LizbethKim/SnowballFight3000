@@ -95,10 +95,12 @@ public class ClientUpdater {
 			InanimateEntity on = board.tileAt(l).getOn();
 			Player p = this.playerIDs.get(playerID);
 			if (on != null && p != null && on instanceof Item) {
-				p.getInventory().addItem((Item)on);
-				board.tileAt(l).removeOn();
+				if (p.getInventory().addItem((Item)on)) {
+					board.tileAt(l).removeOn();
+				}
 			}
 		}
+		
 	}
 	
 	public void freezePlayer() {

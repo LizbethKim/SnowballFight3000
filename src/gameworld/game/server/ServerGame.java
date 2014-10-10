@@ -75,9 +75,10 @@ public class ServerGame {
 			Location l = Location.locationInFrontOf(p.getLocation(), p.getDirection());
 			InanimateEntity on = board.tileAt(l).getOn();
 			if (on != null && on instanceof Item) {
-				p.getInventory().addItem((Item)on);
-				board.tileAt(l).removeOn();
-				server.queuePlayerUpdate(new PickUpItemEvent(l), playerID);
+				if(p.getInventory().addItem((Item)on)) {
+					board.tileAt(l).removeOn();
+					server.queuePlayerUpdate(new PickUpItemEvent(l), playerID);
+				}
 			}
 		}
 	}
