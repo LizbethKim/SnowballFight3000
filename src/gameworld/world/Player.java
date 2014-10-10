@@ -11,11 +11,12 @@ public class Player implements Entity {
 	private Team team;
 	private int score = 0;
 	private int health = 100;	// From 0 to 100. 0 is frozen.
-	public final String name;	// KTC necessary?
+	public final String name;
 	private Inventory inventory;
 	private Direction d = Direction.NORTH;
 	private int ID;
 
+	// For single player only
 	public Player (Team team, Location l, String name) {
 		this.loc = l;
 		this.team = team;
@@ -46,10 +47,51 @@ public class Player implements Entity {
 		return false;
 	}
 
+	@Override
+	public Objects asEnum() {
+		if (this.team == Team.RED) {
+			if (this.d == Direction.NORTH) {
+				return Objects.REDPLAYER_N;
+			} else if (this.d== Direction.EAST) {
+				return Objects.REDPLAYER_E;
+			} else if (this.d == Direction.SOUTH) {
+				return Objects.REDPLAYER_S;
+			} else {
+				return Objects.REDPLAYER_W;
+			}
+		} else {
+			if (this.d == Direction.NORTH) {
+				return Objects.BLUEPLAYER_N;
+			} else if (this.d == Direction.EAST) {
+				return Objects.BLUEPLAYER_E;
+			} else if (this.d == Direction.SOUTH) {
+				return Objects.BLUEPLAYER_S;
+			} else {
+				return Objects.BLUEPLAYER_W;
+			}
+		}
+	}
+	
+	public void damage(int amount) {
+		health -= amount;
+	}
+
+	public void incrementScore(int amount) {
+		score += amount;
+	}
+	
+	// GETTERS AND SETTERS
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	/**
+	 * Allows the location to be set when the player first starts the game
+	 * @param l new location
+	 */
 	public void setLocation(Location l) {
 		this.loc = l;
 	}
-
 
 	public Location getLocation() {
 		return loc;
@@ -77,19 +119,7 @@ public class Player implements Entity {
 	public Inventory getInventory() {
 		return inventory;
 	}
-
-	public void damage(int amount) {
-		health -= amount;
-	}
 	
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
-	public void incrementScore(int amount) {
-		score += amount;
-	}
-
 	public Direction getDirection() {
 		return d;
 	}
@@ -109,30 +139,4 @@ public class Player implements Entity {
 	public void setTeam(Team team) {
 			this.team = team;
 	}
-
-	@Override
-	public Objects asEnum() {
-		if (this.team == Team.RED) {
-			if (this.d == Direction.NORTH) {
-				return Objects.REDPLAYER_N;
-			} else if (this.d== Direction.EAST) {
-				return Objects.REDPLAYER_E;
-			} else if (this.d == Direction.SOUTH) {
-				return Objects.REDPLAYER_S;
-			} else {
-				return Objects.REDPLAYER_W;
-			}
-		} else {
-			if (this.d == Direction.NORTH) {
-				return Objects.BLUEPLAYER_N;
-			} else if (this.d == Direction.EAST) {
-				return Objects.BLUEPLAYER_E;
-			} else if (this.d == Direction.SOUTH) {
-				return Objects.BLUEPLAYER_S;
-			} else {
-				return Objects.BLUEPLAYER_W;
-			}
-		}
-	}
-
 }

@@ -64,7 +64,7 @@ public class ClientGame {
 		// this.playerID = KTC to do
 		//this.board = sb.getBoard();
 
-		this.board = new Board();
+		this.board = Board.defaultBoard();
 
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
