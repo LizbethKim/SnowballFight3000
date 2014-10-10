@@ -110,6 +110,10 @@ public class Client implements Runnable {
 					int hp = readFromSocket();
 					// BF add take damage stuff here
 				}
+				else if (in == 0x0B) {
+					int id = readFromSocket();
+					// BF add freeze player stuff here
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
