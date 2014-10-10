@@ -144,7 +144,6 @@ public class ServerGame {
 		int i = 0;
 		for (Snowball s: projectiles) {
 			snowballLocs[i] = s.getLocation();
-			System.out.println(s.getLocation());
 			i++;
 		}
 		for(int id: playerIDs.keySet()) {

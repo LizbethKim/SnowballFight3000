@@ -95,7 +95,8 @@ public class Client implements Runnable {
 				// take damage
 				else if (in == 0x0A) {
 					int hp = readFromSocket();
-					// BF add take damage stuff here
+					updater.updatePlayerHealth(hp);
+					// BF I added it in, hope that's ok - Kelsey
 				}
 				// freeze player
 				else if (in == 0x0B) {
