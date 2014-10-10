@@ -97,7 +97,7 @@ public class UI extends JFrame {
 
 		if (debugMode) {
 			Client c = new Client("127.0.0.1");
-			Board b = new Board(); // This should be new from file - the first
+			Board b = Board.defaultBoard(); // This should be new from file - the first
 									// file to come through the network perhaps
 			client = new ClientGame(b, c);
 			setupGame();
