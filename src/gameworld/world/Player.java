@@ -81,6 +81,10 @@ public class Player implements Entity {
 	public void damage(int amount) {
 		health -= amount;
 	}
+	
+	public void setHealth(int health) {
+		this.health = health;
+	}
 
 	public void incrementScore(int amount) {
 		score += amount;

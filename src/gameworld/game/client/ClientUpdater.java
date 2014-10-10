@@ -38,7 +38,7 @@ public class ClientUpdater {
 	}
 
 	// Only for single-player mode
-	public ClientUpdater( Board b, Map<Integer, Player> players, BoardState bs, UI display) {
+	public ClientUpdater(Board b, Map<Integer, Player> players, BoardState bs, UI display) {
 		this.board = b;
 		this.playerIDs = players;
 		this.bs = bs;
@@ -79,6 +79,21 @@ public class ClientUpdater {
 			p.setDirection(d);
 		}
 		updateBoardState();	// KTC call this inside a loop, perhaps?
+	}
+	
+	public void updatePlayerHealth(int health) {
+		Player p = playerIDs.get(playerID);
+		if (p != null) {
+			p.setHealth(health);
+		}
+	}
+	
+	public void pickupItemAt(Location l) {
+		// KTC todo
+	}
+	
+	public void freezePlayer() {
+		// KTC 
 	}
 
 	public void updateProjectiles(Location[] snowballPositions) {
