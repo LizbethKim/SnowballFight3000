@@ -5,7 +5,7 @@ import java.io.OutputStream;
 
 import gameworld.world.Location;
 
-public class MoveEvent implements UpdateEvent {
+public class MoveEvent extends LocationEvent {
 	int playerID;
 	Location location;
 
@@ -19,10 +19,7 @@ public class MoveEvent implements UpdateEvent {
 		// TODO Auto-generated method stub
 		out.write(0x01);
 		out.write(playerID);
-		out.write(location.x);
-		out.write(location.x>>8);
-		out.write(location.y);
-		out.write(location.y>>8);
+		writeLocation(out,location);
 	}
 
 }

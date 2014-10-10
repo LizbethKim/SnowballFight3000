@@ -5,7 +5,7 @@ import gameworld.world.Location;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class PickUpItemEvent implements UpdateEvent {
+public class PickUpItemEvent extends LocationEvent {
 
 	private Location location;
 	
@@ -17,10 +17,7 @@ public class PickUpItemEvent implements UpdateEvent {
 	public void writeTo(OutputStream out) throws IOException {
 		// TODO Auto-generated method stub
 		out.write(0x0C);
-		out.write(location.x);
-		out.write(location.x>>8);
-		out.write(location.y);
-		out.write(location.y>>8);
+		writeLocation(out,location);
 	}
 
 }
