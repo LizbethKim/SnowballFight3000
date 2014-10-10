@@ -34,9 +34,6 @@ public class Server implements Runnable {
 	}
 
 	public void sendLoop() {
-		// BF, could I (Kelsey) please get you to tick the game here too? Doesn't make
-		// sense to have two loops when one will do.
-		// Just call game.tick() every x milliseconds.
 		while(true) {
 			try {
 				//get next player and get them to send queued updates
