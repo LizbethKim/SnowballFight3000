@@ -144,7 +144,7 @@ public class Client implements Runnable {
 	}
 
 
-	private void throwSnowball() {
+	public void throwSnowball() {
 		try {
 			connection.getOutputStream().write(0x08);
 			connection.getOutputStream().flush();
@@ -154,7 +154,7 @@ public class Client implements Runnable {
 		}
 	}
 	
-	private void pickUpItem() {
+	public void pickUpItem() {
 		try {
 			connection.getOutputStream().write(0x0C);
 			connection.getOutputStream().flush();
