@@ -125,6 +125,7 @@ public class ClientGame {
 	}
 
 	public void throwSnowball() {
+		client.throwSnowball();
 		// KTC send a fire snowball method through the network with playerID.
 		// not sure how to extend for non-standard snowballs.
 	}

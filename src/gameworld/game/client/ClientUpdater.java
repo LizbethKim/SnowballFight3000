@@ -2,9 +2,13 @@ package gameworld.game.client;
 
 import java.util.Map;
 
+import com.sun.org.apache.xpath.internal.operations.Plus;
+
 import ui.UI;
 import gameworld.world.Board;
 import gameworld.world.Direction;
+import gameworld.world.InanimateEntity;
+import gameworld.world.Item;
 import gameworld.world.Location;
 import gameworld.world.NullLocation;
 import gameworld.world.Player;
@@ -89,7 +93,14 @@ public class ClientUpdater {
 	}
 	
 	public void pickupItemAt(Location l) {
-		// KTC todo
+		if (board.containsLocation(l)) {
+			InanimateEntity on = board.tileAt(l).getOn();
+			Player p = this.playerIDs.get(playerID);
+			if (on != null && p != null && on instanceof Item) {
+				p.getInventory().addItem((Item)on);
+				board.tileAt(l).removeOn();
+			}
+		}
 	}
 	
 	public void freezePlayer() {

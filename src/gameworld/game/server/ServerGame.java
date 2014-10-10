@@ -10,12 +10,15 @@ import server.Server;
 import server.events.CreateLocalPlayerEvent;
 import server.events.CreatePlayerEvent;
 import server.events.MoveEvent;
+import server.events.PickUpItemEvent;
 import server.events.RemovePlayerEvent;
 import server.events.TurnEvent;
 import server.events.UpdateHealthEvent;
 import server.events.UpdateProjectilePositionsEvent;
 import gameworld.world.Board;
 import gameworld.world.Direction;
+import gameworld.world.InanimateEntity;
+import gameworld.world.Item;
 import gameworld.world.Location;
 import gameworld.world.Player;
 import gameworld.world.Snowball;
@@ -67,10 +70,19 @@ public class ServerGame {
 	}
 
 	public void pickUpItemAt (int playerID, Location l) {
-		// KTC make this work
+		if (board.containsLocation(l)) {
+			InanimateEntity on = board.tileAt(l).getOn();
+			Player p = this.playerIDs.get(playerID);
+			if (on != null && p != null && on instanceof Item) {
+				p.getInventory().addItem((Item)on);
+				board.tileAt(l).removeOn();
+				server.queuePlayerUpdate(new PickUpItemEvent(l), playerID);
+			}
+		}
 	}
 
 	public void throwSnowball(int playerID) {
+		System.out.println("Server throwing snowball");
 		Player thrower = playerIDs.get(playerID);
 		if (board.tileAt(thrower.getLocation()).isSnow()) {
 			projectiles.add(snowballFactory.makeSnowball(thrower.getLocation(), thrower.getDirection(), SnowballType.NORMAL));
@@ -112,7 +124,7 @@ public class ServerGame {
 		while (it.hasNext()) {
 			Snowball s = it.next();
 			s.clockTick();
-			if (!board.canTraverse(s.getLocation())) {
+			if (!board.containsLocation(s.getLocation()) || !board.canTraverse(s.getLocation())) {
 				it.remove();
 				continue;
 			}
@@ -132,6 +144,7 @@ public class ServerGame {
 		int i = 0;
 		for (Snowball s: projectiles) {
 			snowballLocs[i] = s.getLocation();
+			System.out.println(s.getLocation());
 			i++;
 		}
 		for(int id: playerIDs.keySet()) {
