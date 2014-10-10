@@ -145,8 +145,25 @@ public class Client implements Runnable {
 
 
 	private void throwSnowball() {
-		// BF do shit
+		try {
+			connection.getOutputStream().write(0x08);
+			connection.getOutputStream().flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
+	private void pickUpItem() {
+		try {
+			connection.getOutputStream().write(0x0C);
+			connection.getOutputStream().flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 
 	public void sendNameAndTeam(String name, Team team) {
 		try {
