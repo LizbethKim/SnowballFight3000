@@ -30,6 +30,7 @@ public class Main {
 				Server server = new Server(g);
 				// start server connection accepting thread
 				new Thread(server).start();
+				new Thread(new Time(g)).start();
 				// currently, the server hogs the current thread (this function runs a while(true) statement)
 				server.sendLoop();
 				// I think in theory, the server's main loop is basically the server recieve loop anyway, so this should be fine
