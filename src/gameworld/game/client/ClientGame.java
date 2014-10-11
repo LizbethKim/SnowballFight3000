@@ -33,7 +33,6 @@ public class ClientGame {
 	private Map<Integer, Player> playerIDs;
 
 	private Player player;
-	private BoardState boardState;
 	private Client client;
 	private ClientUpdater updater;
 
@@ -42,6 +41,9 @@ public class ClientGame {
 	private UI display;
 	private long lastMovedTime;
 	private long lastFiredTime;
+	
+	private BoardState boardState;
+	private int selectedIndex = -1;	// index selected in inventory
 
 	// Only used for single player
 	public ClientGame(Board b, Client c){
@@ -210,6 +212,14 @@ public class ClientGame {
 			}
 		}
 		return true;
+	}
+
+	public int getSelectedIndex() {
+		return selectedIndex;
+	}
+
+	public void setSelectedIndex(int selectedIndex) {
+		this.selectedIndex = selectedIndex;
 	}
 
 }
