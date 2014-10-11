@@ -145,23 +145,30 @@ public class Board {
 		board[0][0].place(new Furniture("A tree", Objects.TREE));
 		board[4][2].place(new Furniture("A tree", Objects.TREE));
 		board[5][3].place(new Furniture("A tree", Objects.TREE));
+		board[3][14].place(new Furniture("A tree", Objects.TREE));
+		board[4][17].place(new Furniture("A tree", Objects.TREE));
+		board[12][6].place(new Furniture("A tree", Objects.TREE));
+		board[14][18].place(new Furniture("A tree", Objects.TREE));
+		board[13][7].place(new Furniture("A tree", Objects.TREE));
+		board[10][14].place(new Furniture("A tree", Objects.TREE));
+		board[2][18].place(new Furniture("A bush", Objects.BUSH));
 		board[2][7].place(new Furniture("A bush", Objects.BUSH));
 		board[6][11].place(new Key());
 		board[14][4].place(new Flag(Team.RED));
 		board[3][10].place(new Flag(Team.BLUE));
-		board[12][17] = new Tile(new Location(12,17), Terrain.GRASS, null);
+		board[12][17].place(new HealthPotion());
 		board[13][10].place(new Furniture("A bush", Objects.BUSH));
 		
 		Bag b = new Bag();
 		b.addItem(new Key());
-		b.addItem(new Powerup());
+		b.addItem(new HealthPotion());
 		board[3][18].place(b);
 		
 		Chest c = new Chest("A treasure chest");
 		c.addItem(new Key());
 		c.addItem(new Bag());
 		
-		board[7][12].place(c);
+		board[13][2].place(c);
 		
 		return new Board(board);
 		
