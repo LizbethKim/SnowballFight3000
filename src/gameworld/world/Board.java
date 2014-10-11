@@ -153,12 +153,12 @@ public class Board {
 		board[6][11].place(new Key());
 		board[14][4].place(new Flag(Team.RED));
 		board[3][10].place(new Flag(Team.BLUE));
-		board[12][17].place(new HealthPotion());
+		board[12][17].place(new Powerup(Powerup.Power.HEALTH_POTION));
 		board[13][10].place(new Furniture("A bush", Objects.BUSH));
 
 		Bag b = new Bag();
 		b.addItem(new Key());
-		b.addItem(new HealthPotion());
+		b.addItem(new Powerup(Powerup.Power.STRONG_HEALTH_POTION));
 		board[3][18].place(b);
 
 		Chest c = new Chest("A treasure chest");
