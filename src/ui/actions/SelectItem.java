@@ -14,7 +14,7 @@ public class SelectItem extends KeyAction{
 	
 	@Override
 	protected void execute() {
-		client.setSelectedIndex(inventoryNumber);
+		client.setSelectedIndex(inventoryNumber-1);
 	}
 
 }
