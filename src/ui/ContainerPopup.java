@@ -41,9 +41,11 @@ public class ContainerPopup extends JPanel {
 		for(int i = 0; i != maxItems; i++){
 			int xPos = column*slotSize;
 			int yPos = row*slotSize;
-			Image item = items.get(i).imgs[0];
 			g.drawImage(slot, xPos, yPos, null, null);
+			if(items.get(i) != null){
+			Image item = items.get(i).imgs[0];
 			drawItem(items.get(i).imgs[0], xPos, yPos, slotSize, g);
+			}
 			if(column < maxColumn){
 				column++;
 			} else {
