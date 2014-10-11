@@ -103,7 +103,7 @@ public class ClientGame {
 
 		if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
 			if (player.getDirection() == d) {
-				Location newLoc = Location.locationInFrontOf(player.getLocation(), d);
+				Location newLoc = player.getLocationInFrontOf();
 				if (board.containsLocation(newLoc) && board.canTraverse(newLoc) && this.isFree(newLoc)) {
 					client.sendMove(newLoc);
 				}
@@ -132,14 +132,23 @@ public class ClientGame {
 		}
 	}
 
-	public String inspectItem() {
-		// KTC inspect the item in front of them.
-		return "";
+	public String inspectItem() throws NoItemException {
+		Location facing = player.getLocationInFrontOf();
+		if (board.containsLocation(facing)) {
+			if (board.tileAt(facing).getOn() != null) {
+				return board.tileAt(facing).getOn().getDescription();
+			}
+		}
+		throw new NoItemException();
 	}
 	
 	public void pickUpItem() {
-		// KTC check if there's something there first?
-		client.pickUpItem();
+		Location facing = player.getLocationInFrontOf();
+		if (board.containsLocation(facing)) {
+			if (board.tileAt(facing).getOn() != null) {
+				client.pickUpItem();
+			}
+		}
 	}
 	
 	public void dropSelectedItem() {
