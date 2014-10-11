@@ -36,7 +36,8 @@ public enum Objects {
 	BLUEPLAYER_S("BluePlayerSouth.png", "BluePlayerNorth.png", "BluePlayerEast.png", "BluePlayerWest.png"),
 	BLUEPLAYER_W("BluePlayerWest.png", "BluePlayerEast.png", "BluePlayerSouth.png", "BluePlayerNorth.png"),
 	DOOR("", "", "", ""),
-	SNOWMAN("snowman.png", "snowman.png", "snowman.png", "snowman.png");
+	SNOWMAN("snowman.png", "snowman.png", "snowman.png", "snowman.png"),
+	BAG("", "", "", "");
 
 	public final Image[] imgs;	// KTC make unmodifiable
 

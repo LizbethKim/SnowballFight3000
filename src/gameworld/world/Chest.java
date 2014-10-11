@@ -12,7 +12,8 @@ import java.util.List;
  * @author Kelsey Jack 300275851
  */
 public class Chest extends Furniture implements Inventory {
-	List<Item> contents;
+	private List<Item> contents;
+	private final int itemLimit = 9;
 
 	/**
 	 * Constructs a chest containing the given collection of items.
@@ -52,6 +53,9 @@ public class Chest extends Furniture implements Inventory {
 		List<Objects> ans = new ArrayList<Objects>();
 		for (Item i: contents) {
 			ans.add(i.asEnum());
+		}
+		while(ans.size() < itemLimit) {
+			ans.add(null);
 		}
 		return Collections.unmodifiableList(ans);
 	}
