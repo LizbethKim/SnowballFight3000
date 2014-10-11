@@ -19,7 +19,8 @@ public enum Objects {
 	REDFLAG("RedFlag.png", "RedFlag.png", "RedFlag.png", "RedFlag.png"),
 	BLUEFLAG("BlueFlag.png", "BlueFlag.png", "BlueFlag.png", "BlueFlag.png"),
 	POWERUP("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png"),
-	CHEST("", "", "", ""),
+	CHEST("TreasureChest.png", "TreasureChest.png", "TreasureChest.png", "TreasureChest.png"),
+	BAG("Bag.png", "Bag.png", "Bag.png", "Bag.png"),
 	MAP("", "", "", ""),
 	TREE("tree.png", "tree.png", "tree.png", "tree.png"),
 	TABLE("", "", "", ""),
@@ -36,8 +37,7 @@ public enum Objects {
 	BLUEPLAYER_S("BluePlayerSouth.png", "BluePlayerNorth.png", "BluePlayerEast.png", "BluePlayerWest.png"),
 	BLUEPLAYER_W("BluePlayerWest.png", "BluePlayerEast.png", "BluePlayerSouth.png", "BluePlayerNorth.png"),
 	DOOR("", "", "", ""),
-	SNOWMAN("snowman.png", "snowman.png", "snowman.png", "snowman.png"),
-	BAG("", "", "", "");
+	SNOWMAN("snowman.png", "snowman.png", "snowman.png", "snowman.png");
 
 	public final Image[] imgs;	// KTC make unmodifiable
 
