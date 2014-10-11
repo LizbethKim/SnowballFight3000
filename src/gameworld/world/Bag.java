@@ -20,6 +20,9 @@ public class Bag extends Item implements Inventory {
 
 	@Override
 	public boolean addItem(Item i) {
+		if (i == this) {
+			throw new IllegalArgumentException();
+		}
 		if (contents.size() < itemLimit) {
 			contents.add(i);
 			return true;

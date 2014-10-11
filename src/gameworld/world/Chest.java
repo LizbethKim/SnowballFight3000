@@ -34,8 +34,11 @@ public class Chest extends Furniture implements Inventory {
 
 	@Override
 	public boolean addItem(Item i) {
-		this.contents.add(i);
-		return true;
+		if (contents.size() < itemLimit) {
+			this.contents.add(i);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
