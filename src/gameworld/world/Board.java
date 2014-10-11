@@ -17,7 +17,7 @@ public class Board {
 	public Board(Tile[][] board) {
 		this.board = board;
 	}
-	
+
 	// KH if you need this.
 	public Board(Tile[][] board, List<Area> rooms) {
 		this.board = board;
@@ -35,13 +35,10 @@ public class Board {
 		return board[l.x][l.y].isTraversable();
 	}
 
-	public Item removeItemAt(Location l) {
-		if (l.x >= board[0].length || l.x < 0
-				|| l.y >= board.length || l.y < 0)
-			return null;	// KTC throw exception?
-		if (board[l.x][l.y] == null)
-			return null;
-		return board[l.x][l.y].removeOn();
+	public void removeItemAt(Location l) {
+		if (this.containsLocation(l)) {
+				board[l.x][l.y].removeOn();
+		}
 	}
 
 	public Terrain[][] convertToEnums () {
@@ -127,7 +124,7 @@ public class Board {
 	public int getYMax() {
 		return board[0].length;
 	}
-	
+
 	public static Board defaultBoard() {
 		Tile[][] board = new Tile[15][20];
 		for (int x = 1; x < 14; x++) {
@@ -158,20 +155,20 @@ public class Board {
 		board[3][10].place(new Flag(Team.BLUE));
 		board[12][17].place(new HealthPotion());
 		board[13][10].place(new Furniture("A bush", Objects.BUSH));
-		
+
 		Bag b = new Bag();
 		b.addItem(new Key());
 		b.addItem(new HealthPotion());
 		board[3][18].place(b);
-		
+
 		Chest c = new Chest("A treasure chest");
 		c.addItem(new Key());
 		c.addItem(new Bag());
-		
+
 		board[13][2].place(c);
-		
+
 		return new Board(board);
-		
+
 //		board = new Tile[10][10];
 //		for (int x = 1; x < 9; x++) {
 //			board[x][0] = new Tile(new Location(x, 0), Terrain.GRASS, null);

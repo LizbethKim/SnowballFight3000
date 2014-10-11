@@ -27,13 +27,8 @@ public class Tile {
 		return on;
 	}
 
-	public Item removeOn() {	// KTC perhaps exceptions, not nulls
-		Item toReturn = null;
-		if (this.on instanceof Item) {
-			toReturn = (Item) on;
-			this.on = null;
-		}
-		return toReturn;
+	public void removeOn() {
+		this.on = null;
 	}
 
 	public boolean place(InanimateEntity i) {

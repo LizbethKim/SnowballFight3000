@@ -82,14 +82,14 @@ public class ClientUpdater {
 		}
 		updateBoardState();	// KTC call this inside a loop, perhaps?
 	}
-	
+
 	public void updatePlayerHealth(int health) {
 		Player p = playerIDs.get(playerID);
 		if (p != null) {
 			p.setHealth(health);
 		}
 	}
-	
+
 	public void pickupItemAt(Location l) {
 		if (board.containsLocation(l)) {
 			InanimateEntity on = board.tileAt(l).getOn();
@@ -100,13 +100,13 @@ public class ClientUpdater {
 				}
 			}
 		}
-		
+
 	}
-	
+
 	public void freezePlayer() {
-		// KTC 
+		// KTC
 	}
-	
+
 	public void removeItemAt(Location l) {
 		if (board.containsLocation(l)) {
 			board.removeItemAt(l);
