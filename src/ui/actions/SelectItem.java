@@ -13,7 +13,7 @@ public class SelectItem extends KeyAction{
 	
 	@Override
 	protected void execute() {
-		System.out.println("SelectItem"+inventoryNumber);
+		System.out.println("SelectItem: "+inventoryNumber);
 		client.setSelectedIndex(inventoryNumber);
 	}
 

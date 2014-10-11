@@ -64,7 +64,7 @@ public class InventoryPanel extends JPanel {
 
 	private void paintInventory(Graphics g) {
 		List<Objects> items = client.getPlayerInventory();
-		// System.out.println("INVENTORY SIZE IS:           "+ items.size());
+		//System.out.println("Selected number IS:           "+ client.getSelectedIndex());
 		final int inventoryNumber = items.size();
 		int xPos = getShowHideWidth();
 		int yPos = 0;
@@ -74,7 +74,6 @@ public class InventoryPanel extends JPanel {
 
 		for (int i = 1; i <= inventoryNumber; i++) {
 			if (i == client.getSelectedIndex()) {
-				System.out.println("drawing selected");
 				drawSlot(selected, xPos, yPos, size, i, g);
 			} else {
 				drawSlot(slot, xPos, yPos, size, i, g);
@@ -96,10 +95,10 @@ public class InventoryPanel extends JPanel {
 		g.drawImage(itemImage, itemXPos, itemYPos, itemSize, itemSize, null);
 	}
 
-	private void drawSlot(Image slot, int xPos, int yPos, int size,
+	private void drawSlot(Image image, int xPos, int yPos, int size,
 			int inventoryNum, Graphics g) {
 		int fontSize = size / 6;
-		g.drawImage(slot, xPos, yPos, null, null);
+		g.drawImage(image, xPos, yPos, null, null);
 		g.setFont(new Font("Times", Font.PLAIN, fontSize));
 		int numberXPos = xPos + size / 12;
 		int numberYPos = size / 30 + fontSize;
