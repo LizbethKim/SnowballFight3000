@@ -93,6 +93,7 @@ public class RemotePlayer implements Runnable {
 			}
 		}
 		game.removePlayer(id);
+		// BF could you please stop the server running if all players disconnect?
 	}
 
 	private void readMove() throws IOException, SocketClosedException {
