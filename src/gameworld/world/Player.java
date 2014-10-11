@@ -20,6 +20,7 @@ public class Player implements Entity {
 	private long stepDelay = 200;
 	private long snowballDelay = 500;
 
+
 	public Player (String name, Team t, int ID, Location l) {
 		this.loc = l;
 		this.ID = ID;
