@@ -86,6 +86,10 @@ public class Player implements Entity {
 		}
 	}
 	
+	public Location getLocationInFrontOf() {
+		return Location.locationInFrontOf(this.loc, this.d);
+	}
+	
 	// GETTERS AND SETTERS
 	public void setHealth(int health) {
 		this.health = health;
