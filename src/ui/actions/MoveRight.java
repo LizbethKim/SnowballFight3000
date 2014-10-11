@@ -2,7 +2,6 @@ package ui.actions;
 
 import gameworld.game.client.ClientGame;
 import gameworld.world.Direction;
-import gameworld.world.Board;
 
 public class MoveRight extends KeyAction{
 	
@@ -13,7 +12,6 @@ public class MoveRight extends KeyAction{
 	@Override
 	protected void execute(){
 		client.move(Direction.EAST);
-		System.out.println("moveRight");
 		//TODO board.moveright()
 	}
 }

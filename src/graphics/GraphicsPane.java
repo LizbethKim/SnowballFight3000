@@ -64,7 +64,6 @@ public class GraphicsPane extends JPanel {
 	private void drawNorth(Terrain[][] currentBoard,
 			Objects[][] currentObjects, Graphics g) {
 		Location playerDir = boardState.getPlayerCoords();
-		System.out.println("Player X | Y " + playerDir.x + " " + playerDir.y);
 		for (int i = 0; i < currentBoard.length; i++) {
 			for (int j = 0; j < currentBoard[0].length; j++) {
 				double x = ((i + 5 - playerDir.x) * 0.5 * width / 10)

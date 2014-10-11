@@ -1,6 +1,7 @@
 package ui;
 
 import gameworld.game.client.ClientGame;
+import graphics.assets.Objects;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -10,12 +11,15 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.util.List;
 
 import javax.swing.JPanel;
 
 public class InventoryPanel extends JPanel {
 	private static final Image inventorySlot = HUDPanel
 			.loadImage("InventorySlot.png");
+	private static final Image selectedSlot = HUDPanel
+			.loadImage("SelectedSlot.png");
 	private static final Image hideItems = HUDPanel.loadImage("HideItems.png");
 	private static final Image showItems = HUDPanel.loadImage("ShowItems.png");
 
@@ -35,8 +39,6 @@ public class InventoryPanel extends JPanel {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		System.out.println("repainting inventory, height = " + getHeight()
-				+ ", width = " + getWidth());
 		if (getHeight() == 0 || getWidth() == 0)
 			return;
 		paintShowHideButton(g);
@@ -61,21 +63,47 @@ public class InventoryPanel extends JPanel {
 	}
 
 	private void paintInventory(Graphics g) {
-		final int inventoryNumber = 9;
+		List<Objects> items = client.getPlayerInventory();
+		//System.out.println("Selected number IS:           "+ client.getSelectedIndex());
+		final int inventoryNumber = items.size();
 		int xPos = getShowHideWidth();
 		int yPos = 0;
 		final int size = this.getHeight();
-		int fontSize = size / 6;
 		Image slot = inventorySlot.getScaledInstance(size, size, 0);
-		for (int i = 0; i < inventoryNumber; i++) {
-			g.drawImage(slot, xPos, yPos, null, null);
-			g.setFont(new Font("Times", Font.PLAIN, fontSize));
-			int numberXPos = xPos + size / 12;
-			int numberYPos = size / 30 + fontSize;
-			g.setColor(Color.white);
-			g.drawString("" + (i + 1), numberXPos, numberYPos);
+		Image selected = selectedSlot.getScaledInstance(size, size, 0);
+
+		for (int i = 1; i <= inventoryNumber; i++) {
+			if (i == client.getSelectedIndex()) {
+				drawSlot(selected, xPos, yPos, size, i, g);
+			} else {
+				drawSlot(slot, xPos, yPos, size, i, g);
+			}
+
+			if (items.get(i-1) != null) {
+				drawItem(xPos, yPos, size, items.get(i - 1), g);
+			}
 			xPos += size;
 		}
+	}
+
+	private void drawItem(int xPos, int yPos, int size, Objects item, Graphics g) {
+		int itemXPos = xPos + size / 6;
+		int itemYPos = yPos + size / 6;
+		int itemSize = size - 2 * (size / 6);
+		Image itemImage = item.imgs[0];
+
+		g.drawImage(itemImage, itemXPos, itemYPos, itemSize, itemSize, null);
+	}
+
+	private void drawSlot(Image image, int xPos, int yPos, int size,
+			int inventoryNum, Graphics g) {
+		int fontSize = size / 6;
+		g.drawImage(image, xPos, yPos, null, null);
+		g.setFont(new Font("Times", Font.PLAIN, fontSize));
+		int numberXPos = xPos + size / 12;
+		int numberYPos = size / 30 + fontSize;
+		g.setColor(Color.white);
+		g.drawString("" + (inventoryNum), numberXPos, numberYPos);
 	}
 
 	private int getShowHideWidth() {

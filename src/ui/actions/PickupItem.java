@@ -1,18 +1,18 @@
 package ui.actions;
+import ui.ContainerPopup;
 import gameworld.game.client.ClientGame;
 import gameworld.world.Board;
 
 
-public class UseItem extends KeyAction{
+public class PickupItem extends KeyAction{
 
-	public UseItem(ClientGame cl){
+	public PickupItem(ClientGame cl){
 		super(cl);
 	}
 	
 	@Override
 	protected void execute() {
-		System.out.println("UsingItem");
-		client.useItem();
+		client.pickUpItem();
 	}
 
 }

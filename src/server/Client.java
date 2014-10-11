@@ -43,11 +43,8 @@ public class Client implements Runnable {
 				// move player
 				if (in == 0x01) {
 					int id = readFromSocket();
-					int x = readFromSocket();
-					x += readFromSocket() << 8;
-					int y = readFromSocket();
-					y += readFromSocket() << 8;
-					updater.movePlayer(id, new Location(x, y));
+					Location loc = readLocation();
+					updater.movePlayer(id, loc);
 				}
 				// turn player
 				else if (in == 0x02) {
@@ -59,21 +56,15 @@ public class Client implements Runnable {
 				else if (in == 0x05) {
 					int id = readFromSocket();
 					String name = readString();
-					int x = readFromSocket();
-					x += readFromSocket() << 8;
-					int y = readFromSocket();
-					y += readFromSocket() << 8;
+					Location loc = readLocation();
 					Team team = Team.values()[readFromSocket()];
-					updater.addPlayer(name,team, id, new Location(x,y));
+					updater.addPlayer(name,team, id, loc);
 				}
 				// create local player
 				else if (in == 0x06) {
 					int id = readFromSocket();
-					int x = readFromSocket();
-					x += readFromSocket() << 8;
-					int y = readFromSocket();
-					y += readFromSocket() << 8;
-					updater.createLocalPlayer(id, new Location(x,y));
+					Location loc = readLocation();
+					updater.createLocalPlayer(id, loc);
 				}
 				// read map file
 				else if (in == 0x07) {
@@ -89,12 +80,37 @@ public class Client implements Runnable {
 				}
 				// update projectile positions
 				else if (in == 0x08) {
-					// BF write some code here
+					int numProjectiles = readFromSocket();
+					Location projectileLocations[] = new Location[numProjectiles]; 
+					for(int i=0;i<numProjectiles;i++) {
+						projectileLocations[i] = readLocation();
+					}
+					updater.updateProjectiles(projectileLocations);
 				}
 				// remove player
 				else if (in == 0x09) {
 					int id = readFromSocket();
 					updater.removePlayer(id);
+				}
+				// take damage
+				else if (in == 0x0A) {
+					int hp = readFromSocket();
+					updater.updatePlayerHealth(hp);
+					// BF I added it in, hope that's ok - Kelsey
+				}
+				// freeze player
+				else if (in == 0x0B) {
+					//int id = readFromSocket();
+					Location loc = readLocation();
+					updater.removeItemAt(loc);
+					// BF add freeze player stuff here
+					// You have double up for 0x0B, I'm using it for
+					// remove item (you had it for both that and freezePlayer)
+				}
+				// add item to inventory
+				else if (in == 0x0C) {
+					Location loc = readLocation();
+					updater.pickupItemAt(loc);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -134,9 +150,26 @@ public class Client implements Runnable {
 	}
 
 
-	private void throwSnowball() {
-		// BF do shit
+	public void throwSnowball() {
+		try {
+			connection.getOutputStream().write(0x08);
+			connection.getOutputStream().flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
+	public void pickUpItem() {
+		try {
+			connection.getOutputStream().write(0x0C);
+			connection.getOutputStream().flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 
 	public void sendNameAndTeam(String name, Team team) {
 		try {
@@ -185,6 +218,14 @@ public class Client implements Runnable {
 		return output;
 	}
 
+	private Location readLocation() throws IOException, SocketClosedException {
+		int x = readFromSocket();
+		x += readFromSocket() << 8;
+		int y = readFromSocket();
+		y += readFromSocket() << 8;
+		return new Location(x,y);
+	}
+	
 	private byte readFromSocket() throws IOException, SocketClosedException {
 		//I hate java
 		int input = connection.getInputStream().read();

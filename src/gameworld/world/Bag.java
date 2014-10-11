@@ -3,39 +3,28 @@ package gameworld.world;
 import graphics.assets.Objects;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Represents a chest. Currently has unlimited capacity.
- * @author Kelsey Jack 300275851
- */
-public class Chest extends Furniture implements Inventory {
+public class Bag extends Item implements Inventory {
+	private final int itemLimit = 4;
 	private List<Item> contents;
-	private final int itemLimit = 9;
-
+	
 	/**
-	 * Constructs a chest containing the given collection of items.
-	 * @param contents The items to be placed in the chest. Cannot be null.
+	 * Constructs an empty bag
 	 */
-	public Chest(String description, Collection<Item> contents) {
-		super(description, Objects.CHEST);
-		this.contents = new ArrayList<Item>(contents);
-	}
-
-	/**
-	 * Constructs an empty chest.
-	 */
-	public Chest(String description) {
-		super(description, Objects.CHEST);
+	public Bag() {
 		this.contents = new ArrayList<Item>();
+		this.description = "A bag can carry a few items. You can carry the bag.";
 	}
 
 	@Override
 	public boolean addItem(Item i) {
+		if (i == this) {
+			throw new IllegalArgumentException();
+		}
 		if (contents.size() < itemLimit) {
-			this.contents.add(i);
+			contents.add(i);
 			return true;
 		}
 		return false;
@@ -43,7 +32,7 @@ public class Chest extends Furniture implements Inventory {
 
 	@Override
 	public boolean removeItem(Item i) {
-		return this.contents.remove(i);
+		return contents.remove(i);
 	}
 
 	@Override
@@ -62,6 +51,11 @@ public class Chest extends Furniture implements Inventory {
 		}
 		return Collections.unmodifiableList(ans);
 	}
+	
+	@Override
+	public Objects asEnum() {
+		return Objects.BAG;
+	}
 
 	@Override
 	public int size() {
@@ -72,6 +66,5 @@ public class Chest extends Furniture implements Inventory {
 	public int maxSize() {
 		return itemLimit;
 	}
-
 
 }

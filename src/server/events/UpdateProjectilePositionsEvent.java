@@ -5,7 +5,7 @@ import gameworld.world.Location;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class UpdateProjectilePositionsEvent implements UpdateEvent {
+public class UpdateProjectilePositionsEvent extends LocationEvent {
 
 	private Location projectiles[];
 
@@ -22,10 +22,7 @@ public class UpdateProjectilePositionsEvent implements UpdateEvent {
 		out.write(0x08);
 		out.write(projectiles.length);
 		for(int i=0;i<projectiles.length;i++) {
-			out.write(projectiles[i].x);
-			out.write(projectiles[i].x>>8);
-			out.write(projectiles[i].y);
-			out.write(projectiles[i].y>>8);
+			writeLocation(out,projectiles[i]);
 		}
 		
 	}

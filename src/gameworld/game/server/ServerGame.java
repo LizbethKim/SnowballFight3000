@@ -10,12 +10,16 @@ import server.Server;
 import server.events.CreateLocalPlayerEvent;
 import server.events.CreatePlayerEvent;
 import server.events.MoveEvent;
+import server.events.PickUpItemEvent;
+import server.events.RemoveItemEvent;
 import server.events.RemovePlayerEvent;
 import server.events.TurnEvent;
 import server.events.UpdateHealthEvent;
 import server.events.UpdateProjectilePositionsEvent;
 import gameworld.world.Board;
 import gameworld.world.Direction;
+import gameworld.world.InanimateEntity;
+import gameworld.world.Item;
 import gameworld.world.Location;
 import gameworld.world.Player;
 import gameworld.world.Snowball;
@@ -30,6 +34,7 @@ import gameworld.world.Team;
  */
 public class ServerGame {
 	public static final long MOVE_DELAY = 200;
+	public static final long THROW_DELAY = 200;
 
 	private Board board;
 	private Map<Integer, Player> playerIDs;
@@ -66,11 +71,25 @@ public class ServerGame {
 		}
 	}
 
-	public void pickUpItemAt (int playerID, Location l) {
-		// KTC make this work
+	public void pickUpItem (int playerID) {
+		Player p = this.playerIDs.get(playerID);
+		if (p != null) {
+			Location l = Location.locationInFrontOf(p.getLocation(), p.getDirection());
+			InanimateEntity on = board.tileAt(l).getOn();
+			if (on != null && on instanceof Item) {
+				if(p.getInventory().addItem((Item)on)) {
+					board.tileAt(l).removeOn();
+					server.queuePlayerUpdate(new PickUpItemEvent(l), playerID);
+					for (int id: playerIDs.keySet()) {
+						server.queuePlayerUpdate(new RemoveItemEvent(l), id);
+					}
+				}
+			}
+		}
 	}
 
 	public void throwSnowball(int playerID) {
+		System.out.println("Server throwing snowball");
 		Player thrower = playerIDs.get(playerID);
 		if (board.tileAt(thrower.getLocation()).isSnow()) {
 			projectiles.add(snowballFactory.makeSnowball(thrower.getLocation(), thrower.getDirection(), SnowballType.NORMAL));
@@ -112,7 +131,7 @@ public class ServerGame {
 		while (it.hasNext()) {
 			Snowball s = it.next();
 			s.clockTick();
-			if (!board.canTraverse(s.getLocation())) {
+			if (!board.containsLocation(s.getLocation()) || !board.canTraverse(s.getLocation())) {
 				it.remove();
 				continue;
 			}

@@ -28,5 +28,7 @@ public interface Inventory {
 	public boolean removeItem(Item i);
 	public List<Item> getContents();
 	public List<Objects> getContentsAsEnums();
+	public int size();
+	public int maxSize();
 
 }

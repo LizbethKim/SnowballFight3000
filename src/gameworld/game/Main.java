@@ -26,23 +26,14 @@ public class Main {
 		if (args.length > 0) {
 			System.out.println(args[0]);
 			if (args[0].equals("server")) {
-				ServerGame g = new ServerGame(new Board());
+				ServerGame g = new ServerGame(Board.defaultBoard());
 				Server server = new Server(g);
 				// start server connection accepting thread
 				new Thread(server).start();
-				// currently, the server hogs the current thread (this function runs a while(true) statement)
+				new Thread(new Time(g)).start();
 				server.sendLoop();
-				// I think in theory, the server's main loop is basically the server recieve loop anyway, so this should be fine
-				// (since the tick stuff should happen in another thread anyway)
-				// the only caveat is a client probably can't be a server as well
-				// if you don't like this, I can change it and make it more multithreaded
 			} else if (args[0].equals("client")) {
 				new UI();
-//				Client c = new Client("127.0.0.1");
-//				Board b = new Board();	// This should be new from file - the first file to come through the network perhaps
-//				ClientGame g = new ClientGame(b, c);
-				//this function creates a new thread for itself
-
 			} else {
 				singlePlayerGame();
 			}
@@ -83,12 +74,6 @@ public class Main {
 //				// should never happen KTC perhaps do something here
 //			}
 //		}
-
-	/*
-	 * In terms of client/server, I think the clients should have a tick that
-	 * calls repaint on the UI/graphics, and the server should have one that
-	 * ticks the model (projectiles, etc). Everything else can happen event-based. (Probably?)
-	 */
 
 
 }

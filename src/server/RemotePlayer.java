@@ -73,9 +73,16 @@ public class RemotePlayer implements Runnable {
 				else if(in==0x07) {
 					// BF put code for sending map file here
 				}
+				else if(in==0x08) {
+					game.throwSnowball(id);
+					// BF I've added this, feel free to change
+				}
 				else if(in==0x09) {
-					int id = readFromSocket();
 					game.removePlayer(id);
+				}
+				else if(in==0x0C) {
+					game.pickUpItem(id);
+					// BF I've added this, feel free to change if you need.
 				}
 			}
 		} catch (IOException e) {

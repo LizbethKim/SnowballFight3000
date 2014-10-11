@@ -36,15 +36,7 @@ public class Snowball implements Entity {
 	 * as it may tick multiple times before moving.
 	 */
 	private void moveForward() {
-		if (d == Direction.NORTH) {
-			l = new Location(l.x - 1, l.y);
-		} else if (d == Direction.SOUTH) {
-			l = new Location(l.x + 1, l.y);
-		} else if (d == Direction.EAST) {
-			l = new Location(l.x, l.y + 1);
-		} else {
-			l = new Location(l.x, l.y - 1);
-		}
+		l = Location.locationInFrontOf(l, d);
 	}
 
 

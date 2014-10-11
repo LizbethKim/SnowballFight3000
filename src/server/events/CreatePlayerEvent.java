@@ -6,7 +6,7 @@ import gameworld.world.Team;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class CreatePlayerEvent implements UpdateEvent {
+public class CreatePlayerEvent extends LocationEvent {
 
 	private int playerID;
 	private String name;
@@ -26,10 +26,7 @@ public class CreatePlayerEvent implements UpdateEvent {
 		out.write(playerID);
 		out.write(name.length());
 		out.write(name.getBytes());
-		out.write(location.x);
-		out.write(location.x>>8);
-		out.write(location.y);
-		out.write(location.y>>8);
+		writeLocation(out,location);
 		out.write(team.ordinal());
 	}
 

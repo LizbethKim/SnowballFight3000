@@ -22,6 +22,7 @@ public class PlayerInventory implements Inventory {
 	 * Creates an empty inventory
 	 */
 	public PlayerInventory() {
+		this.itemLimit = DEFAULT_LIMIT;
 		this.contents = new ArrayList<Item>();
 	}
 
@@ -66,11 +67,24 @@ public class PlayerInventory implements Inventory {
 
 	@Override
 	public List<Objects> getContentsAsEnums() {
-		List<Objects> ans = new ArrayList<Objects>();
+		List<Objects> ans = new ArrayList<Objects>(itemLimit);
 		for (Item i: contents) {
 			ans.add(i.asEnum());
 		}
+		while (ans.size() < itemLimit) {
+			ans.add(null);
+		}
 		return Collections.unmodifiableList(ans);
+	}
+
+	@Override
+	public int size() {
+		return contents.size();
+	}
+	
+	@Override 
+	public int maxSize() {
+		return itemLimit;
 	}
 
 

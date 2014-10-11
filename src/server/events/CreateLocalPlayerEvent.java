@@ -5,7 +5,7 @@ import gameworld.world.Location;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class CreateLocalPlayerEvent implements UpdateEvent {
+public class CreateLocalPlayerEvent extends LocationEvent {
 	int id;
 	private Location location;
 
@@ -18,10 +18,7 @@ public class CreateLocalPlayerEvent implements UpdateEvent {
 	public void writeTo(OutputStream out) throws IOException {
 		out.write(0x06);
 		out.write(id);
-		out.write(location.x);
-		out.write(location.x>>8);
-		out.write(location.y);
-		out.write(location.y>>8);
+		writeLocation(out,location);
 		// TODO Auto-generated method stub
 
 	}
