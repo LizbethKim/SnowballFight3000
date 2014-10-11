@@ -71,14 +71,15 @@ public class InventoryPanel extends JPanel {
 		final int size = this.getHeight();
 		Image slot = inventorySlot.getScaledInstance(size, size, 0);
 		Image selected = selectedSlot.getScaledInstance(size, size, 0);
+		
 		for (int i = 1; i <= inventoryNumber; i++) {
 			if (client.getSelectedIndex() == i) {
+				System.out.println("drawing selected");
 				drawSlot(selected, xPos, yPos, size, i, g);
 			} else{
 				drawSlot(slot, xPos, yPos, size, i, g);
 			}
-			if (i < items.size() && items.get(i) != null) {
-
+			if (i < items.size()-1 && items.get(i) != null) {
 				drawItem(xPos, yPos, size, items.get(i - 1), g);
 			}
 			xPos += size;
