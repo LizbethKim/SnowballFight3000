@@ -67,9 +67,12 @@ public class PlayerInventory implements Inventory {
 
 	@Override
 	public List<Objects> getContentsAsEnums() {
-		List<Objects> ans = new ArrayList<Objects>();
+		List<Objects> ans = new ArrayList<Objects>(itemLimit);
 		for (Item i: contents) {
 			ans.add(i.asEnum());
+		}
+		while (ans.size() < itemLimit) {
+			ans.add(null);
 		}
 		return Collections.unmodifiableList(ans);
 	}
