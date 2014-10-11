@@ -159,6 +159,15 @@ public class ClientGame {
 		// KTC make adding into containers work
 	}
 	
+	public void useItem(){
+		//KTC use selected item
+	}
+	
+	public boolean selectedIsContainer(){
+		return false;
+		//KTC selected is container
+	}
+	
 	public void dropSelectedItem() {
 		if (player.getInventory().size() > selectedIndex && player.getInventory().getContents().get(selectedIndex) != null) {
 			// KTC send drop item request through network
@@ -168,8 +177,6 @@ public class ClientGame {
 	/**
 	 * Gets the contents of the inventory (if there is one) in front of where the 
 	 * player is standing. If there is none, it returns an empty list.
-	 * RB should it return null actually? Because an empty container is
-	 * different to not a container...
 	 * @return An unmodifiable list of enums representing the objects in the inventory.
 	 * @throws NotAChestException 
 	 */
