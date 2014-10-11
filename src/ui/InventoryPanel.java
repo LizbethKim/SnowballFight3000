@@ -25,7 +25,6 @@ public class InventoryPanel extends JPanel {
 
 	private static final double showHideXProportion = 1.0 / 20.0;
 	private boolean inventoryHidden;
-	private int selectedItem;
 
 	private ClientGame client;
 
@@ -73,8 +72,8 @@ public class InventoryPanel extends JPanel {
 		Image slot = inventorySlot.getScaledInstance(size, size, 0);
 		Image selected = selectedSlot.getScaledInstance(size, size, 0);
 		for (int i = 1; i <= inventoryNumber; i++) {
-			if (selectedItem == i) {
-				drawSlot(selectedSlot, xPos, yPos, size, i, g);
+			if (client.getSelectedIndex() == i) {
+				drawSlot(selected, xPos, yPos, size, i, g);
 			} else{
 				drawSlot(slot, xPos, yPos, size, i, g);
 			}
