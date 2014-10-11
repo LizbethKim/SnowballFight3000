@@ -159,11 +159,14 @@ public class ClientGame {
 		// KTC make adding into containers work
 	}
 	
-	public void useItem(){
+	public void useItem() {
 		//KTC use selected item
 	}
 	
 	public boolean selectedIsContainer(){
+		if (selectedIndex != -1 && player.getInventory().getContents().get(selectedIndex) instanceof Inventory) {
+			return true;
+		}
 		return false;
 		//KTC selected is container
 	}
