@@ -13,15 +13,28 @@ import graphics.assets.Terrain;
 import org.junit.Test;
 
 public class BoardTests {
-
+	
 	@Test
 	public void testTileAt() {
-		
+		Board b = setUpBoard();
+		assertTrue(b.tileAt(new Location (0,0)).getType() == Terrain.GRASS);
 	}
 	
 	@Test 
 	public void testTraversable() {
 		
+	}
+	
+	@Test 
+	public void testContainsLocation() {
+		Board b = setUpBoard();
+		assertTrue(b.containsLocation(new Location(0,0)));
+		assertTrue(b.containsLocation(new Location(14,19)));
+		assertTrue(b.containsLocation(new Location(12, 7)));
+		assertFalse(b.containsLocation(new Location(-2,-2)));
+		assertFalse(b.containsLocation(new Location(7, 25)));
+		assertFalse(b.containsLocation(new Location(18, 10)));
+		assertFalse(b.containsLocation(new Location(15, 20)));
 	}
 	
 	@Test 
