@@ -11,6 +11,7 @@ import server.events.CreateLocalPlayerEvent;
 import server.events.CreatePlayerEvent;
 import server.events.MoveEvent;
 import server.events.PickUpItemEvent;
+import server.events.RemoveItemEvent;
 import server.events.RemovePlayerEvent;
 import server.events.TurnEvent;
 import server.events.UpdateHealthEvent;
@@ -79,6 +80,9 @@ public class ServerGame {
 				if(p.getInventory().addItem((Item)on)) {
 					board.tileAt(l).removeOn();
 					server.queuePlayerUpdate(new PickUpItemEvent(l), playerID);
+					for (int id: playerIDs.keySet()) {
+						server.queuePlayerUpdate(new RemoveItemEvent(l), id);
+					}
 				}
 			}
 		}

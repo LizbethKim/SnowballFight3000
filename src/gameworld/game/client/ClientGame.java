@@ -143,8 +143,8 @@ public class ClientGame {
 		client.pickUpItem();
 	}
 	
-	public void dropItem(int index) {
-		if (player.getInventory().size() > index && player.getInventory().getContents().get(index) != null) {
+	public void dropSelectedItem() {
+		if (player.getInventory().size() > selectedIndex && player.getInventory().getContents().get(selectedIndex) != null) {
 			// KTC send drop item request through network
 		}
 	}
@@ -170,6 +170,16 @@ public class ClientGame {
 	public int getPlayerID() {
 		return playerID;
 	}
+	
+
+	public int getSelectedIndex() {
+		return selectedIndex;
+	}
+
+	public void setSelectedIndex(int selectedIndex) {
+		this.selectedIndex = selectedIndex;
+	}
+
 
 	public BoardState getBoard() {
 		return boardState;
@@ -212,14 +222,6 @@ public class ClientGame {
 			}
 		}
 		return true;
-	}
-
-	public int getSelectedIndex() {
-		return selectedIndex;
-	}
-
-	public void setSelectedIndex(int selectedIndex) {
-		this.selectedIndex = selectedIndex;
 	}
 
 }

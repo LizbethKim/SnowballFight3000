@@ -106,6 +106,12 @@ public class ClientUpdater {
 	public void freezePlayer() {
 		// KTC 
 	}
+	
+	public void removeItemAt(Location l) {
+		if (board.containsLocation(l)) {
+			board.removeItemAt(l);
+		}
+	}
 
 	public void updateProjectiles(Location[] snowballPositions) {
 		this.snowballPositions = snowballPositions;

@@ -100,8 +100,12 @@ public class Client implements Runnable {
 				}
 				// freeze player
 				else if (in == 0x0B) {
-					int id = readFromSocket();
+					//int id = readFromSocket();
+					Location loc = readLocation();
+					updater.removeItemAt(loc);
 					// BF add freeze player stuff here
+					// You have double up for 0x0B, I'm using it for
+					// remove item (you had it for both that and freezePlayer)
 				}
 				// add item to inventory
 				else if (in == 0x0C) {
