@@ -15,6 +15,7 @@ public class Bag extends Item implements Inventory {
 	 */
 	public Bag() {
 		this.contents = new ArrayList<Item>();
+		this.description = "A bag can carry a few items. You can carry the bag.";
 	}
 
 	@Override

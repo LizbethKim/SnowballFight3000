@@ -7,6 +7,9 @@ public class Flag extends Item {
 	
 	public Flag(Team t) {
 		this.team = t;
+		this.description = "The " + (this.team == Team.RED ? "red": "blue") 
+				+ " team's flag!";
+		
 	}
 
 	@Override

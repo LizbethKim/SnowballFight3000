@@ -8,6 +8,14 @@ import graphics.assets.Objects;
  */
 public class Key extends Item {
 	// KTC more
+	public Key (String description) {
+		this.description = description;
+	}
+	
+	public Key() {
+		this.description = "A key, but to what?";
+	}
+	
 	@Override
 	public Objects asEnum() {
 		return Objects.KEY;

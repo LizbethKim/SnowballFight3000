@@ -10,6 +10,14 @@ import graphics.assets.Objects;
  *
  */
 public class Powerup extends Item {
+	
+	public Powerup(String description) {
+		this.description = description;
+	}
+	
+	public Powerup() {
+		this.description = "";
+	}
 
 	@Override
 	public Objects asEnum() {
