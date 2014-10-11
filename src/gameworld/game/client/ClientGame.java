@@ -151,10 +151,20 @@ public class ClientGame {
 		}
 	}
 	
+	/**
+	 * Removes the item at the specified index from the container 
+	 * in front of the player in the world. Places it in the 
+	 * player's inventory
+	 * @param index
+	 */
 	public void takeItemFromContainer(int index) {
 		// KTC make picking from containers work
 	}
 	
+	/**
+	 * Drops the selected item in the player's inventory into
+	 * the container in front of them in the world
+	 */
 	public void dropSelectedIntoContainer() {
 		// KTC make adding into containers work
 	}
@@ -168,7 +178,13 @@ public class ClientGame {
 			return true;
 		}
 		return false;
-		//KTC selected is container
+	}
+	
+	public List<Objects> getContentsOfSelected() throws NotAContainerException {
+		if (selectedIsContainer()) {
+			return ((Inventory)player.getInventory().getContents().get(selectedIndex)).getContentsAsEnums();
+		}
+		throw new NotAContainerException();
 	}
 	
 	public void dropSelectedItem() {
@@ -181,9 +197,9 @@ public class ClientGame {
 	 * Gets the contents of the inventory (if there is one) in front of where the 
 	 * player is standing. If there is none, it returns an empty list.
 	 * @return An unmodifiable list of enums representing the objects in the inventory.
-	 * @throws NotAChestException 
+	 * @throws NotAContainerException 
 	 */
-	public List<Objects> getContents() throws NotAChestException {
+	public List<Objects> getContents() throws NotAContainerException {
 		Location containerLoc = Location.locationInFrontOf(player.getLocation(), player.getDirection()); 
 		if (board.containsLocation(containerLoc)) {
 			InanimateEntity on = board.tileAt(containerLoc).getOn();
@@ -191,7 +207,7 @@ public class ClientGame {
 				return ((Inventory)on).getContentsAsEnums();
 			}
 		}
-		throw new NotAChestException();
+		throw new NotAContainerException();
 	}
 
 	public int getPlayerID() {
