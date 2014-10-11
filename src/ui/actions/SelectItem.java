@@ -1,4 +1,5 @@
 package ui.actions;
+import ui.UI;
 import gameworld.game.client.ClientGame;
 import gameworld.world.Board;
 
@@ -6,8 +7,8 @@ import gameworld.world.Board;
 public class SelectItem extends KeyAction{
 	private int inventoryNumber;
 
-	public SelectItem(ClientGame cl, int inventoryNumber){
-		super(cl);
+	public SelectItem(ClientGame cl, UI parent, int inventoryNumber){
+		super(cl, parent);
 		this.inventoryNumber = inventoryNumber;
 	}
 	

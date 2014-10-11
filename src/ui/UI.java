@@ -70,45 +70,11 @@ public class UI extends JFrame {
 
 	private final boolean debugMode = false;
 
-	public UI(ClientGame cl) {
-
-		// initialise UI
-		super();
-		client = cl;
-
-		if (debugMode) {
-			setupGame();
-			// pack and Display window
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			pack();
-			setResizable(true);
-			setVisible(true);
-		} else {
-			setupWelcome();
-		}
-		// startGame();
-
-	}
-
 	public UI() {
 
 		// initialise UI
 		super();
-
-		if (debugMode) {
-			Client c = new Client("127.0.0.1");
-			Board b = Board.defaultBoard(); // This should be new from file - the first
-									// file to come through the network perhaps
-			client = new ClientGame(b, c);
-			setupGame();
-			// pack and Display window
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			pack();
-			setResizable(true);
-			setVisible(true);
-		} else {
-			setupWelcome();
-		}
+		setupWelcome();
 	}
 
 	private void setupGame() {
@@ -132,7 +98,7 @@ public class UI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setResizable(true);
-		
+
 		frame.setVisible(false);
 		frame.dispose();
 		setVisible(true);
@@ -220,39 +186,50 @@ public class UI extends JFrame {
 		// sets the window to respond to inputs from any internal components
 
 		// add arrow keys and WASD for movement
-		addKeyBinding("MoveRight", new MoveRight(client), KeyEvent.VK_RIGHT,
-				KeyEvent.VK_D);
-		addKeyBinding("MoveLeft", new MoveLeft(client), KeyEvent.VK_LEFT,
+		addKeyBinding("MoveRight", new MoveRight(client, this),
+				KeyEvent.VK_RIGHT, KeyEvent.VK_D);
+		addKeyBinding("MoveLeft", new MoveLeft(client, this), KeyEvent.VK_LEFT,
 				KeyEvent.VK_A);
-		addKeyBinding("MoveUp", new MoveUp(client), KeyEvent.VK_UP,
+		addKeyBinding("MoveUp", new MoveUp(client, this), KeyEvent.VK_UP,
 				KeyEvent.VK_W);
-		addKeyBinding("MoveDown", new MoveDown(client), KeyEvent.VK_DOWN,
+		addKeyBinding("MoveDown", new MoveDown(client, this), KeyEvent.VK_DOWN,
 				KeyEvent.VK_S);
-		
-		//player action keys
-		addKeyBinding("ThrowSnowball", new ThrowSnowball(client),
+
+		// player action keys
+		addKeyBinding("ThrowSnowball", new ThrowSnowball(client, this),
 				KeyEvent.VK_SPACE);
-		addKeyBinding("Inspect", new InspectItem(client), KeyEvent.VK_I);
-		addKeyBinding("OpenChest", new InteractWithItem(client), KeyEvent.VK_X);
-		addKeyBinding("PickupItem", new PickupItem(client), KeyEvent.VK_Z);
-		addKeyBinding("UseInventoryItem", new UseItem(client), KeyEvent.VK_R);
-		
-		//view rotation keys
-		addKeyBinding("RotateClockwise", new RotateClockwise(client),
+		addKeyBinding("Inspect", new InspectItem(client, this), KeyEvent.VK_I);
+		addKeyBinding("OpenChest", new InteractWithItem(client, this),
+				KeyEvent.VK_X);
+		addKeyBinding("PickupItem", new PickupItem(client, this), KeyEvent.VK_Z);
+		addKeyBinding("UseInventoryItem", new UseItem(client, this),
+				KeyEvent.VK_R);
+
+		// view rotation keys
+		addKeyBinding("RotateClockwise", new RotateClockwise(client, this),
 				KeyEvent.VK_E);
-		addKeyBinding("RotateAntiClockwise", new RotateAntiClockwise(client),
-				KeyEvent.VK_Q);
+		addKeyBinding("RotateAntiClockwise", new RotateAntiClockwise(client,
+				this), KeyEvent.VK_Q);
 
 		// setup item hotkeys
-		addKeyBinding("SelectItem1", new SelectItem(client, 1), KeyEvent.VK_1);
-		addKeyBinding("SelectItem2", new SelectItem(client, 2), KeyEvent.VK_2);
-		addKeyBinding("SelectItem3", new SelectItem(client, 3), KeyEvent.VK_3);
-		addKeyBinding("SelectItem4", new SelectItem(client, 4), KeyEvent.VK_4);
-		addKeyBinding("SelectItem5", new SelectItem(client, 5), KeyEvent.VK_5);
-		addKeyBinding("SelectItem6", new SelectItem(client, 6), KeyEvent.VK_6);
-		addKeyBinding("SelectItem7", new SelectItem(client, 7), KeyEvent.VK_7);
-		addKeyBinding("SelectItem8", new SelectItem(client, 8), KeyEvent.VK_8);
-		addKeyBinding("SelectItem9", new SelectItem(client, 9), KeyEvent.VK_9);
+		addKeyBinding("SelectItem1", new SelectItem(client, this, 1),
+				KeyEvent.VK_1);
+		addKeyBinding("SelectItem2", new SelectItem(client, this, 2),
+				KeyEvent.VK_2);
+		addKeyBinding("SelectItem3", new SelectItem(client, this, 3),
+				KeyEvent.VK_3);
+		addKeyBinding("SelectItem4", new SelectItem(client, this, 4),
+				KeyEvent.VK_4);
+		addKeyBinding("SelectItem5", new SelectItem(client, this, 5),
+				KeyEvent.VK_5);
+		addKeyBinding("SelectItem6", new SelectItem(client, this, 6),
+				KeyEvent.VK_6);
+		addKeyBinding("SelectItem7", new SelectItem(client, this, 7),
+				KeyEvent.VK_7);
+		addKeyBinding("SelectItem8", new SelectItem(client, this, 8),
+				KeyEvent.VK_8);
+		addKeyBinding("SelectItem9", new SelectItem(client, this, 9),
+				KeyEvent.VK_9);
 
 	}
 

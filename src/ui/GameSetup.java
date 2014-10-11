@@ -1,6 +1,8 @@
 package ui;
 
+import gameworld.game.Time;
 import gameworld.game.client.ClientGame;
+import gameworld.game.server.ServerGame;
 import gameworld.world.Board;
 
 import java.awt.Canvas;
@@ -25,17 +27,22 @@ import java.util.HashSet;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import server.Server;
+
 public class GameSetup extends JPanel {
 
 	private static final Image welcomeImage = HUDPanel
-			.loadImage("WelcomeImage.png");
+			.loadImage("NewWelcomeImage.png");
 	private static final double buttonXStartProportion = 1.0 / 4.0;
 	private static final double buttonWidthProportion = 1.0 / 2.0;
-	private static final double buttonHeightProportion = 1.0 / 8.0;
+	private static final double buttonHeightProportion = 1.0 / 10.0;
 
-	private static final double startGameYStartProportion = 3.0 / 7.0;
-	private static final double controlsYStartProportion = 4.0 / 7.0;
-	private static final double helpYStartProportion = 5.0 / 7.0;
+	private static final double newPlayerYStartProportion = 3.0 / 8.0;
+	private static final double loadPlayerYStartProportion = 4.0 / 8.0;
+	private static final double startServerYStartProportion = 5.0 / 8.0;
+	private static final double controlsYStartProportion = 6.0 / 8.0;
+	
+	
 
 	private final double aspectRatio;
 	
@@ -59,17 +66,31 @@ public class GameSetup extends JPanel {
 	}
 
 	private void dealWithClick(int x, int y){
-		if(onStartGame(x,y)){
+		if(onNewPlayer(x,y)){
 			new InputPopup(ui);
+		} else if(onLoadPlayer(x,y)){
+			new LoadPopup();
+		} else if(onStartServer(x,y)){
+			startServer();
 		} else if(onControls(x,y)){
 			new ControlsPopup().showControls();
-		} else if(onHelp(x,y)){
-			
 		}
 	}
 	
+	private void startServer(){
+//		new UI();
+	//	ui.setVisible(false);
+		ServerGame g = new ServerGame(Board.defaultBoard());
+		Server server = new Server(g);
+		// start server connection accepting thread
+		new Thread(server).start();
+		new Thread(new Time(g)).start();
+		server.sendLoop();
+
+	}
+	
 	private void updateCursor(int x, int y) {
-		if(onStartGame(x,y) || onControls(x,y) || onHelp(x, y)){
+		if(onNewPlayer(x,y) || onLoadPlayer(x,y) || onStartServer(x, y) || onControls(x,y)){
 			setCursor(new Cursor(Cursor.HAND_CURSOR));
 		} else {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -77,9 +98,25 @@ public class GameSetup extends JPanel {
 			
 	}
 
-	private boolean onStartGame(int xPos, int yPos) {
+	private boolean onNewPlayer(int xPos, int yPos) {
 		int x = (int) (buttonXStartProportion * getWidth());
-		int y = (int) (startGameYStartProportion * getHeight());
+		int y = (int) (newPlayerYStartProportion * getHeight());
+		int width = (int) (buttonWidthProportion * getWidth());
+		int height = (int) (buttonHeightProportion * getHeight());
+		return new Rectangle(x, y, width, height).contains(xPos, yPos);
+	}
+	
+	private boolean onLoadPlayer(int xPos, int yPos) {
+		int x = (int) (buttonXStartProportion * getWidth());
+		int y = (int) (loadPlayerYStartProportion * getHeight());
+		int width = (int) (buttonWidthProportion * getWidth());
+		int height = (int) (buttonHeightProportion * getHeight());
+		return new Rectangle(x, y, width, height).contains(xPos, yPos);
+	}
+	
+	private boolean onStartServer(int xPos, int yPos) {
+		int x = (int) (buttonXStartProportion * getWidth());
+		int y = (int) (startServerYStartProportion * getHeight());
 		int width = (int) (buttonWidthProportion * getWidth());
 		int height = (int) (buttonHeightProportion * getHeight());
 		return new Rectangle(x, y, width, height).contains(xPos, yPos);
@@ -88,14 +125,6 @@ public class GameSetup extends JPanel {
 	private boolean onControls(int xPos, int yPos) {
 		int x = (int) (buttonXStartProportion * getWidth());
 		int y = (int) (controlsYStartProportion * getHeight());
-		int width = (int) (buttonWidthProportion * getWidth());
-		int height = (int) (buttonHeightProportion * getHeight());
-		return new Rectangle(x, y, width, height).contains(xPos, yPos);
-	}
-
-	private boolean onHelp(int xPos, int yPos) {
-		int x = (int) (buttonXStartProportion * getWidth());
-		int y = (int) (helpYStartProportion * getHeight());
 		int width = (int) (buttonWidthProportion * getWidth());
 		int height = (int) (buttonHeightProportion * getHeight());
 		return new Rectangle(x, y, width, height).contains(xPos, yPos);

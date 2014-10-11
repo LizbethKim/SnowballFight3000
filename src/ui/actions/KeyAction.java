@@ -7,12 +7,16 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import ui.UI;
+
 public abstract class KeyAction extends AbstractAction {
 
 	protected ClientGame client;
+	protected UI parent;
 
-    public KeyAction(ClientGame client) {
+    public KeyAction(ClientGame client, UI parent) {
         this.client = client;
+        this.parent = parent;
     }
 
     @Override

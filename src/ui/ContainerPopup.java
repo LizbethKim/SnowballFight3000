@@ -34,17 +34,26 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	private List<Objects> items;
 	private boolean interactable;
 
-	public ContainerPopup(ClientGame cl, List<Objects> items,
+	public ContainerPopup(ClientGame cl, UI ui, String title, List<Objects> items,
 			boolean interactable) {
-		super();
+		super(ui, title);
 		this.client = cl;
 		this.items = items;
 		this.selectedItem = 1;
 		this.maxItems = items.size();
 		this.items = items;
 		this.interactable = interactable;
+		setupPanel();
+		this.setLocationRelativeTo(ui);
+		setTitle(title);
 		addKeyListener(this);
+	
+		
+		pack();
+		setVisible(true);
+	}
 
+	private void setupPanel(){
 		JPanel panel = new JPanel() {
 			@Override
 			public void paintComponent(Graphics g) {
@@ -54,10 +63,8 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		panel.setPreferredSize(new Dimension(slotSize * (maxColumn), slotSize
 				* ((int) Math.ceil((double) maxItems / maxColumn))));
 		add(panel);
-		pack();
-		setVisible(true);
 	}
-
+	
 	public void paintContainer(Graphics g) {
 		Image slot = containerSlot.getScaledInstance(slotSize, slotSize, 0);
 		Image selectedSlot = selectedContainerSlot.getScaledInstance(slotSize,
@@ -154,13 +161,4 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	public void keyTyped(KeyEvent arg0) {
 		dealWithKeyTyped(arg0);
 	}
-
-	public static void main(String[] args) {
-		List<Objects> objects = new ArrayList<Objects>();
-		objects.add(Objects.KEY);
-		objects.add(Objects.REDFLAG);
-		objects.add(Objects.BLUEFLAG);
-		objects.add(Objects.KEY);
-	}
-
 }
