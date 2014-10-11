@@ -155,8 +155,9 @@ public class ClientGame {
 	 * RB should it return null actually? Because an empty container is
 	 * different to not a container...
 	 * @return An unmodifiable list of enums representing the objects in the inventory.
+	 * @throws NotAChestException 
 	 */
-	public List<Objects> getContents() {
+	public List<Objects> getContents() throws NotAChestException {
 		Location containerLoc = Location.locationInFrontOf(player.getLocation(), player.getDirection()); 
 		if (board.containsLocation(containerLoc)) {
 			InanimateEntity on = board.tileAt(containerLoc).getOn();
@@ -164,7 +165,7 @@ public class ClientGame {
 				return ((Inventory)on).getContentsAsEnums();
 			}
 		}
-		return Collections.unmodifiableList(new ArrayList<Objects>());
+		throw new NotAChestException();
 	}
 
 	public int getPlayerID() {
