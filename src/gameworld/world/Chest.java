@@ -60,5 +60,15 @@ public class Chest extends Furniture implements Inventory {
 		return Collections.unmodifiableList(ans);
 	}
 
+	@Override
+	public int size() {
+		return contents.size();
+	}
+
+	@Override
+	public int maxSize() {
+		return itemLimit;
+	}
+
 
 }

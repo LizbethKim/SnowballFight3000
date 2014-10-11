@@ -53,4 +53,14 @@ public class Bag extends Item implements Inventory {
 		return Objects.BAG;
 	}
 
+	@Override
+	public int size() {
+		return contents.size();
+	}
+
+	@Override
+	public int maxSize() {
+		return itemLimit;
+	}
+
 }

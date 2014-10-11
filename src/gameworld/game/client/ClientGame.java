@@ -140,6 +140,12 @@ public class ClientGame {
 		// KTC check if there's something there first?
 		client.pickUpItem();
 	}
+	
+	public void dropItem(int index) {
+		if (player.getInventory().size() > index && player.getInventory().getContents().get(index) != null) {
+			// KTC send drop item request through network
+		}
+	}
 
 	/**
 	 * Gets the contents of the inventory (if there is one) in front of where the 
