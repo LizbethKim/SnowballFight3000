@@ -151,6 +151,18 @@ public class Board {
 		board[3][10].place(new Flag(Team.BLUE));
 		board[12][17] = new Tile(new Location(12,17), Terrain.GRASS, null);
 		board[13][10].place(new Furniture("A bush", Objects.BUSH));
+		
+		Bag b = new Bag();
+		b.addItem(new Key());
+		b.addItem(new Powerup());
+		board[3][18].place(b);
+		
+		Chest c = new Chest("A treasure chest");
+		c.addItem(new Key());
+		c.addItem(new Bag());
+		
+		board[7][12].place(c);
+		
 		return new Board(board);
 		
 //		board = new Tile[10][10];
