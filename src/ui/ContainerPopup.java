@@ -32,24 +32,27 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	private int selectedItem;
 	private int maxItems;
 	private List<Objects> items;
+	private boolean interactable;
 
-	public ContainerPopup(ClientGame cl, List<Objects> items) {
+	public ContainerPopup(ClientGame cl, List<Objects> items,
+			boolean interactable) {
 		super();
 		this.client = cl;
 		this.items = items;
 		this.selectedItem = 1;
 		this.maxItems = items.size();
 		this.items = items;
+		this.interactable = interactable;
 		addKeyListener(this);
-		
-		JPanel panel = new JPanel(){
+
+		JPanel panel = new JPanel() {
 			@Override
-			public void paintComponent(Graphics g){
+			public void paintComponent(Graphics g) {
 				paintContainer(g);
 			}
 		};
 		panel.setPreferredSize(new Dimension(slotSize * (maxColumn), slotSize
-				* ((int) Math.ceil((double)maxItems / maxColumn))));
+				* ((int) Math.ceil((double) maxItems / maxColumn))));
 		add(panel);
 		pack();
 		setVisible(true);
@@ -57,25 +60,25 @@ public class ContainerPopup extends JDialog implements KeyListener {
 
 	public void paintContainer(Graphics g) {
 		Image slot = containerSlot.getScaledInstance(slotSize, slotSize, 0);
-		Image selectedSlot = selectedContainerSlot.getScaledInstance(slotSize, slotSize, 0);
+		Image selectedSlot = selectedContainerSlot.getScaledInstance(slotSize,
+				slotSize, 0);
 		int row = 0;
 		int column = 0;
 		for (int i = 0; i != maxItems; i++) {
 			int xPos = column * slotSize;
 			int yPos = row * slotSize;
-			
-			if(i+1 == selectedItem){
+
+			if (i + 1 == selectedItem) {
 				g.drawImage(selectedSlot, xPos, yPos, null, null);
 			} else {
 				g.drawImage(slot, xPos, yPos, null, null);
 			}
-			
-			
+
 			if (items.get(i) != null) {
 				Image item = items.get(i).imgs[0];
 				drawItem(items.get(i).imgs[0], xPos, yPos, slotSize, g);
 			}
-			if (column+1 < maxColumn) {
+			if (column + 1 < maxColumn) {
 				column++;
 			} else {
 				column = 0;
@@ -91,33 +94,52 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		g.drawImage(item, itemXPos, itemYPos, itemSize, itemSize, null);
 	}
 
-	private void dealWithKeyTyped(KeyEvent e){
+	private void dealWithKeyTyped(KeyEvent e) {
 		int key = e.getKeyCode();
-		if(key == KeyEvent.VK_W || key == KeyEvent.VK_UP){
+		if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
 			changeSelection(-maxColumn);
-		} else if(key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN){
+		} else if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
 			changeSelection(maxColumn);
-		} else if(key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT){
+		} else if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
 			changeSelection(-1);
-		} else if(key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT){
+		} else if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
 			changeSelection(1);
-		} else if (key == KeyEvent.VK_Z){
-			//client.
+		} else if (interactable) {
+			if (key == KeyEvent.VK_Z) {
+				client.takeItemFromContainer(selectedItem);
+			} else if (key == KeyEvent.VK_1) {
+				client.dropIntoContainer(1);
+			} else if (key == KeyEvent.VK_2) {
+				client.dropIntoContainer(2);
+			} else if (key == KeyEvent.VK_3) {
+				client.dropIntoContainer(3);
+			} else if (key == KeyEvent.VK_4) {
+				client.dropIntoContainer(4);
+			} else if (key == KeyEvent.VK_5) {
+				client.dropIntoContainer(5);
+			} else if (key == KeyEvent.VK_6) {
+				client.dropIntoContainer(6);
+			} else if (key == KeyEvent.VK_7) {
+				client.dropIntoContainer(7);
+			} else if (key == KeyEvent.VK_8) {
+				client.dropIntoContainer(8);
+			} else if (key == KeyEvent.VK_9) {
+				client.dropIntoContainer(9);
+			}
 		}
 		repaint();
 	}
-	
-	private void changeSelection(int selectionChange){
+
+	private void changeSelection(int selectionChange) {
 		int newSelection = selectedItem + selectionChange;
-		if(newSelection > 0 && newSelection <= maxItems){
+		if (newSelection > 0 && newSelection <= maxItems) {
 			selectedItem = newSelection;
-			System.out.println("changing selection to:"+newSelection);
+			System.out.println("changing selection to:" + newSelection);
 		}
 	}
-	
-	
-	//KeyListener Methods
-	
+
+	// KeyListener Methods
+
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		dealWithKeyTyped(arg0);
@@ -125,7 +147,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-	
+
 	}
 
 	@Override

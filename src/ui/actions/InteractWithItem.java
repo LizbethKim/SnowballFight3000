@@ -18,7 +18,7 @@ public class InteractWithItem extends KeyAction {
 	protected void execute() {
 		try {
 			List<Objects> items = client.getContents();
-			new ContainerPopup(client, items);
+			new ContainerPopup(client, items, true);
 		} catch (NotAContainerException e) {
 			//do nothing
 		}
