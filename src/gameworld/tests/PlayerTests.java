@@ -57,6 +57,8 @@ public class PlayerTests {
 		p.damage(85);
 		assertTrue(p.getHealth() == 0);
 		assertTrue(p.isFrozen());
+		p.damage(-110);
+		assertTrue(p.getHealth() == 100);
 	}
 	
 	@Test

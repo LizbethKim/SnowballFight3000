@@ -77,6 +77,9 @@ public class Player implements Entity {
 		if (health < 0) {
 			health = 0;
 		}
+		if (health > 100) {
+			health = 100;
+		}
 	}
 
 	public void incrementScore(int amount) {
