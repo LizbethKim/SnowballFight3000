@@ -20,14 +20,6 @@ public class Player implements Entity {
 	private long stepDelay = 200;
 	private long snowballDelay = 500;
 
-	// For single player only
-	public Player (Team team, Location l, String name) {
-		this.loc = l;
-		this.team = team;
-		this.name = name;
-		this.inventory = new PlayerInventory();
-	}
-
 	public Player (String name, Team t, int ID, Location l) {
 		this.loc = l;
 		this.ID = ID;

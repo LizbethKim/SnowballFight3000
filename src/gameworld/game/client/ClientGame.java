@@ -1,6 +1,5 @@
 package gameworld.game.client;
 
-import gameworld.game.server.ServerGame;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.InanimateEntity;
@@ -43,21 +42,6 @@ public class ClientGame {
 
 	private BoardState boardState;
 	private int selectedIndex = -1;	// index selected in inventory
-
-	// Only used for single player
-	public ClientGame(Board b, Client c){
-		this.board = b;
-		this.client = c;
-		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
-		playerIDs = new HashMap<Integer, Player>();
-		display = new UI(this);
-		client.sendNameAndTeam("name goes here", Team.BLUE);
-		player = new Player("name goes here", Team.BLUE, 0, new Location(3,3));
-
-		updater = this.getUpdater();
-		client.startReceiving(updater);
-		System.out.println("new game created");
-	}
 
 	public ClientGame(String name, String IP, Team team, UI display) {
 		this.client = new Client(IP);

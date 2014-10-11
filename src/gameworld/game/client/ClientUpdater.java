@@ -39,15 +39,6 @@ public class ClientUpdater {
 
 	}
 
-	// Only for single-player mode
-	public ClientUpdater(Board b, Map<Integer, Player> players, BoardState bs, UI display) {
-		this.board = b;
-		this.playerIDs = players;
-		this.bs = bs;
-		this.display = display;
-		updateBoardState();
-	}
-
 	public void addPlayer(String name, Team t, int id, Location l) {
 		if (playerIDs.get(id) == null) {
 			playerIDs.put(id, new Player(name, t, id, l));
