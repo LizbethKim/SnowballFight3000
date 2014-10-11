@@ -20,8 +20,9 @@ public class Main {
 				new Thread(server).start();
 				new Thread(new Time(g)).start();
 				server.sendLoop();
+			} else {
+				new UI();
 			}
-			new UI();
 
 		}
 		new UI();
