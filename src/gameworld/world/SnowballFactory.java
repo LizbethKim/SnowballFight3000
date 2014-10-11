@@ -5,11 +5,7 @@ public class SnowballFactory {
 	public enum SnowballType{
 		NORMAL, FLAMING, ICE
 	}
-	
-	public SnowballFactory() {
-		// AUTO
-	}
-	
+
 	public Snowball makeSnowball(Location l, Direction d, SnowballType s) {
 		if (s == SnowballType.FLAMING) {
 			return new Snowball(l, d, 20, 1.5, s);

@@ -16,6 +16,10 @@ public class Player implements Entity {
 	private Direction d = Direction.NORTH;
 	private int ID;
 
+	// Determine the speed the player can do stuff
+	private long stepDelay = 200;
+	private long snowballDelay = 500;
+
 	// For single player only
 	public Player (Team team, Location l, String name) {
 		this.loc = l;
@@ -71,7 +75,7 @@ public class Player implements Entity {
 			}
 		}
 	}
-	
+
 	public void damage(int amount) {
 		health -= amount;
 		if (health < 0) {
@@ -88,11 +92,11 @@ public class Player implements Entity {
 			score = 0;
 		}
 	}
-	
+
 	public Location getLocationInFrontOf() {
 		return Location.locationInFrontOf(this.loc, this.d);
 	}
-	
+
 	// GETTERS AND SETTERS
 	public void setHealth(int health) {
 		this.health = health;
@@ -132,7 +136,7 @@ public class Player implements Entity {
 	public Inventory getInventory() {
 		return inventory;
 	}
-	
+
 	public Direction getDirection() {
 		return d;
 	}
@@ -152,4 +156,21 @@ public class Player implements Entity {
 	public void setTeam(Team team) {
 			this.team = team;
 	}
+
+	public long getSnowballDelay() {
+		return snowballDelay;
+	}
+
+	public void setSnowballDelay(long snowballDelay) {
+		this.snowballDelay = snowballDelay;
+	}
+
+	public long getStepDelay() {
+		return stepDelay;
+	}
+
+	public void setStepDelay(long stepDelay) {
+		this.stepDelay = stepDelay;
+	}
+
 }

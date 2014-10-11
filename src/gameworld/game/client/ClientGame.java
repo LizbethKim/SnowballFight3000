@@ -40,7 +40,7 @@ public class ClientGame {
 	private UI display;
 	private long lastMovedTime;
 	private long lastFiredTime;
-	
+
 	private BoardState boardState;
 	private int selectedIndex = -1;	// index selected in inventory
 
@@ -101,7 +101,7 @@ public class ClientGame {
 		Direction up = boardState.getDirection();
 		d = Direction.values()[(d.ordinal() - up.ordinal() + 4)%4];
 
-		if (System.currentTimeMillis() - lastMovedTime > ServerGame.MOVE_DELAY) {
+		if (System.currentTimeMillis() - lastMovedTime > player.getStepDelay()) {
 			if (player.getDirection() == d) {
 				Location newLoc = player.getLocationInFrontOf();
 				if (board.containsLocation(newLoc) && board.canTraverse(newLoc) && this.isFree(newLoc)) {
@@ -126,7 +126,7 @@ public class ClientGame {
 	}
 
 	public void throwSnowball() {
-		if (System.currentTimeMillis() - lastFiredTime > ServerGame.THROW_DELAY) {
+		if (System.currentTimeMillis() - lastFiredTime > player.getSnowballDelay()) {
 			client.throwSnowball();
 			lastFiredTime = System.currentTimeMillis();
 		}
@@ -141,7 +141,7 @@ public class ClientGame {
 		}
 		throw new NoItemException();
 	}
-	
+
 	public void pickUpItem() {
 		Location facing = player.getLocationInFrontOf();
 		if (board.containsLocation(facing)) {
@@ -150,17 +150,17 @@ public class ClientGame {
 			}
 		}
 	}
-	
+
 	/**
-	 * Removes the item at the specified index from the container 
-	 * in front of the player in the world. Places it in the 
+	 * Removes the item at the specified index from the container
+	 * in front of the player in the world. Places it in the
 	 * player's inventory
 	 * @param index
 	 */
 	public void takeItemFromContainer(int index) {
 		// KTC make picking from containers work
 	}
-	
+
 	/**
 	 * Drops the item at the index position in the player's inventory into
 	 * the container in front of them in the world
@@ -168,25 +168,25 @@ public class ClientGame {
 	public void dropIntoContainer(int index) {
 		// KTC make adding into containers work
 	}
-	
+
 	public void useItem() {
 		//KTC use selected item
 	}
-	
+
 	public boolean selectedIsContainer(){
 		if (selectedIndex != -1 && player.getInventory().getContents().get(selectedIndex) instanceof Inventory) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public List<Objects> getContentsOfSelected() throws NotAContainerException {
 		if (selectedIsContainer()) {
 			return ((Inventory)player.getInventory().getContents().get(selectedIndex)).getContentsAsEnums();
 		}
 		throw new NotAContainerException();
 	}
-	
+
 	public void dropSelectedItem() {
 		if (player.getInventory().size() > selectedIndex && player.getInventory().getContents().get(selectedIndex) != null) {
 			// KTC send drop item request through network
@@ -194,13 +194,13 @@ public class ClientGame {
 	}
 
 	/**
-	 * Gets the contents of the inventory (if there is one) in front of where the 
+	 * Gets the contents of the inventory (if there is one) in front of where the
 	 * player is standing. If there is none, it returns an empty list.
 	 * @return An unmodifiable list of enums representing the objects in the inventory.
-	 * @throws NotAContainerException 
+	 * @throws NotAContainerException
 	 */
 	public List<Objects> getContents() throws NotAContainerException {
-		Location containerLoc = Location.locationInFrontOf(player.getLocation(), player.getDirection()); 
+		Location containerLoc = Location.locationInFrontOf(player.getLocation(), player.getDirection());
 		if (board.containsLocation(containerLoc)) {
 			InanimateEntity on = board.tileAt(containerLoc).getOn();
 			if (on != null && on instanceof Inventory) {
@@ -213,7 +213,7 @@ public class ClientGame {
 	public int getPlayerID() {
 		return playerID;
 	}
-	
+
 
 	public int getSelectedIndex() {
 		return selectedIndex;
