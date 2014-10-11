@@ -1,12 +1,16 @@
 package ui;
 
 
+import graphics.assets.Objects;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,12 +21,16 @@ public class ContainerPopup extends JPanel {
 			.loadImage("ContainerSlot.png");
 
 	private static final int slotSize = 100;
-	private static final int containerSize = 9;
 	private static final int maxColumn = 3;
+	
+	private int maxItems;
+	private List<Objects> items;
 
-	public ContainerPopup() {
-		setPreferredSize(new Dimension(slotSize*(maxColumn), slotSize*(containerSize/maxColumn)));
-		//setLayout(new GridLayout(0,3));
+	public ContainerPopup(List<Objects> items) {
+		this.maxItems = items.size();
+		this.items = items;
+		
+		setPreferredSize(new Dimension(slotSize*(maxColumn), slotSize*(maxItems/maxColumn)));
 	}
 
 	@Override
@@ -30,8 +38,12 @@ public class ContainerPopup extends JPanel {
 		Image slot = containerSlot.getScaledInstance(slotSize, slotSize, 0);
 		int row = 0;
 		int column = 0;
-		for(int i = 0; i != containerSize; i++){
-			g.drawImage(slot, column*slotSize, row*slotSize, null, null);
+		for(int i = 0; i != maxItems; i++){
+			int xPos = column*slotSize;
+			int yPos = row*slotSize;
+			Image item = items.get(i).imgs[0];
+			g.drawImage(slot, xPos, yPos, null, null);
+			drawItem(items.get(i).imgs[0], xPos, yPos, slotSize, g);
 			if(column < maxColumn){
 				column++;
 			} else {
@@ -41,13 +53,25 @@ public class ContainerPopup extends JPanel {
 		}
 	}
 	
+	private void drawItem(Image item, int xPos, int yPos, int size, Graphics g) {
+		int itemXPos = xPos + size / 6;
+		int itemYPos = yPos + size / 6;
+		int itemSize = size - 2 * (size / 6);
+		g.drawImage(item, itemXPos, itemYPos, itemSize, itemSize, null);
+	}
+	
 	public void show() {
 		JOptionPane.showMessageDialog(null, this, "Contents of Chest",
 				JOptionPane.PLAIN_MESSAGE);
 	}
 	
 	public static void main(String[] args){
-		new ContainerPopup().show();
+		List<Objects> objects = new ArrayList<Objects>();
+		objects.add(Objects.KEY);
+		objects.add(Objects.REDFLAG);
+		objects.add(Objects.BLUEFLAG);
+		objects.add(Objects.KEY);
+		new ContainerPopup(objects).show();
 	}
 
 }

@@ -12,7 +12,11 @@ public class InteractWithItem extends KeyAction{
 	
 	@Override
 	protected void execute() {
-		new ContainerPopup().show();
+		if(client.getContents() != null){
+			
+			new ContainerPopup(client.getContents()).show();
+		}
+		
 		//RB: client.interactWithItem();
 	}
 

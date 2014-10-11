@@ -18,11 +18,14 @@ import javax.swing.JPanel;
 public class InventoryPanel extends JPanel {
 	private static final Image inventorySlot = HUDPanel
 			.loadImage("InventorySlot.png");
+	private static final Image selectedSlot = HUDPanel
+			.loadImage("SelectedSlot.png");
 	private static final Image hideItems = HUDPanel.loadImage("HideItems.png");
 	private static final Image showItems = HUDPanel.loadImage("ShowItems.png");
 
 	private static final double showHideXProportion = 1.0 / 20.0;
 	private boolean inventoryHidden;
+	private int selectedItem;
 
 	private ClientGame client;
 
@@ -62,17 +65,22 @@ public class InventoryPanel extends JPanel {
 
 	private void paintInventory(Graphics g) {
 		List<Objects> items = client.getPlayerInventory();
-		//System.out.println("INVENTORY SIZE IS:           "+ items.size());
-		final int inventoryNumber = 9;
+		// System.out.println("INVENTORY SIZE IS:           "+ items.size());
+		final int inventoryNumber = items.size();
 		int xPos = getShowHideWidth();
 		int yPos = 0;
 		final int size = this.getHeight();
 		Image slot = inventorySlot.getScaledInstance(size, size, 0);
-		for (int i = 0; i < inventoryNumber; i++) {
-			drawSlot(slot, xPos, yPos, size, i + 1, g);
-			if (i < items.size()) {
-				//System.out.println("DRAWING INVENTORY ITEMS ----------");
-				drawItem(xPos, yPos, size, items.get(i), g);
+		Image selected = selectedSlot.getScaledInstance(size, size, 0);
+		for (int i = 1; i <= inventoryNumber; i++) {
+			if (selectedItem == i) {
+				drawSlot(selectedSlot, xPos, yPos, size, i, g);
+			} else{
+				drawSlot(slot, xPos, yPos, size, i, g);
+			}
+			if (i < items.size() && items.get(i) != null) {
+
+				drawItem(xPos, yPos, size, items.get(i - 1), g);
 			}
 			xPos += size;
 		}
