@@ -151,6 +151,14 @@ public class ClientGame {
 		}
 	}
 	
+	public void takeItemFromContainer(int index) {
+		// KTC make picking from containers work
+	}
+	
+	public void dropSelectedIntoContainer() {
+		// KTC make adding into containers work
+	}
+	
 	public void dropSelectedItem() {
 		if (player.getInventory().size() > selectedIndex && player.getInventory().getContents().get(selectedIndex) != null) {
 			// KTC send drop item request through network
