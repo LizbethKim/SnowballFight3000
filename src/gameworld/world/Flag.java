@@ -4,13 +4,19 @@ import graphics.assets.Objects;
 
 public class Flag extends Item {
 	private Team team;
-	
+
 	public Flag(Team t) {
 		this.team = t;
-		this.description = "The " + (this.team == Team.RED ? "red": "blue") 
+		this.description = "The " + (this.team == Team.RED ? "red": "blue")
 				+ " team's flag!";
-		
+
 	}
+
+	@Override
+	public boolean canMoveThrough () {
+		return false;
+	}
+
 
 	@Override
 	public Objects asEnum() {
