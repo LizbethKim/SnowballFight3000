@@ -162,10 +162,10 @@ public class ClientGame {
 	}
 	
 	/**
-	 * Drops the selected item in the player's inventory into
+	 * Drops the item at the index position in the player's inventory into
 	 * the container in front of them in the world
 	 */
-	public void dropSelectedIntoContainer() {
+	public void dropIntoContainer(int index) {
 		// KTC make adding into containers work
 	}
 	
