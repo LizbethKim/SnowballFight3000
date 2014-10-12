@@ -175,7 +175,7 @@ public class StaxParser {
 		}else if(name.equals("map")){
 			item = new Map();
 		}else if(name.equals("powerup")){
-			//item = new Powerup();
+			item = new Powerup(Powerup.Power.valueOf(values[1]));
 		}
 		return item;
 	}
