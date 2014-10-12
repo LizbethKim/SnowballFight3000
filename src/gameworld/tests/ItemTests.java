@@ -5,9 +5,14 @@ import gameworld.world.Bag;
 import org.junit.Test;
 
 public class ItemTests {
-
+	// KTC finish these tests
 	@Test
 	public void testChest() {
+		
+	}
+	
+	@Test
+	public void testChestLocking() {
 		
 	}
 	
@@ -32,4 +37,8 @@ public class ItemTests {
 		
 	}
 
+	public void testDoor() {
+		
+	}
+	
 }
