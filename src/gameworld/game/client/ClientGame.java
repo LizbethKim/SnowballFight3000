@@ -160,8 +160,12 @@ public class ClientGame {
 			Item toUse = player.getInventory().getContents().get(selectedIndex);
 			if (toUse instanceof Powerup) {
 				Powerup powerup = (Powerup)toUse;
-				powerup.use(player);
-				// client.removeItem(selectedIndex);
+				if (powerup.getPower() == Powerup.Power.HEALTH_POTION || powerup.getPower() == Powerup.Power.STRONG_HEALTH_POTION) {
+					client.useItem(selectedIndex);
+				} else {
+					powerup.use(player);
+					client.useItem(selectedIndex);
+				}
 			} else {
 				// KTC later
 			}

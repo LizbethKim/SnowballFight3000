@@ -23,6 +23,7 @@ import gameworld.world.InanimateEntity;
 import gameworld.world.Item;
 import gameworld.world.Location;
 import gameworld.world.Player;
+import gameworld.world.Powerup;
 import gameworld.world.Snowball;
 import gameworld.world.SnowballFactory;
 import gameworld.world.SnowballFactory.SnowballType;
@@ -100,7 +101,23 @@ public class ServerGame {
 	}
 
 	public void useItem(int playerID, int index) {
-
+		Player p = this.playerIDs.get(playerID);
+		if (p != null) {
+			if (index != -1 && p.getInventory().getContents().get(index) != null) {
+				Item toUse = p.getInventory().getContents().get(index);
+				if (toUse instanceof Powerup) {
+					Powerup powerup = (Powerup)toUse;
+					if (powerup.getPower() == Powerup.Power.HEALTH_POTION || powerup.getPower() == Powerup.Power.STRONG_HEALTH_POTION) {
+						powerup.use(p);
+						server.queuePlayerUpdate(new UpdateHealthEvent(p.getHealth()), playerID);
+					} else {
+						// server.queuePlayerUpdate(new RemoveItemFromInventoryEvent(index), playerID);
+					}
+				} else {
+					// KTC later
+				}
+			}
+		}
 	}
 
 	public void throwSnowball(int playerID) {

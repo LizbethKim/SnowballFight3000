@@ -13,7 +13,7 @@ public class Powerup extends Item {
 	protected PowerupEffect effect;
 	private Power power;
 
-	enum Power {
+	public enum Power {
 		SPEED_BOOST("Move twice as fast for 30 seconds"),
 		FIRE_SPEED_BOOST("You can throw snowballs more frequently for 30 seconds"),
 		STRONG_HEALTH_POTION("Restores you to full health"),
@@ -49,7 +49,7 @@ public class Powerup extends Item {
 	public void use (Player p) {
 		effect.apply(p);
 	}
-	
+
 	public Power getPower(){
 		return power;
 	}
