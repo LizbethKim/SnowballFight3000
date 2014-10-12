@@ -49,6 +49,10 @@ public class Powerup extends Item {
 	public void use (Player p) {
 		effect.apply(p);
 	}
+	
+	public Power getPower(){
+		return power;
+	}
 
 	@Override
 	public Objects asEnum() {
