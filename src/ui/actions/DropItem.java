@@ -12,7 +12,9 @@ public class DropItem extends KeyAction{
 	
 	@Override
 	protected void execute() {
+		if(client.getSelectedIndex()> 0){
 		client.dropSelectedItem();
+		}
 	}
 
 }

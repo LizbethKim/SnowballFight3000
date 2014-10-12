@@ -74,7 +74,7 @@ public class InputPopup extends JPanel {
 		// keep redisplaying dialog until cancelled or valid option chosen
 		do {
 			// dialog
-			chosen = JOptionPane.showOptionDialog(null, this,
+			chosen = JOptionPane.showOptionDialog(ui, this,
 					"Enter Name, IP Adress and Team",
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.DEFAULT_OPTION,
 					null, null, null);
