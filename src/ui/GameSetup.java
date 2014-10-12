@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.HashSet;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import server.Server;
@@ -78,15 +79,12 @@ public class GameSetup extends JPanel {
 	}
 	
 	private void startServer(){
-//		new UI();
-	//	ui.setVisible(false);
 		ServerGame g = new ServerGame(Board.defaultBoard());
 		Server server = new Server(g);
 		// start server connection accepting thread
 		new Thread(server).start();
 		new Thread(new Time(g)).start();
-		server.sendLoop();
-
+		JOptionPane.showMessageDialog(null, "Server Started");
 	}
 	
 	private void updateCursor(int x, int y) {

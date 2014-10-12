@@ -1,0 +1,18 @@
+package ui.actions;
+import ui.UI;
+import gameworld.game.client.ClientGame;
+import gameworld.world.Board;
+
+
+public class DropItem extends KeyAction{
+
+	public DropItem(ClientGame cl, UI parent){
+		super(cl, parent);
+	}
+	
+	@Override
+	protected void execute() {
+		client.dropSelectedItem();
+	}
+
+}

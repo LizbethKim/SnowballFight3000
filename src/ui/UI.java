@@ -204,6 +204,8 @@ public class UI extends JFrame {
 		addKeyBinding("PickupItem", new PickupItem(client, this), KeyEvent.VK_Z);
 		addKeyBinding("UseInventoryItem", new UseItem(client, this),
 				KeyEvent.VK_R);
+		addKeyBinding("DropItem", new DropItem(client, this),
+				KeyEvent.VK_F);
 
 		// view rotation keys
 		addKeyBinding("RotateClockwise", new RotateClockwise(client, this),
