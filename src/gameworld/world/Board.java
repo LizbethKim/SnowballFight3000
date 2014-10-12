@@ -61,7 +61,7 @@ public class Board {
 						if (a.contains(board[x][y])){
 							enumTiles[x][y] = board[x][y].getType();
 						} else {
-							enumTiles[x][y] = Terrain.NULL_TILE;
+							enumTiles[x][y] = Terrain.NULLTILE;
 						}
 					}
 				}
