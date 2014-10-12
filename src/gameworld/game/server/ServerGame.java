@@ -93,11 +93,14 @@ public class ServerGame {
 		Player p = this.playerIDs.get(playerID);
 		if (p != null) {
 			Location l = Location.locationInFrontOf(p.getLocation(), p.getDirection());
-			Item toDrop = p.getInventory().getContents().get(index);
-			p.getInventory().removeItem(toDrop);
-			server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
-			for (int id: playerIDs.keySet()) {
-				server.queuePlayerUpdate(new PlaceItemEvent(l, toDrop), id);
+			if (board.tileAt(l).isClear()) {
+				Item toDrop = p.getInventory().getContents().get(index);
+				p.getInventory().removeItem(toDrop);
+				board.tileAt(l).place(toDrop);
+				server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
+				for (int id: playerIDs.keySet()) {
+					server.queuePlayerUpdate(new PlaceItemEvent(l, toDrop), id);
+				}
 			}
 		}
 	}
