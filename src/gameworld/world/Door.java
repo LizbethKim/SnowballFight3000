@@ -19,7 +19,7 @@ public class Door extends Furniture implements Lockable {
 
 	@Override
 	public boolean unlock(Key k) {
-		if (k.id == this.id) {	// KTC ??
+		if (k.id == this.id) {
 			this.locked = false;
 			return true;
 		}

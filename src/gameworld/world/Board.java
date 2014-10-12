@@ -138,7 +138,7 @@ public class Board {
 		return board[0].length;
 	}
 
-	public static Board defaultBoard2() {
+	public static Board defaultBoard() {
 		Tile[][] board = new Tile[15][20];
 		List<Area> rooms = new ArrayList<Area>();
 		Area main = new Area();
@@ -217,7 +217,7 @@ public class Board {
 // 		board[2][7].place(new Furniture("A bush", Objects.BUSH));
 	}
 
-	public static Board defaultBoard() {
+	public static Board defaultBoard2() {
 		Tile[][] board = new Tile[80][80];
 		char[][] terrain = {{'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'G', 'G', 'G', 'G', 'G', 'G', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
 				{'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
