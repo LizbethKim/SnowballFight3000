@@ -4,6 +4,7 @@ public class SpeedEffect implements PowerupEffect {
 	private Player p;
 	@Override
 	public void apply(Player p) {
+		this.p = p;
 		new Thread(this).start();
 	}
 

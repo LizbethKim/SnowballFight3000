@@ -38,7 +38,7 @@ public class Board {
 
 	public void removeItemAt(Location l) {
 		if (this.containsLocation(l)) {
-				board[l.x][l.y].removeOn();
+				board[l.x][l.y].clear();
 		}
 	}
 
@@ -159,6 +159,7 @@ public class Board {
 		board[14][18].place(new Furniture("A tree", Objects.TREE));
 		board[13][7].place(new Furniture("A tree", Objects.TREE));
 		board[10][14].place(new Furniture("A tree", Objects.TREE));
+		board[8][12].place(new Powerup(Powerup.Power.SPEED_BOOST));
 		board[2][18].place(new Furniture("A bush", Objects.BUSH));
 		board[3][4].place(new Furniture("A corner", Objects.CORNER_N_E));
 		board[0][4].place(new Furniture("A corner", Objects.CORNER_N_W));
@@ -228,6 +229,10 @@ public class Board {
 			board[10][y].place(new Furniture("A wall", Objects.WALL_N_S));
 			board[69][y].place(new Furniture("A wall", Objects.WALL_N_S));
 		}
+		board[69][10].clear();
+		board[69][69].clear();
+		board[10][10].clear();
+		board[10][69].clear();
 		board[69][10].place(new Furniture("A wall", Objects.CORNER_S_W));
 		board[69][69].place(new Furniture("A wall", Objects.CORNER_S_E));
 		board[10][10].place(new Furniture("A wall", Objects.CORNER_N_W));

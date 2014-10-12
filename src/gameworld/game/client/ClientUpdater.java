@@ -88,7 +88,7 @@ public class ClientUpdater {
 			Player p = this.playerIDs.get(playerID);
 			if (on != null && p != null && on instanceof Item) {
 				if (p.getInventory().addItem((Item)on)) {
-					board.tileAt(l).removeOn();
+					board.tileAt(l).clear();
 				}
 			}
 		}

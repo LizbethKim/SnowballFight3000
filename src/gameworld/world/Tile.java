@@ -27,7 +27,7 @@ public class Tile {
 		return on;
 	}
 
-	public void removeOn() {
+	public void clear() {
 		this.on = null;
 	}
 
