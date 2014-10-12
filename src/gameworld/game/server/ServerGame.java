@@ -86,6 +86,14 @@ public class ServerGame {
 		}
 	}
 
+	public void dropItem(int playerID, int index) {
+
+	}
+
+	public void useItem(int playerID, int index) {
+
+	}
+
 	public void throwSnowball(int playerID) {
 		System.out.println("Server throwing snowball");
 		Player thrower = playerIDs.get(playerID);
@@ -122,7 +130,6 @@ public class ServerGame {
 	}
 
 	public void clockTick() {
-		// KTC recode this prettier later
 		Iterator<Snowball> it = projectiles.iterator();
 		while (it.hasNext()) {
 			Snowball s = it.next();
