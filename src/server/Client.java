@@ -260,7 +260,8 @@ public class Client implements Runnable {
 		Objects object = Objects.values()[readFromSocket()];
 		if(object==Objects.KEY) {
 			int id = readFromSocket();
-			return new Key("A key to your mum", id);
+			String description = readString();
+			return new Key(description, id);
 		} else if(object==Objects.BAG) {
 			return new Bag();
 		} else if(object==Objects.BLUEFLAG) {
