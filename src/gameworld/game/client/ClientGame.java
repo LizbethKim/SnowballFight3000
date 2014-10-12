@@ -163,6 +163,7 @@ public class ClientGame {
 				if (powerup.getPower() == Powerup.Power.HEALTH_POTION || powerup.getPower() == Powerup.Power.STRONG_HEALTH_POTION) {
 					client.useItem(selectedIndex);
 				} else {
+					System.out.println(player);
 					powerup.use(player);
 					client.useItem(selectedIndex);
 				}

@@ -12,6 +12,8 @@ import server.events.CreatePlayerEvent;
 import server.events.FreezePlayerEvent;
 import server.events.MoveEvent;
 import server.events.PickUpItemEvent;
+import server.events.PlaceItemEvent;
+import server.events.RemoveFromInventoryEvent;
 import server.events.RemoveItemEvent;
 import server.events.RemovePlayerEvent;
 import server.events.TurnEvent;
@@ -93,9 +95,9 @@ public class ServerGame {
 			Location l = Location.locationInFrontOf(p.getLocation(), p.getDirection());
 			Item toDrop = p.getInventory().getContents().get(index);
 			p.getInventory().removeItem(toDrop);
-			// server.queuePlayerUpdate(new RemoveItemFromInventoryEvent(index), playerID);
+			server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
 			for (int id: playerIDs.keySet()) {
-				// server.queuePlayerUpdate(new PlaceItemEvent(toDrop.serialize(), l), id);
+				server.queuePlayerUpdate(new PlaceItemEvent(l, toDrop), id);
 			}
 		}
 	}
@@ -110,9 +112,8 @@ public class ServerGame {
 					if (powerup.getPower() == Powerup.Power.HEALTH_POTION || powerup.getPower() == Powerup.Power.STRONG_HEALTH_POTION) {
 						powerup.use(p);
 						server.queuePlayerUpdate(new UpdateHealthEvent(p.getHealth()), playerID);
-					} else {
-						// server.queuePlayerUpdate(new RemoveItemFromInventoryEvent(index), playerID);
 					}
+					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
 				} else {
 					// KTC later
 				}
@@ -132,7 +133,6 @@ public class ServerGame {
 		Location spawnLoc = new Location(13,13); 	// KTC change to something meaningful later
 		server.queuePlayerUpdate(new CreateLocalPlayerEvent(playerID, spawnLoc), playerID);
 		Player p = new Player(name, t, playerID, spawnLoc);
-		//server.queuePlayerUpdate(new MoveEvent(playerID, spawnLoc), playerID);
 		playerIDs.put(playerID, p);
 		for (int id: playerIDs.keySet()) {
 			Player other = playerIDs.get(id);
