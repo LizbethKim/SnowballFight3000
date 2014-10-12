@@ -130,6 +130,8 @@ public class Board {
 
 	public static Board defaultBoard() {
 		Tile[][] board = new Tile[15][20];
+		List<Area> rooms = new ArrayList<Area>();
+		Area main = new Area();
 		for (int x = 1; x < 14; x++) {
 			board[x][0] = new Tile(new Location(x, 0), Terrain.GRASS, null);
 			board[x][19] = new Tile(new Location(x, 19), Terrain.GRASS, null);
@@ -141,6 +143,12 @@ public class Board {
 			board[0][y] = new Tile(new Location(0, y), Terrain.GRASS, null);
 			board[14][y] = new Tile(new Location(14, y), Terrain.GRASS, null);
 		}
+		for (int x = 0; x < 15; x++) {
+			for (int y = 0; y < 20; y++) {
+				main.add(board[x][y]);
+			}
+		}
+		rooms.add(main);
 
 		board[0][0].place(new Furniture("A tree", Objects.TREE));
 		board[4][2].place(new Furniture("A tree", Objects.TREE));
@@ -177,7 +185,7 @@ public class Board {
 
 		board[13][2].place(c);
 
-		return new Board(board);
+		return new Board(board, rooms);
 
 //		board = new Tile[10][10];
 //		for (int x = 1; x < 9; x++) {
@@ -220,10 +228,10 @@ public class Board {
 			board[10][y].place(new Furniture("A wall", Objects.WALL_N_S));
 			board[69][y].place(new Furniture("A wall", Objects.WALL_N_S));
 		}
-		//board[69][10].place(new Furniture("A wall", Objects.WALL_CORNER_S_W));
-		//board[69][69].place(new Furniture("A wall", Objects.WALL_CORNER_S_E));
-		//board[10][10].place(new Furniture("A wall", Objects.WALL_CORNER_N_W));
-		//board[10][69].place(new Furniture("A wall", Objects.WALL_CORNER_N_E));
+		board[69][10].place(new Furniture("A wall", Objects.CORNER_S_W));
+		board[69][69].place(new Furniture("A wall", Objects.CORNER_S_E));
+		board[10][10].place(new Furniture("A wall", Objects.CORNER_N_W));
+		board[10][69].place(new Furniture("A wall", Objects.CORNER_N_E));
 
 
 		areas.add(main);
