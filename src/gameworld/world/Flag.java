@@ -16,6 +16,10 @@ public class Flag extends Item {
 	public boolean canMoveThrough () {
 		return false;
 	}
+	
+	public Team getTeam() {
+		return team;
+	}
 
 
 	@Override

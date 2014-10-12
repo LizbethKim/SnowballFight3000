@@ -87,7 +87,7 @@ public class ClientUpdater {
 			InanimateEntity on = board.tileAt(l).getOn();
 			Player p = this.playerIDs.get(playerID);
 			if (on != null && p != null && on instanceof Item) {
-				if (p.getInventory().addItem((Item)on)) {
+				if (p.addItemToInventory((Item)on)) {
 					board.tileAt(l).clear();
 				}
 			}
@@ -97,7 +97,7 @@ public class ClientUpdater {
 	public void removeFromInventory(int index) {
 		Player p = playerIDs.get(playerID);
 		if (p != null) {
-			p.getInventory().removeItem(p.getInventory().getContents().get(index));
+			p.removeFromInventory(index);
 		}
 		updateBoardState();
 	}

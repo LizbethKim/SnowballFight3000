@@ -96,7 +96,8 @@ public class StaxWriter {
 					Characters playerContents = eventFactory.createCharacters(buildPlayerString(p));
 					eventWriter.add(playerContents);
 					eventWriter.add(inventoryStartElement);
-					for(Item item : p.getInventory().getContents()){
+					// KH I changed the way that I use the inventory, so I edited this
+					for(Item item : p.getInventoryItems()){
 						createTag(ITEM, buildItemString(item));
 					}
 					eventWriter.add(inventoryEndElement);

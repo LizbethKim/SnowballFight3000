@@ -72,7 +72,7 @@ public class ClientGame {
 	}
 
 	public List<Objects> getPlayerInventory() {
-		return player.getInventory().getContentsAsEnums();
+		return player.getInventoryEnums();
 	}
 
 	public Location getPlayerLocation() {
@@ -156,8 +156,8 @@ public class ClientGame {
 	}
 
 	public void useItem() {
-		if (selectedIndex != -1 && player.getInventory().getContents().get(selectedIndex) != null) {
-			Item toUse = player.getInventory().getContents().get(selectedIndex);
+		if (selectedIndex != -1 && player.getInventoryItems().get(selectedIndex) != null) {
+			Item toUse = player.getInventoryItems().get(selectedIndex);
 			if (toUse instanceof Powerup) {
 				Powerup powerup = (Powerup)toUse;
 				if (powerup.getPower() == Powerup.Power.HEALTH_POTION || powerup.getPower() == Powerup.Power.STRONG_HEALTH_POTION) {
@@ -174,7 +174,7 @@ public class ClientGame {
 	}
 
 	public boolean selectedIsContainer(){
-		if (selectedIndex != -1 && player.getInventory().getContents().get(selectedIndex) instanceof Inventory) {
+		if (selectedIndex != -1 && player.getInventoryItems().get(selectedIndex) instanceof Inventory) {
 			return true;
 		}
 		return false;
@@ -182,13 +182,13 @@ public class ClientGame {
 
 	public List<Objects> getContentsOfSelected() throws NotAContainerException {
 		if (selectedIsContainer()) {
-			return ((Inventory)player.getInventory().getContents().get(selectedIndex)).getContentsAsEnums();
+			return ((Inventory)player.getInventoryItems().get(selectedIndex)).getContentsAsEnums();
 		}
 		throw new NotAContainerException();
 	}
 
 	public void dropSelectedItem() {
-		if (player.getInventory().size() > selectedIndex && player.getInventory().getContents().get(selectedIndex) != null) {
+		if (player.getInventoryItems().size() > selectedIndex && player.getInventoryItems().get(selectedIndex) != null) {
 			client.dropItem(selectedIndex);
 		}
 	}
