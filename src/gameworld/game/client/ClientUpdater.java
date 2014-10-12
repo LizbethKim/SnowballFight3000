@@ -125,6 +125,10 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
+	public void placeItem(Item i, Location l) {
+		board.tileAt(l).place(i);
+	}
+
 	// Updates the boardState after other methods are called.
 	private void updateBoardState() {
 		Objects[][] items = board.itemEnums();

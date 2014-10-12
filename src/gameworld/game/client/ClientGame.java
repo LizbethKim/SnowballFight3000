@@ -184,7 +184,7 @@ public class ClientGame {
 
 	public void dropSelectedItem() {
 		if (player.getInventory().size() > selectedIndex && player.getInventory().getContents().get(selectedIndex) != null) {
-			// KTC send drop item request through network
+			client.dropItem(selectedIndex);
 		}
 	}
 

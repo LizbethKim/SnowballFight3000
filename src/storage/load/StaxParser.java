@@ -6,8 +6,11 @@ package storage.load;
 import gameworld.world.Board;
 import gameworld.world.Furniture;
 import gameworld.world.InanimateEntity;
+import gameworld.world.Inventory;
+import gameworld.world.Item;
 import gameworld.world.Location;
 import gameworld.world.Player;
+import gameworld.world.PlayerInventory;
 import gameworld.world.Team;
 import gameworld.world.Tile;
 import graphics.assets.Objects;
@@ -88,7 +91,7 @@ public class StaxParser {
 						int teamNum = Integer.parseInt(values[0]);
 						Team team = Team.values()[teamNum];
 						Location loc = parseLoc(values[1], values[2]);
-						curPlayer = new Player(team, loc, values[3]);
+						curPlayer = new Player(values[4], team, 10, loc);
 						continue;
 					}
 
@@ -116,11 +119,19 @@ public class StaxParser {
 						continue;
 					}
 
-					if (elemName.equals(INVENTORY)) { 	//not implemented yet
-						/*if(eventReader.peek().isCharacters()){	//Inventory could be empty, so check if anything is there
+					if (elemName.equals(INVENTORY)) {
+						if(eventReader.peek().isCharacters()){	//Inventory could be empty, so check if anything is there
 							event = eventReader.nextEvent();
 							String[] values = event.asCharacters().getData().split(DELIMITER);
-						}*/
+							PlayerInventory inven = (PlayerInventory) curPlayer.getInventory();
+							for(int i = 0;i<6;i++){
+								inven.addItem(findItem(values[0]));
+							}
+						}
+						if(eventReader.peek().isStartElement()){
+							elemName = event.asStartElement().getName().getLocalPart();
+						}
+						
 						continue;
 					}
 
@@ -154,6 +165,15 @@ public class StaxParser {
 
 		return new StoredGame(board, players);
 
+	}
+
+	/**
+	 * @param string
+	 * @return
+	 */
+	private Item findItem(String string) {
+		
+		return null;
 	}
 
 	private Location parseLoc(String xStr, String yStr){
