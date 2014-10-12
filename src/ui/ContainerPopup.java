@@ -62,24 +62,29 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		int width =Math.min(slotSize * maxItems, slotSize * maxColumn); 
 		int height = slotSize
 				* ((int) Math.ceil((double) maxItems / maxColumn));
-		JPanel panel = new JPanel() {
+		JPanel containerPanel = new JPanel() {
 			@Override
 			public void paintComponent(Graphics g) {
 				paintContainer(g);
 			}
 		};
 
-		panel.setPreferredSize(new Dimension(width, height));
-		add(panel);
-
+		containerPanel.setPreferredSize(new Dimension(width, height));
+		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(1,1));
+		
 		JButton close = new JButton("Close Chest");
-		//close.setPreferredSize(new Dimension(width, 25));
+		buttonPanel.setPreferredSize(new Dimension(width, slotSize/2));
+		buttonPanel.add(close);
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}
 		});
-		add(close);
+		
+		add(containerPanel);
+		add(buttonPanel);
 
 	}
 
