@@ -7,7 +7,7 @@ import graphics.assets.Terrain;
 public class NullTile extends Tile {
 
 	public NullTile(Location c) {
-		super(c, Terrain.SAND, null);
+		super(c, Terrain.NULLTILE, null);
 	}
 
 	@Override

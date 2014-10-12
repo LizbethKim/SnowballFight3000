@@ -3,6 +3,7 @@ package gameworld.game.client;
 import java.util.Map;
 
 import ui.UI;
+import gameworld.world.Area;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.InanimateEntity;
@@ -131,21 +132,27 @@ public class ClientUpdater {
 
 	// Updates the boardState after other methods are called.
 	private void updateBoardState() {
-		Objects[][] items = board.itemEnums();
+		if (playerIDs.get(playerID) == null || !board.containsLocation(playerIDs.get(playerID).getLocation())) {
+			return;
+		}
+
+		Area toRender = board.getAreaContaining(playerIDs.get(playerID).getLocation());
+
+		Objects[][] items = board.itemEnumsInArea(toRender);
 		for (Location l: snowballPositions) {
-			if (l != null) {
+			if (l != null && toRender.containsLoc(l)) {
 				items[l.x][l.y] = Objects.SNOWBALL;
 			}
 		}
 		for (Player p: playerIDs.values()) {
-			if (p.getLocation() != null) {
+			if (p.getLocation() != null && toRender.containsLoc(p.getLocation())) {
 				items[p.getLocation().x][p.getLocation().y] = p.asEnum();
 			}
 		}
 		if (playerIDs.get(playerID) == null) {
 			bs.update(board.convertToEnums(), items, new NullLocation());
 		} else {
-			bs.update(board.convertToEnumsInArea(playerIDs.get(playerID).getLocation()),
+			bs.update(board.convertToEnumsInArea(toRender),
 					items, playerIDs.get(playerID).getLocation());
 		}
 		display.repaint();
