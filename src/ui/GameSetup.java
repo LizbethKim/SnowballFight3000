@@ -32,6 +32,10 @@ import server.Server;
 
 public class GameSetup extends JPanel {
 
+	private enum ButtonSelected {
+		NEW, LOAD, SERVER, CONTROLS
+	}
+
 	private static final Image welcomeImage = HUDPanel
 			.loadImage("NewWelcomeImage.png");
 	private static final double buttonXStartProportion = 1.0 / 4.0;
@@ -42,11 +46,9 @@ public class GameSetup extends JPanel {
 	private static final double loadPlayerYStartProportion = 4.0 / 8.0;
 	private static final double startServerYStartProportion = 5.0 / 8.0;
 	private static final double controlsYStartProportion = 6.0 / 8.0;
-	
-	
 
 	private final double aspectRatio;
-	
+	private ButtonSelected selected;
 	private UI ui;
 
 	public GameSetup(UI ui, double aspectRatio) {
@@ -57,28 +59,28 @@ public class GameSetup extends JPanel {
 
 	private void setupListeners() {
 		addMouseMotionListener(new MotionListener());
-		addMouseListener(new MouseAdapter(){
-			
+		addMouseListener(new MouseAdapter() {
+
 			@Override
-			public void mouseClicked(MouseEvent e){
+			public void mouseClicked(MouseEvent e) {
 				dealWithClick(e.getX(), e.getY());
 			}
 		});
 	}
 
-	private void dealWithClick(int x, int y){
-		if(onNewPlayer(x,y)){
+	private void dealWithClick(int x, int y) {
+		if (onNewPlayer(x, y)) {
 			new InputPopup(ui);
-		} else if(onLoadPlayer(x,y)){
+		} else if (onLoadPlayer(x, y)) {
 			new LoadPopup();
-		} else if(onStartServer(x,y)){
+		} else if (onStartServer(x, y)) {
 			startServer();
-		} else if(onControls(x,y)){
+		} else if (onControls(x, y)) {
 			new ControlsPopup().showControls();
 		}
 	}
-	
-	private void startServer(){
+
+	private void startServer() {
 		ServerGame g = new ServerGame(Board.defaultBoard());
 		Server server = new Server(g);
 		// start server connection accepting thread
@@ -87,50 +89,79 @@ public class GameSetup extends JPanel {
 		JOptionPane.showMessageDialog(null, "Server Started");
 	}
 	
+	private Rectangle getButtonBounds(double xProportion, double yProportion){
+		int xPos = (int) (xProportion * getWidth());
+		int yPos = (int) (yProportion * getHeight());
+		int width = (int) (buttonWidthProportion * getWidth());
+		int height = (int) (buttonHeightProportion * getHeight()); 
+		return new Rectangle(xPos, yPos, width, height);
+	}
+
+	private void highlightButton(Graphics g) {
+		Rectangle bounds = null;
+		g.setColor(Color.red);
+		if(selected == ButtonSelected.NEW){
+			bounds = getButtonBounds(buttonXStartProportion, newPlayerYStartProportion);
+		} else if(selected == ButtonSelected.LOAD){
+			bounds = getButtonBounds(buttonXStartProportion, loadPlayerYStartProportion);
+		} else if(selected == ButtonSelected.SERVER){
+			bounds = getButtonBounds(buttonXStartProportion, startServerYStartProportion);
+		} else if(selected == ButtonSelected.CONTROLS){
+			bounds = getButtonBounds(buttonXStartProportion, controlsYStartProportion);
+		}
+		
+		if(bounds != null){
+		g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+		g.drawRect(bounds.x-1, bounds.y-1, bounds.width+2, bounds.height+2);
+		g.drawRect(bounds.x+1, bounds.y+1, bounds.width-2, bounds.height-2);
+		repaint();
+		}
+	}
+
 	private void updateCursor(int x, int y) {
-		if(onNewPlayer(x,y) || onLoadPlayer(x,y) || onStartServer(x, y) || onControls(x,y)){
+		if (onNewPlayer(x, y)) {
 			setCursor(new Cursor(Cursor.HAND_CURSOR));
+			selected = ButtonSelected.NEW;
+		} else if (onLoadPlayer(x, y)) {
+			setCursor(new Cursor(Cursor.HAND_CURSOR));
+			selected = ButtonSelected.LOAD;
+		} else if (onStartServer(x, y)) {
+			setCursor(new Cursor(Cursor.HAND_CURSOR));
+			selected = ButtonSelected.SERVER;
+		} else if (onControls(x, y)) {
+			setCursor(new Cursor(Cursor.HAND_CURSOR));
+			selected = ButtonSelected.CONTROLS;
 		} else {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			selected = null;
 		}
-			
+		repaint();
 	}
 
 	private boolean onNewPlayer(int xPos, int yPos) {
-		int x = (int) (buttonXStartProportion * getWidth());
-		int y = (int) (newPlayerYStartProportion * getHeight());
-		int width = (int) (buttonWidthProportion * getWidth());
-		int height = (int) (buttonHeightProportion * getHeight());
-		return new Rectangle(x, y, width, height).contains(xPos, yPos);
+		Rectangle bounds = getButtonBounds(buttonXStartProportion, newPlayerYStartProportion); 
+		return bounds.contains(xPos, yPos);
 	}
-	
+
 	private boolean onLoadPlayer(int xPos, int yPos) {
-		int x = (int) (buttonXStartProportion * getWidth());
-		int y = (int) (loadPlayerYStartProportion * getHeight());
-		int width = (int) (buttonWidthProportion * getWidth());
-		int height = (int) (buttonHeightProportion * getHeight());
-		return new Rectangle(x, y, width, height).contains(xPos, yPos);
+		Rectangle bounds = getButtonBounds(buttonXStartProportion, loadPlayerYStartProportion); 
+		return bounds.contains(xPos, yPos);
 	}
-	
+
 	private boolean onStartServer(int xPos, int yPos) {
-		int x = (int) (buttonXStartProportion * getWidth());
-		int y = (int) (startServerYStartProportion * getHeight());
-		int width = (int) (buttonWidthProportion * getWidth());
-		int height = (int) (buttonHeightProportion * getHeight());
-		return new Rectangle(x, y, width, height).contains(xPos, yPos);
+		Rectangle bounds = getButtonBounds(buttonXStartProportion, startServerYStartProportion); 
+		return bounds.contains(xPos, yPos);
 	}
 
 	private boolean onControls(int xPos, int yPos) {
-		int x = (int) (buttonXStartProportion * getWidth());
-		int y = (int) (controlsYStartProportion * getHeight());
-		int width = (int) (buttonWidthProportion * getWidth());
-		int height = (int) (buttonHeightProportion * getHeight());
-		return new Rectangle(x, y, width, height).contains(xPos, yPos);
-	}
+		Rectangle bounds = getButtonBounds(buttonXStartProportion, controlsYStartProportion); 
+		return bounds.contains(xPos, yPos);
+		}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		g.drawImage(welcomeImage, 0, 0, getHeight(), getWidth(), null);
+		highlightButton(g);
 	}
 
 	private class MotionListener implements MouseMotionListener {
