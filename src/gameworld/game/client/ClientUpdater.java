@@ -115,6 +115,11 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
+	public void disconnectFromServer() {
+		// KTC potentially do something else
+		System.exit(0);
+	}
+
 	public void updateProjectiles(Location[] snowballPositions) {
 		this.snowballPositions = snowballPositions;
 		updateBoardState();
