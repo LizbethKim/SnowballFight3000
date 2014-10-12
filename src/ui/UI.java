@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
@@ -77,15 +78,6 @@ public class UI extends JFrame {
 		setupWelcome();
 	}
 
-	private void setupGame() {
-		// setup components
-		setupFileBar();
-		setupKeyBindings();
-		setupGamePanel();
-		setupHUD();
-		setupGraphics();
-	}
-
 	public void startGame(String name, String IP, gameworld.world.Team t) {
 		client = new ClientGame(name, IP, t, this);
 		// setupGamePanel();
@@ -101,6 +93,7 @@ public class UI extends JFrame {
 
 		frame.setVisible(false);
 		frame.dispose();
+		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setVisible(true);
 	}
 

@@ -55,6 +55,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		addKeyListener(this);
 
 		pack();
+		setResizable(false);
 		setVisible(true);
 	}
 
