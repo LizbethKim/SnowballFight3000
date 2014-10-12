@@ -18,7 +18,8 @@ public enum Terrain {
 	TESTTILE("TileTemplate.png"),
 	ICE("Ice.png"),
 	SAND("Sand.png"),
-	WATER("Water.png");
+	WATER("Water.png"),
+	NULLTILE("NullTile.png");
 	
 	public final BufferedImage img;
 
