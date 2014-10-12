@@ -100,17 +100,18 @@ public class Client implements Runnable {
 				}
 				// freeze player
 				else if (in == 0x0B) {
-					//int id = readFromSocket();
-					Location loc = readLocation();
-					updater.removeItemAt(loc);
-					// BF add freeze player stuff here
-					// You have double up for 0x0B, I'm using it for
-					// remove item (you had it for both that and freezePlayer)
+					int id = readFromSocket();
+					updater.freezePlayer(id);
 				}
 				// add item to inventory
 				else if (in == 0x0C) {
 					Location loc = readLocation();
 					updater.pickupItemAt(loc);
+				}
+				// remove item
+				else if (in == 0x0D) {
+					Location loc = readLocation();
+					updater.removeItemAt(loc);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -163,6 +164,28 @@ public class Client implements Runnable {
 	public void pickUpItem() {
 		try {
 			connection.getOutputStream().write(0x0C);
+			connection.getOutputStream().flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void dropItem(int index) {
+		try {
+			connection.getOutputStream().write(0x0D);
+			connection.getOutputStream().write(index);
+			connection.getOutputStream().flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void useItem(int index) {
+		try {
+			connection.getOutputStream().write(0x0E);
+			connection.getOutputStream().write(index);
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

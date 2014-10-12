@@ -41,7 +41,7 @@ public class Snowball implements Entity {
 
 
 	/**
-	 * Damages the player it hits. KTC right now friendly fire can hurt
+	 * Damages the player it hits.
 	 * @param p The player hit
 	 */
 	public void hit(Player p) {

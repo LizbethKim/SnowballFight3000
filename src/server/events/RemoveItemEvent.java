@@ -15,7 +15,7 @@ public class RemoveItemEvent extends LocationEvent {
 
 	@Override
 	public void writeTo(OutputStream out) throws IOException {
-		out.write(0x0B);
+		out.write(0x0D);
 		writeLocation(out,location);
 	}
 

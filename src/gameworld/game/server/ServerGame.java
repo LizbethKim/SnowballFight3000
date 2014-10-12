@@ -86,6 +86,23 @@ public class ServerGame {
 		}
 	}
 
+	public void dropItem(int playerID, int index) {
+		Player p = this.playerIDs.get(playerID);
+		if (p != null) {
+			Location l = Location.locationInFrontOf(p.getLocation(), p.getDirection());
+			Item toDrop = p.getInventory().getContents().get(index);
+			p.getInventory().removeItem(toDrop);
+			// server.queuePlayerUpdate(new RemoveItemFromInventoryEvent(index), playerID);
+			for (int id: playerIDs.keySet()) {
+				// server.queuePlayerUpdate(new PlaceItemEvent(toDrop.serialize(), l), id);
+			}
+		}
+	}
+
+	public void useItem(int playerID, int index) {
+
+	}
+
 	public void throwSnowball(int playerID) {
 		System.out.println("Server throwing snowball");
 		Player thrower = playerIDs.get(playerID);
@@ -122,7 +139,6 @@ public class ServerGame {
 	}
 
 	public void clockTick() {
-		// KTC recode this prettier later
 		Iterator<Snowball> it = projectiles.iterator();
 		while (it.hasNext()) {
 			Snowball s = it.next();
