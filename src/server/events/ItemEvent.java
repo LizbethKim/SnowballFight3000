@@ -12,10 +12,10 @@ public abstract class ItemEvent implements UpdateEvent {
 	protected void writeItem(OutputStream out, Item item) throws IOException {
 		out.write(item.asEnum().ordinal());
 		if(item instanceof Key){
-			// BF add key stuff here
+			out.write(((Key)item).id);
 		}
 		else if(item instanceof Powerup){
-			//out.write(((Powerup)item).getPower().ordinal());
+			out.write(((Powerup)item).getPower().ordinal());
 		}
 	}
 

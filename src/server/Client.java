@@ -1,10 +1,17 @@
 package server;
 
 import gameworld.game.client.ClientUpdater;
+import gameworld.world.Bag;
 import gameworld.world.Direction;
+import gameworld.world.Flag;
+import gameworld.world.Item;
+import gameworld.world.Key;
 import gameworld.world.Location;
 import gameworld.world.Player;
+import gameworld.world.Powerup;
+import gameworld.world.Powerup.Power;
 import gameworld.world.Team;
+import graphics.assets.Objects;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -247,6 +254,26 @@ public class Client implements Runnable {
 		int y = readFromSocket();
 		y += readFromSocket() << 8;
 		return new Location(x,y);
+	}
+	
+	private Item readItem() throws IOException, SocketClosedException {
+		Objects object = Objects.values()[readFromSocket()];
+		if(object==Objects.KEY) {
+			int id = readFromSocket();
+			return new Key("A key to your mum", id);
+		} else if(object==Objects.BAG) {
+			return new Bag();
+		} else if(object==Objects.BLUEFLAG) {
+			return new Flag(Team.BLUE);
+		} else if(object==Objects.REDFLAG) {
+			return new Flag(Team.RED);
+		} else if(object==Objects.POWERUP) {
+			Power p = Power.values()[readFromSocket()];
+			return new Powerup(p);
+		} else {
+			System.out.println("Invalid item recieved! "+object);
+		}
+		return null;
 	}
 	
 	private byte readFromSocket() throws IOException, SocketClosedException {
