@@ -19,7 +19,6 @@ public class Main {
 				// start server connection accepting thread
 				new Thread(server).start();
 				new Thread(new Time(g)).start();
-				server.sendLoop();
 			} else {
 				new UI();
 			}
