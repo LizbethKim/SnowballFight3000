@@ -23,7 +23,8 @@ public class LoadGame{
 	
 	public StoredGame loadGame(String filename){
 		StaxParser parser = new StaxParser();
-		game = parser.parse(new File("src/storage/defaultBoard.xml"));
+		System.out.println(filename);
+		game = parser.parse(new File("src/storage/"+filename));
 		System.out.println("Game Loaded by loader");
 		return game;
 	}

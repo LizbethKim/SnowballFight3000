@@ -3,16 +3,7 @@
  */
 package storage.load;
 
-import gameworld.world.Board;
-import gameworld.world.Furniture;
-import gameworld.world.InanimateEntity;
-import gameworld.world.Inventory;
-import gameworld.world.Item;
-import gameworld.world.Location;
-import gameworld.world.Player;
-import gameworld.world.PlayerInventory;
-import gameworld.world.Team;
-import gameworld.world.Tile;
+import gameworld.world.*;
 import graphics.assets.Objects;
 import graphics.assets.Terrain;
 
@@ -47,14 +38,16 @@ public class StaxParser {
 	static final String BOARD = "board";
 	static final String TILE = "tile";
 	static final String INVENTORY= "inventory";
+	static final String ITEM = "item";
 
 	static final String DELIMITER = "\\s+";
-
+	
 	private Board board;
 	private Tile[][] tiles;
 	private List<Player> players;
 	private Player curPlayer;
 	private Tile curTile;
+	private PlayerInventory curInven;
 
 	/**
 	 * @param file
@@ -120,18 +113,15 @@ public class StaxParser {
 					}
 
 					if (elemName.equals(INVENTORY)) {
-						if(eventReader.peek().isCharacters()){	//Inventory could be empty, so check if anything is there
-							event = eventReader.nextEvent();
-							String[] values = event.asCharacters().getData().split(DELIMITER);
-							PlayerInventory inven = (PlayerInventory) curPlayer.getInventory();
-							for(int i = 0;i<6;i++){
-								inven.addItem(findItem(values[0]));
-							}
-						}
-						if(eventReader.peek().isStartElement()){
-							elemName = event.asStartElement().getName().getLocalPart();
-						}
-						
+						curInven = (PlayerInventory) curPlayer.getInventory();
+						continue;
+					}
+					
+					if (elemName.equals(ITEM)) {
+						event = eventReader.nextEvent();
+						String[] values = event.asCharacters().getData().split(DELIMITER);
+						Item item = loadItem(values);
+						curInven.addItem(item);
 						continue;
 					}
 
@@ -168,12 +158,41 @@ public class StaxParser {
 	}
 
 	/**
-	 * @param string
+	 * @param values 
 	 * @return
 	 */
-	private Item findItem(String string) {
-		
-		return null;
+	private Item loadItem(String[] values) {
+		String name = values[0];
+		Item item = null;
+		if(name.equals("bag")){
+			item = new Bag();
+		}else if(name.equals("flag")){
+			int teamNum = Integer.parseInt(values[1]);
+			item = new Flag(Team.values()[teamNum]);
+		}else if(name.equals("key")){
+			String description = parseDescription(2, values);
+			item = new Key(description, Integer.parseInt(values[1]));
+		}else if(name.equals("map")){
+			item = new Map();
+		}else if(name.equals("powerup")){
+			//item = new Powerup();
+		}
+		return item;
+	}
+
+
+	/**
+	 * @param i
+	 * @param values
+	 * @return
+	 */
+	private String parseDescription(int start, String[] values) {
+		StringBuilder builder = new StringBuilder();
+		for(int i=0; i<values.length; i++) {
+			builder.append(values[i]);
+		    builder.append(" ");
+		}
+		return builder.toString();
 	}
 
 	private Location parseLoc(String xStr, String yStr){
