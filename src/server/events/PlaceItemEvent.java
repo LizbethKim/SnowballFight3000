@@ -20,8 +20,8 @@ public class PlaceItemEvent extends ItemEvent {
 	public void writeTo(OutputStream out) throws IOException {
 		// TODO Auto-generated method stub
 		out.write(0x0f);
-		writeLocation(out,location);
 		writeItem(out,item);
+		writeLocation(out,location);
 	}
 
 }

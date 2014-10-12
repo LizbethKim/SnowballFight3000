@@ -131,6 +131,14 @@ public class Client implements Runnable {
 					int index = readFromSocket();
 					updater.removeFromInventory(index);
 				}
+				// invalid name/team info
+				else if (in == 0x11) {
+					// BF add code here
+				}
+				// valid name/team info
+				else if (in == 0x12) {
+					// BF add code here
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
