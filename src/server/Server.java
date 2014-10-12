@@ -23,14 +23,17 @@ public class Server implements Runnable {
 	public Server(ServerGame g) {
 		game = g;
 		g.setServer(this);
-		try {
-			server = new ServerSocket(6015);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		updateQueue = new LinkedBlockingQueue<RemotePlayer>();
 		playersByID = new HashMap<Integer, RemotePlayer>();
+		//start accepting thread
+		new Thread(this).start();
+		//hack to get around race condition
+		while(server==null){
+			try {
+				Thread.currentThread().sleep(1);
+			} catch (InterruptedException e) {
+			
+		}
 	}
 
 	public void sendLoop() {
@@ -64,19 +67,30 @@ public class Server implements Runnable {
 
 	@Override
 	public void run() {
-		while(true) {
+		if(server==null) {
 			try {
-				Socket newSocket = server.accept();
-				newSocket.setTcpNoDelay(true); // stops TCP from combining packets, reduces latency
-				int id = generatePlayerID();
-				RemotePlayer newPlayer = new RemotePlayer(id, newSocket, game);
-				playersByID.put(id, newPlayer);
-				//create and start a new thread, running the socket worker code
-				new Thread(newPlayer).start();
+				server = new ServerSocket(6015);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			while(true) {
+				try {
+					Socket newSocket = server.accept();
+					newSocket.setTcpNoDelay(true); // stops TCP from combining packets, reduces latency
+					int id = generatePlayerID();
+					RemotePlayer newPlayer = new RemotePlayer(id, newSocket, game);
+					playersByID.put(id, newPlayer);
+					//create and start a new thread, running the socket worker code
+					new Thread(newPlayer).start();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} else {
+			//will be run the second time
+			sendLoop();
 		}
 	}
 }
