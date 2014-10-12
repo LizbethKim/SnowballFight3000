@@ -3,9 +3,14 @@
  */
 package storage.save;
 
+import gameworld.world.Bag;
 import gameworld.world.Board;
+import gameworld.world.Flag;
+import gameworld.world.Item;
+import gameworld.world.Key;
 import gameworld.world.Location;
 import gameworld.world.Player;
+import gameworld.world.Powerup;
 import gameworld.world.Team;
 import gameworld.world.Tile;
 
@@ -40,6 +45,7 @@ public class StaxWriter {
 	private static final String BOARD = "board";
 	private static final String TILE = "tile";
 	private static final String INVENTORY= "inventory";
+	private static final String ITEM = "item";
 
 	//private static final String DELIMITER = "\\s+";
 	private static final String EMPTY = "";
@@ -78,12 +84,18 @@ public class StaxWriter {
 				// create player start and end elements
 				StartElement playerStartElement = eventFactory.createStartElement(EMPTY,EMPTY, PLAYER);
 				EndElement playerEndElement = eventFactory.createEndElement(EMPTY,EMPTY, PLAYER);
+				StartElement inventoryStartElement = eventFactory.createStartElement(EMPTY,EMPTY, INVENTORY);
+				EndElement inventoryEndElement = eventFactory.createEndElement(EMPTY,EMPTY, INVENTORY);
 				
 				for(Player p :players){
 					eventWriter.add(playerStartElement); //open new player tag
 					Characters playerContents = eventFactory.createCharacters(buildPlayerString(p));
 					eventWriter.add(playerContents);
-					createTag(eventWriter,INVENTORY,p.getInventory().toString()); //KH for real inventory implementation
+					eventWriter.add(inventoryStartElement);
+					for(Item item : p.getInventory().getContents()){
+						createTag(eventWriter,ITEM, buildItemString(item));
+					}
+					eventWriter.add(inventoryEndElement);
 					eventWriter.add(playerEndElement);
 					eventWriter.add(newline);
 				}
@@ -129,6 +141,44 @@ public class StaxWriter {
 		}
 
 		return filename;
+	}
+
+
+	/**
+	 * @param item
+	 * @return
+	 */
+	private String buildItemString(Item item) {
+		StringBuilder str = new StringBuilder();
+		switch (item.asEnum()){
+			case BAG:
+				str.append("bag");break;
+			case KEY:
+				str.append("key ");
+				Key key = (Key)item;
+				str.append(key.id+SPACE);
+				str.append(key.getDescription());
+				break;
+			case REDFLAG:
+				str.append("flag ");
+				str.append(0);
+				break;
+			case BLUEFLAG:
+				str.append("flag ");
+				str.append(1);
+				break;
+			case MAP:
+				str.append("map");
+				break;
+			case POWERUP:
+				str.append("powerup");
+				Powerup p = (Powerup)item;
+				str.append(p.getPower().name());
+				break;
+			default:
+				str.append(0);break;
+		}
+		return str.toString();
 	}
 
 
