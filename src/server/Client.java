@@ -127,7 +127,7 @@ public class Client implements Runnable {
 					updater.placeItem(item, loc);
 				}
 				// remove item from inventory
-				else if (in == 0x0f) {
+				else if (in == 0x10) {
 					int index = readFromSocket();
 					updater.removeFromInventory(index);
 				}
