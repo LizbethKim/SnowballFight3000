@@ -13,7 +13,7 @@ import java.util.EnumSet;
 public class Furniture implements StaticEntity {
 
 	private static EnumSet<Objects> FURNITURE = EnumSet.of(Objects.BUSH,
-			Objects.TABLE, Objects.TREE, Objects.WALL_E_W, Objects.WALL_N_S, Objects.DOOR, Objects.CHEST, Objects.CORNER_S_E);
+			Objects.TABLE, Objects.TREE, Objects.WALL_E_W, Objects.WALL_N_S, Objects.DOOR, Objects.CHEST, Objects.CORNER_N_W, Objects.CORNER_N_E, Objects.CORNER_S_W, Objects.CORNER_S_E);
 
 	private String description;
 	private Objects type;
