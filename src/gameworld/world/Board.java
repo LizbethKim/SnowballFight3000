@@ -1,5 +1,6 @@
 package gameworld.world;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import graphics.assets.Objects;
@@ -59,6 +60,8 @@ public class Board {
 					for (int y = 0; y < board[0].length; y++) {
 						if (a.contains(board[x][y])){
 							enumTiles[x][y] = board[x][y].getType();
+						} else {
+							enumTiles[x][y] = Terrain.NULL_TILE;
 						}
 					}
 				}
@@ -125,7 +128,7 @@ public class Board {
 		return board[0].length;
 	}
 
-	public static Board defaultBoard() {
+	public static Board defaultBoard2() {
 		Tile[][] board = new Tile[15][20];
 		for (int x = 1; x < 14; x++) {
 			board[x][0] = new Tile(new Location(x, 0), Terrain.GRASS, null);
@@ -186,6 +189,36 @@ public class Board {
 // 		board[4][2].place(new Furniture("A tree", Objects.TREE));
 // 		board[5][3].place(new Furniture("A tree", Objects.TREE));
 // 		board[2][7].place(new Furniture("A bush", Objects.BUSH));
+	}
+
+	public static Board defaultBoard() {
+		Tile[][] board = new Tile[80][80];
+		List<Area> areas = new ArrayList<Area>();
+		for (int x = 0; x < 80; x++) {
+			for (int y = 0; y < 80; y++) {
+				board[x][y] = new NullTile(new Location(x,y));
+			}
+		}
+
+		Area main = new Area();
+		for (int x = 10; x < 70; x++) {
+			for (int y = 10; y < 70; y++) {
+				board[x][y] = new Tile(new Location(x, y), Terrain.SNOW, null);
+				main.add(board[x][y]);
+			}
+			board[x][10].place(new Furniture("A wall", Objects.TREE));
+			board[x][69].place(new Furniture("A wall", Objects.TREE));
+		}
+		for (int y = 11; y < 69; y++) {
+			board[10][y].place(new Furniture("A wall", Objects.TREE));
+			board[69][y].place(new Furniture("A wall", Objects.TREE));
+		}
+		areas.add(main);
+
+
+
+		return new Board(board, areas);
+
 	}
 
 }

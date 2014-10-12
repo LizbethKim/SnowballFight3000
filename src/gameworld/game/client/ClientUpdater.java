@@ -145,7 +145,8 @@ public class ClientUpdater {
 		if (playerIDs.get(playerID) == null) {
 			bs.update(board.convertToEnums(), items, new NullLocation());
 		} else {
-			bs.update(board.convertToEnums(), items, playerIDs.get(playerID).getLocation());
+			bs.update(board.convertToEnumsInArea(playerIDs.get(playerID).getLocation()),
+					items, playerIDs.get(playerID).getLocation());
 		}
 		display.repaint();
 	}
