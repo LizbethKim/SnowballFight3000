@@ -120,6 +120,12 @@ public class Client implements Runnable {
 					Location loc = readLocation();
 					updater.removeItemAt(loc);
 				}
+				// item placed
+				else if (in == 0x0f) {
+					Item item = readItem();
+					Location loc = readLocation();
+					updater.placeItem(item, loc);
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
