@@ -4,9 +4,11 @@ import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.InanimateEntity;
 import gameworld.world.Inventory;
+import gameworld.world.Item;
 import gameworld.world.Location;
 import gameworld.world.NullLocation;
 import gameworld.world.Player;
+import gameworld.world.Powerup;
 import gameworld.world.Team;
 import graphics.assets.Objects;
 
@@ -154,7 +156,16 @@ public class ClientGame {
 	}
 
 	public void useItem() {
-		//KTC use selected item
+		if (selectedIndex != -1 && player.getInventory().getContents().get(selectedIndex) != null) {
+			Item toUse = player.getInventory().getContents().get(selectedIndex);
+			if (toUse instanceof Powerup) {
+				Powerup powerup = (Powerup)toUse;
+				powerup.use(player);
+				// client.removeItem(selectedIndex);
+			} else {
+				// KTC later
+			}
+		}
 	}
 
 	public boolean selectedIsContainer(){

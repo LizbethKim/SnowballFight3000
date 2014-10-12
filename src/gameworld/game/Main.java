@@ -24,8 +24,9 @@ public class Main {
 				new UI();
 			}
 
+		} else {
+			new UI();
 		}
-		new UI();
 	}
 
 }

@@ -9,6 +9,7 @@ import java.util.Map;
 import server.Server;
 import server.events.CreateLocalPlayerEvent;
 import server.events.CreatePlayerEvent;
+import server.events.FreezePlayerEvent;
 import server.events.MoveEvent;
 import server.events.PickUpItemEvent;
 import server.events.RemoveItemEvent;
@@ -111,6 +112,9 @@ public class ServerGame {
 		for (int id: playerIDs.keySet()) {
 			server.queuePlayerUpdate(new RemovePlayerEvent(playerID), id);
 		}
+		if (playerIDs.isEmpty()) {
+			System.exit(0);
+		}
 	}
 
 	public void setServer(Server s) {
@@ -132,7 +136,9 @@ public class ServerGame {
 					s.hit(p);
 					server.queuePlayerUpdate(new UpdateHealthEvent(p.getHealth()), p.getID());
 					if (p.isFrozen()) {
-						// KTC update freezing.
+						for (int id: playerIDs.keySet()) {
+							server.queuePlayerUpdate(new FreezePlayerEvent(p.getID()), id);
+						}
 					}
 					it.remove();
 					break;

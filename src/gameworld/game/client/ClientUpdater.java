@@ -91,17 +91,28 @@ public class ClientUpdater {
 				}
 			}
 		}
-
 	}
 
-	public void freezePlayer() {
-		// KTC
+	public void removeFromInventory(int index) {
+		Player p = playerIDs.get(playerID);
+		if (p != null) {
+			p.getInventory().removeItem(p.getInventory().getContents().get(index));
+		}
+		updateBoardState();
+	}
+
+	public void freezePlayer(int id) {
+		Player p = playerIDs.get(id);
+		if (p != null) {
+			p.setHealth(0);
+		}
 	}
 
 	public void removeItemAt(Location l) {
 		if (board.containsLocation(l)) {
 			board.removeItemAt(l);
 		}
+		updateBoardState();
 	}
 
 	public void updateProjectiles(Location[] snowballPositions) {

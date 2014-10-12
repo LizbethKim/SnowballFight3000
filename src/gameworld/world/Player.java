@@ -36,6 +36,9 @@ public class Player implements Entity {
 	 * @return	true if they moved, false otherwise
 	 */
 	public boolean move(Location l) {
+		if (this.isFrozen()) {
+			return false;
+		}
 		if ( this.loc == null || (Math.abs(l.x - loc.x) == 1) != (Math.abs(l.y - loc.y) == 1)) {
 			// if exactly one step in a cardinal direction has been taken
 			loc = l;
@@ -46,6 +49,9 @@ public class Player implements Entity {
 
 	@Override
 	public Objects asEnum() {
+		if (this.isFrozen()) {
+			return Objects.SNOWMAN;
+		}
 		if (this.team == Team.RED) {
 			if (this.d == Direction.NORTH) {
 				return Objects.REDPLAYER_N;
