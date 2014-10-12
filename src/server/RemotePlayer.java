@@ -76,14 +76,22 @@ public class RemotePlayer implements Runnable {
 				}
 				else if(in==0x08) {
 					game.throwSnowball(id);
-					// BF I've added this, feel free to change
 				}
 				else if(in==0x09) {
 					game.removePlayer(id);
 				}
 				else if(in==0x0C) {
 					game.pickUpItem(id);
-					// BF I've added this, feel free to change if you need.
+					}
+				else if(in==0x0D) {
+					int index = readFromSocket();
+					game.dropItem(id, index);
+					// BF add crap here
+				}
+				else if(in==0x0E) {
+					int index = readFromSocket();
+					game.useItem(id, index);
+					// BF add crap here
 				}
 			}
 		} catch (IOException e) {

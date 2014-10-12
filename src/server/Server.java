@@ -38,18 +38,6 @@ public class Server implements Runnable {
 		}
 	}
 
-	public void sendLoop() {
-		while(true) {
-			try {
-				//get next player and get them to send queued updates
-				updateQueue.poll(1000,TimeUnit.DAYS).sendUpdates();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-
 	public void queuePlayerUpdate(UpdateEvent event, int playerID) {
 		//System.out.println("Queued event: "+event);
 		RemotePlayer playerUpdates = playersByID.get(playerID);
@@ -93,6 +81,18 @@ public class Server implements Runnable {
 		} else {
 			//will be run the second time
 			sendLoop();
+		}
+	}
+
+	private void sendLoop() {
+		while(true) {
+			try {
+				//get next player and get them to send queued updates
+				updateQueue.poll(1000,TimeUnit.DAYS).sendUpdates();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
