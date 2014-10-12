@@ -7,15 +7,19 @@ import graphics.assets.Objects;
  * @author Kelsey Jack 300275851
  */
 public class Key extends Item {
-	// KTC more
-	public Key (String description) {
+	public final int id;
+
+	public Key (String description, int id) {
 		this.description = description;
+		this.id = id;
 	}
-	
+
+	// TEMP
 	public Key() {
 		this.description = "A key, but to what?";
+		this.id = 0;
 	}
-	
+
 	@Override
 	public Objects asEnum() {
 		return Objects.KEY;

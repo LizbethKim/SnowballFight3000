@@ -9,15 +9,17 @@ import graphics.assets.Objects;
  */
 public class Door extends Furniture implements Lockable {
 	private boolean locked;
-	private Key key;
+	public final int id;
 
-	public Door(String description, Key k) {
+	public Door(String description, int id) {
 		super(description, Objects.DOOR);
+		this.id = id;
+		this.locked = false;
 	}
 
 	@Override
 	public boolean unlock(Key k) {
-		if (k.equals(key)) {	// KTC ??
+		if (k.id == this.id) {	// KTC ??
 			this.locked = false;
 			return true;
 		}
@@ -25,8 +27,8 @@ public class Door extends Furniture implements Lockable {
 	}
 
 	@Override
-	public Key getKey() {
-		return key;
+	public int getID() {
+		return id;
 	}
 
 	@Override
