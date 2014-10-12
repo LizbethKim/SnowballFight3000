@@ -73,7 +73,7 @@ public class InventoryPanel extends JPanel {
 		Image selected = selectedSlot.getScaledInstance(size, size, 0);
 
 		for (int i = 1; i <= inventoryNumber; i++) {
-			if (i == client.getSelectedIndex()) {
+			if (i == client.getSelectedIndex()+1) {
 				drawSlot(selected, xPos, yPos, size, i, g);
 			} else {
 				drawSlot(slot, xPos, yPos, size, i, g);
