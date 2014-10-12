@@ -107,6 +107,15 @@ public class Board {
 		}
 		throw new IllegalArgumentException();
 	}
+	
+	public Area getSpawnArea(Team t) {
+		for (Area a: rooms) {
+			if (a instanceof SpawnArea && ((SpawnArea)a).team == t) {
+				return a;
+			}
+		}
+		return rooms.get(0);
+	}
 
 	public boolean containsLocation(Location l) {
 		return l.x >= 0 && l.x < board.length && l.y >= 0 && l.y < board[0].length;
@@ -367,13 +376,15 @@ public class Board {
 		
 		for (int x = 0; x < areaNums[0].length; x++) {
 			for (int y = 0; y < areaNums.length; y++) {
-				if (areaNums[y][x]%2 == 0) { areaTwo.add(board[x][y]); }
-				if (areaNums[y][x]%3 == 0) { areaThree.add(board[x][y]); }
-				if (areaNums[y][x]%5 == 0) { areaFive.add(board[x][y]); }
-				if (areaNums[y][x]%7 == 0) { areaSeven.add(board[x][y]); }
-				if (areaNums[y][x]%11 == 0) { areaEleven.add(board[x][y]); }
-				if (areaNums[y][x]%13 == 0) { areaThirteen.add(board[x][y]); }
-				if (areaNums[y][x]%17 == 0) { areaSeventeen.add(board[x][y]); }
+				if (areaNums[y][x] != 0) {
+					if (areaNums[y][x]%2 == 0) { areaTwo.add(board[x][y]); }
+					if (areaNums[y][x]%3 == 0) { areaThree.add(board[x][y]); }
+					if (areaNums[y][x]%5 == 0) { areaFive.add(board[x][y]); }
+					if (areaNums[y][x]%7 == 0) { areaSeven.add(board[x][y]); }
+					if (areaNums[y][x]%11 == 0) { areaEleven.add(board[x][y]); }
+					if (areaNums[y][x]%13 == 0) { areaThirteen.add(board[x][y]); }
+					if (areaNums[y][x]%17 == 0) { areaSeventeen.add(board[x][y]); }
+				}
 			}
 		}
 		return new Board(board, areas);

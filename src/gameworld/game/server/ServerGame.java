@@ -113,7 +113,17 @@ public class ServerGame {
 	}
 
 	public void addPlayer(int playerID, String name, Team t) {
-		Location spawnLoc = new Location(13,13); 	// KTC change to something meaningful later
+		Area spawnArea = board.getSpawnArea(t);
+		Location spawnLoc = new NullLocation();
+		for (Tile tile: spawnArea.getTiles()) {
+			if (tile.isClear()) {
+				spawnLoc = tile.getCoords();
+				if (isFree(spawnLoc)) {
+					System.out.println(spawnLoc);
+					break;
+				}
+			}
+		}
 		server.queuePlayerUpdate(new CreateLocalPlayerEvent(playerID, spawnLoc), playerID);
 		Player p = new Player(name, t, playerID, spawnLoc);
 		playerIDs.put(playerID, p);
