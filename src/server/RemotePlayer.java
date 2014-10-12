@@ -9,6 +9,7 @@ import gameworld.world.Team;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -135,7 +136,15 @@ public class RemotePlayer implements Runnable {
 
 	private byte readFromSocket() throws IOException, SocketClosedException {
 		//I hate java
-		int input = connection.getInputStream().read();
+		if(connection.isInputShutdown()){
+			throw new SocketClosedException();
+		}
+		int input;
+		try{
+			input = connection.getInputStream().read();
+		}catch(SocketException e) {
+			throw new SocketClosedException();
+		}
 		if (input == -1) {
 			throw new SocketClosedException();
 		}
