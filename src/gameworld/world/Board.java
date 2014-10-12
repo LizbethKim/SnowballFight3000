@@ -152,10 +152,13 @@ public class Board {
 		board[13][7].place(new Furniture("A tree", Objects.TREE));
 		board[10][14].place(new Furniture("A tree", Objects.TREE));
 		board[2][18].place(new Furniture("A bush", Objects.BUSH));
+		board[3][4].place(new Furniture("A corner", Objects.CORNER_N_E));
+		board[0][4].place(new Furniture("A corner", Objects.CORNER_N_W));
 		board[3][5].place(new Furniture("A wall", Objects.WALL_N_S));
 		board[3][6].place(new Furniture("A wall", Objects.WALL_N_S));
 		board[2][7].place(new Furniture("A wall", Objects.WALL_E_W));
 		board[1][7].place(new Furniture("A wall", Objects.WALL_E_W));
+		board[0][7].place(new Furniture("A corner", Objects.CORNER_S_W));
 		board[3][7].place(new Furniture("A corner", Objects.CORNER_S_E));
 		board[6][11].place(new Key());
 		board[14][4].place(new Flag(Team.RED));
