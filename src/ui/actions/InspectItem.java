@@ -13,7 +13,6 @@ public class InspectItem extends KeyAction{
 	
 	@Override
 	protected void execute() {
-		System.out.println("Inspect");
 		try {
 			client.inspectItem();
 		} catch (NoItemException e) {

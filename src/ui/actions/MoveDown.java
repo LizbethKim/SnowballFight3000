@@ -14,7 +14,5 @@ public class MoveDown extends KeyAction{
 	@Override
 	protected void execute(){
 		client.move(Direction.SOUTH);
-		System.out.println("moveDown");
-		//TODO board.movedown()
 	}
 }

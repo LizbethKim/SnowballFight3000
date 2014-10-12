@@ -12,7 +12,6 @@ public class UseItem extends KeyAction{
 	
 	@Override
 	protected void execute() {
-		System.out.println("UsingItem");
 		client.useItem();
 	}
 

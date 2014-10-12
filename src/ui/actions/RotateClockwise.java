@@ -14,6 +14,5 @@ public class RotateClockwise extends KeyAction{
 	@Override
 	protected void execute(){
 		client.rotateClockwise();
-		System.out.println("rotateClockwise");
 	}
 }

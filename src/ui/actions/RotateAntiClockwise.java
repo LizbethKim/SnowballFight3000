@@ -12,6 +12,5 @@ public class RotateAntiClockwise extends KeyAction{
 	@Override
 	protected void execute(){
 		client.rotateAnticlockwise();
-		System.out.println("rotateAnti");
 	}
 }

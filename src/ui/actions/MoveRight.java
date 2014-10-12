@@ -13,6 +13,5 @@ public class MoveRight extends KeyAction{
 	@Override
 	protected void execute(){
 		client.move(Direction.EAST);
-		//TODO board.moveright()
 	}
 }

@@ -12,7 +12,6 @@ public class ThrowSnowball extends KeyAction{
 	
 	@Override
 	protected void execute() {
-		System.out.println("FireSnowball");
 		client.throwSnowball();
 	}
 
