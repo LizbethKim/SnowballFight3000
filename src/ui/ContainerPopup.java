@@ -3,16 +3,21 @@ package ui;
 import gameworld.game.client.ClientGame;
 import graphics.assets.Objects;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +33,8 @@ public class ContainerPopup extends JDialog implements KeyListener {
 			.loadImage("ContainerSlot.png");
 	private static final Image selectedContainerSlot = HUDPanel
 			.loadImage("SelectedContainerSlot.png");
+	private static final Image exitButton = HUDPanel
+			.loadImage("CloseContainer.png");
 
 	private static final int slotSize = 100;
 	private static final int maxColumn = 3;
@@ -37,6 +44,10 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	private int maxItems;
 	private List<Objects> items;
 	private boolean interactable;
+	private int width;
+	private int height;
+	private JPanel buttonPanel;
+	private JPanel containerPanel;
 
 	public ContainerPopup(ClientGame cl, UI ui, String title,
 			List<Objects> items, boolean interactable) {
@@ -48,48 +59,61 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		this.items = items;
 		this.interactable = interactable;
 
+		width = Math.min(slotSize * maxItems, slotSize * maxColumn);
+		height = slotSize * ((int) Math.ceil((double) maxItems / maxColumn));
+
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
 		setupComponents();
 		this.setLocationRelativeTo(ui);
 		setTitle(title);
 		addKeyListener(this);
+		setupMotionListener();
 
 		pack();
 		setResizable(false);
 		setVisible(true);
 	}
 
-	private void setupComponents() {
-		int width =Math.min(slotSize * maxItems, slotSize * maxColumn); 
-		int height = slotSize
-				* ((int) Math.ceil((double) maxItems / maxColumn));
-		JPanel containerPanel = new JPanel() {
+	private void setupExitButton() {
+		// setup panel
+		buttonPanel = new JPanel() {
+			@Override
+			public void paintComponent(Graphics g) {
+				paintExitButton(g);
+			}
+		};
+		buttonPanel.setPreferredSize(new Dimension(width, slotSize / 2));
+
+		// add mouse listener to exit on click
+		buttonPanel.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
+		add(buttonPanel);
+	}
+
+	private void setupContainerPanel() {
+		containerPanel = new JPanel() {
 			@Override
 			public void paintComponent(Graphics g) {
 				paintContainer(g);
 			}
 		};
-
 		containerPanel.setPreferredSize(new Dimension(width, height));
-		
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(1,1));
-		
-		JButton close = new JButton("Close Chest");
-		buttonPanel.setPreferredSize(new Dimension(width, slotSize/2));
-		buttonPanel.add(close);
-		close.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-		});
-		
 		add(containerPanel);
-		add(buttonPanel);
-
 	}
 
-	public void paintContainer(Graphics g) {
+	private void setupComponents() {
+		setupContainerPanel();
+		setupExitButton();
+	}
+
+	private void paintExitButton(Graphics g) {
+		g.drawImage(exitButton, 0, 0, width, slotSize / 2, null);
+	}
+
+	private void paintContainer(Graphics g) {
 		Image slot = containerSlot.getScaledInstance(slotSize, slotSize, 0);
 		Image selectedSlot = selectedContainerSlot.getScaledInstance(slotSize,
 				slotSize, 0);
@@ -107,7 +131,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 
 			if (items.get(i) != null) {
 				Image item = items.get(i).imgs[0];
-				drawItem(items.get(i).imgs[0], xPos, yPos, slotSize, g);
+				drawItem(items.get(i).imgs[0], xPos, yPos, g);
 			}
 			if (column + 1 < maxColumn) {
 				column++;
@@ -118,10 +142,10 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		}
 	}
 
-	private void drawItem(Image item, int xPos, int yPos, int size, Graphics g) {
-		int itemXPos = xPos + size / 6;
-		int itemYPos = yPos + size / 6;
-		int itemSize = size - 2 * (size / 6);
+	private void drawItem(Image item, int xPos, int yPos, Graphics g) {
+		int itemXPos = xPos + slotSize / 6;
+		int itemYPos = yPos + slotSize / 6;
+		int itemSize = slotSize - 2 * (slotSize / 6);
 		g.drawImage(item, itemXPos, itemYPos, itemSize, itemSize, null);
 	}
 
@@ -184,5 +208,21 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		dealWithKeyTyped(arg0);
+	}
+
+	private void setupMotionListener() {
+		// add mouse motion listener to change cursor when hovered over
+		addMouseMotionListener(new MouseMotionListener() {
+			public void mouseDragged(MouseEvent arg0) {
+			}
+
+			public void mouseMoved(MouseEvent e) {
+				if (getContentPane().getComponentAt(new Point(e.getX(), e.getY())) == buttonPanel) {
+					setCursor(new Cursor(Cursor.HAND_CURSOR));
+				} else {
+					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				}
+			}
+		});
 	}
 }
