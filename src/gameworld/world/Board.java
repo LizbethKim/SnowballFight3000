@@ -38,7 +38,7 @@ public class Board {
 
 	public void removeItemAt(Location l) {
 		if (this.containsLocation(l)) {
-				board[l.x][l.y].removeOn();
+				board[l.x][l.y].clear();
 		}
 	}
 
@@ -228,6 +228,10 @@ public class Board {
 			board[10][y].place(new Furniture("A wall", Objects.WALL_N_S));
 			board[69][y].place(new Furniture("A wall", Objects.WALL_N_S));
 		}
+		board[69][10].clear();
+		board[69][69].clear();
+		board[10][10].clear();
+		board[10][69].clear();
 		board[69][10].place(new Furniture("A wall", Objects.CORNER_S_W));
 		board[69][69].place(new Furniture("A wall", Objects.CORNER_S_E));
 		board[10][10].place(new Furniture("A wall", Objects.CORNER_N_W));

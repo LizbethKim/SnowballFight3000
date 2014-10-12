@@ -77,7 +77,7 @@ public class ServerGame {
 			InanimateEntity on = board.tileAt(l).getOn();
 			if (on != null && on instanceof Item) {
 				if(p.getInventory().addItem((Item)on)) {
-					board.tileAt(l).removeOn();
+					board.tileAt(l).clear();
 					server.queuePlayerUpdate(new PickUpItemEvent(l), playerID);
 					for (int id: playerIDs.keySet()) {
 						server.queuePlayerUpdate(new RemoveItemEvent(l), id);
