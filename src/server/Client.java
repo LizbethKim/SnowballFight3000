@@ -126,6 +126,11 @@ public class Client implements Runnable {
 					Location loc = readLocation();
 					updater.placeItem(item, loc);
 				}
+				// remove item from inventory
+				else if (in == 0x0f) {
+					int index = readFromSocket();
+					updater.removeFromInventory(index);
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
