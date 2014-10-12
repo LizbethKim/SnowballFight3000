@@ -2,6 +2,7 @@ package gameworld.game.client;
 
 import gameworld.world.Direction;
 import gameworld.world.Location;
+import gameworld.world.NullLocation;
 import graphics.assets.Objects;
 import graphics.assets.Terrain;
 
@@ -79,6 +80,7 @@ public class BoardState {
 	public BoardState(Terrain[][] board, Objects[][] entities) {
 		this.board = board;
 		this.entities = entities;
+		this.playerCoords = new NullLocation();
 	}
 
 	// Getter methods for rendering
