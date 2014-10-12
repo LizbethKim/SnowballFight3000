@@ -17,7 +17,7 @@ public class Player implements Entity {
 	private int ID;
 
 	// Determine the speed the player can do stuff
-	private long stepDelay = 200;
+	private long stepDelay = 0;	// KTC change back to 200
 	private long snowballDelay = 500;
 
 

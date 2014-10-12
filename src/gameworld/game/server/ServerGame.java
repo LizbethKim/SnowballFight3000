@@ -7,29 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import server.Server;
-import server.events.CreateLocalPlayerEvent;
-import server.events.CreatePlayerEvent;
-import server.events.FreezePlayerEvent;
-import server.events.MoveEvent;
-import server.events.PickUpItemEvent;
-import server.events.PlaceItemEvent;
-import server.events.RemoveFromInventoryEvent;
-import server.events.RemoveItemEvent;
-import server.events.RemovePlayerEvent;
-import server.events.TurnEvent;
-import server.events.UpdateHealthEvent;
-import server.events.UpdateProjectilePositionsEvent;
-import gameworld.world.Board;
-import gameworld.world.Direction;
-import gameworld.world.InanimateEntity;
-import gameworld.world.Item;
-import gameworld.world.Location;
-import gameworld.world.Player;
-import gameworld.world.Powerup;
-import gameworld.world.Snowball;
-import gameworld.world.SnowballFactory;
+import server.events.*;
+import gameworld.world.*;
 import gameworld.world.SnowballFactory.SnowballType;
-import gameworld.world.Team;
 
 /**
  * Main game logic class. Interacts with the network on the server side.

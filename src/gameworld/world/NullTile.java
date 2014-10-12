@@ -1,7 +1,5 @@
 package gameworld.world;
 
-import javax.naming.OperationNotSupportedException;
-
 import graphics.assets.Terrain;
 
 public class NullTile extends Tile {

@@ -13,6 +13,7 @@ public class SuperSnowballsEffect implements PowerupEffect {
 
 	@Override
 	public void run() {
+		p.getDirection();
 		// TODO Auto-generated method stub
 
 	}
