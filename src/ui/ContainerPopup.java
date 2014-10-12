@@ -9,11 +9,15 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -34,37 +38,57 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	private List<Objects> items;
 	private boolean interactable;
 
-	public ContainerPopup(ClientGame cl, UI ui, String title, List<Objects> items,
-			boolean interactable) {
-		super(ui, title);
+	public ContainerPopup(ClientGame cl, UI ui, String title,
+			List<Objects> items, boolean interactable) {
+		super(ui, title, ModalityType.APPLICATION_MODAL);
 		this.client = cl;
 		this.items = items;
 		this.selectedItem = 1;
 		this.maxItems = items.size();
 		this.items = items;
 		this.interactable = interactable;
-		setupPanel();
+
+		setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
+		setupComponents();
 		this.setLocationRelativeTo(ui);
 		setTitle(title);
 		addKeyListener(this);
-	
-		
+
 		pack();
+		setResizable(false);
 		setVisible(true);
 	}
 
-	private void setupPanel(){
-		JPanel panel = new JPanel() {
+	private void setupComponents() {
+		int width =Math.min(slotSize * maxItems, slotSize * maxColumn); 
+		int height = slotSize
+				* ((int) Math.ceil((double) maxItems / maxColumn));
+		JPanel containerPanel = new JPanel() {
 			@Override
 			public void paintComponent(Graphics g) {
 				paintContainer(g);
 			}
 		};
-		panel.setPreferredSize(new Dimension(slotSize * (maxColumn), slotSize
-				* ((int) Math.ceil((double) maxItems / maxColumn))));
-		add(panel);
+
+		containerPanel.setPreferredSize(new Dimension(width, height));
+		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(1,1));
+		
+		JButton close = new JButton("Close Chest");
+		buttonPanel.setPreferredSize(new Dimension(width, slotSize/2));
+		buttonPanel.add(close);
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		
+		add(containerPanel);
+		add(buttonPanel);
+
 	}
-	
+
 	public void paintContainer(Graphics g) {
 		Image slot = containerSlot.getScaledInstance(slotSize, slotSize, 0);
 		Image selectedSlot = selectedContainerSlot.getScaledInstance(slotSize,
