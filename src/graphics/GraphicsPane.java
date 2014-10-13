@@ -26,6 +26,7 @@ public class GraphicsPane extends JPanel {
 	private double startingHeight;
 	private BoardState boardState;
 	private BufferedImage nightShade;
+	private BufferedImage duskShade;
 
 	public GraphicsPane(int playerNum, BoardState boardState) {
 		this.boardState = boardState;
@@ -33,6 +34,7 @@ public class GraphicsPane extends JPanel {
 		startingHeight = 700;
 		try {
 			nightShade = ImageIO.read(Objects.class.getResource("NightShade.png"));
+			duskShade = ImageIO.read(Objects.class.getResource("DuskShade.png"));
 		} catch (IOException e) {
 			System.out.println("Dis not good m8");
 		}
@@ -65,7 +67,13 @@ public class GraphicsPane extends JPanel {
 		} else {
 			System.out.println("LOADING IMAGE HERE"); //Insert Loading Music
 		}
-		if (boardState.isNight()) g.drawImage(nightShade, 0, 0, getWidth(), getHeight(), null);
+		switch(boardState.getLight()){
+		case 0: g.drawImage(nightShade, 0, 0, getWidth(), getHeight(), null);
+		break;
+		case 1: g.drawImage(duskShade, 0, 0, getWidth(), getHeight(), null);
+		break;
+		default: break;
+		}
 	}
 
 	private void drawNorth(Terrain[][] currentBoard,
