@@ -91,7 +91,7 @@ public class RemotePlayer implements Runnable {
 					int index = readFromSocket();
 					game.useItem(id, index);
 				}
-				else if(in==0x) {
+				else if(in==0x10) {
 					int index = readFromSocket();
 					// BF add crap here
 				}
