@@ -9,7 +9,6 @@ import java.util.Map;
 import server.Server;
 import server.events.*;
 import gameworld.world.*;
-import gameworld.world.Snowball.SnowballType;
 
 /**
  * Main game logic class. Interacts with the network on the server side.
@@ -144,7 +143,6 @@ public class ServerGame {
 	}
 
 	public void throwSnowball(int playerID, Snowball.SnowballType type) {
-		System.out.println("Server throwing snowball");
 		Player thrower = playerIDs.get(playerID);
 		if (board.tileAt(thrower.getLocation()).isSnow()) {
 			projectiles.add(snowballFactory.makeSnowball(thrower.getLocation(), thrower.getDirection(), type));
@@ -222,7 +220,7 @@ public class ServerGame {
 			server.queuePlayerUpdate(new UpdateProjectilePositionsEvent(snowballLocs, snowballTypes), id);
 			Player p = playerIDs.get(id);
 			if (!p.isFrozen()) {
-				p.incrementScore(5);
+				p.incrementScore(1);
 				server.queuePlayerUpdate(new UpdateScoreEvent(p.getScore()), id);
 			}
 		}

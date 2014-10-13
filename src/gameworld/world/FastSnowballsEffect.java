@@ -1,19 +1,25 @@
 package gameworld.world;
 
+import gameworld.world.Snowball.SnowballType;
+
 public class FastSnowballsEffect implements PowerupEffect {
 	private Player p;
-	// KTC to do
 
 	@Override
 	public void apply(Player p) {
 		this.p = p;
+		new Thread(this).start();
 	}
 
 	@Override
 	public void run() {
-		p.getDirection();
-		// TODO Auto-generated method stub
-
+		p.setCanThrow(SnowballType.FAST);
+		try{
+			Thread.sleep(30000);
+		} catch(InterruptedException e) {
+			
+		}
+		p.setCanThrow(SnowballType.NORMAL);
 	}
 
 }

@@ -138,7 +138,7 @@ public class Board {
 		return board[0].length;
 	}
 
-	public static Board defaultBoard2() {
+	public static Board defaultBoard() {
 		Tile[][] board = new Tile[15][20];
 		List<Area> rooms = new ArrayList<Area>();
 		Area main = new Area();
@@ -169,7 +169,7 @@ public class Board {
 		board[14][18].place(new Furniture("A tree", Objects.TREE));
 		board[13][7].place(new Furniture("A tree", Objects.TREE));
 		board[10][14].place(new Furniture("A tree", Objects.TREE));
-		board[8][12].place(new Powerup(Powerup.Power.SPEED_BOOST));
+		board[8][12].place(new Powerup(Powerup.Power.FAST_SNOWBALLS));
 		board[2][18].place(new Furniture("A bush", Objects.BUSH));
 		board[3][4].place(new Furniture("A corner", Objects.CORNER_N_E));
 		board[0][4].place(new Furniture("A corner", Objects.CORNER_N_W));
@@ -217,7 +217,7 @@ public class Board {
 // 		board[2][7].place(new Furniture("A bush", Objects.BUSH));
 	}
 
-	public static Board defaultBoard() {
+	public static Board defaultBoard2() {
 		Tile[][] board = new Tile[80][80];
 		char[][] terrain = {{'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'G', 'G', 'G', 'G', 'G', 'G', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
 				{'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},

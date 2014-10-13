@@ -9,7 +9,6 @@ import gameworld.world.Location;
 import gameworld.world.NullLocation;
 import gameworld.world.Player;
 import gameworld.world.Powerup;
-import gameworld.world.Snowball;
 import gameworld.world.Team;
 import graphics.assets.Objects;
 
@@ -110,7 +109,7 @@ public class ClientGame {
 
 	public void throwSnowball() {
 		if (System.currentTimeMillis() - lastFiredTime > player.getSnowballDelay()) {
-			client.throwSnowball(Snowball.SnowballType.NORMAL);
+			client.throwSnowball(player.getCanThrow());
 			lastFiredTime = System.currentTimeMillis();
 		}
 	}

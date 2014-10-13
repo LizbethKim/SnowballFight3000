@@ -2,6 +2,7 @@ package gameworld.world;
 
 import java.util.List;
 
+import gameworld.world.Snowball.SnowballType;
 import graphics.assets.Objects;
 
 /**
@@ -10,17 +11,18 @@ import graphics.assets.Objects;
  */
 public class Player implements Entity {
 	private Location loc;
+	private Direction d = Direction.NORTH;
 	private Team team;
+	private Inventory inventory;
 	private int score = 0;
 	private int health = 100;	// From 0 to 100. 0 is frozen.
 	public final String name;
-	private Inventory inventory;
-	private Direction d = Direction.NORTH;
 	private int ID;
 
 	// Determine the speed the player can do stuff
 	private long stepDelay = 0;	// KTC change back to 200
 	private long snowballDelay = 500;
+	private SnowballType canThrow = SnowballType.NORMAL;
 	
 	public static final int MAX_SCORE = 64999;
 
@@ -211,6 +213,14 @@ public class Player implements Entity {
 
 	public void setStepDelay(long stepDelay) {
 		this.stepDelay = stepDelay;
+	}
+
+	public SnowballType getCanThrow() {
+		return canThrow;
+	}
+
+	public void setCanThrow(SnowballType canThrow) {
+		this.canThrow = canThrow;
 	}
 
 }
