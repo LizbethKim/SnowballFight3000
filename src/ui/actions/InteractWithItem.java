@@ -20,9 +20,11 @@ public class InteractWithItem extends KeyAction {
 	@Override
 	protected void execute() {
 		try {
+			//check that the client has a container in front
+			client.getContents();
 			String title = client.inspectItem();
 			new ContainerPopup(client, parent, title, true);
-		} catch (NoItemException e) {
+		} catch (NoItemException | NotAContainerException e) {
 			//do nothing
 		}
 	}

@@ -155,6 +155,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		} catch (NotAContainerException e) {
 			System.out.println("not a container exception");
 			dispose();
+			
 		}
 	}
 
