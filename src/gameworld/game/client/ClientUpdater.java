@@ -140,7 +140,7 @@ public class ClientUpdater {
 		}
 	}
 	
-	public void updateScore(int score) {
+	public void updateScore(int score, int id) {
 		this.playerIDs.get(playerID).setScore(score);
 	}
 	
