@@ -133,11 +133,17 @@ public class Client implements Runnable {
 				}
 				// invalid name/team info
 				else if (in == 0x11) {
-					// BF add code here
+					updater.receivePlayerValidity(false);
 				}
 				// valid name/team info
 				else if (in == 0x12) {
-					// BF add code here
+					updater.receivePlayerValidity(true);
+				}
+				// remove item from inventory
+				else if (in == 0x13) {
+					Location loc = readLocation();
+					int index = readFromSocket();
+					// BF add crap here
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
