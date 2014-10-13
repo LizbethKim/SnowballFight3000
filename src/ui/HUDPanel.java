@@ -117,7 +117,14 @@ public class HUDPanel extends JPanel {
 		final int fontSize = this.getHeight() / 18;
 		g.setColor(Color.white);
 		g.setFont(new Font("Times", Font.BOLD, fontSize));
+		g.setColor(Color.WHITE);
+		g.drawString("Score: "+client.getPlayerScore(), xPos+1, yPos);
+		g.drawString("Score: "+client.getPlayerScore(), xPos-1, yPos);
+		g.drawString("Score: "+client.getPlayerScore(), xPos, yPos+1);
+		g.drawString("Score: "+client.getPlayerScore(), xPos, yPos-1);
+		g.setColor(Color.WHITE);
 		g.drawString("Score: "+client.getPlayerScore(), xPos, yPos);
+		
 	}
 
 	/**

@@ -10,7 +10,7 @@ public class OneHitKill extends CheatSwitch {
 
 	@Override
 	protected void changeState() {
-		//RB: client.toggleOneHitKill();
+		client.toggleOneHitKill();
 	}
 
 }
