@@ -192,7 +192,9 @@ public class ClientGame {
 	}
 
 	public void dropSelectedItem() {
-		if (player.getInventoryItems().size() > selectedIndex && player.getInventoryItems().get(selectedIndex) != null) {
+		if (player.getInventoryItems().size() > selectedIndex
+				&& player.getInventoryItems().get(selectedIndex) != null
+				&& board.tileAt(player.getLocationInFrontOf()).isClear()) {
 			client.dropItem(selectedIndex);
 		}
 	}

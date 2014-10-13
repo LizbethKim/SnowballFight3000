@@ -97,8 +97,15 @@ public class ServerGame {
 			if (index < p.getInventoryItems().size()) {
 				Item toPlace = p.removeFromInventory(index);
 				Tile toPlaceOn = board.tileAt(l);
-				if (toPlaceOn.isClear()) {
-					toPlaceOn.place(toPlace);
+				if (toPlaceOn instanceof FlagTile && toPlaceOn.place(toPlace)) {
+					Team won = ((FlagTile)toPlaceOn).getTeam();
+					System.out.println("The " + (won == Team.BLUE ? "blue" :"red") +  " team won!");
+					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
+					for (int id: playerIDs.keySet()) {
+						server.queuePlayerUpdate(new PlaceItemEvent(l, toPlace), id);
+						// server.queuePlayerUpdate(new EndGameEvent(), playerID);
+					}
+				} else if (toPlaceOn.isClear() && toPlaceOn.place(toPlace)) {
 					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
 					for (int id: playerIDs.keySet()) {
 						server.queuePlayerUpdate(new PlaceItemEvent(l, toPlace), id);

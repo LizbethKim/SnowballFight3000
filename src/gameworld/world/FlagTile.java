@@ -4,6 +4,7 @@ import graphics.assets.Terrain;
 
 public class FlagTile extends Tile {
 	private Team t;
+
 	public FlagTile(Location c, Terrain type, Team t) {
 		super(c, type, null);
 		this.t = t;
@@ -16,6 +17,10 @@ public class FlagTile extends Tile {
 			return super.place(on);
 		}
 		return false;
+	}
+
+	public Team getTeam(){
+		return t;
 	}
 
 }
