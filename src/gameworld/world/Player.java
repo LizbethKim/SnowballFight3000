@@ -21,6 +21,8 @@ public class Player implements Entity {
 	// Determine the speed the player can do stuff
 	private long stepDelay = 0;	// KTC change back to 200
 	private long snowballDelay = 500;
+	
+	public static final int MAX_SCORE = 64999;
 
 
 	public Player (String name, Team t, int ID, Location l) {
@@ -91,6 +93,8 @@ public class Player implements Entity {
 		score += amount;
 		if (score < 0) {
 			score = 0;
+		} else if (score > MAX_SCORE) {
+			score = MAX_SCORE;
 		}
 	}
 
@@ -156,7 +160,7 @@ public class Player implements Entity {
 	}
 	
 	public void setScore(int score) {
-		if (score > 0) {
+		if (score > 0 && score < MAX_SCORE) {
 			this.score = score;
 		}
 	}
