@@ -144,7 +144,6 @@ public class ClientGame {
 	 * @param index
 	 */
 	public void takeItemFromContainer(int index) {
-		/// check for container
 		//client.takeFromContainer(index);
 		// KTC make picking from containers work
 	}

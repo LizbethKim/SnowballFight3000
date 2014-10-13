@@ -60,7 +60,7 @@ public class ServerGame {
 			if (on != null && on instanceof Item) {
 				if(p.addItemToInventory((Item)on)) {
 					board.tileAt(l).clear();
-					server.queuePlayerUpdate(new PickUpItemEvent(l), playerID);
+					server.queuePlayerUpdate(new PickUpItemEvent((Item)on), playerID);
 					for (int id: playerIDs.keySet()) {
 						server.queuePlayerUpdate(new RemoveItemEvent(l), id);
 					}
@@ -72,10 +72,19 @@ public class ServerGame {
 	public void takeFromContainer(int playerID, int index) {
 		Player p = this.playerIDs.get(playerID);
 		if (p != null) {
-			Tile t = board.tileAt(p.getLocationInFrontOf());
-			if (t.getOn() != null && t.getOn() instanceof Inventory) {
-				Inventory takingFrom = (Inventory)t.getOn();
-				//
+			Location on = p.getLocationInFrontOf();
+			if (board.tileAt(on).getOn() != null && board.tileAt(on).getOn() instanceof Inventory) {
+				Inventory takingFrom = (Inventory)board.tileAt(on).getOn();
+				if (index < takingFrom.size()) {
+					Item toTake = takingFrom.getContents().get(index);
+					if (p.addItemToInventory(toTake)) {
+						takingFrom.removeItem(toTake);
+						// server.queuePlayerUpdate(new PickUpItemEvent(toTake), playerID);
+						for (int id: playerIDs.keySet()) {
+							server.queuePlayerUpdate(new RemoveFromContainerEvent(on, index), id);
+						}
+					}
+				}
 			}
 		}
 
@@ -103,6 +112,7 @@ public class ServerGame {
 			}
 		}
 	}
+
 
 	public void useItem(int playerID, int index) {
 		Player p = this.playerIDs.get(playerID);

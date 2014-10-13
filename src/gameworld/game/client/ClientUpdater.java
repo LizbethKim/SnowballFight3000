@@ -83,15 +83,10 @@ public class ClientUpdater {
 		}
 	}
 
-	public void pickupItemAt(Location l) {
-		if (board.containsLocation(l)) {
-			InanimateEntity on = board.tileAt(l).getOn();
-			Player p = this.playerIDs.get(playerID);
-			if (on != null && p != null && on instanceof Item) {
-				if (p.addItemToInventory((Item)on)) {
-					board.tileAt(l).clear();
-				}
-			}
+	public void pickupItem(Item i) {
+		Player p = this.playerIDs.get(playerID);
+		if (p != null) {
+			p.addItemToInventory(i);
 		}
 	}
 
