@@ -113,4 +113,10 @@ public class BoardState {
 		// goes forward 3 clockwise - same as going one anticlockwise.
 		orientation = Direction.values()[(orientation.ordinal() + 3) % 4];
 	}
+
+
+	public boolean isNight() {
+		// KTC Fill this out!
+		return true;
+	}
 }

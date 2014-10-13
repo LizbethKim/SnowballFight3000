@@ -25,11 +25,17 @@ public class GraphicsPane extends JPanel {
 	private double startingWidth;
 	private double startingHeight;
 	private BoardState boardState;
+	private BufferedImage nightShade;
 
 	public GraphicsPane(int playerNum, BoardState boardState) {
 		this.boardState = boardState;
 		startingWidth = 700;
 		startingHeight = 700;
+		try {
+			nightShade = ImageIO.read(Objects.class.getResource("NightShade.png"));
+		} catch (IOException e) {
+			System.out.println("Dis not good m8");
+		}
 	}
 
 	public void paintComponent(Graphics g) {
@@ -59,6 +65,7 @@ public class GraphicsPane extends JPanel {
 		} else {
 			System.out.println("LOADING IMAGE HERE"); //Insert Loading Music
 		}
+		if (boardState.isNight()) g.drawImage(nightShade, 0, 0, getWidth(), getHeight(), null);
 	}
 
 	private void drawNorth(Terrain[][] currentBoard,
@@ -66,11 +73,11 @@ public class GraphicsPane extends JPanel {
 		Location playerDir = boardState.getPlayerCoords();
 		for (int i = 0; i < currentBoard.length; i++) {
 			for (int j = 0; j < currentBoard[0].length; j++) {
-				double x = ((i + 5 - playerDir.x) * 0.5 * width / 10)
-						- ((j + 5 - playerDir.y) * 0.5 * width / 10)
+				double x = ((i + 5.5 - playerDir.x) * 0.5 * width / 10)
+						- ((j + 5.5 - playerDir.y) * 0.5 * width / 10)
 						+ (10 / 1.75) * (int) width / 13;
-				double y = ((i + 5 - playerDir.x) * 0.5 * height / 15)
-						+ ((j + 5 - playerDir.y) * 0.5 * height / 15)
+				double y = ((i + 5.5 - playerDir.x) * 0.5 * height / 15)
+						+ ((j + 5.5 - playerDir.y) * 0.5 * height / 15)
 						+ (10 / 3) * (int) height / 21;
 				if (currentBoard[i][j] != null)
 					g.drawImage(
@@ -89,12 +96,12 @@ public class GraphicsPane extends JPanel {
 		for (int i = 0; i < currentBoard.length; i++) {
 			for (int j = 0; j < currentBoard[0].length; j++) {
 				if (currentObjects[i][j] != null) {
-					double x = ((i + 5 - playerDir.x) * 0.5 * width / 10)
-							- ((j + 5 - playerDir.y) * 0.5 * width / 10)
+					double x = ((i + 5.5 - playerDir.x) * 0.5 * width / 10)
+							- ((j + 5.5 - playerDir.y) * 0.5 * width / 10)
 							+ (10 / 1.75) * (int) width / 13
 							- (currentObjects[i][j].imgs[0].getWidth(null) * (width / startingWidth) - width/10)/2;
-					double y = ((i + 5 - playerDir.x) * 0.5 * height / 15)
-							+ ((j + 5 - playerDir.y) * 0.5 * height / 15)
+					double y = ((i + 5.5 - playerDir.x) * 0.5 * height / 15)
+							+ ((j + 5.5 - playerDir.y) * 0.5 * height / 15)
 							+ (10 / 3) * (int) height / 21
 							+ (0.75 * height / 15) - (currentObjects[i][j].imgs[0].getHeight(null) * (height / startingHeight));
 					g.drawImage(
@@ -116,11 +123,11 @@ public class GraphicsPane extends JPanel {
 		Location playerDir = boardState.getPlayerCoords();
 		for (int i = 0; i < currentBoard.length; i++) {
 			for (int j = 0; j < currentBoard[0].length; j++) {
-				double x = ((i - currentBoard.length + 5 + (playerDir.x)) * 0.5 * width / 10)
-						- ((j - currentBoard[0].length + 5 + (playerDir.y)) * 0.5 * width / 10)
+				double x = ((i - currentBoard.length + 6 + (playerDir.x)) * 0.5 * width / 10)
+						- ((j - currentBoard[0].length + 6 + (playerDir.y)) * 0.5 * width / 10)
 						+ (10 / 1.75) * (int) width / 13;
-				double y = ((i - currentBoard.length + 5 + (playerDir.x)) * 0.5 * height / (15))
-						+ ((j - currentBoard[0].length + 5 + (playerDir.y)) * 0.5 * height / (15))
+				double y = ((i - currentBoard.length + 6 + (playerDir.x)) * 0.5 * height / (15))
+						+ ((j - currentBoard[0].length + 6 + (playerDir.y)) * 0.5 * height / (15))
 						+ (10 / 3) * (int) height / 21;
 				if (currentBoard[currentBoard.length - 1 - i][currentBoard[0].length
 						- 1 - j] != null)
@@ -137,12 +144,12 @@ public class GraphicsPane extends JPanel {
 		for (int i = 0; i < currentBoard.length; i++) {
 			for (int j = 0; j < currentBoard[0].length; j++) {
 				if (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - j] != null) {
-					double x = ((i - currentBoard.length + 5 + (playerDir.x)) * 0.5 * width / 10)
-							- ((j - currentBoard[0].length + 5 + (playerDir.y)) * 0.5 * width / 10)
+					double x = ((i - currentBoard.length + 6 + (playerDir.x)) * 0.5 * width / 10)
+							- ((j - currentBoard[0].length + 6 + (playerDir.y)) * 0.5 * width / 10)
 							+ (10 / 1.75) * (int) width / 13
 							- (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - j].imgs[1].getWidth(null) * (width / startingWidth) - width/10)/2;
-					double y = ((i - currentBoard.length + 5 + (playerDir.x)) * 0.5 * height / 15)
-							+ ((j - currentBoard[0].length + 5 + (playerDir.y)) * 0.5 * height / 15)
+					double y = ((i - currentBoard.length + 6 + (playerDir.x)) * 0.5 * height / 15)
+							+ ((j - currentBoard[0].length + 6 + (playerDir.y)) * 0.5 * height / 15)
 							+ (10 / 3) * (int) height / 21
 							+ (0.75 * height / 15) - (currentObjects[currentObjects.length - 1 - i][currentObjects[0].length - 1 - j].imgs[1].getHeight(null) * (height / startingHeight));
 					g.drawImage(
@@ -164,10 +171,10 @@ public class GraphicsPane extends JPanel {
 		Location playerDir = boardState.getPlayerCoords();
 		for (int i = 0; i < currentBoard.length; i++) {
 			for (int j = 0; j < currentBoard[0].length; j++) {
-				double x = ((j + 5 - currentBoard[0].length + playerDir.y) * 0.5 * width / 10)
+				double x = ((j + 6 - currentBoard[0].length + playerDir.y) * 0.5 * width / 10)
 						- ((i + 5 - playerDir.x) * 0.5 * width / 10)
 						+ (10 / 1.75) * (int) width / 13;
-				double y = ((j + 5 - currentBoard[0].length + playerDir.y) * 0.5 * height / (15))
+				double y = ((j + 6 - currentBoard[0].length + playerDir.y) * 0.5 * height / (15))
 						+ ((i + 5 - playerDir.x) * 0.5 * height / (15))
 						+ (10 / 3) * (int) height / 21;
 				if (currentBoard[i][currentBoard[0].length
@@ -185,11 +192,11 @@ public class GraphicsPane extends JPanel {
 		for (int i = 0; i < currentBoard.length; i++) {
 			for (int j = 0; j < currentBoard[0].length; j++) {
 				if (currentObjects[i][currentObjects[0].length - 1 - j] != null) {
-					double x = ((j + 5 - currentBoard[0].length + playerDir.y) * 0.5 * width / 10)
+					double x = ((j + 6 - currentBoard[0].length + playerDir.y) * 0.5 * width / 10)
 							- ((i + 5 - playerDir.x) * 0.5 * width / 10)
 							+ (10 / 1.75) * (int) width / 13
 							- (currentObjects[i][currentObjects[0].length - 1 - j].imgs[2].getWidth(null) * (width / startingWidth) - width/10)/2;
-					double y = ((j + 5 - currentBoard[0].length + playerDir.y) * 0.5 * height / 15)
+					double y = ((j + 6 - currentBoard[0].length + playerDir.y) * 0.5 * height / 15)
 							+ ((i + 5 - playerDir.x) * 0.5 * height / 15)
 							+ (10 / 3) * (int) height / 21
 							+ (0.75 * height / 15) - (currentObjects[i][currentObjects[0].length - 1 - j].imgs[2].getHeight(null) * (height / startingHeight));
@@ -213,10 +220,10 @@ public class GraphicsPane extends JPanel {
 		for (int i = 0; i < currentBoard.length; i++) {
 			for (int j = 0; j < currentBoard[0].length; j++) {
 				double x = ((j + 5 - playerDir.y) * 0.5 * width / 10)
-						- ((i - currentBoard.length + 5 + playerDir.x) * 0.5 * width / 10)
+						- ((i - currentBoard.length + 6 + playerDir.x) * 0.5 * width / 10)
 						+ (10 / 1.75) * (int) width / 13;
 				double y = ((j + 5 - playerDir.y) * 0.5 * height / (15))
-						+ ((i - currentBoard.length + 5 + playerDir.x) * 0.5 * height / (15))
+						+ ((i - currentBoard.length + 6 + playerDir.x) * 0.5 * height / (15))
 						+ (10 / 3) * (int) height / 21;
 				if (currentBoard[currentBoard.length - 1 - i][j] != null)
 					g.drawImage(
@@ -232,11 +239,11 @@ public class GraphicsPane extends JPanel {
 			for (int j = 0; j < currentBoard[0].length; j++) {
 				if (currentObjects[currentObjects.length - 1 - i][j] != null) {
 					double x = ((j + 5 - playerDir.y) * 0.5 * width / 10)
-							- ((i - currentBoard.length + 5 + playerDir.x) * 0.5 * width / 10)
+							- ((i - currentBoard.length + 6 + playerDir.x) * 0.5 * width / 10)
 							+ (10 / 1.75) * (int) width / 13
 							- (currentObjects[currentObjects.length - 1 - i][j].imgs[3].getWidth(null) * (width / startingWidth) - width/10)/2;
 					double y = ((j + 5 - playerDir.y) * 0.5 * height / 15)
-							+ ((i - currentBoard.length + 5 + playerDir.x) * 0.5 * height / 15)
+							+ ((i - currentBoard.length + 6 + playerDir.x) * 0.5 * height / 15)
 							+ (10 / 3) * (int) height / 21
 							+ (0.75 * height / 15) - (currentObjects[currentObjects.length - 1 - i][j].imgs[3].getHeight(null) * (height / startingHeight));
 					g.drawImage(
