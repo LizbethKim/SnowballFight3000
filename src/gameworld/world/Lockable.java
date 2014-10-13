@@ -6,6 +6,7 @@ package gameworld.world;
  */
 public interface Lockable extends StaticEntity {
 	public boolean unlock(Key k);
+	public boolean isLocked();
 	public int getID();
 
 }

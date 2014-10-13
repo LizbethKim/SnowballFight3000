@@ -38,4 +38,9 @@ public class Door extends Furniture implements Lockable {
 	public boolean canMoveThrough() {
 		return !locked;
 	}
+
+	@Override
+	public boolean isLocked() {
+		return locked;
+	}
 }

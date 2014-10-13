@@ -5,7 +5,9 @@ import gameworld.world.Direction;
 import gameworld.world.InanimateEntity;
 import gameworld.world.Inventory;
 import gameworld.world.Item;
+import gameworld.world.Key;
 import gameworld.world.Location;
+import gameworld.world.Lockable;
 import gameworld.world.NullLocation;
 import gameworld.world.Player;
 import gameworld.world.Powerup;
@@ -81,7 +83,7 @@ public class ClientGame {
 
 	public void move(Direction d) {
 		Direction up = boardState.getDirection();
-		d = Direction.values()[(d.ordinal() - up.ordinal() + 4)%4];
+		d = Direction.values()[(d.ordinal() - up.ordinal() + 4) % 4];
 
 		if (System.currentTimeMillis() - lastMovedTime > player.getStepDelay()) {
 			if (player.getDirection() == d) {
@@ -210,7 +212,12 @@ public class ClientGame {
 		if (board.containsLocation(containerLoc)) {
 			InanimateEntity on = board.tileAt(containerLoc).getOn();
 			if (on != null && on instanceof Inventory) {
-				return ((Inventory)on).getContentsAsEnums();
+				if (on instanceof Lockable && ((Lockable)on).isLocked() 
+						&& this.unlock((Lockable)on, containerLoc)) {
+					return ((Inventory)on).getContentsAsEnums();
+				} else {
+					return ((Inventory)on).getContentsAsEnums();
+				}
 			}
 		}
 		throw new NotAContainerException();
@@ -291,6 +298,18 @@ public class ClientGame {
 			}
 		}
 		return true;
+	}
+	
+	private boolean unlock(Lockable lock, Location at) {
+		if (player.holdsKey(lock.getID())) {
+			int index = player.getKeyIndex(lock.getID());
+			if (lock.unlock((Key)player.getInventoryItems().get(index))) {
+				// client.unlock(at);
+				client.useItem(index);
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

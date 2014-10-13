@@ -132,7 +132,26 @@ public class Player implements Entity {
 		}
 		return this.inventory.addItem(i);
 	}
+	
+	public boolean holdsKey(int id) {
+		for (Item i: inventory.getContents()) {
+			if (i instanceof Key && ((Key)i).id == id) {
+				return true;
+			}
+		}
+		return false;
+	}
 
+	public int getKeyIndex(int id) {
+		for (int i = 0; i < inventory.getContents().size(); i++) {
+			if (inventory.getContents().get(i) instanceof Key &&
+					((Key)inventory.getContents().get(i)).id == id) {
+				return i;
+			}
+		}
+		throw new IllegalArgumentException();
+	}
+	
 	// GETTERS AND SETTERS
 	public void setHealth(int health) {
 		this.health = health;

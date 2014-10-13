@@ -21,7 +21,7 @@ public class ServerGame {
 	private List<Snowball> projectiles;
 	private SnowballFactory snowballFactory;
 	private Server server;
-	private int time;	// 24 hour time
+	private int time = 12;	// 24 hour time
 	private long lastHourTime;
 	private final long millisPerHour = 2500;
 
