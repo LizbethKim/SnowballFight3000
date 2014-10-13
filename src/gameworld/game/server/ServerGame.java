@@ -73,12 +73,20 @@ public class ServerGame {
 		Player p = this.playerIDs.get(playerID);
 		if (p != null) {
 			Location l = Location.locationInFrontOf(p.getLocation(), p.getDirection());
-			if (board.tileAt(l).isClear() && index < p.getInventoryItems().size()) {
+			if (index < p.getInventoryItems().size()) {
 				Item toPlace = p.removeFromInventory(index);
-				board.tileAt(l).place(toPlace);
-				server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
-				for (int id: playerIDs.keySet()) {
-					server.queuePlayerUpdate(new PlaceItemEvent(l, toPlace), id);
+				Tile toPlaceOn = board.tileAt(l);
+				if (toPlaceOn.isClear()) {
+					toPlaceOn.place(toPlace);
+					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
+					for (int id: playerIDs.keySet()) {
+						server.queuePlayerUpdate(new PlaceItemEvent(l, toPlace), id);
+					}
+				} else if (toPlaceOn.getOn() instanceof Inventory && ((Inventory)toPlaceOn.getOn()).addItem(toPlace)) {
+					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
+					for (int id: playerIDs.keySet()) {
+						server.queuePlayerUpdate(new PlaceItemEvent(l, toPlace), id);
+					}
 				}
 			}
 		}

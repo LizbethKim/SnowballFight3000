@@ -7,6 +7,7 @@ import gameworld.world.Area;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.InanimateEntity;
+import gameworld.world.Inventory;
 import gameworld.world.Item;
 import gameworld.world.Location;
 import gameworld.world.NullLocation;
@@ -127,7 +128,11 @@ public class ClientUpdater {
 	}
 
 	public void placeItem(Item i, Location l) {
-		board.tileAt(l).place(i);
+		if (board.tileAt(l).isClear()) {
+			board.tileAt(l).place(i);
+		} else if (board.tileAt(l).getOn() instanceof Inventory) {
+			((Inventory)board.tileAt(l).getOn()).addItem(i);
+		}
 	}
 
 	// Updates the boardState after other methods are called.
