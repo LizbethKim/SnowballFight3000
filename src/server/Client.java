@@ -170,11 +170,13 @@ public class Client implements Runnable {
 				else if (in == 0x15) {
 					int score = readFromSocket();
 					score += readFromSocket()>>8;
+					updater.updateScore(score, 0);
 					// BF put shit here
 				}
 				// receive time
 				else if (in == 0x16) {
 					int time = readFromSocket();
+					updater.updateTime(time);
 					// BF put shit here
 				}
 			} catch (IOException e) {
