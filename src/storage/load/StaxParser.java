@@ -47,9 +47,12 @@ public class StaxParser {
 	private List<Player> players;
 	private Player curPlayer;
 	private Tile curTile;
-	private PlayerInventory curInven;
-	private boolean invenLoad;
-	private boolean tileLoad;
+	private Inventory curInven;
+	//private Chest curChest;
+	private boolean playerLoad=false;
+	private boolean tileLoad=false;
+	private boolean chestLoad=false;
+	
 
 	/**
 	 * @param file
@@ -62,10 +65,10 @@ public class StaxParser {
 			InputStream in = new FileInputStream(file);
 			//Make the event reader to detect the XML
 			XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
-
+			int count =0;
 			while (eventReader.hasNext()) {
 				XMLEvent event = eventReader.nextEvent();
-
+				count++;
 				if (event.isStartElement()) {
 					StartElement startElement = event.asStartElement();
 					String elemName = startElement.getName().getLocalPart();
@@ -86,7 +89,8 @@ public class StaxParser {
 						int teamNum = Integer.parseInt(values[0]);
 						Team team = Team.values()[teamNum];
 						Location loc = parseLoc(values[1], values[2]);
-						curPlayer = new Player(values[4], team, 10, loc);
+						curPlayer = new Player(values[3], team, 10, loc);
+						playerLoad=true;
 						continue;
 					}
 
@@ -103,30 +107,32 @@ public class StaxParser {
 						String[] values = event.asCharacters().getData().split(DELIMITER);
 						int terrain = Integer.parseInt(values[0]);
 						Location loc = parseLoc(values[1],values[2]);
-						InanimateEntity entity = null;
-						if(values.length>3){	//there is something on the tile
-							int obj = Integer.parseInt(values[3]);
-
-							if (obj==4)
-								entity = new Furniture("default tree", Objects.values()[4]);
-						}
-						curTile = new Tile(loc,Terrain.values()[terrain], entity);
+						curTile = new Tile(loc,Terrain.values()[terrain], null);
+						tileLoad=true;
 						continue;
 					}
 
 					if (elemName.equals(INVENTORY)) {
-						curInven = (PlayerInventory) curPlayer.getInventory();
+						if(playerLoad){
+							curInven = (PlayerInventory) curPlayer.getInventory();
+						}else if(tileLoad){
+							event = eventReader.nextEvent();
+							String[] values = event.asCharacters().getData().split(DELIMITER);
+							curInven = (Inventory)loadItem(values);
+						}						
 						continue;
 					}
 					
 					if (elemName.equals(ITEM)) {
 						event = eventReader.nextEvent();
 						String[] values = event.asCharacters().getData().split(DELIMITER);
-						Item item = loadItem(values);
-						if(invenLoad){
-							curInven.addItem(item);
+						InanimateEntity item = loadItem(values);
+						if(playerLoad){
+							curInven.addItem((Item)item);
+						}else if(chestLoad){
+							curInven.addItem((Item)item);
 						}else if(tileLoad){
-							curTile.place(item);	
+							curTile.place(item);
 						}
 						continue;
 					}
@@ -138,6 +144,14 @@ public class StaxParser {
 					String elemName = endElement.getName().getLocalPart();
 					if (elemName.equals(PLAYER)) {
 						players.add(curPlayer);
+						playerLoad=false;
+						continue;
+					}
+					if (elemName.equals(INVENTORY)){
+						if(chestLoad==true && tileLoad==true){
+							curTile.place((Chest)curInven);
+							chestLoad=false;
+						}
 						continue;
 					}
 					if (elemName.equals(GAME)) {
@@ -145,6 +159,7 @@ public class StaxParser {
 						break;
 					}
 					if (elemName.equals(TILE)) {
+						tileLoad = false;
 						tiles[curTile.getCoords().x][curTile.getCoords().y] = curTile;
 						continue;
 					}
@@ -168,25 +183,32 @@ public class StaxParser {
 	 * @param values 
 	 * @return
 	 */
-	private Item loadItem(String[] values) {
+	private InanimateEntity loadItem(String[] values) {
 		String name = values[0];
-		Item item = null;
-		switch(name){
-		case ("bag"):
+		InanimateEntity item = null;
+
+		if(name.equals(Objects.KEY.name())){
+			item = new Key(parseDescription(2, values), Integer.parseInt(values[1]));
+		}else if(name.equals(Objects.BAG.name())){
 			item = new Bag();
-		case ("flag"):
-			int teamNum = Integer.parseInt(values[1]);
-			item = new Flag(Team.values()[teamNum]);
-		case ("key"):
-			String description = parseDescription(2, values);
-			item = new Key(description, Integer.parseInt(values[1]));
-		case ("map"):
-			item = new Map();
-		case ("powerup"):
+		}else if(name.equals(Objects.CHEST.name())){
+			chestLoad = true;
+			item = new Chest(parseDescription(1, values));
+		}else if(name.equals(Objects.REDFLAG.name())){
+			item = new Flag(Team.RED);
+		}else if(name.equals(Objects.BLUEFLAG.name())){
+			item = new Flag(Team.BLUE);
+		}else if(name.equals(Objects.DOOREW.name())){
+			item = new Door(parseDescription(3, values),Integer.parseInt(values[1]) ,Direction.EAST );
+		}else if(name.equals(Objects.DOORNS.name())){
+			item = new Door(parseDescription(3, values),Integer.parseInt(values[1]) ,Direction.NORTH );
+		}else if(name.equals(Objects.POWERUP.name()) || name.equals(Objects.HEALTH.name())){
 			item = new Powerup(Powerup.Power.valueOf(values[1]));
-		case ("wall"):
-			 //do things
+		}else{
+			Objects type = Objects.valueOf(name);
+			item = new Furniture(parseDescription(1, values), type);
 		}
+		
 		return item;
 	}
 
@@ -198,7 +220,7 @@ public class StaxParser {
 	 */
 	private String parseDescription(int start, String[] values) {
 		StringBuilder builder = new StringBuilder();
-		for(int i=0; i<values.length; i++) {
+		for(int i=start; i<values.length; i++) {
 			builder.append(values[i]);
 		    builder.append(" ");
 		}

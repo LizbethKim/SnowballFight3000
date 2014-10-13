@@ -3,7 +3,13 @@
  */
 package storage;
 
+import gameworld.world.Chest;
+import gameworld.world.Location;
+import gameworld.world.Tile;
+import graphics.assets.Objects;
+
 import java.io.File;
+
 import storage.load.StaxParser;
 
 /**
@@ -17,7 +23,7 @@ public class LoadGame{
 	public static void main(String[] args) {
 		
 		StaxParser parser = new StaxParser();
-		StoredGame testGame = parser.parse(new File("src/storage/defaultBoard.xml"));
+		StoredGame testGame = parser.parse(new File("src/storage/1413195551663.xml"));
         System.out.println("Game Loaded by loader");
 	}
 	
