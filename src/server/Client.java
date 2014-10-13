@@ -88,7 +88,7 @@ public class Client implements Runnable {
 				// update projectile positions
 				else if (in == 0x08) {
 					int numProjectiles = readFromSocket();
-					Location projectileLocations[] = new Location[numProjectiles]; 
+					Location projectileLocations[] = new Location[numProjectiles];
 					for(int i=0;i<numProjectiles;i++) {
 						projectileLocations[i] = readLocation();
 					}
@@ -186,7 +186,7 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void pickUpItem() {
 		try {
 			connection.getOutputStream().write(0x0C);
@@ -196,7 +196,18 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public void pickUpItemFromInventory(int index) {
+		try {
+			connection.getOutputStream().write(0x10);
+			connection.getOutputStream().write(index);
+			connection.getOutputStream().flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public void dropItem(int index) {
 		try {
 			connection.getOutputStream().write(0x0D);
@@ -207,7 +218,7 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void useItem(int index) {
 		try {
 			connection.getOutputStream().write(0x0E);
@@ -274,7 +285,7 @@ public class Client implements Runnable {
 		y += readFromSocket() << 8;
 		return new Location(x,y);
 	}
-	
+
 	private Item readItem() throws IOException, SocketClosedException {
 		Objects object = Objects.values()[readFromSocket()];
 		if(object==Objects.KEY) {
@@ -295,7 +306,7 @@ public class Client implements Runnable {
 		}
 		return null;
 	}
-	
+
 	private byte readFromSocket() throws IOException, SocketClosedException {
 		//I hate java
 		int input = connection.getInputStream().read();

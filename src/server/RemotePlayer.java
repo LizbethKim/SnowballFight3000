@@ -86,11 +86,13 @@ public class RemotePlayer implements Runnable {
 				else if(in==0x0D) {
 					int index = readFromSocket();
 					game.dropItem(id, index);
-					// BF add crap here
 				}
 				else if(in==0x0E) {
 					int index = readFromSocket();
 					game.useItem(id, index);
+				}
+				else if(in==0x) {
+					int index = readFromSocket();
 					// BF add crap here
 				}
 			}
