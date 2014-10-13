@@ -140,11 +140,11 @@ public class ServerGame {
 		}
 	}
 
-	public void throwSnowball(int playerID) {
+	public void throwSnowball(int playerID, Snowball.SnowballType type) {
 		System.out.println("Server throwing snowball");
 		Player thrower = playerIDs.get(playerID);
 		if (board.tileAt(thrower.getLocation()).isSnow()) {
-			projectiles.add(snowballFactory.makeSnowball(thrower.getLocation(), thrower.getDirection(), SnowballType.NORMAL));
+			projectiles.add(snowballFactory.makeSnowball(thrower.getLocation(), thrower.getDirection(), type));
 		}
 	}
 
@@ -208,13 +208,15 @@ public class ServerGame {
 			}
 		}
 		Location[] snowballLocs = new Location[projectiles.size()];
+		Snowball.SnowballType[] snowballTypes = new Snowball.SnowballType[projectiles.size()];
 		int i = 0;
 		for (Snowball s: projectiles) {
 			snowballLocs[i] = s.getLocation();
+			snowballTypes[i] = s.type;
 			i++;
 		}
 		for(int id: playerIDs.keySet()) {
-			server.queuePlayerUpdate(new UpdateProjectilePositionsEvent(snowballLocs), id);
+			server.queuePlayerUpdate(new UpdateProjectilePositionsEvent(snowballLocs, snowballTypes), id);
 			Player p = playerIDs.get(id);
 			if (!p.isFrozen()) {
 				p.incrementScore(5);

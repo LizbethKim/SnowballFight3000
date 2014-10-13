@@ -19,6 +19,7 @@ public class BoardState {
 	private Objects[][] entities;
 	private Direction orientation = Direction.NORTH;
 	private Location playerCoords;
+	private int time = 12;
 
 	/*
 	 * EK This is for you, sets up a plain boring board for testing purposes.
@@ -117,6 +118,6 @@ public class BoardState {
 
 	public boolean isNight() {
 		// KTC Fill this out!
-		return true;
+		return (21 <= time && time <= 7);
 	}
 }
