@@ -68,15 +68,23 @@ public class ServerGame {
 			}
 		}
 	}
-	
-	public void takeFromInventory(int playerID, int index) {
-		
+
+	public void takeFromContainer(int playerID, int index) {
+		Player p = this.playerIDs.get(playerID);
+		if (p != null) {
+			Tile t = board.tileAt(p.getLocationInFrontOf());
+			if (t.getOn() != null && t.getOn() instanceof Inventory) {
+				Inventory takingFrom = (Inventory)t.getOn();
+				//
+			}
+		}
+
 	}
 
 	public void dropItem(int playerID, int index) {
 		Player p = this.playerIDs.get(playerID);
 		if (p != null) {
-			Location l = Location.locationInFrontOf(p.getLocation(), p.getDirection());
+			Location l = p.getLocationInFrontOf();
 			if (index < p.getInventoryItems().size()) {
 				Item toPlace = p.removeFromInventory(index);
 				Tile toPlaceOn = board.tileAt(l);
