@@ -1,6 +1,5 @@
 package gameworld.world;
 
-import gameworld.world.SnowballFactory.SnowballType;
 import graphics.assets.Objects;
 
 /**
@@ -16,6 +15,11 @@ public class Snowball implements Entity {
 	public final double ticksPerSquare;
 	private double ticksSinceLast = 0;
 	public final SnowballType type;
+
+
+	public enum SnowballType{
+		NORMAL, SUPER, ICE
+	}
 
 	/**
 	 * Creates a new snowball and starts it one square in
