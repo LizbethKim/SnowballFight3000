@@ -9,7 +9,7 @@ import java.util.Map;
 import server.Server;
 import server.events.*;
 import gameworld.world.*;
-import gameworld.world.SnowballFactory.SnowballType;
+import gameworld.world.Snowball.SnowballType;
 
 /**
  * Main game logic class. Interacts with the network on the server side.
