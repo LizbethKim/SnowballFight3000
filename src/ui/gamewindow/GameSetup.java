@@ -1,4 +1,4 @@
-package ui;
+package ui.gamewindow;
 
 import gameworld.game.Time;
 import gameworld.game.client.ClientGame;
@@ -29,6 +29,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import server.Server;
+import ui.ControlsPopup;
+import ui.InputPopup;
+import ui.LoadPopup;
 
 public class GameSetup extends JPanel {
 

@@ -29,6 +29,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import ui.gamewindow.HUDPanel;
+import ui.gamewindow.UI;
+
 public class ContainerPopup extends JDialog implements KeyListener {
 	private static final Image containerSlot = HUDPanel
 			.loadImage("ContainerSlot.png");

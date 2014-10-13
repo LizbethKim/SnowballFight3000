@@ -5,6 +5,8 @@ import gameworld.game.client.ClientGame;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import ui.gamewindow.InventoryPanel;
+
 public class RightClickListener extends MouseAdapter {
 	private ClientGame client;
 	private InventoryPanel panel;

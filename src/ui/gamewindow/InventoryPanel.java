@@ -1,4 +1,4 @@
-package ui;
+package ui.gamewindow;
 
 import gameworld.game.client.ClientGame;
 import graphics.assets.Objects;
@@ -14,6 +14,8 @@ import java.awt.event.MouseMotionListener;
 import java.util.List;
 
 import javax.swing.JPanel;
+
+import ui.RightClickListener;
 
 public class InventoryPanel extends JPanel {
 	private static final Image inventorySlot = HUDPanel

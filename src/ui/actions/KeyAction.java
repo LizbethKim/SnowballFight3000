@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import ui.UI;
+import ui.gamewindow.UI;
 
 public abstract class KeyAction extends AbstractAction {
 

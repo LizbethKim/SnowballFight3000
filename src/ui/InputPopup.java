@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import ui.gamewindow.UI;
+
 public class InputPopup extends JPanel {
 	private static final String blueTeam = "blue";
 	private static final String redTeam = "red";

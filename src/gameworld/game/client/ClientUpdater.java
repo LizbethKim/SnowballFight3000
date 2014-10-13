@@ -2,7 +2,7 @@ package gameworld.game.client;
 
 import java.util.Map;
 
-import ui.UI;
+import ui.gamewindow.UI;
 import gameworld.world.Area;
 import gameworld.world.Board;
 import gameworld.world.Direction;

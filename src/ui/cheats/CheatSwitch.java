@@ -12,7 +12,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
-import ui.HUDPanel;
+import ui.gamewindow.HUDPanel;
 
 public abstract class CheatSwitch extends JPanel {
 	private static final Image onSwitch = HUDPanel.loadImage("OnSwitch.png");

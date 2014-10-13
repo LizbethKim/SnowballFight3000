@@ -23,7 +23,7 @@ import java.util.Map;
 import server.Client;
 import storage.SaveGame;
 import storage.StoredGame;
-import ui.UI;
+import ui.gamewindow.UI;
 
 /**
  * Current reprentation of the model on the client. Deals with the network and sends and receives updates to/from the server.

@@ -1,4 +1,4 @@
-package ui;
+package ui.gamewindow;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
@@ -24,6 +24,8 @@ import gameworld.game.client.ClientGame;
 import gameworld.world.Board;
 import graphics.GraphicsPane;
 import server.Client;
+import ui.CheatsPopup;
+import ui.ControlsPopup;
 import ui.actions.*;
 
 import javax.swing.ActionMap;

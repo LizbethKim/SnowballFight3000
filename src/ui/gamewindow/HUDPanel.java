@@ -1,4 +1,4 @@
-package ui;
+package ui.gamewindow;
 
 import gameworld.game.client.ClientGame;
 import gameworld.world.Board;
