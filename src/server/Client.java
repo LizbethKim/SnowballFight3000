@@ -210,7 +210,7 @@ public class Client implements Runnable {
 		}
 	}
 
-	public void pickUpItemFromInventory(int index) {
+	public void takeFromContainer(int index) {
 		try {
 			connection.getOutputStream().write(0x10);
 			connection.getOutputStream().write(index);
