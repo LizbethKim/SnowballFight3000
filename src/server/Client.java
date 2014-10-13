@@ -293,7 +293,12 @@ public class Client implements Runnable {
 			String description = readString();
 			return new Key(description, id);
 		} else if(object==Objects.BAG) {
-			return new Bag();
+			Bag bag = new Bag();
+			int numItems = readFromSocket();
+			for(int i=0;i<numItems;i++) {
+				bag.addItem(readItem());
+			}
+			return bag;
 		} else if(object==Objects.BLUEFLAG) {
 			return new Flag(Team.BLUE);
 		} else if(object==Objects.REDFLAG) {

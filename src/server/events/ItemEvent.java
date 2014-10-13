@@ -1,5 +1,6 @@
 package server.events;
 
+import gameworld.world.Bag;
 import gameworld.world.Item;
 import gameworld.world.Key;
 import gameworld.world.Powerup;
@@ -18,6 +19,12 @@ public abstract class ItemEvent extends LocationEvent {
 		}
 		else if(item instanceof Powerup){
 			out.write(((Powerup)item).getPower().ordinal());
+		}
+		else if(item instanceof Bag) {
+			out.write(((Bag)item).size());
+			for(Item i : ((Bag)item).getContents()) {
+				writeItem(out, i);
+			}
 		}
 	}
 
