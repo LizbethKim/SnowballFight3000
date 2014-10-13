@@ -88,7 +88,7 @@ public class ClientGame {
 		Direction up = boardState.getDirection();
 		d = Direction.values()[(d.ordinal() - up.ordinal() + 4) % 4];
 
-		if (System.currentTimeMillis() - lastMovedTime > player.getStepDelay()) {
+		if (!player.isFrozen() && System.currentTimeMillis() - lastMovedTime > player.getStepDelay()) {
 			if (player.getDirection() == d) {
 				Location newLoc = player.getLocationInFrontOf();
 				if (board.containsLocation(newLoc) && board.canTraverse(newLoc) && this.isFree(newLoc)) {
@@ -113,7 +113,7 @@ public class ClientGame {
 	}
 
 	public void throwSnowball() {
-		if (System.currentTimeMillis() - lastFiredTime > player.getSnowballDelay()) {
+		if (!player.isFrozen() && System.currentTimeMillis() - lastFiredTime > player.getSnowballDelay()) {
 			client.throwSnowball(player.getCanThrow());
 			lastFiredTime = System.currentTimeMillis();
 		}
@@ -131,7 +131,7 @@ public class ClientGame {
 
 	public void pickUpItem() {
 		Location facing = player.getLocationInFrontOf();
-		if (board.containsLocation(facing)) {
+		if (!player.isFrozen() && board.containsLocation(facing)) {
 			if (board.tileAt(facing).getOn() != null) {
 				client.pickUpItem();
 			}
