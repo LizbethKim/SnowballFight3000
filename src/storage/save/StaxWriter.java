@@ -97,6 +97,8 @@ public class StaxWriter {
 					Characters playerContents = eventFactory.createCharacters(buildPlayerString(p));
 					eventWriter.add(playerContents);
 					eventWriter.add(inventoryStartElement);
+
+					// KH I changed the way that I use the inventory, so I edited this
 					for(Item item : p.getInventory().getContents()){
 						createTag(ITEM, buildEntityString(item));
 					}
@@ -233,7 +235,7 @@ public class StaxWriter {
 			str.append("chest ");
 			chestItem= true;
 			break;
-		case DOOR:
+		case DOOREW:
 			str.append("door ");
 			Door door = (Door) item;
 			str.append(door.id+SPACE);

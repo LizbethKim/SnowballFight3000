@@ -2,7 +2,6 @@ package gameworld.tests;
 
 import static org.junit.Assert.*;
 import gameworld.world.Flag;
-import gameworld.world.Inventory;
 import gameworld.world.Key;
 import gameworld.world.Location;
 import gameworld.world.Player;
@@ -17,7 +16,7 @@ public class PlayerTests {
 
 	private Player setUpPlayerWithInventory() {
 		Player toReturn = new Player("Player2", Team.BLUE, 50, new Location(2,4));
-		toReturn.getInventory().addItem(new Key());
+		toReturn.addItemToInventory(new Key());
 		return toReturn;
 	}
 	
@@ -40,12 +39,12 @@ public class PlayerTests {
 	@Test
 	public void testPlayerInventory() {
 		Player p = setUpPlayerWithInventory();
-		Inventory i = p.getInventory();
-		assertTrue(i.getContents().size() == 1);
-		i.addItem(new Flag(Team.BLUE));
-		assertTrue(i.getContents().size() == 2);
-		i.removeItem(i.getContents().get(0));
-		assertTrue(i.getContents().size() == 1);
+		assertTrue(p.getInventoryItems().size() == 1);
+		assertTrue(p.addItemToInventory(new Flag(Team.RED)));
+		assertTrue(p.getInventoryItems().size() == 2);
+		p.removeFromInventory(0);
+		assertTrue(p.getInventoryItems().size() == 1);
+		assertFalse(p.addItemToInventory(new Flag(Team.BLUE)));
 	}
 	
 	@Test

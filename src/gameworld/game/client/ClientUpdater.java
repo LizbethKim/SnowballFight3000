@@ -7,6 +7,7 @@ import gameworld.world.Area;
 import gameworld.world.Board;
 import gameworld.world.Direction;
 import gameworld.world.InanimateEntity;
+import gameworld.world.Inventory;
 import gameworld.world.Item;
 import gameworld.world.Location;
 import gameworld.world.NullLocation;
@@ -87,7 +88,7 @@ public class ClientUpdater {
 			InanimateEntity on = board.tileAt(l).getOn();
 			Player p = this.playerIDs.get(playerID);
 			if (on != null && p != null && on instanceof Item) {
-				if (p.getInventory().addItem((Item)on)) {
+				if (p.addItemToInventory((Item)on)) {
 					board.tileAt(l).clear();
 				}
 			}
@@ -97,7 +98,7 @@ public class ClientUpdater {
 	public void removeFromInventory(int index) {
 		Player p = playerIDs.get(playerID);
 		if (p != null) {
-			p.getInventory().removeItem(p.getInventory().getContents().get(index));
+			p.removeFromInventory(index);
 		}
 		updateBoardState();
 	}
@@ -127,7 +128,11 @@ public class ClientUpdater {
 	}
 
 	public void placeItem(Item i, Location l) {
-		board.tileAt(l).place(i);
+		if (board.tileAt(l).isClear()) {
+			board.tileAt(l).place(i);
+		} else if (board.tileAt(l).getOn() instanceof Inventory) {
+			((Inventory)board.tileAt(l).getOn()).addItem(i);
+		}
 	}
 
 	// Updates the boardState after other methods are called.

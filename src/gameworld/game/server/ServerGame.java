@@ -58,7 +58,7 @@ public class ServerGame {
 			Location l = Location.locationInFrontOf(p.getLocation(), p.getDirection());
 			InanimateEntity on = board.tileAt(l).getOn();
 			if (on != null && on instanceof Item) {
-				if(p.getInventory().addItem((Item)on)) {
+				if(p.addItemToInventory((Item)on)) {
 					board.tileAt(l).clear();
 					server.queuePlayerUpdate(new PickUpItemEvent(l), playerID);
 					for (int id: playerIDs.keySet()) {
@@ -73,13 +73,20 @@ public class ServerGame {
 		Player p = this.playerIDs.get(playerID);
 		if (p != null) {
 			Location l = Location.locationInFrontOf(p.getLocation(), p.getDirection());
-			if (board.tileAt(l).isClear()) {
-				Item toDrop = p.getInventory().getContents().get(index);
-				p.getInventory().removeItem(toDrop);
-				board.tileAt(l).place(toDrop);
-				server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
-				for (int id: playerIDs.keySet()) {
-					server.queuePlayerUpdate(new PlaceItemEvent(l, toDrop), id);
+			if (index < p.getInventoryItems().size()) {
+				Item toPlace = p.removeFromInventory(index);
+				Tile toPlaceOn = board.tileAt(l);
+				if (toPlaceOn.isClear()) {
+					toPlaceOn.place(toPlace);
+					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
+					for (int id: playerIDs.keySet()) {
+						server.queuePlayerUpdate(new PlaceItemEvent(l, toPlace), id);
+					}
+				} else if (toPlaceOn.getOn() instanceof Inventory && ((Inventory)toPlaceOn.getOn()).addItem(toPlace)) {
+					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
+					for (int id: playerIDs.keySet()) {
+						server.queuePlayerUpdate(new PlaceItemEvent(l, toPlace), id);
+					}
 				}
 			}
 		}
@@ -88,8 +95,8 @@ public class ServerGame {
 	public void useItem(int playerID, int index) {
 		Player p = this.playerIDs.get(playerID);
 		if (p != null) {
-			if (index != -1 && p.getInventory().getContents().get(index) != null) {
-				Item toUse = p.getInventory().getContents().get(index);
+			if (index != -1 && p.getInventoryItems().get(index) != null) {
+				Item toUse = p.getInventoryItems().get(index);
 				if (toUse instanceof Powerup) {
 					Powerup powerup = (Powerup)toUse;
 					if (powerup.getPower() == Powerup.Power.HEALTH_POTION || powerup.getPower() == Powerup.Power.STRONG_HEALTH_POTION) {
