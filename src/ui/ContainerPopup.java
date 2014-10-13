@@ -54,9 +54,10 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		super(ui, title, ModalityType.APPLICATION_MODAL);
 		this.client = cl;
 		this.selectedItem = 1;
+		this.interactable = inventory;
 		refresh();
 		this.maxItems = items.size();
-		this.interactable = interactable;
+		
 
 		width = Math.min(slotSize * maxItems, slotSize * maxColumn);
 		height = slotSize * ((int) Math.ceil((double) maxItems / maxColumn));
@@ -148,10 +149,10 @@ public class ContainerPopup extends JDialog implements KeyListener {
 			} else {
 				this.items = client.getContentsOfSelected();
 			}
+			repaint();
 		} catch (NotAContainerException e) {
-			e.printStackTrace();
+			dispose();
 		}
-		repaint();
 	}
 
 	private void drawItem(Image item, int xPos, int yPos, Graphics g) {
