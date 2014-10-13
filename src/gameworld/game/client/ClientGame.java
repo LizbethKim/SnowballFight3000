@@ -247,6 +247,10 @@ public class ClientGame {
 	public void setLocalLocation(Location l) {
 		this.player.setLocation(l);
 	}
+	
+	public int getPlayerScore() {
+		return this.player.getScore();
+	}
 
 	public void save() {
 		SaveGame saver = new SaveGame();
