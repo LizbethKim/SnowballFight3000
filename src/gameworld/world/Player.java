@@ -97,19 +97,19 @@ public class Player implements Entity {
 	public Location getLocationInFrontOf() {
 		return Location.locationInFrontOf(this.loc, this.d);
 	}
-	
+
 	public List<Item> getInventoryItems() {
 		return this.inventory.getContents();
 	}
-	
+
 	public List<Objects> getInventoryEnums() {
 		return this.inventory.getContentsAsEnums();
 	}
-	
+
 	public boolean removeFromInventory (Item i) {
 		return this.inventory.removeItem(i);
 	}
-	
+
 	public Item removeFromInventory (int index) {
 		if (index < this.inventory.getContents().size()) {
 			Item toRemove = this.inventory.getContents().get(index);
@@ -119,7 +119,7 @@ public class Player implements Entity {
 		}
 		throw new IllegalArgumentException();
 	}
-	
+
 	public boolean addItemToInventory (Item i) {
 		if (i instanceof Flag && ((Flag)i).getTeam() == this.team) {
 			return false;

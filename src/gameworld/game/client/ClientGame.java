@@ -152,7 +152,10 @@ public class ClientGame {
 	 * the container in front of them in the world
 	 */
 	public void dropIntoContainer(int index) {
-		// KTC make adding into containers work
+		if (index < player.getInventoryItems().size()
+				&& board.tileAt(player.getLocationInFrontOf()).getOn() instanceof Inventory) {
+			client.dropItem(index);
+		}
 	}
 
 	public void useItem() {
