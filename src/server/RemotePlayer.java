@@ -19,12 +19,21 @@ import java.util.concurrent.LinkedBlockingQueue;
 import server.events.CreateLocalPlayerEvent;
 import server.events.UpdateEvent;
 
+/**
+ * @author Bryden Frizzell
+ *
+ */
 public class RemotePlayer implements Runnable {
 	private int id;
 	private Socket connection;
 	private Queue<UpdateEvent> queuedEvents;
 	private ServerGame game;
 
+	/**
+	 * @param id the id of the player this represents
+	 * @param sock the socket connected to the player
+	 * @param game the ServerGame object for updates to be called on
+	 */
 	public RemotePlayer(int id, Socket sock, ServerGame g) {
 		this.game = g;
 		this.id = id;
@@ -32,10 +41,18 @@ public class RemotePlayer implements Runnable {
 		queuedEvents = new LinkedList<UpdateEvent>();
 	}
 
+	/**
+	 * queues an event to be sent to the server,
+	 * call sendUpdates to send queued events
+	 * @param event the event to be queued to be sent to the server
+	 */
 	public void queueEvent(UpdateEvent e) {
 		queuedEvents.offer(e);
 	}
 
+	/**
+	 * sends queued updates to the client
+	 */
 	public void sendUpdates() {
 		if(connection.isClosed()) {
 			System.out.println("Why are you updating a closed socket?");
