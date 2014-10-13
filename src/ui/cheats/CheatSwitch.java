@@ -21,7 +21,7 @@ public abstract class CheatSwitch extends JPanel {
 	private static final int SWITCH_HEIGHT = 25;
 
 	private boolean switchedOn;
-	private ClientGame client;
+	protected ClientGame client;
 
 	public CheatSwitch(ClientGame cl) {
 		this.client = cl;

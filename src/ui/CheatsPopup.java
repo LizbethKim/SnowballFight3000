@@ -16,8 +16,10 @@ import javax.swing.JPanel;
 
 import ui.cheats.CheatSwitch;
 import ui.cheats.Invincibility;
+import ui.cheats.NightVision;
 import ui.cheats.OneHitKill;
 import ui.cheats.UnlimitedSnowballs;
+import ui.cheats.UnlimitedSpeed;
 
 public class CheatsPopup extends JPanel{
 
@@ -54,7 +56,9 @@ public class CheatsPopup extends JPanel{
 	
 	private void setupLabels(){
 		addCheat("Invincibility", new Invincibility(client));
-		addCheat("Unlimited Snowballs", new UnlimitedSnowballs(client));
+		addCheat("Unlimited Fire Rate", new UnlimitedSnowballs(client));
+		addCheat("Unlimited Speed", new UnlimitedSpeed(client));
 		addCheat("One Hit Kill", new OneHitKill(client));
+		addCheat("Night Vision", new NightVision(client));
 	}
 }

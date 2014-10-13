@@ -10,7 +10,7 @@ public class Invincibility extends CheatSwitch {
 
 	@Override
 	protected void changeState() {
-		//RB: client.toggleInvincibility();
+		client.toggleInvincibility();
 	}
 
 }

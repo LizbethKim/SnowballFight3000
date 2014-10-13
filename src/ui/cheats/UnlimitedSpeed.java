@@ -2,15 +2,15 @@ package ui.cheats;
 
 import gameworld.game.client.ClientGame;
 
-public class UnlimitedSnowballs extends CheatSwitch {
+public class UnlimitedSpeed extends CheatSwitch {
 
-	public UnlimitedSnowballs(ClientGame cl) {
+	public UnlimitedSpeed(ClientGame cl) {
 		super(cl);
 	}
 
 	@Override
 	protected void changeState() {
-		client.toggleUnlimitedFireRate();
+		client.toggleUnlimitedSpeed();
 	}
 
 }
