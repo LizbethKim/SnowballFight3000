@@ -12,6 +12,7 @@ import gameworld.world.NullLocation;
 import gameworld.world.Player;
 import gameworld.world.Powerup;
 import gameworld.world.Team;
+import gameworld.world.Snowball.SnowballType;
 import graphics.assets.Objects;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.Map;
 import server.Client;
 import storage.SaveGame;
 import storage.StoredGame;
+import sun.nio.ch.BsdAsynchronousChannelProvider;
 import ui.UI;
 
 /**
@@ -46,6 +48,7 @@ public class ClientGame {
 
 	private BoardState boardState;
 	private int selectedIndex = -1;	// index selected in inventory
+	
 
 	public ClientGame(String name, String IP, Team team, UI display) {
 		this.client = new Client(IP);
@@ -162,7 +165,7 @@ public class ClientGame {
 	}
 
 	public void useItem() {
-		if (selectedIndex != -1 && player.getInventoryItems().get(selectedIndex) != null) {
+		if (!player.isFrozen() && selectedIndex != -1 && player.getInventoryItems().get(selectedIndex) != null) {
 			Item toUse = player.getInventoryItems().get(selectedIndex);
 			if (toUse instanceof Powerup) {
 				Powerup powerup = (Powerup)toUse;
@@ -194,7 +197,7 @@ public class ClientGame {
 	}
 
 	public void dropSelectedItem() {
-		if (player.getInventoryItems().size() > selectedIndex
+		if (!player.isFrozen() && player.getInventoryItems().size() > selectedIndex
 				&& player.getInventoryItems().get(selectedIndex) != null
 				&& board.tileAt(player.getLocationInFrontOf()).isClear()) {
 			client.dropItem(selectedIndex);
@@ -276,19 +279,31 @@ public class ClientGame {
 	}
 	
 	public void toggleUnlimitedSpeed () {
-		
+		if (this.player.getStepDelay() != 0) {
+			this.player.setStepDelay(0);
+		} else {
+			this.player.setStepDelay(Player.DEFAULT_STEP_DELAY);
+		}
 	}
 	public void toggleUnlimitedFireRate () {
-		
+		if (this.player.getSnowballDelay() != 0) {
+			this.player.setSnowballDelay(0);
+		} else {
+			this.player.setSnowballDelay(Player.DEFAULT_SNOWBALL_DELAY);
+		}
 	}
 	public void toggleInvincibility () {
-		
+		// KTC think about
 	}
 	public void toggleOneHitKill () {
-		
+		if (this.player.getCanThrow() == SnowballType.ONE_HIT) {
+			this.player.setCanThrow(SnowballType.NORMAL);
+		} else {
+			this.player.setCanThrow(SnowballType.ONE_HIT);
+		}
 	}
 	public void toggleNightVision() {
-		
+		boardState.toggleNightVision();
 	}
 
 	private boolean isFree(Location l) {

@@ -20,11 +20,13 @@ public class Player implements Entity {
 	private int ID;
 
 	// Determine the speed the player can do stuff
-	private long stepDelay = 0;	// KTC change back to 200
-	private long snowballDelay = 500;
+	private long stepDelay = DEFAULT_STEP_DELAY;
+	private long snowballDelay = DEFAULT_SNOWBALL_DELAY;
 	private SnowballType canThrow = SnowballType.NORMAL;
 	
 	public static final int MAX_SCORE = 64999;
+	public static final long DEFAULT_STEP_DELAY = 200;
+	public static final long DEFAULT_SNOWBALL_DELAY = 500;
 
 
 	public Player (String name, Team t, int ID, Location l) {

@@ -20,6 +20,7 @@ public class BoardState {
 	private Direction orientation = Direction.NORTH;
 	private Location playerCoords;
 	private int time = 12;
+	private boolean nightVision;
 
 	/*
 	 * EK This is for you, sets up a plain boring board for testing purposes.
@@ -99,6 +100,9 @@ public class BoardState {
 	}
 	
 	public int getLight() {
+		if (nightVision) {
+			return 2;
+		}
 		if ((5 <= time && time <= 7) || (21 <= time && time <= 23)) {
 			return 1;
 		} else if (8 <= time && time <= 20) {
@@ -128,5 +132,9 @@ public class BoardState {
 	
 	protected void setTime(int time) {
 		this.time = time;
+	}
+	
+	protected void toggleNightVision() {
+		this.nightVision = !this.nightVision;
 	}
 }

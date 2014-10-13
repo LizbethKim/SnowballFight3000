@@ -165,7 +165,7 @@ public class ClientUpdater {
 			// KTC make the user select a different player.
 		}
 	}
-
+	
 	// Updates the boardState after other methods are called.
 	private void updateBoardState() {
 		if (playerIDs.get(playerID) == null || !board.containsLocation(playerIDs.get(playerID).getLocation())) {
@@ -194,4 +194,5 @@ public class ClientUpdater {
 		display.repaint();
 	}
 
+	
 }
