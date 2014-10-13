@@ -48,13 +48,13 @@ public class StaxParser {
 	private Player curPlayer;
 	private Tile curTile;
 	private Inventory curInven;
-	//private Chest curChest;
 	private boolean playerLoad=false;
 	private boolean tileLoad=false;
 	private boolean chestLoad=false;
 	
 
 	/**
+	 * Parses the given file into a StoredGame ready to be played
 	 * @param file
 	 */
 	public StoredGame parse(File file) {
@@ -65,10 +65,8 @@ public class StaxParser {
 			InputStream in = new FileInputStream(file);
 			//Make the event reader to detect the XML
 			XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
-			int count =0;
 			while (eventReader.hasNext()) {
 				XMLEvent event = eventReader.nextEvent();
-				count++;
 				if (event.isStartElement()) {
 					StartElement startElement = event.asStartElement();
 					String elemName = startElement.getName().getLocalPart();
@@ -118,7 +116,7 @@ public class StaxParser {
 						}else if(tileLoad){
 							event = eventReader.nextEvent();
 							String[] values = event.asCharacters().getData().split(DELIMITER);
-							curInven = (Inventory)loadItem(values);
+							curInven = (Inventory)loadEntitiy(values);
 						}						
 						continue;
 					}
@@ -126,7 +124,7 @@ public class StaxParser {
 					if (elemName.equals(ITEM)) {
 						event = eventReader.nextEvent();
 						String[] values = event.asCharacters().getData().split(DELIMITER);
-						InanimateEntity item = loadItem(values);
+						InanimateEntity item = loadEntitiy(values);
 						if(playerLoad){
 							curInven.addItem((Item)item);
 						}else if(chestLoad){
@@ -179,11 +177,11 @@ public class StaxParser {
 	}
 
 	/**
-	 * KH Finish this
-	 * @param values 
-	 * @return
+	 * Loading an item from its tag into an actual InanimateEntity. Also loads all its properties.
+	 * @param values A string array, usually from the characters within a particular tag
+	 * @return entity The item represented as an
 	 */
-	private InanimateEntity loadItem(String[] values) {
+	private InanimateEntity loadEntitiy(String[] values) {
 		String name = values[0];
 		InanimateEntity item = null;
 
@@ -214,9 +212,10 @@ public class StaxParser {
 
 
 	/**
-	 * @param i
-	 * @param values
-	 * @return
+	 * Parses the leftover part of the values array into a single string. Used to load item descriptions.
+	 * @param start The starting index of the description
+	 * @param values The array of strings to load
+	 * @return description A single string description
 	 */
 	private String parseDescription(int start, String[] values) {
 		StringBuilder builder = new StringBuilder();
@@ -227,6 +226,12 @@ public class StaxParser {
 		return builder.toString();
 	}
 
+	/**
+	 * Parses two integer strings into a location.
+	 * @param xStr String of x value
+	 * @param yStr String of y value
+	 * @return location new Location of the points
+	 */
 	private Location parseLoc(String xStr, String yStr){
 		int x = Integer.parseInt(xStr);
 		int y = Integer.parseInt(yStr);
