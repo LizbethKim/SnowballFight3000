@@ -3,6 +3,7 @@ package ui;
 import java.awt.GridLayout;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,12 +41,13 @@ public class InputPopup extends JPanel {
 		// buttonPanel.setLayout(new );
 		teamChoice.add(team1);
 		teamChoice.add(team2);
+		team1.setSelected(true);
 
 		// buttonPanel.add(team1);
 		// buttonPanel.add(team2);
 
-		address = new JTextField();
-		name = new JTextField();
+		address = new JTextField("127.0.0.1");
+		name = new JTextField("defaultname");
 
 		add(new JLabel("Enter IP Address"));
 		add(address);
