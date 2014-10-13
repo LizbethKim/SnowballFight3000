@@ -166,6 +166,17 @@ public class Client implements Runnable {
 					Team team = Team.values()[readFromSocket()];
 					updater.endGame(team);
 				}
+				// recieve score
+				else if (in == 0x15) {
+					int score = readFromSocket();
+					score += readFromSocket()>>8;
+					// BF put shit here
+				}
+				// receive time
+				else if (in == 0x16) {
+					int time = readFromSocket();
+					// BF put shit here
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
