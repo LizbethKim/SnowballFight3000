@@ -63,10 +63,6 @@ public class ClientGame {
 		client.startReceiving(u);
 	}
 
-	public ClientGame() {
-		// TEMP
-	}
-
 	public int getPlayerHealth() {
 		return player.getHealth();
 	}
@@ -150,8 +146,6 @@ public class ClientGame {
 				client.takeFromContainer(index);
 			}
 		}
-
-		// KTC make picking from containers work
 	}
 
 	/**

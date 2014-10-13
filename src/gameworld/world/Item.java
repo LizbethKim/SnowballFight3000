@@ -8,14 +8,11 @@ package gameworld.world;
  */
 public abstract class Item implements InanimateEntity {
 	protected String description;
-//	private Tile on;			KTC necessary?
-//	private Inventory in;
-//	private boolean inInventory; 	// indicates whether the item is being carried or is in the map
 
 	public boolean canMoveThrough () {
 		return true;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}

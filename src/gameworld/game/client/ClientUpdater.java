@@ -73,7 +73,7 @@ public class ClientUpdater {
 		if (p != null) {
 			p.setDirection(d);
 		}
-		updateBoardState();	// KTC call this inside a loop, perhaps?
+		updateBoardState();
 	}
 
 	public void updatePlayerHealth(int health) {
@@ -113,7 +113,12 @@ public class ClientUpdater {
 	}
 
 	public void removeFromContainerAt(Location l, int index) {
-		// KTC
+		if (board.containsLocation(l) && board.tileAt(l).getOn() instanceof Inventory) {
+			Inventory i = (Inventory)board.tileAt(l).getOn();
+			if (index < i.size()) {
+				i.removeItem(i.getContents().get(index));
+			}
+		}
 		updateBoardState();
 	}
 
