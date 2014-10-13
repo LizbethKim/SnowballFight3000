@@ -79,7 +79,7 @@ public class ServerGame {
 					Item toTake = takingFrom.getContents().get(index);
 					if (p.addItemToInventory(toTake)) {
 						takingFrom.removeItem(toTake);
-						// server.queuePlayerUpdate(new PickUpItemEvent(toTake), playerID);
+						server.queuePlayerUpdate(new PickUpItemEvent(toTake), playerID);
 						for (int id: playerIDs.keySet()) {
 							server.queuePlayerUpdate(new RemoveFromContainerEvent(on, index), id);
 						}

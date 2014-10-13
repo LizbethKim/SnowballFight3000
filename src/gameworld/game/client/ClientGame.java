@@ -144,7 +144,13 @@ public class ClientGame {
 	 * @param index
 	 */
 	public void takeItemFromContainer(int index) {
-		//client.takeFromContainer(index);
+		Location facing = player.getLocationInFrontOf();
+		if (board.containsLocation(facing)) {
+			if (board.tileAt(facing).getOn() != null && board.tileAt(facing).getOn() instanceof Inventory) {
+				client.takeFromContainer(index);
+			}
+		}
+
 		// KTC make picking from containers work
 	}
 

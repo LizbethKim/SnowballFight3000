@@ -319,6 +319,9 @@ public class Client implements Runnable {
 		} else if(object==Objects.POWERUP) {
 			Power p = Power.values()[readFromSocket()];
 			return new Powerup(p);
+		} else if (object==Objects.HEALTH) {
+			Power p = Power.values()[readFromSocket()];
+			return new Powerup(p);
 		} else {
 			System.out.println("Invalid item recieved! "+object);
 		}
