@@ -40,8 +40,8 @@ public enum Objects {
 	BLUEPLAYER_E("BluePlayerEast.png", "BluePlayerWest.png", "BluePlayerNorth.png", "BluePlayerSouth.png"),
 	BLUEPLAYER_S("BluePlayerSouth.png", "BluePlayerNorth.png", "BluePlayerEast.png", "BluePlayerWest.png"),
 	BLUEPLAYER_W("BluePlayerWest.png", "BluePlayerEast.png", "BluePlayerSouth.png", "BluePlayerNorth.png"),
-	DOORNS("DoorS.png", "DoorS.png", "DoorS.png", "DoorS.png"),
-	DOOREW("DoorW.png", "DoorW.png", "DoorW.png", "DoorW.png"),
+	DOORNS("DoorS.png", "DoorS.png", "DoorW.png", "DoorW.png"),
+	DOOREW("DoorW.png", "DoorW.png", "DoorS.png", "DoorS.png"),
 	HEALTH("HealthPotion.png", "HealthPotion.png", "HealthPotion.png", "HealthPotion.png"),
 	SNOWMAN("snowman.png", "snowman.png", "snowman.png", "snowman.png");
 
