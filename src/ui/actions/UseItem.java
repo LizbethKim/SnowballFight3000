@@ -19,17 +19,11 @@ public class UseItem extends KeyAction {
 	@Override
 	protected void execute() {
 		if (client.selectedIsContainer()) {
-			System.out.println("is container");
-			try {
-				String title = client.inspectItem();
-				System.out.println("title fetched");
-				new ContainerPopup(client, parent, title, false);
-				System.out.println("popup done");
-			} catch (NoItemException e) {
-				// do nothing
-			}
+		//	System.out.println("is container");
+			new ContainerPopup(client, parent, "", false);
+			System.out.println("popup done");
 		} else {
-		client.useItem();
+			client.useItem();
 		}
 	}
 

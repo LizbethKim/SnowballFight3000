@@ -145,12 +145,15 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	private void refresh() {
 		try {
 			if (interactable) {
+				System.out.println("interactable");
 				this.items = client.getContents();
 			} else {
+				System.out.println("not interactable");
 				this.items = client.getContentsOfSelected();
 			}
 			repaint();
 		} catch (NotAContainerException e) {
+			System.out.println("not a container exception");
 			dispose();
 		}
 	}
