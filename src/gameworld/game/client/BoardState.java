@@ -98,11 +98,6 @@ public class BoardState {
 		return orientation;
 	}
 	
-	public boolean isNight() {
-		// KTC Fill this out!
-		return (21 <= time && time <= 7);
-	}
-	
 	public int getLight() {
 		if ((5 <= time && time <= 7) || (18 <= time && time <= 20)) {
 			return 1;

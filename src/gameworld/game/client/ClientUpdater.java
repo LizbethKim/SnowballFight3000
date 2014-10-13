@@ -149,7 +149,7 @@ public class ClientUpdater {
 	}
 	
 	public void endGame (Team winners) {
-		// KTC display.endGame(winners);
+		display.endGame();	// KTC ask Ryan to take the winning team
 	}
 
 	public void receivePlayerValidity (boolean isValid) {
