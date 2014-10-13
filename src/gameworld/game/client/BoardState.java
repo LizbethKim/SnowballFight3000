@@ -99,9 +99,9 @@ public class BoardState {
 	}
 	
 	public int getLight() {
-		if ((5 <= time && time <= 7) || (18 <= time && time <= 20)) {
+		if ((5 <= time && time <= 7) || (21 <= time && time <= 23)) {
 			return 1;
-		} else if (8 <= time && time <= 17) {
+		} else if (8 <= time && time <= 20) {
 			return 2;
 		}
 		else {

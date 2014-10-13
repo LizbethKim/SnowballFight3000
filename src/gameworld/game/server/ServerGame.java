@@ -99,7 +99,7 @@ public class ServerGame {
 				Item toPlace = p.removeFromInventory(index);
 				Tile toPlaceOn = board.tileAt(l);
 				if (toPlaceOn instanceof FlagTile && toPlaceOn.place(toPlace)) {
-					Team won = ((FlagTile)toPlaceOn).getTeam();
+					Team won = Team.values()[(((FlagTile)toPlaceOn).getTeam().ordinal() + 1) % 2];
 					System.out.println("The " + (won == Team.BLUE ? "blue" :"red") +  " team won!");
 					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
 					for (int id: playerIDs.keySet()) {
