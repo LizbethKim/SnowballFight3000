@@ -106,7 +106,7 @@ public class InventoryPanel extends JPanel {
 		g.drawString("" + (inventoryNum), numberXPos, numberYPos);
 	}
 
-	private int getShowHideWidth() {
+	public int getShowHideWidth() {
 		return Math.max(1, (int) (this.getWidth() * showHideXProportion));
 	}
 
@@ -152,7 +152,7 @@ public class InventoryPanel extends JPanel {
 
 		});
 
-		addMouseListener(new RightClickListener(client));
+		addMouseListener(new RightClickListener(client, this));
 	}
 
 }
