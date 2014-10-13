@@ -101,7 +101,7 @@ public class Client implements Runnable {
 					for(int i=0;i<numProjectiles;i++) {
 						projectileLocations[i] = readLocation();
 						types[i] = SnowballType.values()[readFromSocket()];
-						
+
 					}
 					updater.updateProjectiles(projectileLocations);
 				}
@@ -162,22 +162,24 @@ public class Client implements Runnable {
 					updater.removeFromContainerAt(loc, index);
 				}
 				// end game
-				else if (in == 0x14) {
+				else if (in == 0x15) {
 					Team team = Team.values()[readFromSocket()];
 					updater.endGame(team);
 				}
 				// recieve score
-				else if (in == 0x15) {
+				else if (in == 0x16) {
 					int score = readFromSocket();
 					score += readFromSocket()>>8;
 					updater.updateScore(score, 0);
-					// BF put shit here
 				}
 				// receive time
-				else if (in == 0x16) {
+				else if (in == 0x17) {
 					int time = readFromSocket();
 					updater.updateTime(time);
-					// BF put shit here
+				}
+				// unlock door
+				else if (in == 0x18) {
+					updater.unlock(readLocation());
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -223,7 +225,7 @@ public class Client implements Runnable {
 		}
 	}
 
-	
+
 	/**
 	 * sends a request to throw a snowball to the server
 	 * @param type the type of snowball you are trying to throw
@@ -252,7 +254,7 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * sends a request to take an item from a container
 	 * in front of you to the server
@@ -302,7 +304,7 @@ public class Client implements Runnable {
 
 	/**
 	 * sends a request to use a name and team to the server
-	 * 
+	 *
 	 * @param name the name you want to be called by
 	 * @param team the team you want to join
 	 */
