@@ -20,10 +20,9 @@ public class UseItem extends KeyAction {
 	protected void execute() {
 		if (client.selectedIsContainer()) {
 			try {
-				List<Objects> items = client.getContentsOfSelected();
 				String title = client.inspectItem();
-				new ContainerPopup(client, parent, title, items, enabled);
-			} catch (NotAContainerException | NoItemException e) {
+				new ContainerPopup(client, parent, title, enabled);
+			} catch (NoItemException e) {
 				// do nothing
 			}
 		} else {

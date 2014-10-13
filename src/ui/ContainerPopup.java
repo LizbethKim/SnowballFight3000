@@ -1,6 +1,7 @@
 package ui;
 
 import gameworld.game.client.ClientGame;
+import gameworld.game.client.NotAContainerException;
 import graphics.assets.Objects;
 
 import java.awt.Cursor;
@@ -49,15 +50,13 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	private JPanel buttonPanel;
 	private JPanel containerPanel;
 
-	public ContainerPopup(ClientGame cl, UI ui, String title,
-			List<Objects> items, boolean interactable) {
+	public ContainerPopup(ClientGame cl, UI ui, String title, boolean interactable) {
 		super(ui, title, ModalityType.APPLICATION_MODAL);
 		this.client = cl;
-		this.items = items;
 		this.selectedItem = 1;
 		this.maxItems = items.size();
-		this.items = items;
 		this.interactable = interactable;
+		refresh();
 
 		width = Math.min(slotSize * maxItems, slotSize * maxColumn);
 		height = slotSize * ((int) Math.ceil((double) maxItems / maxColumn));
@@ -142,6 +141,16 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		}
 	}
 
+	private void refresh() {
+		try {
+			this.items = client.getContents();
+			repaint();
+		} catch (NotAContainerException e) {
+			// do nothing
+		}
+
+	}
+
 	private void drawItem(Image item, int xPos, int yPos, Graphics g) {
 		int itemXPos = xPos + slotSize / 6;
 		int itemYPos = yPos + slotSize / 6;
@@ -163,26 +172,26 @@ public class ContainerPopup extends JDialog implements KeyListener {
 			if (key == KeyEvent.VK_Z) {
 				client.takeItemFromContainer(selectedItem);
 			} else if (key == KeyEvent.VK_1) {
-				client.dropIntoContainer(1);
+				client.dropIntoContainer(0);
 			} else if (key == KeyEvent.VK_2) {
-				client.dropIntoContainer(2);
+				client.dropIntoContainer(1);
 			} else if (key == KeyEvent.VK_3) {
-				client.dropIntoContainer(3);
+				client.dropIntoContainer(2);
 			} else if (key == KeyEvent.VK_4) {
-				client.dropIntoContainer(4);
+				client.dropIntoContainer(3);
 			} else if (key == KeyEvent.VK_5) {
-				client.dropIntoContainer(5);
+				client.dropIntoContainer(4);
 			} else if (key == KeyEvent.VK_6) {
-				client.dropIntoContainer(6);
+				client.dropIntoContainer(5);
 			} else if (key == KeyEvent.VK_7) {
-				client.dropIntoContainer(7);
+				client.dropIntoContainer(6);
 			} else if (key == KeyEvent.VK_8) {
-				client.dropIntoContainer(8);
+				client.dropIntoContainer(7);
 			} else if (key == KeyEvent.VK_9) {
-				client.dropIntoContainer(9);
+				client.dropIntoContainer(8);
 			}
 		}
-		repaint();
+		refresh();
 	}
 
 	private void changeSelection(int selectionChange) {
@@ -217,7 +226,8 @@ public class ContainerPopup extends JDialog implements KeyListener {
 			}
 
 			public void mouseMoved(MouseEvent e) {
-				if (getContentPane().getComponentAt(new Point(e.getX(), e.getY())) == buttonPanel) {
+				if (getContentPane().getComponentAt(
+						new Point(e.getX(), e.getY())) == buttonPanel) {
 					setCursor(new Cursor(Cursor.HAND_CURSOR));
 				} else {
 					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
