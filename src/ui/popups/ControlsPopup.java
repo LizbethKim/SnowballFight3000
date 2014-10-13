@@ -1,4 +1,4 @@
-package ui;
+package ui.popups;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;

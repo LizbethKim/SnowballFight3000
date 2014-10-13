@@ -1,4 +1,4 @@
-package ui;
+package ui.popups;
 
 import java.io.File;
 

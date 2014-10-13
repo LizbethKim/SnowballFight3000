@@ -1,4 +1,4 @@
-package ui;
+package ui.popups;
 
 import gameworld.game.client.ClientGame;
 import gameworld.game.client.NotAContainerException;

@@ -29,9 +29,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import server.Server;
-import ui.ControlsPopup;
-import ui.InputPopup;
-import ui.LoadPopup;
+import ui.popups.ControlsPopup;
+import ui.popups.InputPopup;
+import ui.popups.LoadPopup;
 
 public class GameSetup extends JPanel {
 

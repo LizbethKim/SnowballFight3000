@@ -1,6 +1,6 @@
 package ui.actions;
-import ui.ContainerPopup;
 import ui.gamewindow.UI;
+import ui.popups.ContainerPopup;
 import gameworld.game.client.ClientGame;
 import gameworld.world.Board;
 

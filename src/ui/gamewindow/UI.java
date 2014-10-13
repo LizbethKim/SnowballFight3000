@@ -24,9 +24,9 @@ import gameworld.game.client.ClientGame;
 import gameworld.world.Board;
 import graphics.GraphicsPane;
 import server.Client;
-import ui.CheatsPopup;
-import ui.ControlsPopup;
 import ui.actions.*;
+import ui.popups.CheatsPopup;
+import ui.popups.ControlsPopup;
 
 import javax.swing.ActionMap;
 import javax.swing.BorderFactory;

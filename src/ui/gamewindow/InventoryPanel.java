@@ -15,7 +15,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import ui.RightClickListener;
+import ui.popups.RightClickListener;
 
 public class InventoryPanel extends JPanel {
 	private static final Image inventorySlot = HUDPanel

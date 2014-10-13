@@ -2,8 +2,8 @@ package ui.actions;
 
 import java.util.List;
 
-import ui.ContainerPopup;
 import ui.gamewindow.UI;
+import ui.popups.ContainerPopup;
 import gameworld.game.client.ClientGame;
 import gameworld.game.client.NoItemException;
 import gameworld.game.client.NotAContainerException;
