@@ -20,6 +20,10 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * @author Bryden Frizzell
+ *
+ */
 public class Client implements Runnable {
 	private final String host;
 
@@ -29,6 +33,9 @@ public class Client implements Runnable {
 
 	private Byte mapBytes[];
 
+	/**
+	 * @param host the address of the server to connect to
+	 */
 	public Client(String host) {
 		this.host = host;
 		try {
@@ -157,7 +164,7 @@ public class Client implements Runnable {
 				// end game
 				else if (in == 0x14) {
 					Team team = Team.values()[readFromSocket()];
-					// BF add crap here
+					updater.endGame(team);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -171,6 +178,9 @@ public class Client implements Runnable {
 		}
 	}
 
+	/**
+	 * @param location the location you're moving to
+	 */
 	public void sendMove(Location l) {
 		try {
 			connection.getOutputStream().write(0x01);
@@ -185,6 +195,10 @@ public class Client implements Runnable {
 		}
 	}
 
+	/**
+	 * sends a request to turn your player to the server
+	 * @param direction the new direction to face
+	 */
 	public void sendTurn(Direction d) {
 		try {
 			connection.getOutputStream().write(0x02);
@@ -196,7 +210,11 @@ public class Client implements Runnable {
 		}
 	}
 
-
+	
+	/**
+	 * sends a request to throw a snowball to the server
+	 * @param type the type of snowball you are trying to throw
+	 */
 	public void throwSnowball(SnowballType type) {
 		try {
 			connection.getOutputStream().write(0x08);
@@ -208,6 +226,10 @@ public class Client implements Runnable {
 		}
 	}
 
+	/**
+	 * sends an attempt to pick up the item in front of you
+	 * to the server
+	 */
 	public void pickUpItem() {
 		try {
 			connection.getOutputStream().write(0x0C);
@@ -217,7 +239,12 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * sends a request to take an item from a container
+	 * in front of you to the server
+	 * @param index the index of the item in the container
+	 */
 	public void takeFromContainer(int index) {
 		try {
 			connection.getOutputStream().write(0x10);
@@ -229,6 +256,10 @@ public class Client implements Runnable {
 		}
 	}
 
+	/**
+	 * sends a request to drop an item from your inventory
+	 * @param index the index in your inventory of the item to be dropped
+	 */
 	public void dropItem(int index) {
 		try {
 			connection.getOutputStream().write(0x0D);
@@ -240,6 +271,10 @@ public class Client implements Runnable {
 		}
 	}
 
+	/**
+	 * sends a request to use an item in your inventory to the server
+	 * @param index the index of the item in your inventory to be used
+	 */
 	public void useItem(int index) {
 		try {
 			connection.getOutputStream().write(0x0E);
@@ -252,6 +287,12 @@ public class Client implements Runnable {
 	}
 
 
+	/**
+	 * sends a request to use a name and team to the server
+	 * 
+	 * @param name the name you want to be called by
+	 * @param team the team you want to join
+	 */
 	public void sendNameAndTeam(String name, Team team) {
 		try {
 			connection.getOutputStream().write(0x06);
@@ -267,6 +308,11 @@ public class Client implements Runnable {
 		}
 	}
 
+	/**
+	 * requests the map file from the server
+	 * this function blocks until the file is received
+	 * @return an array of byte containing the file data
+	 */
 	public Byte[] sendMapRequest() {
 		try {
 			connection.getOutputStream().write(0x07);
@@ -284,12 +330,23 @@ public class Client implements Runnable {
 		return mapBytes;
 	}
 
+	/**
+	 * starts receiving data in a new thread
+	 * @param updater the ClientUpdater to call update methods on
+	 */
 	public void startReceiving(ClientUpdater c) {
 		this.updater = c;
 		Thread t = new Thread(this);
 		t.start();
 	}
 
+	/**
+	 * reads a string, encoded as a byte containing length
+	 * followed by length characters, from the connection
+	 * @return
+	 * @throws IOException
+	 * @throws SocketClosedException
+	 */
 	private String readString() throws IOException, SocketClosedException {
 		String output = "";
 		int len = readFromSocket();
@@ -299,6 +356,13 @@ public class Client implements Runnable {
 		return output;
 	}
 
+	/**
+	 * reads a location from the connection, where X and Y are
+	 * 2-byte big-endian encoded
+	 * @return the recieved location
+	 * @throws IOException
+	 * @throws SocketClosedException
+	 */
 	private Location readLocation() throws IOException, SocketClosedException {
 		int x = readFromSocket();
 		x += readFromSocket() << 8;
@@ -307,6 +371,12 @@ public class Client implements Runnable {
 		return new Location(x,y);
 	}
 
+	/**
+	 * reads an item from the connection
+	 * @return the read item
+	 * @throws IOException
+	 * @throws SocketClosedException
+	 */
 	private Item readItem() throws IOException, SocketClosedException {
 		Objects object = Objects.values()[readFromSocket()];
 		if(object==Objects.KEY) {
@@ -336,6 +406,13 @@ public class Client implements Runnable {
 		return null;
 	}
 
+	/**
+	 * reads a byte from the connection, and nicely deals
+	 * with common errors
+	 * @return
+	 * @throws IOException
+	 * @throws SocketClosedException
+	 */
 	private byte readFromSocket() throws IOException, SocketClosedException {
 		//I hate java
 		int input = connection.getInputStream().read();
