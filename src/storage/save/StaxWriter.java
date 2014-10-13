@@ -17,6 +17,7 @@ import gameworld.world.Player;
 import gameworld.world.Powerup;
 import gameworld.world.Team;
 import gameworld.world.Tile;
+import graphics.assets.Objects;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,6 +51,7 @@ public class StaxWriter {
 	private static final String TILE = "tile";
 	private static final String INVENTORY= "inventory";
 	private static final String ITEM = "item";
+	//private static final String CHEST = "chest";
 
 	//private static final String DELIMITER = "\\s+";
 	private static final String EMPTY = "";
@@ -61,7 +63,6 @@ public class StaxWriter {
 	private Board board;
 	private List<Player> players;
 	private XMLEventWriter eventWriter;
-	private boolean chestItem;
 
 	public String saveGame(StoredGame g){
 
@@ -128,14 +129,19 @@ public class StaxWriter {
 						Tile t = board.tileAt(new Location(x,y));
 						String tileContents = buildTileString(t);
 						eventWriter.add(eventFactory.createCharacters(tileContents));
-						if(chestItem){
+						InanimateEntity onItem = t.getOn();
+						if(onItem!=null && onItem.asEnum()==Objects.CHEST){
 							System.out.println("we have a chest");
-							List<Item> itemsIn = ((Chest)t.getOn()).getContents();
+							eventWriter.add(eventFactory.createStartElement(EMPTY,EMPTY, INVENTORY));
+							eventWriter.add(eventFactory.createCharacters(buildEntityString(onItem)));
+							List<Item> itemsIn = ((Chest)t.getOn()).getContents();							
 							for(Item it:itemsIn){
 								System.out.println("in the chest");
 								createTag(ITEM, buildEntityString(it));
 							}
-							chestItem = false;
+							eventWriter.add(eventFactory.createEndElement(EMPTY,EMPTY, INVENTORY));
+						}else if(onItem!=null){
+							createTag(ITEM, buildEntityString(onItem));
 						}
 						eventWriter.add(eventFactory.createEndElement(EMPTY,EMPTY, TILE));
 						eventWriter.add(newline);
@@ -183,10 +189,6 @@ public class StaxWriter {
 				str.append(0);break;
 		}
 		str.append(String.format(" %03d %03d ", t.getCoords().x, t.getCoords().y));
-		InanimateEntity onItem = t.getOn();
-		if(onItem!=null){
-			str.append(buildEntityString(onItem));
-		}
 		return str.toString();
 	}
 
@@ -199,12 +201,12 @@ public class StaxWriter {
 	 */
 	private String buildEntityString(InanimateEntity item) throws XMLStreamException {
 		StringBuilder str = new StringBuilder();
-		switch (item.asEnum()){
+		Objects itemEnum = item.asEnum();
+		str.append(itemEnum.name()+SPACE);
+		switch (itemEnum){
+		/*
 		case BAG:
-			str.append("bag");break;
-		case KEY:
-			str.append(buildKeyString((Key)item));
-			break;
+			str.append(item.asEnum().name());break;
 		case REDFLAG:
 			str.append("flag ");
 			str.append(0);
@@ -216,57 +218,42 @@ public class StaxWriter {
 		case MAP:
 			str.append("map ");
 			break;
-		case HEALTH:
-		case POWERUP:
-			str.append("powerup ");
-			Powerup p = (Powerup)item;
-			str.append(p.getPower().name());
-			break;
 		case WALL_E_W:
-			str.append("wall EW ");break;
+			str.append(Objects.WALL_E_W.name());break;
 		case WALL_N_S:
-			str.append("wall NS ");break;
+			str.append("wallNS ");break;
 		case TREE:
 			str.append("tree ");break;
 		case BUSH:
 			str.append("bush ");break;
 		case TABLE:
-			str.append("table ");break;
+			str.append("table ");break;		
 		case CHEST:
-			str.append("chest ");
-			chestItem= true;
+			str.append()
+		*/
+		case KEY:
+			Key key = (Key)item;
+			str.append(key.id+SPACE);
+			str.append(key.getDescription());
+			break;
+		case HEALTH:
+		case POWERUP:
+			Powerup p = (Powerup)item;
+			str.append(p.getPower().name());
 			break;
 		case DOOREW:
-			str.append("doorEW ");
 			Door doorew = (Door) item;
 			str.append(doorew.id+SPACE);
 			str.append(doorew.canMoveThrough());
 			break;
 		case DOORNS:
-			str.append("doorNS ");
 			Door doorns = (Door) item;
 			str.append(doorns.id+SPACE);
 			str.append(doorns.canMoveThrough());
 			break;
 		default:
-			System.out.println("Add this item to tile possiblities: "+ item.asEnum().name());
 			break;
 		}
-		return str.toString();
-	}
-
-
-	/**
-	 * Builds a string description of the key
-	 * @param Key to transcribe
-	 * @return string summary of the key 
-	 */
-	private String buildKeyString(Key item) {
-		StringBuilder str = new StringBuilder();
-		str.append("key ");
-		Key key = (Key)item;
-		str.append(key.id+SPACE);
-		str.append(key.getDescription());
 		return str.toString();
 	}
 
@@ -301,7 +288,6 @@ public class StaxWriter {
 
 		// open tag
 		StartElement sElement = eventFactory.createStartElement(EMPTY, EMPTY, name);
-		//eventWriter.add(tab);
 		eventWriter.add(sElement);
 
 		// save the characters of content
@@ -311,7 +297,6 @@ public class StaxWriter {
 		// end tag
 		EndElement eElement = eventFactory.createEndElement(EMPTY, EMPTY, name);
 		eventWriter.add(eElement);
-		eventWriter.add(newline);
 
 	}
 
