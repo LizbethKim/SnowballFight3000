@@ -61,6 +61,7 @@ public class StaxWriter {
 	private Board board;
 	private List<Player> players;
 	private XMLEventWriter eventWriter;
+	private boolean chestItem;
 
 	public String saveGame(StoredGame g){
 
@@ -97,7 +98,7 @@ public class StaxWriter {
 					eventWriter.add(playerContents);
 					eventWriter.add(inventoryStartElement);
 					for(Item item : p.getInventory().getContents()){
-						createTag(ITEM, buildItemString(item));
+						createTag(ITEM, buildEntityString(item));
 					}
 					eventWriter.add(inventoryEndElement);
 					eventWriter.add(playerEndElement);
@@ -121,9 +122,21 @@ public class StaxWriter {
 				//for each tile, make its tag and fill it
 				for(int x=0;x<xMax;x++){
 					for(int y=0;y<xMax;y++){
+						eventWriter.add(eventFactory.createStartElement(EMPTY,EMPTY, TILE));
 						Tile t = board.tileAt(new Location(x,y));
 						String tileContents = buildTileString(t);
-						createTag(TILE,tileContents);
+						eventWriter.add(eventFactory.createCharacters(tileContents));
+						if(chestItem){
+							System.out.println("we have a chest");
+							List<Item> itemsIn = ((Chest)t.getOn()).getContents();
+							for(Item it:itemsIn){
+								System.out.println("in the chest");
+								createTag(ITEM, buildEntityString(it));
+							}
+							chestItem = false;
+						}
+						eventWriter.add(eventFactory.createEndElement(EMPTY,EMPTY, TILE));
+						eventWriter.add(newline);
 					}
 				}
 
@@ -146,63 +159,14 @@ public class StaxWriter {
 
 		return filename;
 	}
-
-
+	
 	/**
-	 * @param item
-	 * @return
+	 * Build a string description of a tile, including the item/s on it
+	 * @param tile
+	 * @return String description
+	 * @throws XMLStreamException 
 	 */
-	private String buildItemString(Item item) {
-		StringBuilder str = new StringBuilder();
-		switch (item.asEnum()){
-		case BAG:
-			str.append("bag");break;
-		case KEY:
-			str.append(buildKeyString(item));
-			break;
-		case REDFLAG:
-			str.append("flag ");
-			str.append(0);
-			break;
-		case BLUEFLAG:
-			str.append("flag ");
-			str.append(1);
-			break;
-		case MAP:
-			str.append("map");
-			break;
-		case POWERUP:
-			str.append("powerup");
-			Powerup p = (Powerup)item;
-			str.append(p.getPower().name());
-			break;
-		default:
-			str.append(0);break;
-		}
-		return str.toString();
-	}
-
-
-	/**
-	 * @param item
-	 * @param str
-	 * @return 
-	 */
-	private String buildKeyString(Item item) {
-		StringBuilder str = new StringBuilder();
-		str.append("key ");
-		Key key = (Key)item;
-		str.append(key.id+SPACE);
-		str.append(key.getDescription());
-		return str.toString();
-	}
-
-
-	/**
-	 * @param t
-	 * @return
-	 */
-	private String buildTileString(Tile t) {
+	private String buildTileString(Tile t) throws XMLStreamException {
 		StringBuilder str = new StringBuilder();
 		switch (t.getType()){
 			case SNOW:
@@ -219,51 +183,83 @@ public class StaxWriter {
 		str.append(String.format(" %03d %03d ", t.getCoords().x, t.getCoords().y));
 		InanimateEntity onItem = t.getOn();
 		if(onItem!=null){
-			switch (onItem.asEnum()){
-			case WALL_E_W:
-				str.append("wallEW ");break;
-			case WALL_N_S:
-				str.append("wallNS ");break;
-			case TREE:
-				str.append("tree ");break;
-			case BUSH:
-				str.append("bush ");break;
-			case TABLE:
-				str.append("table ");break;
-			case CHEST:
-				str.append("chest ");
-				Chest chest = (Chest)onItem;
-				List<Item> itemsIn = chest.getContents();
-				for(Item item:itemsIn){
-					str.append(buildItemString(item) + SPACE);
-				}
-				break;
-			case DOOR:
-				str.append("door ");
-				Door door = (Door) onItem;
-				str.append(door.id+SPACE);
-				if(door.canMoveThrough())
-					str.append(1+SPACE);
-				else
-					str.append(0+SPACE);
-				break;
-			case KEY:
-			case BAG:
-			case REDFLAG:
-			case BLUEFLAG:
-			case MAP:
-			case POWERUP:
-				str.append(buildItemString((Item)onItem));
-				break;
-			default:
-				System.out.println("Add this item to tile possiblities: "+ onItem.asEnum().name());
-				break;
-			}
-			
+			str.append(buildEntityString(onItem));
 		}
 		return str.toString();
 	}
 
+	/**
+	 * Builds a String for any item under the InanimateEntity category. Used for building tiles
+	 *  and for building inventories. Calls itself recursively for chest contents
+	 * @param item Inanimate Entity
+	 * @return string description of item
+	 * @throws XMLStreamException 
+	 */
+	private String buildEntityString(InanimateEntity item) throws XMLStreamException {
+		StringBuilder str = new StringBuilder();
+		switch (item.asEnum()){
+		case BAG:
+			str.append("bag");break;
+		case KEY:
+			str.append(buildKeyString((Key)item));
+			break;
+		case REDFLAG:
+			str.append("flag ");
+			str.append(0);
+			break;
+		case BLUEFLAG:
+			str.append("flag ");
+			str.append(1);
+			break;
+		case MAP:
+			str.append("map ");
+			break;
+		case POWERUP:
+			str.append("powerup ");
+			Powerup p = (Powerup)item;
+			str.append(p.getPower().name());
+			break;
+		case WALL_E_W:
+			str.append("wallEW ");break;
+		case WALL_N_S:
+			str.append("wallNS ");break;
+		case TREE:
+			str.append("tree ");break;
+		case BUSH:
+			str.append("bush ");break;
+		case TABLE:
+			str.append("table ");break;
+		case CHEST:
+			str.append("chest ");
+			chestItem= true;
+			break;
+		case DOOR:
+			str.append("door ");
+			Door door = (Door) item;
+			str.append(door.id+SPACE);
+			str.append(door.canMoveThrough());
+			break;
+		default:
+			System.out.println("Add this item to tile possiblities: "+ item.asEnum().name());
+			break;
+		}
+		return str.toString();
+	}
+
+
+	/**
+	 * Builds a string description of the key
+	 * @param Key to transcribe
+	 * @return string summary of the key 
+	 */
+	private String buildKeyString(Key item) {
+		StringBuilder str = new StringBuilder();
+		str.append("key ");
+		Key key = (Key)item;
+		str.append(key.id+SPACE);
+		str.append(key.getDescription());
+		return str.toString();
+	}
 
 	/**
 	 * @param p
@@ -296,7 +292,7 @@ public class StaxWriter {
 
 		// open tag
 		StartElement sElement = eventFactory.createStartElement(EMPTY, EMPTY, name);
-		eventWriter.add(tab);
+		//eventWriter.add(tab);
 		eventWriter.add(sElement);
 
 		// save the characters of content
