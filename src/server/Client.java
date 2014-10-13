@@ -112,8 +112,8 @@ public class Client implements Runnable {
 				}
 				// add item to inventory
 				else if (in == 0x0C) {
-					Location loc = readLocation();
-					updater.pickupItemAt(loc);
+					Item item = readItem();
+					updater.pickupItem(item);
 				}
 				// remove item
 				else if (in == 0x0D) {
