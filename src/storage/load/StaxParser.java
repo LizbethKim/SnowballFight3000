@@ -48,6 +48,8 @@ public class StaxParser {
 	private Player curPlayer;
 	private Tile curTile;
 	private PlayerInventory curInven;
+	private boolean invenLoad;
+	private boolean tileLoad;
 
 	/**
 	 * @param file
@@ -121,7 +123,11 @@ public class StaxParser {
 						event = eventReader.nextEvent();
 						String[] values = event.asCharacters().getData().split(DELIMITER);
 						Item item = loadItem(values);
-						curInven.addItem(item);
+						if(invenLoad){
+							curInven.addItem(item);
+						}else if(tileLoad){
+							curTile.place(item);	
+						}
 						continue;
 					}
 
@@ -158,24 +164,28 @@ public class StaxParser {
 	}
 
 	/**
+	 * KH Finish this
 	 * @param values 
 	 * @return
 	 */
 	private Item loadItem(String[] values) {
 		String name = values[0];
 		Item item = null;
-		if(name.equals("bag")){
+		switch(name){
+		case ("bag"):
 			item = new Bag();
-		}else if(name.equals("flag")){
+		case ("flag"):
 			int teamNum = Integer.parseInt(values[1]);
 			item = new Flag(Team.values()[teamNum]);
-		}else if(name.equals("key")){
+		case ("key"):
 			String description = parseDescription(2, values);
 			item = new Key(description, Integer.parseInt(values[1]));
-		}else if(name.equals("map")){
+		case ("map"):
 			item = new Map();
-		}else if(name.equals("powerup")){
+		case ("powerup"):
 			item = new Powerup(Powerup.Power.valueOf(values[1]));
+		case ("wall"):
+			 //do things
 		}
 		return item;
 	}

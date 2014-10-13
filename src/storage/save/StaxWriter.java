@@ -223,9 +223,9 @@ public class StaxWriter {
 			str.append(p.getPower().name());
 			break;
 		case WALL_E_W:
-			str.append("wallEW ");break;
+			str.append("wall EW ");break;
 		case WALL_N_S:
-			str.append("wallNS ");break;
+			str.append("wall NS ");break;
 		case TREE:
 			str.append("tree ");break;
 		case BUSH:
