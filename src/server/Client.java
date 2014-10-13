@@ -10,6 +10,7 @@ import gameworld.world.Location;
 import gameworld.world.Player;
 import gameworld.world.Powerup;
 import gameworld.world.Powerup.Power;
+import gameworld.world.Snowball.SnowballType;
 import gameworld.world.Team;
 import graphics.assets.Objects;
 
@@ -89,8 +90,11 @@ public class Client implements Runnable {
 				else if (in == 0x08) {
 					int numProjectiles = readFromSocket();
 					Location projectileLocations[] = new Location[numProjectiles];
+					SnowballType types[] = new SnowballType[numProjectiles];
 					for(int i=0;i<numProjectiles;i++) {
 						projectileLocations[i] = readLocation();
+						types[i] = SnowballType.values()[readFromSocket()];
+						
 					}
 					updater.updateProjectiles(projectileLocations);
 				}
@@ -193,9 +197,10 @@ public class Client implements Runnable {
 	}
 
 
-	public void throwSnowball() {
+	public void throwSnowball(SnowballType type) {
 		try {
 			connection.getOutputStream().write(0x08);
+			connection.getOutputStream().write(type.ordinal());
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

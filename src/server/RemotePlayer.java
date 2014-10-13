@@ -4,6 +4,7 @@ import gameworld.game.client.ClientUpdater;
 import gameworld.game.server.ServerGame;
 import gameworld.world.Direction;
 import gameworld.world.Location;
+import gameworld.world.Snowball.SnowballType;
 import gameworld.world.Team;
 
 import java.io.IOException;
@@ -75,7 +76,8 @@ public class RemotePlayer implements Runnable {
 					// BF put code for sending map file here
 				}
 				else if(in==0x08) {
-					game.throwSnowball(id);
+					SnowballType type = SnowballType.values()[readFromSocket()];
+					game.throwSnowball(id, type);
 				}
 				else if(in==0x09) {
 					game.removePlayer(id);
