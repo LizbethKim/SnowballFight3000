@@ -50,11 +50,11 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	private JPanel buttonPanel;
 	private JPanel containerPanel;
 
-	public ContainerPopup(ClientGame cl, UI ui, String title, boolean inventory) {
+	public ContainerPopup(ClientGame cl, UI ui, String title, boolean interactable) {
 		super(ui, title, ModalityType.APPLICATION_MODAL);
 		this.client = cl;
 		this.selectedItem = 1;
-		this.interactable = inventory;
+		this.interactable = interactable;
 		refresh();
 		this.maxItems = items.size();
 		
@@ -131,7 +131,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 
 			if (items.get(i) != null) {
 				Image item = items.get(i).imgs[0];
-				drawItem(items.get(i).imgs[0], xPos, yPos, g);
+				drawItem(item, xPos, yPos, g);
 			}
 			if (column + 1 < maxColumn) {
 				column++;
