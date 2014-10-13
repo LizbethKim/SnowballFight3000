@@ -19,7 +19,9 @@ public enum Terrain {
 	ICE("Ice.png"),
 	SAND("Sand.png"),
 	WATER("Water.png"),
-	NULLTILE("NullTile.png");
+	NULLTILE("NullTile.png"),
+	RED("RedTile.png"),
+	BLUE("BlueTile.png");
 	
 	public final BufferedImage img;
 
