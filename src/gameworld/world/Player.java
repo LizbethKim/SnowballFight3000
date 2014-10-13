@@ -154,6 +154,12 @@ public class Player implements Entity {
 	public int getScore() {
 		return score;
 	}
+	
+	public void setScore(int score) {
+		if (score > 0) {
+			this.score = score;
+		}
+	}
 
 	public int getHealth() {
 		return health;

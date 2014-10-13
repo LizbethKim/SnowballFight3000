@@ -140,6 +140,14 @@ public class ClientUpdater {
 		}
 	}
 	
+	public void updateScore(int score) {
+		this.playerIDs.get(playerID).setScore(score);
+	}
+	
+	public void updateTime(int time) {
+		bs.setTime(time);
+	}
+	
 	public void endGame (Team winners) {
 		// KTC display.endGame(winners);
 	}

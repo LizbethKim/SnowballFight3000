@@ -97,6 +97,22 @@ public class BoardState {
 	public Direction getDirection() {
 		return orientation;
 	}
+	
+	public boolean isNight() {
+		// KTC Fill this out!
+		return (21 <= time && time <= 7);
+	}
+	
+	public int getLight() {
+		if ((5 <= time && time <= 7) || (18 <= time && time <= 20)) {
+			return 1;
+		} else if (8 <= time && time <= 17) {
+			return 2;
+		}
+		else {
+			return 0;
+		}
+	}
 
 	// Methods to update the state
 
@@ -114,10 +130,8 @@ public class BoardState {
 		// goes forward 3 clockwise - same as going one anticlockwise.
 		orientation = Direction.values()[(orientation.ordinal() + 3) % 4];
 	}
-
-
-	public boolean isNight() {
-		// KTC Fill this out!
-		return (21 <= time && time <= 7);
+	
+	protected void setTime(int time) {
+		this.time = time;
 	}
 }
