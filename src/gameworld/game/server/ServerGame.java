@@ -22,6 +22,9 @@ public class ServerGame {
 	private List<Snowball> projectiles;
 	private SnowballFactory snowballFactory;
 	private Server server;
+	private int time;	// 24 hour time
+	private long lastHourTime;
+	private final long millisPerHour = 2500;
 
 	public ServerGame(Board b) {
 		this.board = b;
@@ -220,11 +223,16 @@ public class ServerGame {
 			Player p = playerIDs.get(id);
 			if (!p.isFrozen()) {
 				p.incrementScore(5);
-				// KTC get bryden to make an updateScoreEvent
-				// server.queuePlayerUpdate(new, playerID);
+				server.queuePlayerUpdate(new UpdateScoreEvent(p.getScore()), id);
 			}
 		}
-		// KTC possibly do time logic too.
+		if (System.currentTimeMillis() - lastHourTime > millisPerHour) {
+			this.time = (this.time + 1)%24;
+			for (int id: playerIDs.keySet()) {
+				server.queuePlayerUpdate(new UpdateTimeEvent(time), id);
+			}
+			this.lastHourTime = System.currentTimeMillis();
+		}
 	}
 
 	private boolean isFree(Location l) {
