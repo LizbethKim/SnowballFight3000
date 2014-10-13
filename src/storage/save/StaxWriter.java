@@ -236,10 +236,16 @@ public class StaxWriter {
 			chestItem= true;
 			break;
 		case DOOREW:
-			str.append("door ");
-			Door door = (Door) item;
-			str.append(door.id+SPACE);
-			str.append(door.canMoveThrough());
+			str.append("doorEW ");
+			Door doorew = (Door) item;
+			str.append(doorew.id+SPACE);
+			str.append(doorew.canMoveThrough());
+			break;
+		case DOORNS:
+			str.append("doorNS ");
+			Door doorns = (Door) item;
+			str.append(doorns.id+SPACE);
+			str.append(doorns.canMoveThrough());
 			break;
 		default:
 			System.out.println("Add this item to tile possiblities: "+ item.asEnum().name());
