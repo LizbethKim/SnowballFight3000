@@ -216,6 +216,7 @@ public class StaxWriter {
 		case MAP:
 			str.append("map ");
 			break;
+		case HEALTH:
 		case POWERUP:
 			str.append("powerup ");
 			Powerup p = (Powerup)item;
