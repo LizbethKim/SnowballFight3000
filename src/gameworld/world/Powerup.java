@@ -46,6 +46,28 @@ public class Powerup extends Item {
 		}
 	}
 
+	/**
+	 * Creates a random powerup.
+	 */
+	public Powerup() {
+		int random = (int)(Math.random()*Power.values().length);
+		this.power = Power.values()[random];
+		this.description = power.description;
+		if (power == Power.SPEED_BOOST) {
+			this.effect = new SpeedEffect();
+		} else if (power == Power.FIRE_SPEED_BOOST) {
+			this.effect = new FireSpeedEffect();
+		} else if (power == Power.STRONG_HEALTH_POTION) {
+			this.effect = new PotionEffect(100);
+		} else if (power == Power.HEALTH_POTION) {
+			this.effect = new PotionEffect(50);
+		} else if (power == Power.FAST_SNOWBALLS) {
+			this.effect = new FastSnowballsEffect();
+		} else {
+			this.effect = new SuperSnowballsEffect();
+		}
+	}
+
 	public void use (Player p) {
 		effect.apply(p);
 	}

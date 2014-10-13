@@ -23,7 +23,7 @@ public class ServerGame {
 	private Server server;
 	private int time = 12;	// 24 hour time
 	private long lastHourTime;
-	private final long millisPerHour = 2500;
+	private final long millisPerHour = 10000;
 
 	public ServerGame(Board b) {
 		this.board = b;

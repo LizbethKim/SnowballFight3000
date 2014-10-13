@@ -17,7 +17,11 @@ public class Door extends Furniture implements Lockable {
 			this.type = Objects.DOORNS;
 		}
 		this.id = id;
-		this.locked = false;
+		if (id == 0) {
+			this.locked = false;
+		} else {
+			this.locked = true;
+		}
 	}
 
 	@Override
