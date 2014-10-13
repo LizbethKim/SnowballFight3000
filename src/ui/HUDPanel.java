@@ -82,6 +82,7 @@ public class HUDPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		paintHealthBar(g);
+		paintScore(g);
 	}
 
 	@Override
@@ -108,6 +109,15 @@ public class HUDPanel extends JPanel {
 					healthHeight, null);
 		}
 
+	}
+	
+	private void paintScore(Graphics g) {
+		final int xPos = (int) (14 * this.getWidth() / 20 / aspectRatio);
+		final int yPos = 2* this.getHeight() / 20;
+		final int fontSize = this.getHeight() / 18;
+		g.setColor(Color.white);
+		g.setFont(new Font("Times", Font.BOLD, fontSize));
+		g.drawString("Score: 459", xPos, yPos);
 	}
 
 	/**

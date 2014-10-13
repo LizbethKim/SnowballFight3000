@@ -39,6 +39,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
@@ -164,6 +165,11 @@ public class UI extends JFrame {
 		}
 	}
 
+	public void endGame(){
+		JOptionPane.showMessageDialog(this, "Game Over! Final score: "+client.getPlayerScore());
+		System.exit(EXIT_ON_CLOSE);
+	}
+	
 	private Dimension getMaximumAspectSize(int width, int height) {
 		if (width / ASPECT_RATIO < height) {
 			return new Dimension(width, (int) (width / ASPECT_RATIO));
