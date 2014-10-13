@@ -43,4 +43,9 @@ public class Door extends Furniture implements Lockable {
 	public boolean isLocked() {
 		return locked;
 	}
+
+	@Override
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
 }

@@ -125,4 +125,9 @@ public class Chest extends Furniture implements Inventory, Lockable {
 	public boolean isLocked() {
 		return locked;
 	}
+
+	@Override
+	public void setLocked(boolean locked) {
+		this.locked = locked;		
+	}
 }

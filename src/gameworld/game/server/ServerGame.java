@@ -89,7 +89,6 @@ public class ServerGame {
 				}
 			}
 		}
-
 	}
 
 	public void dropItem(int playerID, int index) {
@@ -135,13 +134,23 @@ public class ServerGame {
 						server.queuePlayerUpdate(new UpdateHealthEvent(p.getHealth()), playerID);
 					}
 					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
-				} else {
-					// KTC later
+				} else if (toUse instanceof Key) {
+					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
 				}
 			}
 		}
 	}
 
+	public void unlock(Location l) {
+		if (board.containsLocation(l) && board.tileAt(l).getOn() != null 
+				&& board.tileAt(l).getOn() instanceof Lockable) {
+			((Lockable)board.tileAt(l).getOn()).setLocked(false);
+			for (int id: playerIDs.keySet()) {
+				// server.queuePlayerUpdate(new UnlockEvent(l), id); KTC
+			}
+		}
+	}
+	
 	public void throwSnowball(int playerID, Snowball.SnowballType type) {
 		Player thrower = playerIDs.get(playerID);
 		if (board.tileAt(thrower.getLocation()).isSnow()) {

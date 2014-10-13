@@ -304,7 +304,7 @@ public class ClientGame {
 		if (player.holdsKey(lock.getID())) {
 			int index = player.getKeyIndex(lock.getID());
 			if (lock.unlock((Key)player.getInventoryItems().get(index))) {
-				// client.unlock(at);
+				// client.unlock(at); KTC
 				client.useItem(index);
 				return true;
 			}

@@ -9,6 +9,7 @@ import gameworld.world.Direction;
 import gameworld.world.Inventory;
 import gameworld.world.Item;
 import gameworld.world.Location;
+import gameworld.world.Lockable;
 import gameworld.world.NullLocation;
 import gameworld.world.Player;
 import gameworld.world.Team;
@@ -137,6 +138,13 @@ public class ClientUpdater {
 			board.tileAt(l).place(i);
 		} else if (board.tileAt(l).getOn() instanceof Inventory) {
 			((Inventory)board.tileAt(l).getOn()).addItem(i);
+		}
+	}
+	
+	public void unlock(Location l) {
+		if (board.containsLocation(l) && board.tileAt(l).getOn() != null 
+				&& board.tileAt(l).getOn() instanceof Lockable) {
+			((Lockable)board.tileAt(l).getOn()).setLocked(false);
 		}
 	}
 	
