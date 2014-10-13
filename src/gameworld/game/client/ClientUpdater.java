@@ -139,6 +139,10 @@ public class ClientUpdater {
 			((Inventory)board.tileAt(l).getOn()).addItem(i);
 		}
 	}
+	
+	public void endGame (Team winners) {
+		// KTC display.endGame(winners);
+	}
 
 	public void receivePlayerValidity (boolean isValid) {
 		if (!isValid) {

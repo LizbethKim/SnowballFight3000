@@ -268,6 +268,22 @@ public class ClientGame {
 		return new ClientUpdater(this, board, playerIDs,
 				boardState, display, playerID);
 	}
+	
+	public void toggleUnlimitedSpeed () {
+		
+	}
+	public void toggleUnlimitedFireRate () {
+		
+	}
+	public void toggleInvincibility () {
+		
+	}
+	public void toggleOneHitKill () {
+		
+	}
+	public void toggleNightVision() {
+		
+	}
 
 	private boolean isFree(Location l) {
 		for (Player p: playerIDs.values()) {
