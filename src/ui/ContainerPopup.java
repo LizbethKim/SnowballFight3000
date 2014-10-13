@@ -170,7 +170,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 			changeSelection(1);
 		} else if (interactable) {
 			if (key == KeyEvent.VK_Z) {
-				client.takeItemFromContainer(selectedItem);
+				client.takeItemFromContainer(selectedItem-1);
 			} else if (key == KeyEvent.VK_1) {
 				client.dropIntoContainer(0);
 			} else if (key == KeyEvent.VK_2) {
