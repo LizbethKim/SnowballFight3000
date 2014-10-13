@@ -5,15 +5,17 @@ import graphics.assets.Terrain;
 public class FlagTile extends Tile {
 	private Team t;
 
-	public FlagTile(Location c, Terrain type, Team t) {
-		super(c, type, null);
+	public FlagTile(Location c, Team t) {
+		super(c, Terrain.RED, null);
+		if (t == Team.BLUE) {
+			this.type = Terrain.BLUE;
+		}
 		this.t = t;
 	}
 
 	@Override
 	public boolean place (InanimateEntity on) {
 		if (on instanceof Flag && ((Flag)on).getTeam() == t) {
-			// KTC win the game?
 			return super.place(on);
 		}
 		return false;

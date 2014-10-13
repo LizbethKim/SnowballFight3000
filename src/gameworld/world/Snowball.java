@@ -18,7 +18,7 @@ public class Snowball implements Entity {
 
 
 	public enum SnowballType{
-		NORMAL, SUPER, ICE
+		NORMAL, SUPER, FAST
 	}
 
 	/**

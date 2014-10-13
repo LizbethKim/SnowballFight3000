@@ -9,7 +9,7 @@ import graphics.assets.Terrain;
  */
 public class Tile {
 	private Location coords;
-	private Terrain type;	// the image won't be used internally
+	protected Terrain type;	// the image won't be used internally
 	private InanimateEntity on;
 
 
