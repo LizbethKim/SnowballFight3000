@@ -117,6 +117,12 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
+	public void removeFromContainerAt(Location l, int index) {
+		// KTC
+		updateBoardState();
+	}
+
+
 	public void disconnectFromServer() {
 		// KTC potentially do something else
 		System.exit(0);
@@ -132,6 +138,12 @@ public class ClientUpdater {
 			board.tileAt(l).place(i);
 		} else if (board.tileAt(l).getOn() instanceof Inventory) {
 			((Inventory)board.tileAt(l).getOn()).addItem(i);
+		}
+	}
+
+	public void receivePlayerValidity (boolean isValid) {
+		if (!isValid) {
+			// KTC make the user select a different player.
 		}
 	}
 
