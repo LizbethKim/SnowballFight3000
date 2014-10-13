@@ -3,12 +3,9 @@
  */
 package storage.save;
 
-import gameworld.world.Bag;
 import gameworld.world.Board;
 import gameworld.world.Chest;
 import gameworld.world.Door;
-import gameworld.world.Flag;
-import gameworld.world.Furniture;
 import gameworld.world.InanimateEntity;
 import gameworld.world.Item;
 import gameworld.world.Key;
@@ -31,13 +28,13 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.EndElement;
-import javax.xml.stream.events.StartDocument;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import storage.StoredGame;
 
 /**
+ * Writes StoredGames into XML files using the StAX library.
  * @author Kate Henderson
  *
  */
@@ -51,22 +48,25 @@ public class StaxWriter {
 	private static final String TILE = "tile";
 	private static final String INVENTORY= "inventory";
 	private static final String ITEM = "item";
-	//private static final String CHEST = "chest";
 
-	//private static final String DELIMITER = "\\s+";
 	private static final String EMPTY = "";
 	private static final String SPACE = " ";
 	private static final String NEWLINE = "\n";
-	private static final String TAB = "\t";
 
-	private String filename = "src/storage/";
+	private String filename;
 	private Board board;
 	private List<Player> players;
 	private XMLEventWriter eventWriter;
 
-	public String saveGame(StoredGame g){
+	/**
+	 * Writes the storedGame to an XML file
+	 * @param g
+	 * @param fp Path to the save file
+	 * @return
+	 */
+	public String saveGame(StoredGame g, String fp){
 
-		filename = filename + Long.toString(System.currentTimeMillis())+".xml"; //filename is current time in milliseconds
+		filename = fp+".xml"; //filename is current time in milliseconds
 		board = g.getBoard();
 		players = g.getPlayers();
 		try {
@@ -188,7 +188,13 @@ public class StaxWriter {
 			default:
 				str.append(0);break;
 		}
+		//Area a = board.getAreaContaining(t.getCoords());
+		//board.
+		//if(a instanceof SpawnArea){
+			//KH how the fluff do areas work
+		//}
 		str.append(String.format(" %03d %03d ", t.getCoords().x, t.getCoords().y));
+		//str.append(board.getAreaContaining(t.getCoords()));
 		return str.toString();
 	}
 
@@ -283,8 +289,6 @@ public class StaxWriter {
 	private void createTag(String name, String value) throws XMLStreamException {
 
 		XMLEventFactory eventFactory = XMLEventFactory.newInstance();
-		XMLEvent newline = eventFactory.createDTD(NEWLINE);
-		XMLEvent tab = eventFactory.createDTD(TAB);
 
 		// open tag
 		StartElement sElement = eventFactory.createStartElement(EMPTY, EMPTY, name);
