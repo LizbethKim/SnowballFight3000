@@ -16,6 +16,8 @@ import javax.imageio.ImageIO;
  */
 public enum Objects {
 	KEY("key.png", "key.png", "key.png", "key.png"),
+	REDBOX("RedBox.png", "RedBox.png", "RedBox.png", "RedBox.png"),
+	BLUEBOX("BlueBox.png", "BlueBox.png", "BlueBox.png", "BlueBox.png"),
 	REDFLAG("RedFlag.png", "RedFlag.png", "RedFlag.png", "RedFlag.png"),
 	BLUEFLAG("BlueFlag.png", "BlueFlag.png", "BlueFlag.png", "BlueFlag.png"),
 	POWERUP("PowerUp.png", "PowerUp.png", "PowerUp.png", "PowerUp.png"),
