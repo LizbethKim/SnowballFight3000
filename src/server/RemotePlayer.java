@@ -93,6 +93,7 @@ public class RemotePlayer implements Runnable {
 				}
 				else if(in==0x10) {
 					int index = readFromSocket();
+					game.takeFromContainer(id, index);
 					// BF add crap here
 				}
 			}
