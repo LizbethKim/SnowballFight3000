@@ -54,9 +54,10 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		super(ui, title, ModalityType.APPLICATION_MODAL);
 		this.client = cl;
 		this.selectedItem = 1;
+		refresh();
 		this.maxItems = items.size();
 		this.interactable = interactable;
-		refresh();
+		
 
 		width = Math.min(slotSize * maxItems, slotSize * maxColumn);
 		height = slotSize * ((int) Math.ceil((double) maxItems / maxColumn));
