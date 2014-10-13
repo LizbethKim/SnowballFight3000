@@ -143,13 +143,16 @@ public class Client implements Runnable {
 				else if (in == 0x13) {
 					int index = readFromSocket();
 					updater.removeFromInventory(index);
-					// BF add crap here
 				}
 				// remove item from inventory
 				else if (in == 0x14) {
 					Location loc = readLocation();
 					int index = readFromSocket();
 					updater.removeFromContainerAt(loc, index);
+				}
+				// end game
+				else if (in == 0x14) {
+					Team team = Team.values()[readFromSocket()];
 					// BF add crap here
 				}
 			} catch (IOException e) {
