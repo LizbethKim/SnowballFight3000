@@ -14,7 +14,7 @@ public class InspectItem extends KeyAction{
 	@Override
 	protected void execute() {
 		try {
-			client.inspectItem();
+			client.inspectItem(); 
 		} catch (NoItemException e) {
 			//do nothing
 		}

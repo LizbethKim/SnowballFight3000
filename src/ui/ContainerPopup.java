@@ -50,14 +50,13 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	private JPanel buttonPanel;
 	private JPanel containerPanel;
 
-	public ContainerPopup(ClientGame cl, UI ui, String title, boolean interactable) {
+	public ContainerPopup(ClientGame cl, UI ui, String title, boolean inventory) {
 		super(ui, title, ModalityType.APPLICATION_MODAL);
 		this.client = cl;
 		this.selectedItem = 1;
 		refresh();
 		this.maxItems = items.size();
 		this.interactable = interactable;
-		
 
 		width = Math.min(slotSize * maxItems, slotSize * maxColumn);
 		height = slotSize * ((int) Math.ceil((double) maxItems / maxColumn));
@@ -144,12 +143,15 @@ public class ContainerPopup extends JDialog implements KeyListener {
 
 	private void refresh() {
 		try {
-			this.items = client.getContents();
-			repaint();
+			if (interactable) {
+				this.items = client.getContents();
+			} else {
+				this.items = client.getContentsOfSelected();
+			}
 		} catch (NotAContainerException e) {
-			// do nothing
+			e.printStackTrace();
 		}
-
+		repaint();
 	}
 
 	private void drawItem(Image item, int xPos, int yPos, Graphics g) {
@@ -171,7 +173,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 			changeSelection(1);
 		} else if (interactable) {
 			if (key == KeyEvent.VK_Z) {
-				client.takeItemFromContainer(selectedItem-1);
+				client.takeItemFromContainer(selectedItem - 1);
 			} else if (key == KeyEvent.VK_1) {
 				client.dropIntoContainer(0);
 			} else if (key == KeyEvent.VK_2) {

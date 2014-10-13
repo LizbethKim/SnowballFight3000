@@ -21,7 +21,7 @@ public class UseItem extends KeyAction {
 		if (client.selectedIsContainer()) {
 			try {
 				String title = client.inspectItem();
-				new ContainerPopup(client, parent, title, enabled);
+				new ContainerPopup(client, parent, title, false);
 			} catch (NoItemException e) {
 				// do nothing
 			}
