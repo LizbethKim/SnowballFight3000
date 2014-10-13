@@ -16,7 +16,7 @@ public class PlayerTests {
 
 	private Player setUpPlayerWithInventory() {
 		Player toReturn = new Player("Player2", Team.BLUE, 50, new Location(2,4));
-		toReturn.addItemToInventory(new Key());
+		toReturn.addItemToInventory(new Key("A key", 0));
 		return toReturn;
 	}
 	

@@ -179,19 +179,19 @@ public class Board {
 		board[1][7].place(new Furniture("A wall", Objects.WALL_E_W));
 		board[0][7].place(new Furniture("A corner", Objects.CORNER_S_W));
 		board[3][7].place(new Furniture("A corner", Objects.CORNER_S_E));
-		board[6][11].place(new Key());
+		board[6][11].place(new Key("A key", 0));
 		board[14][4].place(new Flag(Team.RED));
 		board[3][10].place(new Flag(Team.BLUE));
 		board[12][17].place(new Powerup(Powerup.Power.HEALTH_POTION));
 		board[13][10].place(new Furniture("A bush", Objects.BUSH));
 
 		Bag b = new Bag();
-		b.addItem(new Key());
+		b.addItem(new Key("A key", 1));
 		b.addItem(new Powerup(Powerup.Power.STRONG_HEALTH_POTION));
 		board[3][18].place(b);
 
 		Chest c = new Chest("A treasure chest");
-		c.addItem(new Key());
+		c.addItem(new Key("A key", 2));
 		c.addItem(new Bag());
 
 		board[13][2].place(c);
@@ -472,9 +472,6 @@ public class Board {
 				} else if (items[y][x] == "p") {
 					board[x][y].place(new Powerup());
 					board[79 - x][79 - y].place(new Powerup());
-				} else if (items[y][x] == "k") {
-					board[x][y].place(new Key());
-					board[79 - x][79 - y].place(new Key());
 				} else if (items[y][x] == "c") {
 					board[x][y].place(new Chest(""));
 					board[79 - x][79 - y].place(new Chest(""));

@@ -14,11 +14,6 @@ public class Key extends Item {
 		this.id = id;
 	}
 
-	// TEMP
-	public Key() {
-		this.description = "A key, but to what?";
-		this.id = 0;
-	}
 
 	@Override
 	public Objects asEnum() {

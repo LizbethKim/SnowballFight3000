@@ -145,9 +145,9 @@ public class ServerGame {
 		if (board.containsLocation(l) && board.tileAt(l).getOn() != null 
 				&& board.tileAt(l).getOn() instanceof Lockable) {
 			((Lockable)board.tileAt(l).getOn()).setLocked(false);
-			for (int id: playerIDs.keySet()) {
-				// server.queuePlayerUpdate(new UnlockEvent(l), id); KTC
-			}
+//			for (int id: playerIDs.keySet()) {
+//				// server.queuePlayerUpdate(new UnlockEvent(l), id); KTC
+//			}
 		}
 	}
 	

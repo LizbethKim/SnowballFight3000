@@ -66,7 +66,7 @@ public class BoardTests {
 		board[4][2].place(new Furniture("A tree", Objects.TREE));
 		board[5][3].place(new Furniture("A tree", Objects.TREE));
 		board[2][7].place(new Furniture("A bush", Objects.BUSH));
-		board[6][11].place(new Key());
+		board[6][11].place(new Key("A key", 0));
 		board[12][17] = new Tile(new Location(12,17), Terrain.GRASS, null);
 		board[13][10].place(new Furniture("A bush", Objects.BUSH));
 		return new Board(board);
