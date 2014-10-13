@@ -68,6 +68,10 @@ public class ServerGame {
 			}
 		}
 	}
+	
+	public void takeFromInventory(int playerID, int index) {
+		
+	}
 
 	public void dropItem(int playerID, int index) {
 		Player p = this.playerIDs.get(playerID);

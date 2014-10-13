@@ -19,7 +19,7 @@ public class Furniture implements StaticEntity {
 			Objects.CORNER_S_W, Objects.CORNER_S_E);
 
 	private String description;
-	private Objects type;
+	protected Objects type;
 
 	public Furniture(String description, Objects type) {
 		if (!FURNITURE.contains(type)) {

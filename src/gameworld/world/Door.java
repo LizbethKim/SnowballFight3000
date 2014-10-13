@@ -11,8 +11,11 @@ public class Door extends Furniture implements Lockable {
 	private boolean locked;
 	public final int id;
 
-	public Door(String description, int id) {
-		super(description, Objects.DOORNS);
+	public Door(String description, int id, Direction d) {
+		super(description, Objects.DOOREW);
+		if (d == Direction.NORTH || d == Direction.SOUTH) {
+			this.type = Objects.DOORNS;
+		}
 		this.id = id;
 		this.locked = false;
 	}
