@@ -6,7 +6,6 @@ import ui.UI;
 import gameworld.world.Area;
 import gameworld.world.Board;
 import gameworld.world.Direction;
-import gameworld.world.InanimateEntity;
 import gameworld.world.Inventory;
 import gameworld.world.Item;
 import gameworld.world.Location;

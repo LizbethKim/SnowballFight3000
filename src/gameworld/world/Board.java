@@ -138,7 +138,7 @@ public class Board {
 		return board[0].length;
 	}
 
-	public static Board defaultBoard() {
+	public static Board defaultBoard2() {
 		Tile[][] board = new Tile[15][20];
 		List<Area> rooms = new ArrayList<Area>();
 		Area main = new Area();
@@ -217,7 +217,7 @@ public class Board {
 // 		board[2][7].place(new Furniture("A bush", Objects.BUSH));
 	}
 
-	public static Board defaultBoard2() {
+	public static Board defaultBoard() {
 		Tile[][] board = new Tile[80][80];
 		char[][] terrain = {{'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'G', 'G', 'G', 'G', 'G', 'G', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
 				{'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
@@ -236,7 +236,7 @@ public class Board {
 				{'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'E', 'E', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'E', 'E', 'S', 'S', 'S', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
 				{'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'E', 'S', 'E', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'E', 'S', 'E', 'S', 'S', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
 				{'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'E', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'E', 'S', 'S', 'S', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
-				{'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'E', 'E', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'G', 'S', 'S', 'S', 'S', 'S', 'E', 'E', 'S', 'S', 'S', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
+				{'G', 'G', 'G', 'G', 'R', 'G', 'G', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'E', 'E', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'G', 'S', 'S', 'S', 'S', 'S', 'E', 'E', 'S', 'S', 'S', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
 				{'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'E', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'G', 'S', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'G', 'S', 'G', 'S', 'E', 'S', 'S', 'S', 'S', 'S', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
 				{'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
 				{'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'E', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'G', 'G', 'S', 'S', 'S', 'S', 'S', 'S', 'S', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
@@ -274,6 +274,9 @@ public class Board {
 				} else if (terrain[y][x] == 'I') {
 					board[x][y] = new Tile(new Location(x,y), Terrain.ICE, null);
 					board[79 - x][79 - y] = new Tile(new Location(79 - x, 79 - y), Terrain.ICE, null);
+				} else if (terrain[y][x] == 'R') {
+					board[x][y] = new FlagTile(new Location(x,y), Team.RED);
+					board[79 - x][79 - y] = new FlagTile(new Location (79 - x, 79 - y), Team.BLUE);
 				} else {
 					board[x][y] = new NullTile(new Location(x,y));
 					board[79 - x][79 - y] = new NullTile(new Location(79 - x, 79 - y));

@@ -215,6 +215,12 @@ public class ServerGame {
 		}
 		for(int id: playerIDs.keySet()) {
 			server.queuePlayerUpdate(new UpdateProjectilePositionsEvent(snowballLocs), id);
+			Player p = playerIDs.get(id);
+			if (!p.isFrozen()) {
+				p.incrementScore(5);
+				// KTC get bryden to make an updateScoreEvent
+				// server.queuePlayerUpdate(new, playerID);
+			}
 		}
 		// KTC possibly do time logic too.
 	}

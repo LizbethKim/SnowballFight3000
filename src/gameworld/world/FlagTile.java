@@ -2,6 +2,12 @@ package gameworld.world;
 
 import graphics.assets.Terrain;
 
+/**
+ * A special tile - if you place the opposite team's flag on it, you win the
+ * game. Doesn't allow anything else ot be placed on it.
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class FlagTile extends Tile {
 	private Team t;
 
