@@ -33,12 +33,18 @@ public class StaxParser {
 	private Board board;
 	private Tile[][] tiles;
 	private List<Player> players;
+	private List<Area> areaList;
+	
 	private Player curPlayer;
 	private Tile curTile;
 	private Inventory curInven;
+	private Area curArea;
+	
 	private boolean playerLoad=false;
 	private boolean tileLoad=false;
 	private boolean chestLoad=false;
+	
+	
 
 
 	/**
@@ -77,13 +83,7 @@ public class StaxParser {
 						event = eventReader.nextEvent();
 						String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
 						//Parse the player values from the Characters
-						int teamNum = Integer.parseInt(values[0]);
-						Team team = Team.values()[teamNum];
-						Location loc = parseLoc(values[1], values[2]);
-						//create the palyer
-						curPlayer = new Player(values[3], team, 10, loc);
-						//turn player load on, to keep track of what the inventory belongs to etc
-						playerLoad=true;
+						curPlayer = parsePlayer(values);
 						continue;
 					}
 
@@ -93,10 +93,12 @@ public class StaxParser {
 						//get the characters within the tag
 						event = eventReader.nextEvent();
 						String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
-						//parse the size of the board, to know how big the array should be
+						// parse the size of the board, to know how big the array should be
 						Location boardSize = parseLoc(values[0],values[1]);
-						//create the board
+						// create the board
 						tiles = new Tile[boardSize.x][boardSize.y];
+						// initialise areas
+						areaList = new ArrayList<Area>();
 						continue;
 					}
 
@@ -105,13 +107,17 @@ public class StaxParser {
 						//get the characters within the tag
 						event = eventReader.nextEvent();
 						String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
-						//parse terrain and location
-						int terrain = Integer.parseInt(values[0]);
-						Location loc = parseLoc(values[1],values[2]);
-						//create the tile
-						curTile = new Tile(loc,Terrain.values()[terrain], null);
-						//turn tileLoad on, to differentiate between inventories
-						tileLoad=true;
+						//parse tile from characters
+						curTile = parseTile(values);
+						continue;
+					}
+					
+					//Start of a new area
+					if (elemName.equals(XMLValues.AREA)) {
+						//get the characters within the tag
+						event = eventReader.nextEvent();
+						String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
+						curArea = parseArea(values);
 						continue;
 					}
 
@@ -127,7 +133,7 @@ public class StaxParser {
 							event = eventReader.nextEvent();
 							String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
 							//uses loadEntity because both chest and Bag are InanimateEntitys
-							curInven = (Inventory)loadEntitiy(values);
+							curInven = (Inventory)parseEntitiy(values);
 						}
 						continue;
 					}
@@ -137,7 +143,7 @@ public class StaxParser {
 						event = eventReader.nextEvent();
 						String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
 						//calls loadEntity to parse the item
-						InanimateEntity item = loadEntitiy(values);
+						InanimateEntity item = parseEntitiy(values);
 						if(chestLoad){
 							//still loading the contents of a chest, so add it to that
 							curInven.addItem((Item)item);
@@ -181,10 +187,16 @@ public class StaxParser {
 						tiles[curTile.getCoords().x][curTile.getCoords().y] = curTile;
 						continue;
 					}
-
-					//
+					
+					//end of an area, add it to the list
+					if (elemName.equals(XMLValues.AREA)) {
+						areaList.add(curArea);
+						continue;
+					}
+					
+					// end of a board element, add the tiles and areas
 					if (elemName.equals(XMLValues.BOARD)) {
-						board = new Board(tiles);
+						board = new Board(tiles, areaList);
 						continue;
 					}
 
@@ -206,11 +218,61 @@ public class StaxParser {
 	}
 
 	/**
+	 * Parse an area, just has it's type and then the cooridnates of the tiles
+	 * @param values Area data
+	 * @return area Area loaded
+	 */
+	private Area parseArea(String[] values) {
+		Area a;
+		if(values[0].equals("NOTEAM")){
+			//just a plain area
+			a = new Area();
+		}else{
+			//spawn area, give it its team name
+			a = new SpawnArea(Team.valueOf(values[0]));
+		}
+		for(int i=1;i<values.length;i=i+2){
+			Location loc = parseLoc(values[i], values[i+1]);
+			a.add(tiles[loc.x][loc.y]);
+		}
+		return a;
+	}
+
+	/**
+	 * Parse a tile, returns the Tile and activates tileLoad. Does not load it's on Object yet
+	 * @param values Tile data
+	 * @return tile loaded Tile object
+	 */
+	private Tile parseTile(String[] values){
+		// turn tileLoad on, to differentiate between inventories
+		tileLoad=true;
+		int terrain = Integer.parseInt(values[0]);
+		Location loc = parseLoc(values[1],values[2]);
+		// create the tile
+		return new Tile(loc,Terrain.values()[terrain], null);
+	}
+
+	/**
+	 * Parse a player, returns the Player and activates playerLoad. Does not load it's inventory yet
+	 * @param values player data
+	 * @return player loaded Player object
+	 */
+	private Player parsePlayer(String[] values) {
+		//turn player load on, to keep track of what the inventory belongs to etc
+		playerLoad=true;
+		int teamNum = Integer.parseInt(values[0]);
+		Team team = Team.values()[teamNum];
+		Location loc = parseLoc(values[1], values[2]);
+		//create the player
+		return new Player(values[3], team, 10, loc);
+	}
+
+	/**
 	 * Loading an item from its tag into an actual InanimateEntity. Also loads all its properties.
 	 * @param values A string array, usually from the characters within a particular tag
 	 * @return entity The item represented as an
 	 */
-	private InanimateEntity loadEntitiy(String[] values) {
+	private InanimateEntity parseEntitiy(String[] values) {
 		String name = values[0];
 		InanimateEntity item = null;
 

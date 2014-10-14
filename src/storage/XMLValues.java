@@ -14,6 +14,7 @@ public class XMLValues {
 	public static final String TILE = "tile";
 	public static final String INVENTORY= "inventory";
 	public static final String ITEM = "item";
+	public static final String AREA = "area";
 	public static final String DELIMITER = "\\s+";
 	public static final String EMPTY = "";
 	public static final String SPACE = " ";

@@ -3,6 +3,7 @@
  */
 package storage.save;
 
+import gameworld.world.Area;
 import gameworld.world.Board;
 import gameworld.world.Chest;
 import gameworld.world.Door;
@@ -12,6 +13,7 @@ import gameworld.world.Key;
 import gameworld.world.Location;
 import gameworld.world.Player;
 import gameworld.world.Powerup;
+import gameworld.world.SpawnArea;
 import gameworld.world.Team;
 import gameworld.world.Tile;
 import graphics.assets.Objects;
@@ -20,6 +22,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.stream.XMLEventFactory;
@@ -46,6 +49,7 @@ public class StaxWriter {
 	private Board board;
 	private List<Player> players;
 	private XMLEventWriter eventWriter;
+	private List<Area> areaList;
 
 	/**
 	 * Writes the storedGame to an XML file
@@ -58,6 +62,8 @@ public class StaxWriter {
 		filename = fp+".xml"; //filename is current time in milliseconds
 		board = g.getBoard();
 		players = g.getPlayers();
+		//KTC I need this getRooms method sorry, no other simple way to do areas
+		//areaList = board.getRooms();
 		try {
 			// create an XMLOutputFactory
 			OutputStream out = new FileOutputStream(new File(filename));
@@ -88,7 +94,6 @@ public class StaxWriter {
 					eventWriter.add(playerContents);
 					eventWriter.add(inventoryStartElement);
 
-					// KH I changed the way that I use the inventory, so I edited this
 					for(Item item : p.getInventory().getContents()){
 						createTag(XMLValues.ITEM, buildEntityString(item));
 					}
@@ -136,6 +141,12 @@ public class StaxWriter {
 						eventWriter.add(newline);
 					}
 				}
+				
+				// make the area tags
+				for(Area area : areaList){
+					createTag(XMLValues.AREA,buildAreaString(area));
+					eventWriter.add(newline);
+				}
 
 				// close board tag
 				eventWriter.add(eventFactory.createEndElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.BOARD));
@@ -150,11 +161,29 @@ public class StaxWriter {
 			eventWriter.add(eventFactory.createEndDocument());
 			eventWriter.close();
 		} catch (FileNotFoundException | XMLStreamException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return filename;
+	}
+
+	/**
+	 * Build a string description of its area, first value  is team (or NOTEAM in not a spawnArea), rest is x,y for tiles
+	 * @param area to be Strung
+	 * @return areaString String description of area
+	 */
+	private String buildAreaString(Area area) {
+		StringBuilder str = new StringBuilder();
+		if(area instanceof SpawnArea){
+			str.append(((SpawnArea) area).team.name()+XMLValues.SPACE);	// Team name for spawn areas
+		}else{
+			str.append("NOTEAM "); //No team 
+		}
+		for(Tile t : area.getTiles()){
+			 // append coordinates for all the tiles
+			str.append(String.format("%d %d ", t.getCoords().x, t.getCoords().y));
+		}
+		return str.toString();
 	}
 
 	/**
@@ -165,25 +194,8 @@ public class StaxWriter {
 	 */
 	private String buildTileString(Tile t) throws XMLStreamException {
 		StringBuilder str = new StringBuilder();
-		switch (t.getType()){
-			case SNOW:
-				str.append(0);break;
-			case FLOOR:
-				str.append(1);break;
-			case GRASS:
-				str.append(2);break;
-			case DIRT:
-				str.append(3);break;
-			default:
-				str.append(0);break;
-		}
-		//Area a = board.getAreaContaining(t.getCoords());
-		//board.
-		//if(a instanceof SpawnArea){
-			//KH how the fluff do areas work
-		//}
-		str.append(String.format(" %03d %03d ", t.getCoords().x, t.getCoords().y));
-		//str.append(board.getAreaContaining(t.getCoords()));
+		str.append(t.getType().ordinal());	// the terrain type
+		str.append(String.format(" %d %d ", t.getCoords().x, t.getCoords().y));	// the coordinates of the tile
 		return str.toString();
 	}
 
@@ -197,7 +209,9 @@ public class StaxWriter {
 	private String buildEntityString(InanimateEntity item) throws XMLStreamException {
 		StringBuilder str = new StringBuilder();
 		Objects itemEnum = item.asEnum();
+		// The enum name of the object, as that is the easiest distinction
 		str.append(itemEnum.name()+XMLValues.SPACE);
+		//if it need more detail, it will be in here
 		switch (itemEnum){
 		case KEY:
 			Key key = (Key)item;
@@ -220,6 +234,7 @@ public class StaxWriter {
 			str.append(doorns.canMoveThrough());
 			break;
 		default:
+			//not an item that needs more than it's name
 			break;
 		}
 		return str.toString();
@@ -235,14 +250,14 @@ public class StaxWriter {
 		}else if(p.getTeam().equals(Team.values()[1])){
 			str.append(1 + XMLValues.SPACE);
 		}
-		str.append(String.format("%03d %03d ", p.getLocation().x, p.getLocation().y));
+		str.append(String.format("%d %d ", p.getLocation().x, p.getLocation().y));
 		str.append(p.name+XMLValues.NEWLINE);
 		return str.toString();
 	}
 
 
 	/**
-	 * Used for creating innermost tags, like tile and inventory
+	 * Used for creating innermost tags, like items
 	 * @param eventWriter
 	 * @param name
 	 * @param value
