@@ -104,6 +104,13 @@ public class ClientUpdater {
 			p.setHealth(0);
 		}
 	}
+	
+	public void unFreezePlayer(int id) {
+		Player p = playerIDs.get(id);
+		if (p != null) {
+			p.setHealth(20);
+		}
+	}
 
 	public void removeItemAt(Location l) {
 		if (board.containsLocation(l)) {
