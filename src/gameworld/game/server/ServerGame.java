@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import storage.StoredGame;
 import network.Server;
 import network.events.*;
 import gameworld.world.*;
@@ -30,6 +31,10 @@ public class ServerGame {
 		this.playerIDs = new HashMap<Integer, Player>();
 		this.projectiles = new ArrayList<Snowball>();
 		this.snowballFactory = new SnowballFactory();
+	}
+
+	public ServerGame(StoredGame sg) {
+		// KTC
 	}
 
 	// examples of methods that will be in here
