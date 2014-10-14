@@ -1,6 +1,7 @@
 package gameworld.world;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import graphics.assets.Objects;
@@ -106,6 +107,11 @@ public class Board {
 			}
 		}
 		throw new IllegalArgumentException();
+	}
+
+
+	public List<Area> getRooms() {
+		return Collections.unmodifiableList(this.rooms);
 	}
 
 	public Area getSpawnArea(Team t) {
@@ -328,7 +334,7 @@ public class Board {
 		}
 		return new Board(board, areas);
 	}
-	
+
 	private static void createDefaultBoardTerrain(Tile[][] board) {
 		char[][] terrain = {{'-','-','-','-','-','-','-','-','-','-','-','-','-','G','G','G','G','G','G','G','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','-','-','-','-','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','-','-','-','-','-','-','-','-','-','-','-','-','-'},
 				{'-','-','-','-','-','-','-','-','-','-','-','-','-','G','G','G','G','G','G','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','-','-','-','-','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','-','-','-','-','-','-','-','-','-','-','-','-','-'},
@@ -395,10 +401,10 @@ public class Board {
 			}
 		}
 	}
-	
+
 	private static void createDefaultBoardObjects(Tile[][]board) {
 		// make chests have contents and keys and bags
-		String[][] items = 
+		String[][] items =
 
 {{"_","_","_","_","_","_","_","_","_","_","_","_","_","F","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","T","_","_","_","_","F","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","T","_","_","_","_","_","_","_","_","_","_","_","_","_"},
 {"_","_","_","_","_","_","_","_","_","_","_","_","_","|","_","p","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","|","_","_","_","_","|","_","_","p","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","_","|","_","_","_","_","_","_","_","_","_","_","_","_","_"},
@@ -481,7 +487,7 @@ public class Board {
 				} else if (items[y][x] == "N1") {
 					board[x][y].place(new Door("A door", 2, Direction.NORTH));
 					board[79 - 13][79 - 36].place(new Key("Unlocks a door", 3));
-					board[79 - x][79 - y].place(new Door("A door", 3, Direction.NORTH));	
+					board[79 - x][79 - y].place(new Door("A door", 3, Direction.NORTH));
 					board[13][36].place(new Key("Unlocks a door", 3));
 				} else if (items[y][x] == "N2") {
 					board[x][y].place(new Door("A door", 4, Direction.NORTH));
@@ -495,10 +501,10 @@ public class Board {
 					board[79 - 29][79 - 13].place(new Key("Unlocks a door", 6));
 				} else if (items[y][x] == "N4") {
 					board[x][y].place(new Door("A door", 8, Direction.NORTH));
-					board[79 - x][79 - y].place(new Door("A door", 9, Direction.NORTH));	
+					board[79 - x][79 - y].place(new Door("A door", 9, Direction.NORTH));
 					board[11][11].place(new Key("Unlocks a door", 8));
 					board[79 - 11][79 - 11].place(new Key("Unlocks a door", 9));
-				} 
+				}
 			}
 		}
 	}

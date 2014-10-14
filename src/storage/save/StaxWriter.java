@@ -62,8 +62,8 @@ public class StaxWriter {
 		filename = fp+".xml"; //filename is current time in milliseconds
 		board = g.getBoard();
 		players = g.getPlayers();
-		//KTC I need this getRooms method sorry, no other simple way to do areas
-		//areaList = board.getRooms();
+
+		areaList = board.getRooms();
 		try {
 			// create an XMLOutputFactory
 			OutputStream out = new FileOutputStream(new File(filename));
@@ -141,7 +141,7 @@ public class StaxWriter {
 						eventWriter.add(newline);
 					}
 				}
-				
+
 				// make the area tags
 				for(Area area : areaList){
 					createTag(XMLValues.AREA,buildAreaString(area));
@@ -177,7 +177,7 @@ public class StaxWriter {
 		if(area instanceof SpawnArea){
 			str.append(((SpawnArea) area).team.name()+XMLValues.SPACE);	// Team name for spawn areas
 		}else{
-			str.append("NOTEAM "); //No team 
+			str.append("NOTEAM "); //No team
 		}
 		for(Tile t : area.getTiles()){
 			 // append coordinates for all the tiles
