@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import network.Client;
+import storage.LoadGame;
 import storage.SaveGame;
 import storage.StoredGame;
 import ui.gamewindow.UI;
@@ -41,11 +42,11 @@ public class ClientGame {
 
 	public ClientGame(String name, String IP, Team team, UI display) {
 		this.client = new Client(IP);
-		//StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
-		// this.playerID = KTC to do
-		//this.board = sb.getBoard();
+		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
+		this.playerID = 0; // KTC (?)
+		this.board = sb.getBoard();
 
-		this.board = Board.defaultBoard();
+		//this.board = Board.defaultBoard();
 
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
@@ -268,6 +269,7 @@ public class ClientGame {
 
 	public void setID(int ID) {
 		this.playerID = ID;
+		System.out.println("ID is " + ID);
 		this.player.setID(ID);
 		this.playerIDs.put(ID, this.player);
 	}
