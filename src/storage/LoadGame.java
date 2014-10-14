@@ -31,16 +31,16 @@ public class LoadGame{
 	
 	/**
 	 * Loads the given filepath
-	 * @param filepath The filepath to load
+	 * @param file The filepath to load
 	 * @return StoredGame the storedGame that was loaded
 	 */
-	public StoredGame loadGame(String filepath){
+	public StoredGame loadGame(File file){
 		StaxParser parser = new StaxParser();
-		System.out.println(filepath);
-		if(filepath==null){
-			System.out.println("That's not a path: "+filepath);
+		System.out.println(file);
+		if(file==null){
+			System.out.println("That's not a path: "+file);
 		}else{
-			game = parser.parse(new File((filepath)));
+			game = parser.parse(file);
 			System.out.println("Game Loaded by loader");
 		}
 		return game;
@@ -61,7 +61,7 @@ public class LoadGame{
 			e.printStackTrace();
 		}
 		
-		return loadGame("byteBoard.xml");
+		return loadGame(new File("byteBoard.xml"));
 	}
 
 

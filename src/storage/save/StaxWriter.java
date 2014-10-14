@@ -54,12 +54,12 @@ public class StaxWriter {
 	/**
 	 * Writes the storedGame to an XML file
 	 * @param g Game to save
-	 * @param fp Path to the save file
+	 * @param file2 Path to the save file
 	 * @return
 	 */
-	public String saveGame(StoredGame g, String fp){
+	public String saveGame(StoredGame g, File file2){
 
-		filename = fp+".xml"; //filename is current time in milliseconds
+		filename = file2+".xml"; //filename is current time in milliseconds
 		board = g.getBoard();
 		players = g.getPlayers();
 
