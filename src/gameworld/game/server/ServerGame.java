@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import server.Server;
-import server.events.*;
+import network.Server;
+import network.events.*;
 import gameworld.world.*;
 
 /**

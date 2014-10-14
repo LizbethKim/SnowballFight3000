@@ -1,4 +1,4 @@
-package server;
+package network;
 
 import gameworld.game.client.ClientUpdater;
 import gameworld.world.Bag;
@@ -184,7 +184,7 @@ public class Client implements Runnable {
 				// unfreeze player
 				else if (in == 0x19) {
 					int id = readFromSocket();
-					// BF add stuff here
+					updater.unFreezePlayer(id);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -230,6 +230,17 @@ public class Client implements Runnable {
 		}
 	}
 
+
+	public void unfreezePlayer(int id) {
+		try {
+			connection.getOutputStream().write(0x19);
+			connection.getOutputStream().write(id);
+			connection.getOutputStream().flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * sends a request to throw a snowball to the server

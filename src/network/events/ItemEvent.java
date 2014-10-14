@@ -1,4 +1,4 @@
-package server.events;
+package network.events;
 
 import gameworld.world.Bag;
 import gameworld.world.Item;
