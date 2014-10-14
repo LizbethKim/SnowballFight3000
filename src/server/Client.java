@@ -181,6 +181,11 @@ public class Client implements Runnable {
 				else if (in == 0x18) {
 					updater.unlock(readLocation());
 				}
+				// unfreeze player
+				else if (in == 0x19) {
+					int id = readFromSocket();
+					// BF add stuff here
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
