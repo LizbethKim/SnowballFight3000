@@ -138,7 +138,7 @@ public class Board {
 		return board[0].length;
 	}
 
-	public static Board defaultBoard2() {
+	public static Board defaultBoard() {
 		Tile[][] board = new Tile[15][20];
 		List<Area> rooms = new ArrayList<Area>();
 		Area main = new Area();
@@ -179,7 +179,7 @@ public class Board {
 		board[1][7].place(new Furniture("A wall", Objects.WALL_E_W));
 		board[0][7].place(new Furniture("A corner", Objects.CORNER_S_W));
 		board[3][7].place(new Furniture("A corner", Objects.CORNER_S_E));
-		board[6][11].place(new Key("A key", 0));
+		board[6][11].place(new Key("A key", 1));
 		board[14][4].place(new Flag(Team.RED));
 		board[3][10].place(new Flag(Team.BLUE));
 		board[12][17].place(new Powerup(Powerup.Power.HEALTH_POTION));
@@ -190,7 +190,7 @@ public class Board {
 		b.addItem(new Powerup(Powerup.Power.STRONG_HEALTH_POTION));
 		board[3][18].place(b);
 
-		Chest c = new Chest("A treasure chest");
+		Chest c = new Chest("A treasure chest", 1, true);
 		c.addItem(new Key("A key", 2));
 		c.addItem(new Bag());
 
@@ -217,7 +217,7 @@ public class Board {
 // 		board[2][7].place(new Furniture("A bush", Objects.BUSH));
 	}
 
-	public static Board defaultBoard() {
+	public static Board defaultBoard2() {
 		Tile[][] board = new Tile[80][80];
 		createDefaultBoardTerrain(board);
 		createDefaultBoardObjects(board);

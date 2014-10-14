@@ -227,9 +227,10 @@ public class ClientGame {
 		if (board.containsLocation(containerLoc)) {
 			InanimateEntity on = board.tileAt(containerLoc).getOn();
 			if (on != null && on instanceof Inventory) {
-				if (on instanceof Lockable && ((Lockable)on).isLocked() 
-						&& this.unlock((Lockable)on, containerLoc)) {
-					return ((Inventory)on).getContentsAsEnums();
+				if (on instanceof Lockable && ((Lockable)on).isLocked()) { 
+					if (this.unlock((Lockable)on, containerLoc)) {
+							return ((Inventory)on).getContentsAsEnums();
+					}
 				} else {
 					return ((Inventory)on).getContentsAsEnums();
 				}
@@ -335,7 +336,6 @@ public class ClientGame {
 		if (player.holdsKey(lock.getID())) {
 			int index = player.getKeyIndex(lock.getID());
 			if (lock.unlock((Key)player.getInventoryItems().get(index))) {
-				// client.unlock(at); KTC
 				client.useItem(index);
 				return true;
 			}

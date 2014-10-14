@@ -135,18 +135,19 @@ public class ServerGame {
 					}
 					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
 				} else if (toUse instanceof Key) {
+					this.unlock(p.getLocationInFrontOf());
 					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
 				}
 			}
 		}
 	}
 
-	public void unlock(Location l) {
+	private void unlock(Location l) {
 		if (board.containsLocation(l) && board.tileAt(l).getOn() != null 
 				&& board.tileAt(l).getOn() instanceof Lockable) {
 			((Lockable)board.tileAt(l).getOn()).setLocked(false);
 			for (int id: playerIDs.keySet()) {
-				// server.queuePlayerUpdate(new UnlockEvent(l), id);
+				server.queuePlayerUpdate(new UnlockEvent(l), id);
 			}
 		}
 	}
