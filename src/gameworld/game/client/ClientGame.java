@@ -204,7 +204,7 @@ public class ClientGame {
 	}
 
 	public List<Objects> getContentsOfSelected(int selectedIndex) throws NotAContainerException {
-		if (selectedIsContainer()) {
+		if (selectedIsContainer(selectedIndex)) {
 			return ((Inventory)player.getInventoryItems().get(selectedIndex)).getContentsAsEnums();
 		}
 		throw new NotAContainerException();
@@ -254,14 +254,6 @@ public class ClientGame {
 		return playerID;
 	}
 
-
-	public int getSelectedIndex() {
-		return selectedIndex;
-	}
-
-	public void setSelectedIndex(int selectedIndex) {
-		this.selectedIndex = selectedIndex;
-	}
 
 
 	public BoardState getBoard() {
