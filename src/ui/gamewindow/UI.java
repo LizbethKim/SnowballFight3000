@@ -55,8 +55,6 @@ public class UI extends JFrame {
 	private GameSetup gameSetup;
 	private JFrame frame;
 
-	private final boolean debugMode = false;
-
 	public UI() {
 
 		// initialise UI
@@ -65,25 +63,29 @@ public class UI extends JFrame {
 	}
 
 	public void startGame(String name, String IP, gameworld.world.Team t) {
+		//create the client
 		client = new ClientGame(name, IP, t, this);
-		// setupGamePanel();
+		
+		// setup the panels and listeners
 		setupFileBar();
 		setupKeyBindings();
 		setupGamePanel();
 		setupHUD();
 		setupGraphics();
+		
+		//get rid of setup frame
+		frame.setVisible(false);
+		frame.dispose();
+		
 		// pack and Display window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setResizable(true);
-
-		frame.setVisible(false);
-		frame.dispose();
-		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setVisible(true);
 	}
 
 	private void setupGamePanel() {
+		//add game panel to the layered pane and set up sizing
 		gamePanel = new JLayeredPane();
 		gamePanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH,
 				DEFAULT_GAME_HEIGHT));

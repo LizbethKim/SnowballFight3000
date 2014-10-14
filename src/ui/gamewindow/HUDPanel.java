@@ -21,7 +21,7 @@ import javax.swing.JPanel;
  */
 
 public class HUDPanel extends JPanel {
-	public static final String IMAGE_PATH = "src/ui/HUDAssets/";
+	public static final String IMAGE_PATH = "src/ui/assets/";
 	private static final Image healthBar = loadImage("HealthBar.png");
 	private static final Image healthBase = loadImage("HealthBarBase.png");
 
