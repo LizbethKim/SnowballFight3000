@@ -143,7 +143,7 @@ public class ServerGame {
 	}
 
 	private void unlock(Location l) {
-		if (board.containsLocation(l) && board.tileAt(l).getOn() != null 
+		if (board.containsLocation(l) && board.tileAt(l).getOn() != null
 				&& board.tileAt(l).getOn() instanceof Lockable) {
 			((Lockable)board.tileAt(l).getOn()).setLocked(false);
 			for (int id: playerIDs.keySet()) {
@@ -151,14 +151,14 @@ public class ServerGame {
 			}
 		}
 	}
-	
+
 	public void throwSnowball(int playerID, Snowball.SnowballType type) {
 		Player thrower = playerIDs.get(playerID);
 		if (board.tileAt(thrower.getLocation()).isSnow()) {
 			projectiles.add(snowballFactory.makeSnowball(thrower.getLocation(), thrower.getDirection(), type));
 		}
 	}
-	
+
 	public void unfreezePlayer(int playerID) {
 		Player p = this.playerIDs.get(playerID);
 		if (p!= null) {
@@ -215,6 +215,14 @@ public class ServerGame {
 		this.server = s;
 	}
 
+	public int getBoardWidth() {
+		return board.width();
+	}
+
+	public int getBoardHeight() {
+		return board.height();
+	}
+
 	public void clockTick() {
 		Iterator<Snowball> it = projectiles.iterator();
 		while (it.hasNext()) {
@@ -260,7 +268,7 @@ public class ServerGame {
 			this.lastHourTime = System.currentTimeMillis();
 		}
 	}
-	
+
 	private void freezePlayer(Player p) {
 		List<Item> itemsInInventory = p.getInventoryItems();
 		for (int i = 0; i < itemsInInventory.size(); i++) {
@@ -270,7 +278,7 @@ public class ServerGame {
 		int i = 0;
 		for (Item item: itemsInInventory) {
 			while (!(board.containsLocation(dropLocs.get(i))
-					&& board.tileAt(dropLocs.get(i)).isTraversable() 
+					&& board.tileAt(dropLocs.get(i)).isTraversable()
 					&& this.isFree(dropLocs.get(i)))) {
 				i++;
 			}
