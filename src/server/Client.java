@@ -181,11 +181,6 @@ public class Client implements Runnable {
 				else if (in == 0x18) {
 					updater.unlock(readLocation());
 				}
-				// end game
-				else if (in == 0x17) {
-					Team team = Team.values()[readFromSocket()];
-					updater.endGame(team);
-				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
