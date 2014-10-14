@@ -70,6 +70,11 @@ public class ClientGame {
 	public ClientGame(String IP, UI display) {
 		// KTC fill player place
 	}
+	
+	public List<String> getPlayerList() {
+		// KTC list of possible players
+		return null;
+	}
 
 	public int getPlayerHealth() {
 		return player.getHealth();
