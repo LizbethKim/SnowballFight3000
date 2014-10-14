@@ -47,6 +47,7 @@ public class ClientGame {
 	private long lastFiredTime;
 
 	private BoardState boardState;
+	private int selectedIndex = -1;	// index selected in inventory
 
 
 	public ClientGame(String name, String IP, Team team, UI display) {
@@ -180,7 +181,7 @@ public class ClientGame {
 		}
 	}
 
-	public void useItem(int selectedIndex) {
+	public void useItem() {
 		if (!player.isFrozen() && selectedIndex != -1 && player.getInventoryItems().get(selectedIndex) != null) {
 			Item toUse = player.getInventoryItems().get(selectedIndex);
 			if (toUse instanceof Powerup) {
@@ -196,21 +197,21 @@ public class ClientGame {
 		}
 	}
 
-	public boolean isContainer(int selectedIndex){
+	public boolean selectedIsContainer(){
 		if (selectedIndex != -1 && player.getInventoryItems().get(selectedIndex) instanceof Inventory) {
 			return true;
 		}
 		return false;
 	}
 
-	public List<Objects> getContentsAtIndex(int selectedIndex) throws NotAContainerException {
-		if (isContainer(selectedIndex)) {
+	public List<Objects> getContentsOfSelected() throws NotAContainerException {
+		if (selectedIsContainer()) {
 			return ((Inventory)player.getInventoryItems().get(selectedIndex)).getContentsAsEnums();
 		}
 		throw new NotAContainerException();
 	}
 
-	public void dropItem(int selectedIndex) {
+	public void dropSelectedItem() {
 		if (!player.isFrozen() && player.getInventoryItems().size() > selectedIndex
 				&& player.getInventoryItems().get(selectedIndex) != null
 				&& board.tileAt(player.getLocationInFrontOf()).isClear()) {
@@ -254,6 +255,14 @@ public class ClientGame {
 		return playerID;
 	}
 
+
+	public int getSelectedIndex() {
+		return selectedIndex;
+	}
+
+	public void setSelectedIndex(int selectedIndex) {
+		this.selectedIndex = selectedIndex;
+	}
 
 
 	public BoardState getBoard() {
