@@ -48,7 +48,7 @@ public class ClientGame {
 
 	private BoardState boardState;
 	private int selectedIndex = -1;	// index selected in inventory
-	
+
 
 	public ClientGame(String name, String IP, Team team, UI display) {
 		this.client = new Client(IP);
@@ -67,18 +67,18 @@ public class ClientGame {
 		ClientUpdater u = this.getUpdater();
 		client.startReceiving(u);
 	}
-	
+
 	public ClientGame(String IP, UI display) {
 		// KTC fill player place
 	}
-	
+
 	public List<String> getPlayerList() {
 		// KTC list of possible players
 		return null;
 	}
-	
+
 	public void loadPlayer(int index) {
-		// KTC to do 
+		// KTC to do
 	}
 
 	public int getPlayerHealth() {
@@ -140,16 +140,8 @@ public class ClientGame {
 
 	public String inspectItem() throws NoItemException {
 		Location facing = player.getLocationInFrontOf();
-		if (board.containsLocation(facing)) {
-			for(Player p: playerIDs.values()) {
-				if (p.getLocation().equals(facing)) {
-					// KTC client.unfreezePlayer(); 
-					return "A frozen player";
-				}
-			}
-			if (board.tileAt(facing).getOn() != null) {
-				return board.tileAt(facing).getOn().getDescription();
-			}			
+		if (board.containsLocation(facing) && board.tileAt(facing).getOn() != null) {
+			return board.tileAt(facing).getOn().getDescription();
 		}
 		throw new NoItemException();
 	}
@@ -201,7 +193,7 @@ public class ClientGame {
 					powerup.use(player);
 					client.useItem(selectedIndex);
 				}
-			} 
+			}
 		}
 	}
 
@@ -238,7 +230,7 @@ public class ClientGame {
 		if (board.containsLocation(containerLoc)) {
 			InanimateEntity on = board.tileAt(containerLoc).getOn();
 			if (on != null && on instanceof Inventory) {
-				if (on instanceof Lockable && ((Lockable)on).isLocked()) { 
+				if (on instanceof Lockable && ((Lockable)on).isLocked()) {
 					if (this.unlock((Lockable)on, containerLoc)) {
 							return ((Inventory)on).getContentsAsEnums();
 					}
@@ -248,6 +240,15 @@ public class ClientGame {
 			}
 		}
 		throw new NotAContainerException();
+	}
+
+	public void unfreezePlayer() {
+		Location facing = player.getLocationInFrontOf();
+		for(Player p: playerIDs.values()) {
+			if (p.getLocation().equals(facing)) {
+				// KTC client.unfreezePlayer();
+			}
+		}
 	}
 
 	public int getPlayerID() {
@@ -281,7 +282,7 @@ public class ClientGame {
 	public void setLocalLocation(Location l) {
 		this.player.setLocation(l);
 	}
-	
+
 	public int getPlayerScore() {
 		return this.player.getScore();
 	}
@@ -289,7 +290,7 @@ public class ClientGame {
 	public Direction getOrientation(){
 		return boardState.getDirection();
 	}
-	
+
 	public void save() {
 		SaveGame saver = new SaveGame();
 		List<Player> ps = new ArrayList<Player>();
@@ -305,7 +306,7 @@ public class ClientGame {
 		return new ClientUpdater(this, board, playerIDs,
 				boardState, display, playerID);
 	}
-	
+
 	public void toggleUnlimitedSpeed () {
 		if (this.player.getStepDelay() != 0) {
 			this.player.setStepDelay(0);
@@ -342,7 +343,7 @@ public class ClientGame {
 		}
 		return true;
 	}
-	
+
 	private boolean unlock(Lockable lock, Location at) {
 		if (player.holdsKey(lock.getID())) {
 			int index = player.getKeyIndex(lock.getID());
