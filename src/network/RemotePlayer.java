@@ -1,4 +1,4 @@
-package server;
+package network;
 
 import gameworld.game.client.ClientUpdater;
 import gameworld.game.server.ServerGame;
@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import server.events.CreateLocalPlayerEvent;
-import server.events.UpdateEvent;
+import network.events.CreateLocalPlayerEvent;
+import network.events.UpdateEvent;
 
 /**
  * @author Bryden Frizzell
@@ -113,7 +113,10 @@ public class RemotePlayer implements Runnable {
 				else if(in==0x10) {
 					int index = readFromSocket();
 					game.takeFromContainer(id, index);
-					// BF add crap here
+				}
+				else if(in==0x19) {
+					int index = readFromSocket();
+					game.unfreezePlayer(readFromSocket());
 				}
 			}
 		} catch (IOException e) {

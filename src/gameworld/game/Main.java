@@ -1,6 +1,6 @@
 package gameworld.game;
 
-import server.Server;
+import network.Server;
 import ui.gamewindow.UI;
 import gameworld.game.server.ServerGame;
 import gameworld.world.Board;

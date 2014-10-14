@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import server.Client;
+import network.Client;
 import storage.SaveGame;
 import storage.StoredGame;
 import ui.gamewindow.UI;

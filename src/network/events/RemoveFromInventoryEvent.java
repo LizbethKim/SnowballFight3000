@@ -1,4 +1,4 @@
-package server.events;
+package network.events;
 
 
 import java.io.IOException;

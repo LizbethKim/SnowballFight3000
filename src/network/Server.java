@@ -1,4 +1,4 @@
-package server;
+package network;
 
 import gameworld.game.server.ServerGame;
 
@@ -11,7 +11,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import server.events.UpdateEvent;
+import network.events.UpdateEvent;
 
 public class Server implements Runnable {
 	private ServerSocket server;
