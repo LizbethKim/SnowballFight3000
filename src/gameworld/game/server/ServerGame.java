@@ -207,13 +207,11 @@ public class ServerGame {
 			for (Player p: playerIDs.values()) {
 				if (p.getLocation().equals(s.getLocation())) {
 					s.hit(p);
+					it.remove();
 					server.queuePlayerUpdate(new UpdateHealthEvent(p.getHealth()), p.getID());
 					if (p.isFrozen()) {
-						for (int id: playerIDs.keySet()) {
-							server.queuePlayerUpdate(new FreezePlayerEvent(p.getID()), id);
-						}
+						this.freezePlayer(p);
 					}
-					it.remove();
 					break;
 				}
 			}
@@ -241,6 +239,29 @@ public class ServerGame {
 			}
 			this.lastHourTime = System.currentTimeMillis();
 		}
+	}
+	
+	private void freezePlayer(Player p) {
+		List<Item> itemsInInventory = p.getInventoryItems();
+		for (int i = 0; i < itemsInInventory.size(); i++) {
+			server.queuePlayerUpdate(new RemoveFromInventoryEvent(0), p.getID());
+		}
+		List<Location> dropLocs = p.getSurroundingLocations();
+		for (int id: playerIDs.keySet()) {
+			int i = 0;
+			for (Item item: itemsInInventory) {
+				while (!(board.containsLocation(dropLocs.get(i))
+						&& board.tileAt(dropLocs.get(i)).isTraversable() 
+						&& this.isFree(dropLocs.get(i)))) {
+					i++;
+				}
+				server.queuePlayerUpdate(new PlaceItemEvent(dropLocs.get(i), item), id);
+				this.board.tileAt(dropLocs.get(i)).place(item);
+				i++;
+			}
+			server.queuePlayerUpdate(new FreezePlayerEvent(p.getID()), id);
+		}
+		p.emptyInventory();
 	}
 
 	private boolean isFree(Location l) {

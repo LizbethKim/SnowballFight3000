@@ -87,6 +87,11 @@ public class PlayerInventory implements Inventory {
 		return itemLimit;
 	}
 
+	@Override
+	public void empty() {
+		this.contents.clear();
+	}
+
 
 
 }

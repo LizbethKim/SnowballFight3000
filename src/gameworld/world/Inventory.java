@@ -30,5 +30,6 @@ public interface Inventory {
 	public List<Objects> getContentsAsEnums();
 	public int size();
 	public int maxSize();
+	public void empty();
 
 }

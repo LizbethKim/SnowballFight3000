@@ -24,7 +24,7 @@ public class Player implements Entity {
 	private long snowballDelay = DEFAULT_SNOWBALL_DELAY;
 	private SnowballType canThrow = SnowballType.NORMAL;
 	
-	public static final int MAX_SCORE = 64999;
+	public static final int MAX_SCORE = 64998;
 	public static final long DEFAULT_STEP_DELAY = 200;
 	public static final long DEFAULT_SNOWBALL_DELAY = 500;
 
@@ -106,6 +106,11 @@ public class Player implements Entity {
 		return Location.locationInFrontOf(this.loc, this.d);
 	}
 
+	// Returns a list of the locations surrounding the player.
+	public List<Location> getSurroundingLocations() {
+		return Location.getSurroundingLocations(this.loc);
+	}
+	
 	public List<Item> getInventoryItems() {
 		return this.inventory.getContents();
 	}
@@ -242,6 +247,10 @@ public class Player implements Entity {
 
 	public void setCanThrow(SnowballType canThrow) {
 		this.canThrow = canThrow;
+	}
+
+	public void emptyInventory() {
+		this.inventory.empty();
 	}
 
 }

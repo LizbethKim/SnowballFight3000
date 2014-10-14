@@ -67,4 +67,9 @@ public class Bag extends Item implements Inventory {
 		return itemLimit;
 	}
 
+	@Override
+	public void empty() {
+		this.contents.clear();
+	}
+
 }

@@ -1,5 +1,8 @@
 package gameworld.world;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a coordinate in the map
  * @author Kelsey Jack 300275851
@@ -53,6 +56,31 @@ public class Location {
 		} else {
 			return new Location (l.x + 1, l.y);
 		}
+	}
+	
+	public static List<Location> getSurroundingLocations(Location l) {
+		List<Location> ans = new ArrayList<Location>();
+		ans.add(new Location (l.x + 1, l.y));
+		ans.add(new Location (l.x - 1, l.y));
+		ans.add(new Location (l.x, l.y + 1));
+		ans.add(new Location (l.x, l.y - 1));
+		ans.add(new Location (l.x + 1, l.y + 1));
+		ans.add(new Location (l.x + 1, l.y - 1));
+		ans.add(new Location (l.x - 1, l.y + 1));
+		ans.add(new Location (l.x - 1, l.y - 1));
+		ans.add(new Location (l.x + 2, l.y));
+		ans.add(new Location (l.x + 2, l.y + 1));
+		ans.add(new Location (l.x + 2, l.y - 1));
+		ans.add(new Location (l.x - 2, l.y));
+		ans.add(new Location (l.x - 2, l.y + 1));
+		ans.add(new Location (l.x - 2, l.y - 1));
+		ans.add(new Location (l.x, l.y - 2));
+		ans.add(new Location (l.x + 1, l.y - 2));
+		ans.add(new Location (l.x - 1, l.y - 2));
+		ans.add(new Location (l.x, l.y - 2));
+		ans.add(new Location (l.x + 1, l.y - 2));
+		ans.add(new Location (l.x - 1, l.y - 2));
+		return ans;
 	}
 }
 
