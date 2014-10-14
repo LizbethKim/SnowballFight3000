@@ -28,9 +28,9 @@ import ui.popups.LoadPopup;
  * The GameSetup is a panel displayed at the start of the game and is
  * responsible for starting up the game, getting the necessary inputs from the
  * user about the server and player name
- * 
+ *
  * @author Ryan Burnell, 300279172
- * 
+ *
  */
 public class GameSetup extends JPanel {
 
@@ -76,7 +76,7 @@ public class GameSetup extends JPanel {
 
 	/**
 	 * Responds to the button at the given point (x,y)
-	 * 
+	 *
 	 * @param x
 	 *            the x coordinate
 	 * @param y
@@ -100,14 +100,14 @@ public class GameSetup extends JPanel {
 	 * starts a new server
 	 */
 	private void startServer() {
-		JFileChooser fileChooser = new JFileChooser();
-		// display the dialog and save the file if valid one selected
-		if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-			File file = fileChooser.getSelectedFile();
-			LoadGame loader = new LoadGame();		
-		// make new server
-		ServerGame g = new ServerGame(loader.loadGame(file));
-		
+//		JFileChooser fileChooser = new JFileChooser();
+//		// display the dialog and save the file if valid one selected
+//		if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+//			File file = fileChooser.getSelectedFile();
+//			LoadGame loader = new LoadGame();
+//		// make new server
+//		ServerGame g = new ServerGame(loader.loadGame(file));
+		ServerGame g = new ServerGame(Board.defaultBoard());
 		Server server = new Server(g);
 
 		// start server connection accepting thread
@@ -115,12 +115,12 @@ public class GameSetup extends JPanel {
 		new Thread(new Time(g)).start();
 		// let the user know the server was started
 		JOptionPane.showMessageDialog(null, "Server Started");
-		}
+//		}
 	}
 
 	/**
 	 * Get the bounds of a button with the given x and y proportions
-	 * 
+	 *
 	 * @param xPosition
 	 * @param yPosition
 	 * @return a rectangle representing the bounds of the button
@@ -138,7 +138,7 @@ public class GameSetup extends JPanel {
 
 	/**
 	 * highlights the selected button by drawing a square around it
-	 * 
+	 *
 	 * @param g
 	 */
 	private void highlightButton(Graphics g) {
