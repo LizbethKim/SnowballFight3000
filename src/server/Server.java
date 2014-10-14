@@ -88,7 +88,10 @@ public class Server implements Runnable {
 		while(true) {
 			try {
 				//get next player and get them to send queued updates
-				updateQueue.poll(1000,TimeUnit.DAYS).sendUpdates();
+				//still returns null sometimes? apparently waiting 1000 days isn't enough...
+				RemotePlayer p = updateQueue.poll(1000,TimeUnit.DAYS);
+				if(p!=null)
+					p.sendUpdates();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
