@@ -247,18 +247,20 @@ public class ServerGame {
 			server.queuePlayerUpdate(new RemoveFromInventoryEvent(0), p.getID());
 		}
 		List<Location> dropLocs = p.getSurroundingLocations();
-		for (int id: playerIDs.keySet()) {
-			int i = 0;
-			for (Item item: itemsInInventory) {
-				while (!(board.containsLocation(dropLocs.get(i))
-						&& board.tileAt(dropLocs.get(i)).isTraversable() 
-						&& this.isFree(dropLocs.get(i)))) {
-					i++;
-				}
-				server.queuePlayerUpdate(new PlaceItemEvent(dropLocs.get(i), item), id);
-				this.board.tileAt(dropLocs.get(i)).place(item);
+		int i = 0;
+		for (Item item: itemsInInventory) {
+			while (!(board.containsLocation(dropLocs.get(i))
+					&& board.tileAt(dropLocs.get(i)).isTraversable() 
+					&& this.isFree(dropLocs.get(i)))) {
 				i++;
 			}
+			for (int id: playerIDs.keySet()) {
+				server.queuePlayerUpdate(new PlaceItemEvent(dropLocs.get(i), item), id);
+			}
+			this.board.tileAt(dropLocs.get(i)).place(item);
+			i++;
+		}
+		for (int id: playerIDs.keySet()) {
 			server.queuePlayerUpdate(new FreezePlayerEvent(p.getID()), id);
 		}
 		p.emptyInventory();
