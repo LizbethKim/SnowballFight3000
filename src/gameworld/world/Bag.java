@@ -23,6 +23,9 @@ public class Bag extends Item implements Inventory {
 		if (i == this) {
 			throw new IllegalArgumentException();
 		}
+		if (i instanceof Flag) {
+			return false;
+		}
 		if (contents.size() < itemLimit) {
 			contents.add(i);
 			return true;
