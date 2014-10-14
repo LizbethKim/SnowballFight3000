@@ -49,7 +49,7 @@ public class StaxWriter {
 
 	/**
 	 * Writes the storedGame to an XML file
-	 * @param g
+	 * @param g Game to save
 	 * @param fp Path to the save file
 	 * @return
 	 */
