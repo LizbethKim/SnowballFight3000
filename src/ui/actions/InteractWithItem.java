@@ -29,7 +29,7 @@ public class InteractWithItem extends KeyAction {
 			String title = client.inspectItem();
 			new ContainerPopup(client, parent, title, false);
 		} catch (NoItemException | NotAContainerException e) {
-
+			//client.unfreezePlayer()
 		}
 	}
 

@@ -54,6 +54,7 @@ public class UI extends JFrame {
 	private ControlsPopup controlsPopup;
 	private GameSetup gameSetup;
 	private JFrame setupFrame;
+	private int selectedIndex;
 
 	public UI() {
 
@@ -66,6 +67,8 @@ public class UI extends JFrame {
 	 * Sets up panels, starts and displays the game window
 	 */
 	public void startGame() {
+		selectedIndex = -1;
+		
 		// setup the panels and listeners
 		setupFileBar();
 		setupKeyBindings();
@@ -80,6 +83,9 @@ public class UI extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * try loading again
+	 */
 	public void retryLoad() {
 		LoadPopup
 				.showFailDialog("Choice rejected, please choose another player");
@@ -219,6 +225,14 @@ public class UI extends JFrame {
 		}
 	}
 
+	public void setSelectedIndex(int index){
+		selectedIndex = index;
+	}
+	
+	public int getSelectedIndex(){
+		return selectedIndex;
+	}
+	
 	/**
 	 * launches a notification that the game has ended
 	 */
