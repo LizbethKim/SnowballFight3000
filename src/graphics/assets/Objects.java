@@ -46,7 +46,7 @@ public enum Objects {
 	HEALTH("HealthPotion.png", "HealthPotion.png", "HealthPotion.png", "HealthPotion.png"),
 	SNOWMAN("snowman.png", "snowman.png", "snowman.png", "snowman.png");
 
-	public final Image[] imgs;	// KTC make unmodifiable
+	public final Image[] imgs;
 
 	/**
 	 * Creates the enumeration and gives it the associated image.
