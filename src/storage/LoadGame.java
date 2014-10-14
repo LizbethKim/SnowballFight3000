@@ -25,21 +25,24 @@ public class LoadGame{
 	public static void main(String[] args) {
 		
 		StaxParser parser = new StaxParser();
-		StoredGame testGame = parser.parse(new File("src/storage/1413195551663.xml"));
-        System.out.println("Game Loaded by loader");
+		StoredGame testGame = parser.parse(new File("src/storage/1413289751685.xml"));
+        System.out.println("Game Loaded by load main");
 	}
 	
 	/**
-	 * Loads the given filename, currently from src/storage/
-	 * KH shouldn't just be from src/storage/
-	 * @param filename The filename to load
-	 * @return
+	 * Loads the given filepath
+	 * @param filepath The filepath to load
+	 * @return StoredGame the storedGame that was loaded
 	 */
-	public StoredGame loadGame(String filename){
+	public StoredGame loadGame(String filepath){
 		StaxParser parser = new StaxParser();
-		System.out.println(filename);
-		game = parser.parse(new File("src/storage/"+filename));
-		System.out.println("Game Loaded by loader");
+		System.out.println(filepath);
+		if(filepath==null){
+			System.out.println("That's not a path: "+filepath);
+		}else{
+			game = parser.parse(new File((filepath)));
+			System.out.println("Game Loaded by loader");
+		}
 		return game;
 	}
 
@@ -49,8 +52,6 @@ public class LoadGame{
 	 * @return The storedGame that was transferred
 	 */
 	public StoredGame loadGame(byte[] map) {
-		// KH, I'll probably need this. Bryden is sending the map through the network in a
-		// array of bytes. So it'd be cool if you could load a game from one.
 		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream(new File("src/storage/byteBoard.xml"));
