@@ -66,6 +66,10 @@ public class ClientGame {
 		ClientUpdater u = this.getUpdater();
 		client.startReceiving(u);
 	}
+	
+	public ClientGame(String IP, UI display) {
+		// KTC fill player place
+	}
 
 	public int getPlayerHealth() {
 		return player.getHealth();
@@ -261,6 +265,10 @@ public class ClientGame {
 		return this.player.getScore();
 	}
 
+	public Direction getOrientation(){
+		return boardState.getDirection();
+	}
+	
 	public void save() {
 		SaveGame saver = new SaveGame();
 		List<Player> ps = new ArrayList<Player>();
