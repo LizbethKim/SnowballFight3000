@@ -42,18 +42,6 @@ import storage.XMLValues;
 
 public class StaxWriter {
 
-	/*private static final String GAME = "game";
-	private static final String PLAYERS = "players";
-	private static final String PLAYER = "player";
-	private static final String BOARD = "board";
-	private static final String TILE = "tile";
-	private static final String INVENTORY= "inventory";
-	private static final String ITEM = "item";
-
-	private static final String EMPTY = "";
-	private static final String SPACE = " ";
-	private static final String NEWLINE = "\n";*/
-
 	private String filename;
 	private Board board;
 	private List<Player> players;
@@ -211,33 +199,6 @@ public class StaxWriter {
 		Objects itemEnum = item.asEnum();
 		str.append(itemEnum.name()+XMLValues.SPACE);
 		switch (itemEnum){
-		/*
-		case BAG:
-			str.append(item.asEnum().name());break;
-		case REDFLAG:
-			str.append("flag ");
-			str.append(0);
-			break;
-		case BLUEFLAG:
-			str.append("flag ");
-			str.append(1);
-			break;
-		case MAP:
-			str.append("map ");
-			break;
-		case WALL_E_W:
-			str.append(Objects.WALL_E_W.name());break;
-		case WALL_N_S:
-			str.append("wallNS ");break;
-		case TREE:
-			str.append("tree ");break;
-		case BUSH:
-			str.append("bush ");break;
-		case TABLE:
-			str.append("table ");break;
-		case CHEST:
-			str.append()
-		*/
 		case KEY:
 			Key key = (Key)item;
 			str.append(key.id+XMLValues.SPACE);

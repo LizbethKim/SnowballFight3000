@@ -1,8 +1,8 @@
 package storage;
 
 /**
- * All the strings required for xml saving and parsing, just kept in one place for consistency.
- * @author henderkath
+ * All the constants required for xml saving and parsing, just kept in one place for consistency.
+ * @author Kate Henderson
  *
  */
 public class XMLValues {
