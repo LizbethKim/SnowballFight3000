@@ -2,7 +2,6 @@ package ui.gamewindow;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -62,21 +61,31 @@ public class UI extends JFrame {
 		setupWelcome();
 	}
 
+	/**
+	 * Gets rid of the setup window and initialises the game
+	 * 
+	 * @param name
+	 *            the player name
+	 * @param IP
+	 *            the IP address of the desired server
+	 * @param t
+	 *            the player's team
+	 */
 	public void startGame(String name, String IP, gameworld.world.Team t) {
-		//create the client
+		// create the client
 		client = new ClientGame(name, IP, t, this);
-		
+
 		// setup the panels and listeners
 		setupFileBar();
 		setupKeyBindings();
 		setupGamePanel();
 		setupHUD();
 		setupGraphics();
-		
-		//get rid of setup frame
+
+		// get rid of setup frame
 		frame.setVisible(false);
 		frame.dispose();
-		
+
 		// pack and Display window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
@@ -84,8 +93,10 @@ public class UI extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * adds the game panel to the layered pane and set up sizing
+	 */
 	private void setupGamePanel() {
-		//add game panel to the layered pane and set up sizing
 		gamePanel = new JLayeredPane();
 		gamePanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH,
 				DEFAULT_GAME_HEIGHT));
@@ -93,6 +104,9 @@ public class UI extends JFrame {
 		add(gamePanel);
 	}
 
+	/**
+	 * initialises the game setup window and displays it
+	 */
 	private void setupWelcome() {
 		frame = new JFrame();
 		frame.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
@@ -105,6 +119,9 @@ public class UI extends JFrame {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * sets up the graphics panel
+	 */
 	private void setupGraphics() {
 		graphicsPanel = new GraphicsPane(client.getBoard());
 		gamePanel.add(graphicsPanel);
@@ -112,19 +129,18 @@ public class UI extends JFrame {
 	}
 
 	/**
-	 * method to set up the HUD
+	 * sets up the HUD panel
 	 */
 	private void setupHUD() {
 		hudPanel = new HUDPanel(client, ASPECT_RATIO);
 		gamePanel.add(hudPanel);
 		hudPanel.setOpaque(false);
-		// hudPanel.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
-		hudPanel.setupInventory(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
-		// hudPanel.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH,
-		// DEFAULT_GAME_HEIGHT));
-
+		hudPanel.setupInventory();
 	}
 
+	/**
+	 * adds a listener to resize the game window when the frame size is changed
+	 */
 	private void setupResizing() {
 		gamePanel.addComponentListener(new ComponentAdapter() {
 			@Override
@@ -135,29 +151,58 @@ public class UI extends JFrame {
 	}
 
 	private void resizeToRatio(ComponentEvent e) {
-
+		// gets the new dimensions of the frame
 		int width = e.getComponent().getWidth();
 		int height = e.getComponent().getHeight();
 
-		Dimension newSize = getMaximumAspectSize(width, height);
+		// get the new size of the game window
+		Dimension newSize = getMaximumGameSize(width, height);
+
+		// sets the game window to the new size and centers is on the screen
 		int xBorder = (width - newSize.width) / 2;
 		int yBorder = (height - newSize.height) / 2;
 		setGameBounds(xBorder, yBorder, newSize.width, newSize.height);
-		// hudPanel.setBounds(xBorder, yBorder, newSize.width,newSize.height);
 	}
 
+	/**
+	 * sets all the panels to the given position and size
+	 * 
+	 * @param x
+	 *            the x position to set to
+	 * @param y
+	 *            the y position to set to
+	 * @param width
+	 *            the width to set to
+	 * @param height
+	 *            the length to set to
+	 */
 	private void setGameBounds(int x, int y, int width, int height) {
+		// set each component inside the game panel to the given bounds
 		for (Component c : gamePanel.getComponents()) {
 			c.setBounds(x, y, width, height);
 		}
 	}
 
-	public void endGame(){
-		JOptionPane.showMessageDialog(this, "Game Over! Final score: "+client.getPlayerScore());
+	/**
+	 * launches a notification that the game has ended
+	 */
+	public void endGame() {
+		JOptionPane.showMessageDialog(this,
+				"Game Over! Final score: " + client.getPlayerScore());
 		System.exit(EXIT_ON_CLOSE);
 	}
-	
-	private Dimension getMaximumAspectSize(int width, int height) {
+
+	/**
+	 * get the maximum sized game window of the set aspect ratio that wll fit in
+	 * a frame of a given size
+	 * 
+	 * @param width
+	 *            the width of the frame
+	 * @param height
+	 *            the height of the frame
+	 * @return the dimensions of the game window
+	 */
+	private Dimension getMaximumGameSize(int width, int height) {
 		if (width / ASPECT_RATIO < height) {
 			return new Dimension(width, (int) (width / ASPECT_RATIO));
 		} else {
@@ -190,8 +235,7 @@ public class UI extends JFrame {
 		addKeyBinding("PickupItem", new PickupItem(client, this), KeyEvent.VK_Z);
 		addKeyBinding("UseInventoryItem", new UseItem(client, this),
 				KeyEvent.VK_R);
-		addKeyBinding("DropItem", new DropItem(client, this),
-				KeyEvent.VK_F);
+		addKeyBinding("DropItem", new DropItem(client, this), KeyEvent.VK_F);
 
 		// view rotation keys
 		addKeyBinding("RotateClockwise", new RotateClockwise(client, this),
@@ -235,7 +279,8 @@ public class UI extends JFrame {
 			int... keyConstants) {
 
 		// get the input and action maps
-		InputMap im = getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		InputMap im = getRootPane().getInputMap(
+				JComponent.WHEN_IN_FOCUSED_WINDOW);
 		ActionMap am = getRootPane().getActionMap();
 
 		// tie each key constant to the action string
@@ -246,13 +291,17 @@ public class UI extends JFrame {
 		am.put(actionString, action);
 	}
 
+	/**
+	 * launches a file chooser and passes the selected file to the client so the
+	 * game can be saved
+	 */
 	private void saveGame() {
 		JFileChooser fileChooser = new JFileChooser();
+		
+		//display the dialog and save the file if valid one selected
 		if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			client.save();
-			// KTC save to file client.save(file) or equivalent, change to
-			// whatever when implemented
 		}
 	}
 
@@ -323,21 +372,5 @@ public class UI extends JFrame {
 			}
 		});
 	}
-
-	// public static void main(String[] args) {
-	// try {
-	// for (UIManager.LookAndFeelInfo info : UIManager
-	// .getInstalledLookAndFeels()) {
-	// if ("Nimbus".equals(info.getName())) {
-	// UIManager.setLookAndFeel(info.getClassName());
-	// break;
-	// }
-	//
-	// }
-	// } catch (Exception e) {
-	// // do nothing
-	// }
-	// UI tester = new UI(new Client(1));
-	// }
 
 }
