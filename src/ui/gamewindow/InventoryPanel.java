@@ -241,19 +241,11 @@ public class InventoryPanel extends JPanel {
 		return (int) Math.ceil((double) (x - itemsXStart) / size);
 	}
 	
+	/**
+	 * toggles the state of the show/hide button
+	 */
 	public void toggleShowHide(){
 		inventoryHidden = !inventoryHidden;
-	}
-
-	private void dealWithClick(MouseEvent e) {
-		// get coordinates of the click
-		int x = e.getX();
-		int y = e.getY();
-		// toggle inventory hidden if the click was on the show/hide button
-		if (onShowHideButton(x, y)) {
-			inventoryHidden = !inventoryHidden;
-			repaint();
-		}
 	}
 
 	/**

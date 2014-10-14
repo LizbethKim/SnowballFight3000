@@ -23,7 +23,7 @@ public class UseItem extends KeyAction {
 	protected void execute() {
 		if (client.selectedIsContainer()) {
 			// System.out.println("is container");
-			new ContainerPopup(client, parent, "", false);
+			new ContainerPopup(client, parent, "", true);
 			System.out.println("popup done");
 		} else {
 			client.useItem();

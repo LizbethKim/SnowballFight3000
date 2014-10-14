@@ -152,15 +152,13 @@ public class HUDPanel extends JPanel {
 	 * @return the fetched image
 	 */
 	public static Image loadImage(String filename) {
-		// using the URL means the image loads when stored
-		// in a jar or expanded into individual files.
+		// loads in the images which are stored in the jar
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(new File(IMAGE_PATH + filename));
 			return img;
 		} catch (IOException e) {
-			// we've encountered an error loading the image. There's not much we
-			// can actually do at this point, except to abort the game.
+			//can't load an image so abort the game
 			throw new RuntimeException("Unable to load image: " + filename);
 		}
 

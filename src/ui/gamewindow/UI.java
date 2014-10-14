@@ -86,24 +86,40 @@ public class UI extends JFrame {
 		loadGame();
 	}
 	
+	/**
+	 * gets rid of the ganme setup window
+	 */
 	public void removeSetup(){
 		// get rid of setup frame
 		setupFrame.setVisible(false);
 		setupFrame.dispose();
 	}
 
+	/**
+	 * initialises the client if it is not already initialised
+	 * @param ip the ip address of the desired server
+	 */
 	public void setupClient(String ip) {
 		if (client == null) {
 			client = new ClientGame(ip, this);
 		}
 	}
 
-	public void setupClient(String name, String IP, gameworld.world.Team t) {
+	/**
+	 * initialises the client if it is not already initialised
+	 * @param name the player's name
+	 * @param ip the ip address of the desired server
+	 * @param t the player's team
+	 */
+	public void setupClient(String name, String ip, gameworld.world.Team t) {
 		if (client == null) {
-		client = new ClientGame(name, IP, t, this);
+		client = new ClientGame(name, ip, t, this);
 		}
 	}
 
+	/**
+	 * launches the pop-up for loading in the player
+	 */
 	public void loadGame() {
 		// attempt to load in a player
 		new LoadPopup(client);
@@ -124,14 +140,18 @@ public class UI extends JFrame {
 	 * initialises the game setup window and displays it
 	 */
 	private void setupWelcome() {
+		//make frame
 		setupFrame = new JFrame();
+		
+		//set size and add the gameSetup panel
 		setupFrame.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
 		gameSetup = new GameSetup(this, ASPECT_RATIO);
 		setupFrame.add(gameSetup);
 		gameSetup.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH,
 				DEFAULT_GAME_WIDTH));
+		
+		//now display
 		setupFrame.pack();
-		// setResizable(true);
 		setupFrame.setVisible(true);
 	}
 
@@ -333,9 +353,7 @@ public class UI extends JFrame {
 		final JMenu fileMenu = new JMenu("File");
 		final JMenu helpMenu = new JMenu("Help");
 
-		final JMenuItem newGame = new JMenuItem("New Game");
 		final JMenuItem save = new JMenuItem("Save Game");
-		// final JMenuItem load = new JMenuItem("Load Game");
 		final JMenuItem quit = new JMenuItem("Quit");
 		final JMenuItem controls = new JMenuItem("Show Controls");
 		final JMenuItem cheats = new JMenuItem("Enable Cheats");
@@ -344,7 +362,6 @@ public class UI extends JFrame {
 
 		// add menu and items
 		menu.add(fileMenu);
-		fileMenu.add(newGame);
 		fileMenu.add(save);
 		fileMenu.add(quit);
 
@@ -353,18 +370,12 @@ public class UI extends JFrame {
 		helpMenu.add(cheats);
 
 		setJMenuBar(menu);
+		
 		// setup listeners for the menu
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(EXIT_ON_CLOSE);
-			}
-		});
-
-		newGame.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// RB: client.newGame()?
 			}
 		});
 
