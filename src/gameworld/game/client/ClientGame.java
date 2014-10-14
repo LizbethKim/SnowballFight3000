@@ -75,6 +75,10 @@ public class ClientGame {
 		// KTC list of possible players
 		return null;
 	}
+	
+	public void loadPlayer(int index) {
+		// KTC to do 
+	}
 
 	public int getPlayerHealth() {
 		return player.getHealth();
