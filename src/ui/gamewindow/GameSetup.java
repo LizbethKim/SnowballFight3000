@@ -68,9 +68,9 @@ public class GameSetup extends JPanel {
 
 	private void dealWithClick(int x, int y) {
 		if (onNewPlayer(x, y)) {
-			new InputPopup(ui);
+			new InputPopup(ui, false);
 		} else if (onLoadPlayer(x, y)) {
-			new LoadPopup();
+			new InputPopup(ui, true);
 		} else if (onStartServer(x, y)) {
 			startServer();
 		} else if (onControls(x, y)) {

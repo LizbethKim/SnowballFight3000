@@ -14,6 +14,7 @@ import graphics.GraphicsPane;
 import ui.actions.*;
 import ui.popups.CheatsPopup;
 import ui.popups.ControlsPopup;
+import ui.popups.LoadPopup;
 
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -52,7 +53,7 @@ public class UI extends JFrame {
 	private CheatsPopup cheatsPopup;
 	private ControlsPopup controlsPopup;
 	private GameSetup gameSetup;
-	private JFrame frame;
+	private JFrame setupFrame;
 
 	public UI() {
 
@@ -62,19 +63,9 @@ public class UI extends JFrame {
 	}
 
 	/**
-	 * Gets rid of the setup window and initialises the game
-	 * 
-	 * @param name
-	 *            the player name
-	 * @param IP
-	 *            the IP address of the desired server
-	 * @param t
-	 *            the player's team
+	 * Sets up panels, starts and displays the game window
 	 */
-	public void startGame(String name, String IP, gameworld.world.Team t) {
-		// create the client
-		client = new ClientGame(name, IP, t, this);
-
+	public void startGame() {
 		// setup the panels and listeners
 		setupFileBar();
 		setupKeyBindings();
@@ -82,15 +73,40 @@ public class UI extends JFrame {
 		setupHUD();
 		setupGraphics();
 
-		// get rid of setup frame
-		frame.setVisible(false);
-		frame.dispose();
-
 		// pack and Display window
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setResizable(true);
 		setVisible(true);
+	}
+
+	public void retryLoad() {
+		LoadPopup
+				.showFailDialog("Choice rejected, please choose another player");
+		loadGame();
+	}
+	
+	public void removeSetup(){
+		// get rid of setup frame
+		setupFrame.setVisible(false);
+		setupFrame.dispose();
+	}
+
+	public void setupClient(String ip) {
+		if (client == null) {
+			client = new ClientGame(ip, this);
+		}
+	}
+
+	public void setupClient(String name, String IP, gameworld.world.Team t) {
+		if (client == null) {
+		client = new ClientGame(name, IP, t, this);
+		}
+	}
+
+	public void loadGame() {
+		// attempt to load in a player
+		new LoadPopup(client);
 	}
 
 	/**
@@ -108,15 +124,15 @@ public class UI extends JFrame {
 	 * initialises the game setup window and displays it
 	 */
 	private void setupWelcome() {
-		frame = new JFrame();
-		frame.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
+		setupFrame = new JFrame();
+		setupFrame.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
 		gameSetup = new GameSetup(this, ASPECT_RATIO);
-		frame.add(gameSetup);
+		setupFrame.add(gameSetup);
 		gameSetup.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH,
 				DEFAULT_GAME_WIDTH));
-		frame.pack();
+		setupFrame.pack();
 		// setResizable(true);
-		frame.setVisible(true);
+		setupFrame.setVisible(true);
 	}
 
 	/**
@@ -297,8 +313,8 @@ public class UI extends JFrame {
 	 */
 	private void saveGame() {
 		JFileChooser fileChooser = new JFileChooser();
-		
-		//display the dialog and save the file if valid one selected
+
+		// display the dialog and save the file if valid one selected
 		if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			client.save();
