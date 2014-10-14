@@ -91,112 +91,178 @@ public class InventoryPanel extends JPanel {
 			// otherwise set image to the hide button
 			showHideButton = hideItems.getScaledInstance(width, height, 0);
 		}
-		
-		//now draw
+
+		// now draw
 		g.drawImage(showHideButton, xPos, yPos, null, null);
 	}
 
 	/**
 	 * paints the inventory slots and any items in the inventory
-	 * @param g the graphics object to draw on
+	 * 
+	 * @param g
+	 *            the graphics object to draw on
 	 */
 	private void paintInventory(Graphics g) {
-		//get the inventory
+		// get the inventory
 		List<Objects> items = client.getPlayerInventory();
-		
-		//set number to max size of inventory
+
+		// set number to max size of inventory
 		final int inventoryNumber = items.size();
-		
-		//first slot is drawn at the end of the show/hide button
+
+		// first slot is drawn at the end of the show/hide button
 		int xPos = getShowHideWidth();
 		int yPos = 0;
-		
-		//get size based on height of inventory panel
+
+		// get size based on height of inventory panel
 		final int size = this.getHeight();
-		
-		//scale images to required size
+
+		// scale images to required size
 		Image slot = inventorySlot.getScaledInstance(size, size, 0);
 		Image selected = selectedSlot.getScaledInstance(size, size, 0);
 
-		//for each possible inventory slot
+		// for each possible inventory slot
 		for (int i = 1; i <= inventoryNumber; i++) {
-			
-			//if selected paint the selected slot
-			if (i == client.getSelectedIndex() + 1) {	
+
+			// if selected paint the selected slot
+			if (i == client.getSelectedIndex() + 1) {
 				drawSlot(selected, xPos, yPos, size, i, g);
 			} else {
-				//otherwise paint normal slot
+				// otherwise paint normal slot
 				drawSlot(slot, xPos, yPos, size, i, g);
 			}
 
-			//if there is an item in the slot
+			// if there is an item in the slot
 			if (items.get(i - 1) != null) {
-				//draw it
+				// draw it
 				drawItem(xPos, yPos, size, items.get(i - 1), g);
 			}
-			//increment position by the size of the slots
+			// increment position by the size of the slots
 			xPos += size;
 		}
 	}
 
 	/**
 	 * draws the item at the given position
-	 * @param slotXPos the x position of the slot to draw in
-	 * @param slotYPos the y position of the slot to draw in
-	 * @param size the size to draw the item
-	 * @param item the item object
-	 * @param g the graphics object to draw on
+	 * 
+	 * @param slotXPos
+	 *            the x position of the slot to draw in
+	 * @param slotYPos
+	 *            the y position of the slot to draw in
+	 * @param size
+	 *            the size to draw the item
+	 * @param item
+	 *            the item object
+	 * @param g
+	 *            the graphics object to draw on
 	 */
-	private void drawItem(int slotXPos, int slotYPos, int size, Objects item, Graphics g) {
-		//get the position and size to draw the item inside the slot
+	private void drawItem(int slotXPos, int slotYPos, int size, Objects item,
+			Graphics g) {
+		// get the position and size to draw the item inside the slot
 		int itemXPos = slotXPos + size / 6;
 		int itemYPos = slotYPos + size / 6;
 		int itemSize = size - 2 * (size / 6);
-		//get the image of the item
+		// get the image of the item
 		Image itemImage = item.imgs[0];
-		//now draw
+		// now draw
 		g.drawImage(itemImage, itemXPos, itemYPos, itemSize, itemSize, null);
 	}
 
+	/**
+	 * draws the slot given its image, position, size and the number of the slot
+	 * 
+	 * @param image
+	 *            the slot image
+	 * @param xPos
+	 *            the x position to draw at
+	 * @param yPos
+	 *            the y position to draw at
+	 * @param size
+	 *            the size to draw
+	 * @param inventoryNum
+	 *            the number of the slot
+	 * @param g
+	 */
 	private void drawSlot(Image image, int xPos, int yPos, int size,
 			int inventoryNum, Graphics g) {
+		// set font size relative to the size of the slot
 		int fontSize = size / 6;
+		// draw the slot image
 		g.drawImage(image, xPos, yPos, null, null);
-		g.setFont(new Font("Times", Font.PLAIN, fontSize));
+
+		// now get the position and set colour and font of the text
 		int numberXPos = xPos + size / 12;
 		int numberYPos = size / 30 + fontSize;
+		g.setFont(new Font("Times", Font.PLAIN, fontSize));
 		g.setColor(Color.white);
+		// finally draw the text
 		g.drawString("" + (inventoryNum), numberXPos, numberYPos);
 	}
 
+	/**
+	 * get the width of the show/hide button
+	 * 
+	 * @return returns the width of the show/hide button
+	 */
 	public int getShowHideWidth() {
+		// if the window is too small return 1, else return the show/hide width
 		return Math.max(1, (int) (this.getWidth() * showHideXProportion));
 	}
 
-	private boolean onShowHideButton(int x, int y) {
+	/**
+	 * returns boolean based on whether the point at the given coordinates is
+	 * within the show/hide button
+	 * 
+	 * @param x
+	 *            x coordinate of the point
+	 * @param y
+	 *            y coordinate of the point
+	 * @return true if the point is within the show/hide width bounds otherwise
+	 *         false
+	 */
+	public boolean onShowHideButton(int x, int y) {
 		return y > 0 && x > 0 && y < getHeight() && x < getShowHideWidth();
+	}
+	
+	/**
+	 * returns the index of the inventory item at a given position
+	 * @param x the x coordinate of the point
+	 * @param y the y coordinate of the point
+	 * @return the index of the item
+	 */
+	public int getSelectedItem(int x, int y) {
+		//get the size and starting position of the items
+		int size = getHeight();
+		int itemsXStart = getShowHideWidth();
+		//if the point is not on one of them return nonsense value
+		if (x < itemsXStart || x > x*size + itemsXStart) {
+			return -1;
+		}
+		//else return the index of the item
+		return (int) Math.ceil((double) (x - itemsXStart) / size);
+	}
+	
+	public void toggleShowHide(){
+		inventoryHidden = !inventoryHidden;
 	}
 
 	private void dealWithClick(MouseEvent e) {
-		// RB: Fix mouse hover when window is resized
-		System.out.println("dealing with click");
+		// get coordinates of the click
 		int x = e.getX();
 		int y = e.getY();
+		// toggle inventory hidden if the click was on the show/hide button
 		if (onShowHideButton(x, y)) {
-			System.out.println("show/hide");
 			inventoryHidden = !inventoryHidden;
 			repaint();
 		}
 	}
 
+	/**
+	 * adds the mouse listener and mouse motion listener for responding to user
+	 * inputs
+	 */
 	private void setupListeners() {
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				dealWithClick(e);
-			}
-		});
 
+		//add motion listener which changes the cursor to a hand when over the show/hide button
 		addMouseMotionListener(new MouseMotionListener() {
 
 			@Override
@@ -215,6 +281,7 @@ public class InventoryPanel extends JPanel {
 
 		});
 
+		//add listener to deal with clicks on the inventory
 		addMouseListener(new RightClickListener(client, this));
 	}
 
