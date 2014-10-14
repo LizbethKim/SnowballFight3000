@@ -3,7 +3,13 @@ package ui.actions;
 import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
 import gameworld.world.Direction;
-import gameworld.world.Board;
+
+/**
+ * MoveUp is a key action that attempts to move the player in the NORTH direction
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 
 public class MoveUp extends KeyAction{
 	

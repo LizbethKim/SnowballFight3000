@@ -2,8 +2,13 @@ package ui.actions;
 
 import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
-import gameworld.world.Board;
-import gameworld.world.Direction;
+
+/**
+ * RotateClockwise is a key action that rotates the view in the clockwise direction
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 
 public class RotateClockwise extends KeyAction{
 	

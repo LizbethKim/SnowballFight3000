@@ -6,31 +6,31 @@ import graphics.assets.Objects;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import ui.gamewindow.HUDPanel;
 import ui.gamewindow.UI;
+
+/**
+ * The ContainerPoup displays the contents of a container, and allows the user
+ * to select and take items out of the container our put them in. Items are
+ * navigated with the arrow keys.
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 
 public class ContainerPopup extends JDialog implements KeyListener {
 	private static final Image containerSlot = HUDPanel
@@ -53,14 +53,14 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	private JPanel buttonPanel;
 	private JPanel containerPanel;
 
-	public ContainerPopup(ClientGame cl, UI ui, String title, boolean interactable) {
+	public ContainerPopup(ClientGame cl, UI ui, String title,
+			boolean interactable) {
 		super(ui, title, ModalityType.APPLICATION_MODAL);
 		this.client = cl;
 		this.selectedItem = 1;
 		this.interactable = interactable;
 		refresh();
 		this.maxItems = items.size();
-		
 
 		width = Math.min(slotSize * maxItems, slotSize * maxColumn);
 		height = slotSize * ((int) Math.ceil((double) maxItems / maxColumn));
@@ -89,6 +89,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 
 		// add mouse listener to exit on click
 		buttonPanel.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
 			}
@@ -158,7 +159,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		} catch (NotAContainerException e) {
 			System.out.println("not a container exception");
 			dispose();
-			
+
 		}
 	}
 
@@ -233,9 +234,11 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	private void setupMotionListener() {
 		// add mouse motion listener to change cursor when hovered over
 		addMouseMotionListener(new MouseMotionListener() {
+			@Override
 			public void mouseDragged(MouseEvent arg0) {
 			}
 
+			@Override
 			public void mouseMoved(MouseEvent e) {
 				if (getContentPane().getComponentAt(
 						new Point(e.getX(), e.getY())) == buttonPanel) {

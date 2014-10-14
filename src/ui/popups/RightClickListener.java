@@ -7,6 +7,14 @@ import java.awt.event.MouseEvent;
 
 import ui.gamewindow.InventoryPanel;
 
+/**
+ * The RightClickListener is responsible for listening to mouse inputs on the
+ * inventory panel and selecting the clicked item or launching the right click menu
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
+
 public class RightClickListener extends MouseAdapter {
 	private ClientGame client;
 	private InventoryPanel panel;
@@ -17,6 +25,7 @@ public class RightClickListener extends MouseAdapter {
 		this.panel = panel;
 	}
 
+	@Override
 	public void mousePressed(MouseEvent e) {
 		int selected = getSelectedItem(e.getX(), e.getY());
 
@@ -34,9 +43,10 @@ public class RightClickListener extends MouseAdapter {
 		if (x < xStart) {
 			return -1;
 		}
-		return (int)Math.ceil((double)(x - xStart) / size);
+		return (int) Math.ceil((double) (x - xStart) / size);
 	}
 
+	@Override
 	public void mouseReleased(MouseEvent e) {
 		int selected = getSelectedItem(e.getX(), e.getY());
 

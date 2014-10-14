@@ -1,29 +1,24 @@
 package ui.gamewindow;
 
 import gameworld.game.client.ClientGame;
-import gameworld.world.Board;
-
-import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+/**
+ * The HUDPanel (Heads up display panel) displays or holds components that
+ * display all the information about the players character including their
+ * score, current health and inventory items
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 
 public class HUDPanel extends JPanel {
 	public static final String IMAGE_PATH = "src/ui/HUDAssets/";
@@ -110,21 +105,21 @@ public class HUDPanel extends JPanel {
 		}
 
 	}
-	
+
 	private void paintScore(Graphics g) {
 		final int xPos = (int) (14 * this.getWidth() / 20 / aspectRatio);
-		final int yPos = 2* this.getHeight() / 20;
+		final int yPos = 2 * this.getHeight() / 20;
 		final int fontSize = this.getHeight() / 18;
 		g.setColor(Color.white);
 		g.setFont(new Font("Times", Font.BOLD, fontSize));
 		g.setColor(Color.WHITE);
-		g.drawString("Score: "+client.getPlayerScore(), xPos+1, yPos);
-		g.drawString("Score: "+client.getPlayerScore(), xPos-1, yPos);
-		g.drawString("Score: "+client.getPlayerScore(), xPos, yPos+1);
-		g.drawString("Score: "+client.getPlayerScore(), xPos, yPos-1);
+		g.drawString("Score: " + client.getPlayerScore(), xPos + 1, yPos);
+		g.drawString("Score: " + client.getPlayerScore(), xPos - 1, yPos);
+		g.drawString("Score: " + client.getPlayerScore(), xPos, yPos + 1);
+		g.drawString("Score: " + client.getPlayerScore(), xPos, yPos - 1);
 		g.setColor(Color.WHITE);
-		g.drawString("Score: "+client.getPlayerScore(), xPos, yPos);
-		
+		g.drawString("Score: " + client.getPlayerScore(), xPos, yPos);
+
 	}
 
 	/**

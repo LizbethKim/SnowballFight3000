@@ -3,7 +3,13 @@ package ui.actions;
 import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
 import gameworld.world.Direction;
-import gameworld.world.Board;
+
+/**
+ * MoveLeft is a key action that attempts to move the player in the WEST direction
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 
 public class MoveLeft extends KeyAction{
 	

@@ -3,8 +3,6 @@ package ui.popups;
 import java.awt.GridLayout;
 
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -12,6 +10,15 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import ui.gamewindow.UI;
+
+/**
+ * The Input popup is responsible for getting and passing the inputs from the
+ * user to the client including name, IP address of the desired server and the
+ * team of the player
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 
 public class InputPopup extends JPanel {
 	private static final String blueTeam = "blue";

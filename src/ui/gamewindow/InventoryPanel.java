@@ -17,6 +17,13 @@ import javax.swing.JPanel;
 
 import ui.popups.RightClickListener;
 
+/**
+ * The InventoryPanel is a class that displays the inventory of the player, and
+ * allows for selecting, picking up and dropping of items from the inventory
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 public class InventoryPanel extends JPanel {
 	private static final Image inventorySlot = HUDPanel
 			.loadImage("InventorySlot.png");
@@ -66,7 +73,8 @@ public class InventoryPanel extends JPanel {
 
 	private void paintInventory(Graphics g) {
 		List<Objects> items = client.getPlayerInventory();
-		//System.out.println("Selected number IS:           "+ client.getSelectedIndex());
+		// System.out.println("Selected number IS:           "+
+		// client.getSelectedIndex());
 		final int inventoryNumber = items.size();
 		int xPos = getShowHideWidth();
 		int yPos = 0;
@@ -75,13 +83,13 @@ public class InventoryPanel extends JPanel {
 		Image selected = selectedSlot.getScaledInstance(size, size, 0);
 
 		for (int i = 1; i <= inventoryNumber; i++) {
-			if (i == client.getSelectedIndex()+1) {
+			if (i == client.getSelectedIndex() + 1) {
 				drawSlot(selected, xPos, yPos, size, i, g);
 			} else {
 				drawSlot(slot, xPos, yPos, size, i, g);
 			}
 
-			if (items.get(i-1) != null) {
+			if (items.get(i - 1) != null) {
 				drawItem(xPos, yPos, size, items.get(i - 1), g);
 			}
 			xPos += size;

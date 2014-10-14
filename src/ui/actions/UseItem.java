@@ -1,14 +1,17 @@
 package ui.actions;
 
-import java.util.List;
-
 import ui.gamewindow.UI;
 import ui.popups.ContainerPopup;
 import gameworld.game.client.ClientGame;
-import gameworld.game.client.NoItemException;
-import gameworld.game.client.NotAContainerException;
-import gameworld.world.Board;
-import graphics.assets.Objects;
+
+/**
+ * UseItem is a key action that uses the currently selected item in the players
+ * inventory. If this is a container it will open it to display its contents, if
+ * it is a power-up it will activate it, otherwise it will do nothing
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 
 public class UseItem extends KeyAction {
 
@@ -19,7 +22,7 @@ public class UseItem extends KeyAction {
 	@Override
 	protected void execute() {
 		if (client.selectedIsContainer()) {
-		//	System.out.println("is container");
+			// System.out.println("is container");
 			new ContainerPopup(client, parent, "", false);
 			System.out.println("popup done");
 		} else {

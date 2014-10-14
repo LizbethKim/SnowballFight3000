@@ -1,24 +1,31 @@
 package ui.actions;
+
 import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
 import gameworld.game.client.NoItemException;
-import gameworld.world.Board;
 
+/**
+ * InspectItem is a key action that attempts to inspect the item in front of the
+ * player and displays some information about it if there is a valid item
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 
-public class InspectItem extends KeyAction{
+public class InspectItem extends KeyAction {
 
-	public InspectItem(ClientGame cl, UI parent){
+	public InspectItem(ClientGame cl, UI parent) {
 		super(cl, parent);
 	}
-	
+
 	@Override
 	protected void execute() {
 		try {
-			client.inspectItem(); 
+			client.inspectItem();
 		} catch (NoItemException e) {
-			//do nothing
+			// do nothing
 		}
-		//:TODO board.firesnowball()
+		// :TODO board.firesnowball()
 	}
 
 }
