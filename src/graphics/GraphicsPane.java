@@ -28,6 +28,7 @@ public class GraphicsPane extends JPanel {
 	private BoardState boardState;
 	private BufferedImage nightShade;
 	private BufferedImage duskShade;
+	private BufferedImage sunShade;
 
 	/**
 	 * Separation between board and graphics means that the board cannot be modified
@@ -41,6 +42,7 @@ public class GraphicsPane extends JPanel {
 		try {
 			nightShade = ImageIO.read(Objects.class.getResource("NightShade.png"));
 			duskShade = ImageIO.read(Objects.class.getResource("DuskShade.png"));
+			sunShade = ImageIO.read(Objects.class.getResource("SunSet.png"));
 		} catch (IOException e) {
 			System.out.println("Dis not good m8");
 		}
@@ -79,11 +81,13 @@ public class GraphicsPane extends JPanel {
 		} else {
 			System.out.println("LOADING IMAGE HERE"); //Insert Loading Music
 		}
-		int lightState = boardState.getLight();
+		int lightState = 3;
 		switch(lightState){
 		case 0: g.drawImage(nightShade, 0, 0, (int) width, (int) height, null); //Night vision
 		break;
 		case 1: g.drawImage(duskShade, 0, 0, (int) width, (int) height, null); //Dusk vision
+		break;
+		case 3: g.drawImage(sunShade, 0, 0, (int) width, (int) height, null);
 		break;
 		default: break;
 		}
