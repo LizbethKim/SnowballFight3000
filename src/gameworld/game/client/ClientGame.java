@@ -1,18 +1,6 @@
 package gameworld.game.client;
 
-import gameworld.world.Board;
-import gameworld.world.Direction;
-import gameworld.world.Door;
-import gameworld.world.InanimateEntity;
-import gameworld.world.Inventory;
-import gameworld.world.Item;
-import gameworld.world.Key;
-import gameworld.world.Location;
-import gameworld.world.Lockable;
-import gameworld.world.NullLocation;
-import gameworld.world.Player;
-import gameworld.world.Powerup;
-import gameworld.world.Team;
+import gameworld.world.*;
 import gameworld.world.Snowball.SnowballType;
 import graphics.assets.Objects;
 
@@ -66,11 +54,15 @@ public class ClientGame {
 		player = new Player(name, team, 0, new NullLocation());
 
 		ClientUpdater u = this.getUpdater();
-		client.startReceiving(u, board.width(), board.height());
+		client.startReceiving(u);
+		//client.startReceiving(u, board.width(), board.height());
 	}
 
 	public ClientGame(String IP, UI display) {
-		// KTC fill player place
+		this.client = new Client(IP);
+		//StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
+		// this.playerID = KTC to do
+		//this.board = sb.getBoard();
 	}
 
 	public List<String> getPlayerList() {
@@ -247,7 +239,7 @@ public class ClientGame {
 		Location facing = player.getLocationInFrontOf();
 		for(Player p: playerIDs.values()) {
 			if (p.getLocation().equals(facing)) {
-				// KTC client.unfreezePlayer();
+				client.unfreezePlayer(this.playerID);
 			}
 		}
 	}

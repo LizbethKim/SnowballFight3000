@@ -478,8 +478,8 @@ public class Board {
 					board[x][y].place(new Powerup());
 					board[79 - x][79 - y].place(new Powerup());
 				} else if (items[y][x] == "c") {
-					board[x][y].place(new Chest(""));
-					board[79 - x][79 - y].place(new Chest(""));
+					board[x][y].place(new Chest("", 0,  false));
+					board[79 - x][79 - y].place(new Chest("", 0, false));
 				} else if (items[y][x] == "f") {
 					board[x][y].place(new Flag(Team.BLUE));
 					board[79 - x][79 - y].place(new Flag(Team.RED));
