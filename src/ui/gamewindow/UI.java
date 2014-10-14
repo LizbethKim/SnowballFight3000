@@ -342,7 +342,7 @@ public class UI extends JFrame {
 		// display the dialog and save the file if valid one selected
 		if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
-			client.save();
+			client.save(file);
 		}
 	}
 

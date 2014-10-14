@@ -12,11 +12,14 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import network.Server;
+import storage.LoadGame;
 import ui.popups.ControlsPopup;
 import ui.popups.InputPopup;
 import ui.popups.LoadPopup;
@@ -97,8 +100,14 @@ public class GameSetup extends JPanel {
 	 * starts a new server
 	 */
 	private void startServer() {
+		JFileChooser fileChooser = new JFileChooser();
+		// display the dialog and save the file if valid one selected
+		if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			LoadGame loader = new LoadGame();		
 		// make new server
-		ServerGame g = new ServerGame(Board.defaultBoard());
+		ServerGame g = new ServerGame(loader.loadGame(file));
+		
 		Server server = new Server(g);
 
 		// start server connection accepting thread
@@ -106,6 +115,7 @@ public class GameSetup extends JPanel {
 		new Thread(new Time(g)).start();
 		// let the user know the server was started
 		JOptionPane.showMessageDialog(null, "Server Started");
+		}
 	}
 
 	/**
