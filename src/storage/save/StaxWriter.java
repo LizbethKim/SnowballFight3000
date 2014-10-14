@@ -22,7 +22,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.stream.XMLEventFactory;
@@ -213,6 +212,10 @@ public class StaxWriter {
 		str.append(itemEnum.name()+XMLValues.SPACE);
 		//if it need more detail, it will be in here
 		switch (itemEnum){
+		case CHEST:
+			Chest chest = (Chest)item;
+			str.append(chest.id+XMLValues.SPACE);
+			str.append(chest.isLocked());
 		case KEY:
 			Key key = (Key)item;
 			str.append(key.id+XMLValues.SPACE);
@@ -226,12 +229,12 @@ public class StaxWriter {
 		case DOOREW:
 			Door doorew = (Door) item;
 			str.append(doorew.id+XMLValues.SPACE);
-			str.append(doorew.canMoveThrough());
+			str.append(doorew.isLocked());			
 			break;
 		case DOORNS:
 			Door doorns = (Door) item;
 			str.append(doorns.id+XMLValues.SPACE);
-			str.append(doorns.canMoveThrough());
+			str.append(doorns.isLocked());
 			break;
 		default:
 			//not an item that needs more than it's name
