@@ -131,7 +131,6 @@ public class ClientUpdater {
 
 
 	public void disconnectFromServer() {
-		// KTC potentially do something else
 		System.exit(0);
 	}
 
@@ -165,7 +164,7 @@ public class ClientUpdater {
 	
 	public void endGame (Team winners) {
 		System.out.println("winning!");
-		display.endGame(winners == Team.RED ? "Red Team"  : "Blue Team");	// KTC ask Ryan to take the winning team
+		display.endGame(winners == Team.RED ? "Red Team"  : "Blue Team");
 	}
 
 	public void receivePlayerValidity (boolean isValid) {

@@ -397,7 +397,7 @@ public class Board {
 	}
 	
 	private static void createDefaultBoardObjects(Tile[][]board) {
-		// KTC make doors and keys do stuff also chests have contents and bags
+		// make chests have contents and keys and bags
 		String[][] items = 
 
 {{"_","_","_","_","_","_","_","_","_","_","_","_","_","F","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","T","_","_","_","_","F","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","T","_","_","_","_","_","_","_","_","_","_","_","_","_"},

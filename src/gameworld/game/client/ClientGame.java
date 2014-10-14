@@ -141,9 +141,15 @@ public class ClientGame {
 	public String inspectItem() throws NoItemException {
 		Location facing = player.getLocationInFrontOf();
 		if (board.containsLocation(facing)) {
+			for(Player p: playerIDs.values()) {
+				if (p.getLocation().equals(facing)) {
+					// KTC client.unfreezePlayer(); 
+					return "A frozen player";
+				}
+			}
 			if (board.tileAt(facing).getOn() != null) {
 				return board.tileAt(facing).getOn().getDescription();
-			}
+			}			
 		}
 		throw new NoItemException();
 	}
@@ -195,9 +201,7 @@ public class ClientGame {
 					powerup.use(player);
 					client.useItem(selectedIndex);
 				}
-			} else {
-				// KTC later
-			}
+			} 
 		}
 	}
 

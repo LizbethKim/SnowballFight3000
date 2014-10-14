@@ -158,6 +158,26 @@ public class ServerGame {
 			projectiles.add(snowballFactory.makeSnowball(thrower.getLocation(), thrower.getDirection(), type));
 		}
 	}
+	
+	public void unfreezePlayer(int playerID) {
+		Player p = this.playerIDs.get(playerID);
+		if (p!= null) {
+			Location l = p.getLocationInFrontOf();
+			Player toUnfreeze = null;
+			for (Player player: playerIDs.values()) {
+				if (player.getLocation().equals(l)) {
+					toUnfreeze = player;
+					break;
+				}
+			}
+			if (toUnfreeze != null && p.getTeam() == toUnfreeze.getTeam()) {
+				toUnfreeze.damage(-20);
+				for (int id: playerIDs.keySet()) {
+					server.queuePlayerUpdate(new UnfreezePlayerEvent(toUnfreeze.getID()), id);
+				}
+			}
+		}
+	}
 
 	public void addPlayer(int playerID, String name, Team t) {
 		Area spawnArea = board.getSpawnArea(t);
