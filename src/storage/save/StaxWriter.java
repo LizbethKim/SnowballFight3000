@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package storage.save;
 
@@ -32,6 +32,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import storage.StoredGame;
+import storage.XMLValues;
 
 /**
  * Writes StoredGames into XML files using the StAX library.
@@ -41,7 +42,7 @@ import storage.StoredGame;
 
 public class StaxWriter {
 
-	private static final String GAME = "game";
+	/*private static final String GAME = "game";
 	private static final String PLAYERS = "players";
 	private static final String PLAYER = "player";
 	private static final String BOARD = "board";
@@ -51,7 +52,7 @@ public class StaxWriter {
 
 	private static final String EMPTY = "";
 	private static final String SPACE = " ";
-	private static final String NEWLINE = "\n";
+	private static final String NEWLINE = "\n";*/
 
 	private String filename;
 	private Board board;
@@ -73,25 +74,25 @@ public class StaxWriter {
 			// create an XMLOutputFactory
 			OutputStream out = new FileOutputStream(new File(filename));
 			XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-			
+
 			eventWriter = outputFactory.createXMLEventWriter(out);
 			XMLEventFactory eventFactory = XMLEventFactory.newInstance();
-			XMLEvent newline = eventFactory.createDTD(NEWLINE); //use for newlines
+			XMLEvent newline = eventFactory.createDTD(XMLValues.NEWLINE); //use for newlines
 
 			// open game tag
-			eventWriter.add(eventFactory.createStartElement(EMPTY,EMPTY, GAME));
+			eventWriter.add(eventFactory.createStartElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.GAME));
 			eventWriter.add(newline);
 
 			if(players!=null){
 				// open players tag
-				eventWriter.add(eventFactory.createStartElement(EMPTY,EMPTY, PLAYERS));
+				eventWriter.add(eventFactory.createStartElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.PLAYERS));
 				eventWriter.add(newline);
 
 				// create player start and end elements
-				StartElement playerStartElement = eventFactory.createStartElement(EMPTY,EMPTY, PLAYER);
-				EndElement playerEndElement = eventFactory.createEndElement(EMPTY,EMPTY, PLAYER);
-				StartElement inventoryStartElement = eventFactory.createStartElement(EMPTY,EMPTY, INVENTORY);
-				EndElement inventoryEndElement = eventFactory.createEndElement(EMPTY,EMPTY, INVENTORY);
+				StartElement playerStartElement = eventFactory.createStartElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.PLAYER);
+				EndElement playerEndElement = eventFactory.createEndElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.PLAYER);
+				StartElement inventoryStartElement = eventFactory.createStartElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.INVENTORY);
+				EndElement inventoryEndElement = eventFactory.createEndElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.INVENTORY);
 
 				for(Player p :players){
 					eventWriter.add(playerStartElement); //open new player tag
@@ -101,7 +102,7 @@ public class StaxWriter {
 
 					// KH I changed the way that I use the inventory, so I edited this
 					for(Item item : p.getInventory().getContents()){
-						createTag(ITEM, buildEntityString(item));
+						createTag(XMLValues.ITEM, buildEntityString(item));
 					}
 					eventWriter.add(inventoryEndElement);
 					eventWriter.add(playerEndElement);
@@ -109,52 +110,52 @@ public class StaxWriter {
 				}
 
 				// close players tag
-				eventWriter.add(eventFactory.createEndElement(EMPTY,EMPTY, PLAYERS));
+				eventWriter.add(eventFactory.createEndElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.PLAYERS));
 				eventWriter.add(newline);
 			}
 
 			if(board!=null){
 				// open board tag
-				eventWriter.add(eventFactory.createStartElement(EMPTY,EMPTY, BOARD));
+				eventWriter.add(eventFactory.createStartElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.BOARD));
 				//add board size
 				int xMax = board.getXMax();
 				int yMax = board.getYMax();
-				Characters boardSize = eventFactory.createCharacters(String.format("%03d %03d", xMax, yMax)+NEWLINE);
+				Characters boardSize = eventFactory.createCharacters(String.format("%03d %03d", xMax, yMax)+XMLValues.NEWLINE);
 				eventWriter.add(boardSize);
 
 				//for each tile, make its tag and fill it
 				for(int x=0;x<xMax;x++){
 					for(int y=0;y<xMax;y++){
-						eventWriter.add(eventFactory.createStartElement(EMPTY,EMPTY, TILE));
+						eventWriter.add(eventFactory.createStartElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.TILE));
 						Tile t = board.tileAt(new Location(x,y));
 						String tileContents = buildTileString(t);
 						eventWriter.add(eventFactory.createCharacters(tileContents));
 						InanimateEntity onItem = t.getOn();
 						if(onItem!=null && onItem.asEnum()==Objects.CHEST){
 							System.out.println("we have a chest");
-							eventWriter.add(eventFactory.createStartElement(EMPTY,EMPTY, INVENTORY));
+							eventWriter.add(eventFactory.createStartElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.INVENTORY));
 							eventWriter.add(eventFactory.createCharacters(buildEntityString(onItem)));
-							List<Item> itemsIn = ((Chest)t.getOn()).getContents();							
+							List<Item> itemsIn = ((Chest)t.getOn()).getContents();
 							for(Item it:itemsIn){
 								System.out.println("in the chest");
-								createTag(ITEM, buildEntityString(it));
+								createTag(XMLValues.ITEM, buildEntityString(it));
 							}
-							eventWriter.add(eventFactory.createEndElement(EMPTY,EMPTY, INVENTORY));
+							eventWriter.add(eventFactory.createEndElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.INVENTORY));
 						}else if(onItem!=null){
-							createTag(ITEM, buildEntityString(onItem));
+							createTag(XMLValues.ITEM, buildEntityString(onItem));
 						}
-						eventWriter.add(eventFactory.createEndElement(EMPTY,EMPTY, TILE));
+						eventWriter.add(eventFactory.createEndElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.TILE));
 						eventWriter.add(newline);
 					}
 				}
 
 				// close board tag
-				eventWriter.add(eventFactory.createEndElement(EMPTY,EMPTY, BOARD));
+				eventWriter.add(eventFactory.createEndElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.BOARD));
 				eventWriter.add(newline);
 			}
 
 			//end the game tag
-			eventWriter.add(eventFactory.createEndElement(EMPTY, EMPTY, GAME));
+			eventWriter.add(eventFactory.createEndElement(XMLValues.EMPTY, XMLValues.EMPTY, XMLValues.GAME));
 			eventWriter.add(newline);
 
 			//end the document
@@ -167,12 +168,12 @@ public class StaxWriter {
 
 		return filename;
 	}
-	
+
 	/**
 	 * Build a string description of a tile, including the item/s on it
 	 * @param tile
 	 * @return String description
-	 * @throws XMLStreamException 
+	 * @throws XMLStreamException
 	 */
 	private String buildTileString(Tile t) throws XMLStreamException {
 		StringBuilder str = new StringBuilder();
@@ -203,12 +204,12 @@ public class StaxWriter {
 	 *  and for building inventories. Calls itself recursively for chest contents
 	 * @param item Inanimate Entity
 	 * @return string description of item
-	 * @throws XMLStreamException 
+	 * @throws XMLStreamException
 	 */
 	private String buildEntityString(InanimateEntity item) throws XMLStreamException {
 		StringBuilder str = new StringBuilder();
 		Objects itemEnum = item.asEnum();
-		str.append(itemEnum.name()+SPACE);
+		str.append(itemEnum.name()+XMLValues.SPACE);
 		switch (itemEnum){
 		/*
 		case BAG:
@@ -233,13 +234,13 @@ public class StaxWriter {
 		case BUSH:
 			str.append("bush ");break;
 		case TABLE:
-			str.append("table ");break;		
+			str.append("table ");break;
 		case CHEST:
 			str.append()
 		*/
 		case KEY:
 			Key key = (Key)item;
-			str.append(key.id+SPACE);
+			str.append(key.id+XMLValues.SPACE);
 			str.append(key.getDescription());
 			break;
 		case HEALTH:
@@ -249,12 +250,12 @@ public class StaxWriter {
 			break;
 		case DOOREW:
 			Door doorew = (Door) item;
-			str.append(doorew.id+SPACE);
+			str.append(doorew.id+XMLValues.SPACE);
 			str.append(doorew.canMoveThrough());
 			break;
 		case DOORNS:
 			Door doorns = (Door) item;
-			str.append(doorns.id+SPACE);
+			str.append(doorns.id+XMLValues.SPACE);
 			str.append(doorns.canMoveThrough());
 			break;
 		default:
@@ -269,13 +270,13 @@ public class StaxWriter {
 	private String buildPlayerString(Player p) {
 		StringBuilder str = new StringBuilder();
 		if(p.getTeam().equals(Team.values()[0])){
-			str.append(0 + SPACE);
+			str.append(0 + XMLValues.SPACE);
 		}else if(p.getTeam().equals(Team.values()[1])){
-			str.append(1 + SPACE);
+			str.append(1 + XMLValues.SPACE);
 		}
 		str.append(String.format("%03d %03d ", p.getLocation().x, p.getLocation().y));
-		str.append(p.name+NEWLINE);
-		return str.toString();	
+		str.append(p.name+XMLValues.NEWLINE);
+		return str.toString();
 	}
 
 
@@ -291,7 +292,7 @@ public class StaxWriter {
 		XMLEventFactory eventFactory = XMLEventFactory.newInstance();
 
 		// open tag
-		StartElement sElement = eventFactory.createStartElement(EMPTY, EMPTY, name);
+		StartElement sElement = eventFactory.createStartElement(XMLValues.EMPTY, XMLValues.EMPTY, name);
 		eventWriter.add(sElement);
 
 		// save the characters of content
@@ -299,11 +300,11 @@ public class StaxWriter {
 		eventWriter.add(characters);
 
 		// end tag
-		EndElement eElement = eventFactory.createEndElement(EMPTY, EMPTY, name);
+		EndElement eElement = eventFactory.createEndElement(XMLValues.EMPTY, XMLValues.EMPTY, name);
 		eventWriter.add(eElement);
 
 	}
 
 
-} 
+}
 

@@ -22,6 +22,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import storage.StoredGame;
+import storage.XMLValues;
 
 
 
@@ -32,16 +33,7 @@ import storage.StoredGame;
  */
 
 public class StaxParser {
-	static final String GAME = "game";
-	static final String PLAYERS = "players";
-	static final String PLAYER = "player";
-	static final String BOARD = "board";
-	static final String TILE = "tile";
-	static final String INVENTORY= "inventory";
-	static final String ITEM = "item";
 
-	static final String DELIMITER = "\\s+";
-	
 	private Board board;
 	private Tile[][] tiles;
 	private List<Player> players;
@@ -51,7 +43,7 @@ public class StaxParser {
 	private boolean playerLoad=false;
 	private boolean tileLoad=false;
 	private boolean chestLoad=false;
-	
+
 
 	/**
 	 * Parses the given file into a StoredGame ready to be played
@@ -71,19 +63,19 @@ public class StaxParser {
 					StartElement startElement = event.asStartElement();
 					String elemName = startElement.getName().getLocalPart();
 
-					if (elemName.equals(GAME)) {
+					if (elemName.equals(XMLValues.GAME)) {
 						//Could add Name of the game or something here
 						continue;
 					}
 
-					if (elemName.equals(PLAYERS)) {
+					if (elemName.equals(XMLValues.PLAYERS)) {
 						players = new ArrayList<>();
 						continue;
 					}
 
-					if (elemName.equals(PLAYER)) {
+					if (elemName.equals(XMLValues.PLAYER)) {
 						event = eventReader.nextEvent();
-						String[] values = event.asCharacters().getData().split(DELIMITER);
+						String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
 						int teamNum = Integer.parseInt(values[0]);
 						Team team = Team.values()[teamNum];
 						Location loc = parseLoc(values[1], values[2]);
@@ -92,17 +84,17 @@ public class StaxParser {
 						continue;
 					}
 
-					if (elemName.equals(BOARD)) {
+					if (elemName.equals(XMLValues.BOARD)) {
 						event = eventReader.nextEvent();
-						String[] values = event.asCharacters().getData().split(DELIMITER);
+						String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
 						Location boardSize = parseLoc(values[0],values[1]);
 						tiles = new Tile[boardSize.x][boardSize.y];
 						continue;
 					}
 
-					if (elemName.equals(TILE)) {
+					if (elemName.equals(XMLValues.TILE)) {
 						event = eventReader.nextEvent();
-						String[] values = event.asCharacters().getData().split(DELIMITER);
+						String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
 						int terrain = Integer.parseInt(values[0]);
 						Location loc = parseLoc(values[1],values[2]);
 						curTile = new Tile(loc,Terrain.values()[terrain], null);
@@ -110,20 +102,20 @@ public class StaxParser {
 						continue;
 					}
 
-					if (elemName.equals(INVENTORY)) {
+					if (elemName.equals(XMLValues.INVENTORY)) {
 						if(playerLoad){
 							curInven = (PlayerInventory) curPlayer.getInventory();
 						}else if(tileLoad){
 							event = eventReader.nextEvent();
-							String[] values = event.asCharacters().getData().split(DELIMITER);
+							String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
 							curInven = (Inventory)loadEntitiy(values);
-						}						
+						}
 						continue;
 					}
-					
-					if (elemName.equals(ITEM)) {
+
+					if (elemName.equals(XMLValues.ITEM)) {
 						event = eventReader.nextEvent();
-						String[] values = event.asCharacters().getData().split(DELIMITER);
+						String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
 						InanimateEntity item = loadEntitiy(values);
 						if(playerLoad){
 							curInven.addItem((Item)item);
@@ -140,28 +132,28 @@ public class StaxParser {
 				if (event.isEndElement()) {
 					EndElement endElement = event.asEndElement();
 					String elemName = endElement.getName().getLocalPart();
-					if (elemName.equals(PLAYER)) {
+					if (elemName.equals(XMLValues.PLAYER)) {
 						players.add(curPlayer);
 						playerLoad=false;
 						continue;
 					}
-					if (elemName.equals(INVENTORY)){
+					if (elemName.equals(XMLValues.INVENTORY)){
 						if(chestLoad==true && tileLoad==true){
 							curTile.place((Chest)curInven);
 							chestLoad=false;
 						}
 						continue;
 					}
-					if (elemName.equals(GAME)) {
+					if (elemName.equals(XMLValues.GAME)) {
 						System.out.println("GAME LOADED");
 						break;
 					}
-					if (elemName.equals(TILE)) {
+					if (elemName.equals(XMLValues.TILE)) {
 						tileLoad = false;
 						tiles[curTile.getCoords().x][curTile.getCoords().y] = curTile;
 						continue;
 					}
-					if (elemName.equals(BOARD)) {
+					if (elemName.equals(XMLValues.BOARD)) {
 						board = new Board(tiles);
 						continue;
 					}
@@ -206,7 +198,7 @@ public class StaxParser {
 			Objects type = Objects.valueOf(name);
 			item = new Furniture(parseDescription(1, values), type);
 		}
-		
+
 		return item;
 	}
 
