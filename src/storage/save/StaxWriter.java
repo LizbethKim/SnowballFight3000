@@ -57,16 +57,16 @@ public class StaxWriter {
 	 * @param file2 Path to the save file
 	 * @return
 	 */
-	public String saveGame(StoredGame g, File file2){
+	public String saveGame(StoredGame g, File file){
 
-		filename = file2+".xml"; //filename is current time in milliseconds
+		filename = file+".xml"; //filename is current time in milliseconds
 		board = g.getBoard();
 		players = g.getPlayers();
 
 		areaList = board.getRooms();
 		try {
 			// create an XMLOutputFactory
-			OutputStream out = new FileOutputStream(new File(filename));
+			OutputStream out = new FileOutputStream(file);
 			XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 
 			eventWriter = outputFactory.createXMLEventWriter(out);

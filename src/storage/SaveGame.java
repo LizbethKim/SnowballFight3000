@@ -18,7 +18,9 @@ public class SaveGame {
 	 * @param sg StoredGame to be saved
 	 */
 	public void save(StoredGame sg) {
-		save(sg, "src/storage/"+ Long.toString(System.currentTimeMillis()));
+		String loc = System.getProperty("user.home");
+		File defaultFile = new File(loc+ Long.toString(System.currentTimeMillis()));
+		save(sg, defaultFile);
 	}
 	
 	/**
@@ -26,10 +28,10 @@ public class SaveGame {
 	 * @param sg StoredGame to be saved
 	 * @param file2 Path to be saved at, should include a filename
 	 */
-	public void save(StoredGame sg, File file2) {
+	public void save(StoredGame sg, File file) {
 		StaxWriter writer = new StaxWriter();
-	    String file = writer.saveGame(sg, file2);
-	    System.out.println("SAVED FILENAME: "+ file);
+	    String filename = writer.saveGame(sg, file);
+	    System.out.println("SAVED FILENAME: "+ filename);
 	}
 	
 }
