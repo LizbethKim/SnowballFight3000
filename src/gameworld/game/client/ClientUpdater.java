@@ -157,7 +157,8 @@ public class ClientUpdater {
 	}
 	
 	public void endGame (Team winners) {
-		display.endGame();	// KTC ask Ryan to take the winning team
+		System.out.println("winning!");
+		display.endGame(winners == Team.RED ? "red"  : "blue");	// KTC ask Ryan to take the winning team
 	}
 
 	public void receivePlayerValidity (boolean isValid) {

@@ -101,7 +101,7 @@ public class BoardState {
 	
 	public int getLight() {
 		if (nightVision) {
-			return 2;
+			return 3;
 		}
 		if ((6 <= time && time <= 7) || (17 <= time && time <= 18)) {
 			return 3;

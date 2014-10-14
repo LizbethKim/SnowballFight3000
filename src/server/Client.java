@@ -161,11 +161,6 @@ public class Client implements Runnable {
 					int index = readFromSocket();
 					updater.removeFromContainerAt(loc, index);
 				}
-				// end game
-				else if (in == 0x14) {
-					Team team = Team.values()[readFromSocket()];
-					updater.endGame(team);
-				}
 				// recieve score
 				else if (in == 0x15) {
 					int score = readFromSocket();
@@ -178,6 +173,11 @@ public class Client implements Runnable {
 					int time = readFromSocket();
 					updater.updateTime(time);
 					// BF put shit here
+				}
+				// end game
+				else if (in == 0x17) {
+					Team team = Team.values()[readFromSocket()];
+					updater.endGame(team);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
