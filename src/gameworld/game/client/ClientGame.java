@@ -2,6 +2,7 @@ package gameworld.game.client;
 
 import gameworld.world.Board;
 import gameworld.world.Direction;
+import gameworld.world.Door;
 import gameworld.world.InanimateEntity;
 import gameworld.world.Inventory;
 import gameworld.world.Item;
@@ -103,8 +104,14 @@ public class ClientGame {
 		if (!player.isFrozen() && System.currentTimeMillis() - lastMovedTime > player.getStepDelay()) {
 			if (player.getDirection() == d) {
 				Location newLoc = player.getLocationInFrontOf();
-				if (board.containsLocation(newLoc) && board.canTraverse(newLoc) && this.isFree(newLoc)) {
-					client.sendMove(newLoc);
+				if (board.containsLocation(newLoc) && this.isFree(newLoc)) {
+					if (board.canTraverse(newLoc)) {
+						client.sendMove(newLoc);
+					} else if (board.tileAt(newLoc).getOn() instanceof Door) {
+						if (this.unlock((Lockable)board.tileAt(newLoc).getOn(), newLoc)) {
+							client.sendMove(newLoc);
+						}
+					}
 				}
 
 			} else {
