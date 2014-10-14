@@ -196,21 +196,21 @@ public class ClientGame {
 		}
 	}
 
-	public boolean selectedIsContainer(int selectedIndex){
+	public boolean isContainer(int selectedIndex){
 		if (selectedIndex != -1 && player.getInventoryItems().get(selectedIndex) instanceof Inventory) {
 			return true;
 		}
 		return false;
 	}
 
-	public List<Objects> getContentsOfSelected(int selectedIndex) throws NotAContainerException {
-		if (selectedIsContainer(selectedIndex)) {
+	public List<Objects> getContentsAtIndex(int selectedIndex) throws NotAContainerException {
+		if (isContainer(selectedIndex)) {
 			return ((Inventory)player.getInventoryItems().get(selectedIndex)).getContentsAsEnums();
 		}
 		throw new NotAContainerException();
 	}
 
-	public void dropSelectedItem(int selectedIndex) {
+	public void dropItem(int selectedIndex) {
 		if (!player.isFrozen() && player.getInventoryItems().size() > selectedIndex
 				&& player.getInventoryItems().get(selectedIndex) != null
 				&& board.tileAt(player.getLocationInFrontOf()).isClear()) {
