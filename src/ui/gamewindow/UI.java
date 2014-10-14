@@ -202,9 +202,10 @@ public class UI extends JFrame {
 	/**
 	 * launches a notification that the game has ended
 	 */
-	public void endGame() {
+	public void endGame(String winningTeam) {
+		String message = "GAME OVER! The "+winningTeam+" Wins!!! Final score: "+client.getPlayerScore();
 		JOptionPane.showMessageDialog(this,
-				"Game Over! Final score: " + client.getPlayerScore());
+				message);
 		System.exit(EXIT_ON_CLOSE);
 	}
 
