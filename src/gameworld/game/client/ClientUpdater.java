@@ -2,7 +2,7 @@ package gameworld.game.client;
 
 import java.util.Map;
 
-import ui.UI;
+import ui.gamewindow.UI;
 import gameworld.world.Area;
 import gameworld.world.Board;
 import gameworld.world.Direction;
@@ -157,7 +157,8 @@ public class ClientUpdater {
 	}
 	
 	public void endGame (Team winners) {
-		display.endGame();	// KTC ask Ryan to take the winning team
+		System.out.println("winning!");
+		display.endGame(winners == Team.RED ? "Red Team"  : "Blue Team");	// KTC ask Ryan to take the winning team
 	}
 
 	public void receivePlayerValidity (boolean isValid) {

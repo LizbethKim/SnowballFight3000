@@ -1,9 +1,13 @@
 package ui.actions;
-import ui.UI;
+import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
-import gameworld.world.Board;
 
-
+/**
+ * DropItem is a key action that drops the selected item from the player's inventory
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 public class DropItem extends KeyAction{
 
 	public DropItem(ClientGame cl, UI parent){

@@ -1,32 +1,27 @@
-package ui;
+package ui.gamewindow;
 
 import gameworld.game.client.ClientGame;
-import gameworld.world.Board;
-
-import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * The HUDPanel (Heads up display panel) displays or holds components that
+ * display all the information about the players character including their
+ * score, current health and inventory items
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
+
 public class HUDPanel extends JPanel {
-	public static final String IMAGE_PATH = "src/ui/HUDAssets/";
+	public static final String IMAGE_PATH = "src/ui/assets/";
 	private static final Image healthBar = loadImage("HealthBar.png");
 	private static final Image healthBase = loadImage("HealthBarBase.png");
 
@@ -44,33 +39,38 @@ public class HUDPanel extends JPanel {
 		this.aspectRatio = aspectRatio;
 	}
 
-	public void setupInventory(int width, int height) {
+	/**
+	 * sets up the inventory panel
+	 */
+	public void setupInventory() {
 		inventoryPanel = new InventoryPanel(client);
 		add(inventoryPanel);
 		setInventoryBounds();
-		// inventoryPanel.setPreferredSize(new Dimension(bounds.width,
-		// bounds.height));
-
 	}
 
+	/**
+	 * sets the size of the hud panel and bounds of the inventory panel based on
+	 * the given width and height
+	 */
 	@Override
 	public void setSize(int width, int height) {
 		super.setSize(width, height);
 		setInventoryBounds();
 	}
 
-	public void inventorySize() {
-		System.out.println("inventory size is: height = "
-				+ inventoryPanel.getHeight() + ", width = "
-				+ inventoryPanel.getWidth());
-	}
-
+	/**
+	 * sets the bounds of the hud panel and inventory panel based on the given
+	 * width and height
+	 */
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
 		super.setBounds(x, y, width, height);
 		setInventoryBounds();
 	}
 
+	/**
+	 * set the inventory bounds based on its proportions and the aspect ratio
+	 */
 	public void setInventoryBounds() {
 		int xPos = 0;
 		int yPos = (int) (getHeight() - getHeight() * inventoryYProportion);
@@ -81,57 +81,75 @@ public class HUDPanel extends JPanel {
 
 	@Override
 	public void paintComponent(Graphics g) {
+		// paints the health bar and score
 		paintHealthBar(g);
 		paintScore(g);
 	}
 
 	@Override
 	public void paint(Graphics g) {
+		// set the bounds
 		setInventoryBounds();
 		super.paint(g);
 
 	}
 
+	/**
+	 * paints the player's health bar int he left hand corner of the hud
+	 * 
+	 * @param g the graphics object to paint on
+	 */
 	private void paintHealthBar(Graphics g) {
+		// get the size and position of the base of the health bar relative to
+		// the size and aspect ratio of the game
 		final int xPos = (int) (this.getWidth() / 20 / aspectRatio);
 		final int yPos = this.getHeight() / 20;
 		final int width = (int) (this.getWidth() / 3 / aspectRatio);
 		final int height = this.getHeight() / 11;
+
+		// get the position and size of the health itself
 		final int healthXPos = xPos + (2 * width / 7);
 		final int healthYPos = yPos + (height / 4);
 		final double healthProportion = client.getPlayerHealth() / maxHealth;
 		final int healthWidth = (int) (width * 7 / 10 * healthProportion);
 		final int healthHeight = height * 3 / 5;
 
+		// now draw the health base, and health if there is any left
 		g.drawImage(healthBase, xPos, yPos, width, height, null);
 		if (healthWidth > 0) {
 			g.drawImage(healthBar, healthXPos, healthYPos, healthWidth,
 					healthHeight, null);
 		}
-
 	}
-	
+
+	/**
+	 * paints the score in the top right corner of the hud
+	 * 
+	 * @param g the graphics object to paint on
+	 */
 	private void paintScore(Graphics g) {
+		// get size and position relative to the size of the game and
+		// aspect ratio
 		final int xPos = (int) (14 * this.getWidth() / 20 / aspectRatio);
-		final int yPos = 2* this.getHeight() / 20;
+		final int yPos = 2 * this.getHeight() / 20;
 		final int fontSize = this.getHeight() / 18;
 		g.setColor(Color.white);
 		g.setFont(new Font("Times", Font.BOLD, fontSize));
 		g.setColor(Color.WHITE);
-		g.drawString("Score: "+client.getPlayerScore(), xPos+1, yPos);
-		g.drawString("Score: "+client.getPlayerScore(), xPos-1, yPos);
-		g.drawString("Score: "+client.getPlayerScore(), xPos, yPos+1);
-		g.drawString("Score: "+client.getPlayerScore(), xPos, yPos-1);
+		g.drawString("Score: " + client.getPlayerScore(), xPos + 1, yPos);
+		g.drawString("Score: " + client.getPlayerScore(), xPos - 1, yPos);
+		g.drawString("Score: " + client.getPlayerScore(), xPos, yPos + 1);
+		g.drawString("Score: " + client.getPlayerScore(), xPos, yPos - 1);
 		g.setColor(Color.WHITE);
-		g.drawString("Score: "+client.getPlayerScore(), xPos, yPos);
-		
+		g.drawString("Score: " + client.getPlayerScore(), xPos, yPos);
+
 	}
 
 	/**
 	 * Load an image from the file system, using a given filename.
 	 * 
-	 * @param filename
-	 * @return
+	 * @param filename the name of the file to load
+	 * @return the fetched image
 	 */
 	public static Image loadImage(String filename) {
 		// using the URL means the image loads when stored

@@ -23,7 +23,7 @@ import java.util.Map;
 import server.Client;
 import storage.SaveGame;
 import storage.StoredGame;
-import ui.UI;
+import ui.gamewindow.UI;
 
 /**
  * Current reprentation of the model on the client. Deals with the network and sends and receives updates to/from the server.
@@ -65,6 +65,19 @@ public class ClientGame {
 
 		ClientUpdater u = this.getUpdater();
 		client.startReceiving(u);
+	}
+	
+	public ClientGame(String IP, UI display) {
+		// KTC fill player place
+	}
+	
+	public List<String> getPlayerList() {
+		// KTC list of possible players
+		return null;
+	}
+	
+	public void loadPlayer(int index) {
+		// KTC to do 
 	}
 
 	public int getPlayerHealth() {
@@ -261,6 +274,10 @@ public class ClientGame {
 		return this.player.getScore();
 	}
 
+	public Direction getOrientation(){
+		return boardState.getDirection();
+	}
+	
 	public void save() {
 		SaveGame saver = new SaveGame();
 		List<Player> ps = new ArrayList<Player>();

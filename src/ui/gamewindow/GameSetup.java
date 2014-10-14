@@ -1,35 +1,33 @@
-package ui;
+package ui.gamewindow;
 
 import gameworld.game.Time;
-import gameworld.game.client.ClientGame;
 import gameworld.game.server.ServerGame;
 import gameworld.world.Board;
 
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashSet;
-
-import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import server.Server;
+import ui.popups.ControlsPopup;
+import ui.popups.InputPopup;
+import ui.popups.LoadPopup;
 
+/**
+ * The GameSetup is a panel displayed at the start of the game and is
+ * responsible for starting up the game, getting the necessary inputs from the
+ * user about the server and player name
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 public class GameSetup extends JPanel {
 
 	private enum ButtonSelected {
@@ -70,9 +68,9 @@ public class GameSetup extends JPanel {
 
 	private void dealWithClick(int x, int y) {
 		if (onNewPlayer(x, y)) {
-			new InputPopup(ui);
+			new InputPopup(ui, false);
 		} else if (onLoadPlayer(x, y)) {
-			new LoadPopup();
+			new InputPopup(ui, true);
 		} else if (onStartServer(x, y)) {
 			startServer();
 		} else if (onControls(x, y)) {
@@ -88,33 +86,39 @@ public class GameSetup extends JPanel {
 		new Thread(new Time(g)).start();
 		JOptionPane.showMessageDialog(null, "Server Started");
 	}
-	
-	private Rectangle getButtonBounds(double xProportion, double yProportion){
+
+	private Rectangle getButtonBounds(double xProportion, double yProportion) {
 		int xPos = (int) (xProportion * getWidth());
 		int yPos = (int) (yProportion * getHeight());
 		int width = (int) (buttonWidthProportion * getWidth());
-		int height = (int) (buttonHeightProportion * getHeight()); 
+		int height = (int) (buttonHeightProportion * getHeight());
 		return new Rectangle(xPos, yPos, width, height);
 	}
 
 	private void highlightButton(Graphics g) {
 		Rectangle bounds = null;
 		g.setColor(Color.red);
-		if(selected == ButtonSelected.NEW){
-			bounds = getButtonBounds(buttonXStartProportion, newPlayerYStartProportion);
-		} else if(selected == ButtonSelected.LOAD){
-			bounds = getButtonBounds(buttonXStartProportion, loadPlayerYStartProportion);
-		} else if(selected == ButtonSelected.SERVER){
-			bounds = getButtonBounds(buttonXStartProportion, startServerYStartProportion);
-		} else if(selected == ButtonSelected.CONTROLS){
-			bounds = getButtonBounds(buttonXStartProportion, controlsYStartProportion);
+		if (selected == ButtonSelected.NEW) {
+			bounds = getButtonBounds(buttonXStartProportion,
+					newPlayerYStartProportion);
+		} else if (selected == ButtonSelected.LOAD) {
+			bounds = getButtonBounds(buttonXStartProportion,
+					loadPlayerYStartProportion);
+		} else if (selected == ButtonSelected.SERVER) {
+			bounds = getButtonBounds(buttonXStartProportion,
+					startServerYStartProportion);
+		} else if (selected == ButtonSelected.CONTROLS) {
+			bounds = getButtonBounds(buttonXStartProportion,
+					controlsYStartProportion);
 		}
-		
-		if(bounds != null){
-		g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
-		g.drawRect(bounds.x-1, bounds.y-1, bounds.width+2, bounds.height+2);
-		g.drawRect(bounds.x+1, bounds.y+1, bounds.width-2, bounds.height-2);
-		repaint();
+
+		if (bounds != null) {
+			g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+			g.drawRect(bounds.x - 1, bounds.y - 1, bounds.width + 2,
+					bounds.height + 2);
+			g.drawRect(bounds.x + 1, bounds.y + 1, bounds.width - 2,
+					bounds.height - 2);
+			repaint();
 		}
 	}
 
@@ -139,24 +143,28 @@ public class GameSetup extends JPanel {
 	}
 
 	private boolean onNewPlayer(int xPos, int yPos) {
-		Rectangle bounds = getButtonBounds(buttonXStartProportion, newPlayerYStartProportion); 
+		Rectangle bounds = getButtonBounds(buttonXStartProportion,
+				newPlayerYStartProportion);
 		return bounds.contains(xPos, yPos);
 	}
 
 	private boolean onLoadPlayer(int xPos, int yPos) {
-		Rectangle bounds = getButtonBounds(buttonXStartProportion, loadPlayerYStartProportion); 
+		Rectangle bounds = getButtonBounds(buttonXStartProportion,
+				loadPlayerYStartProportion);
 		return bounds.contains(xPos, yPos);
 	}
 
 	private boolean onStartServer(int xPos, int yPos) {
-		Rectangle bounds = getButtonBounds(buttonXStartProportion, startServerYStartProportion); 
+		Rectangle bounds = getButtonBounds(buttonXStartProportion,
+				startServerYStartProportion);
 		return bounds.contains(xPos, yPos);
 	}
 
 	private boolean onControls(int xPos, int yPos) {
-		Rectangle bounds = getButtonBounds(buttonXStartProportion, controlsYStartProportion); 
+		Rectangle bounds = getButtonBounds(buttonXStartProportion,
+				controlsYStartProportion);
 		return bounds.contains(xPos, yPos);
-		}
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {

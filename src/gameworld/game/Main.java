@@ -1,7 +1,7 @@
 package gameworld.game;
 
 import server.Server;
-import ui.UI;
+import ui.gamewindow.UI;
 import gameworld.game.server.ServerGame;
 import gameworld.world.Board;
 

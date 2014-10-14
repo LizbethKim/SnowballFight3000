@@ -101,14 +101,15 @@ public class BoardState {
 	
 	public int getLight() {
 		if (nightVision) {
-			return 2;
+			return 3;
 		}
-		if ((5 <= time && time <= 7) || (21 <= time && time <= 23)) {
+		if ((6 <= time && time <= 7) || (17 <= time && time <= 18)) {
+			return 3;
+		} else if (19 <= time && time <= 22 || 2 <= time && time <=5){
 			return 1;
-		} else if (8 <= time && time <= 20) {
+		} else if (8 <= time && time <= 16) {
 			return 2;
-		}
-		else {
+		} else {
 			return 0;
 		}
 	}

@@ -1,9 +1,13 @@
 package ui.actions;
-import ui.ContainerPopup;
-import ui.UI;
+import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
-import gameworld.world.Board;
 
+/**
+ * PickupItem is a key action that attempts to pick up the item in front of the player
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
 
 public class PickupItem extends KeyAction{
 

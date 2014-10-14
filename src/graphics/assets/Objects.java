@@ -9,10 +9,9 @@ import javax.imageio.ImageIO;
  * Represents the types of objects that can be rendered on a tile
  *  - this can be furniture, items, etc. WALL_E_W is a wall going east to west,
  *  WALL_N_S is a wall going north to south. RB, also stores the associated images,
- *  accessed through the img field.
- * EK we may need to add extra wall types, such as corners/doors.
- * @author Kelsey Jack (300275851) + kimeliz1
- *
+ *  accessed through the img field. Each enum has 4 images associated with it to do
+ *  with each of the 4 views that are possible in the game
+ * @author Kelsey Jack (300275851) + Elizabeth Kim kimeliz1 (300302456)
  */
 public enum Objects {
 	KEY("key.png", "key.png", "key.png", "key.png"),
@@ -47,7 +46,7 @@ public enum Objects {
 	HEALTH("HealthPotion.png", "HealthPotion.png", "HealthPotion.png", "HealthPotion.png"),
 	SNOWMAN("snowman.png", "snowman.png", "snowman.png", "snowman.png");
 
-	public final Image[] imgs;	// KTC make unmodifiable
+	public final Image[] imgs;
 
 	/**
 	 * Creates the enumeration and gives it the associated image.

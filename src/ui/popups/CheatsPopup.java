@@ -1,4 +1,4 @@
-package ui;
+package ui.popups;
 
 import gameworld.game.client.ClientGame;
 
@@ -6,10 +6,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,40 +17,46 @@ import ui.cheats.OneHitKill;
 import ui.cheats.UnlimitedSnowballs;
 import ui.cheats.UnlimitedSpeed;
 
-public class CheatsPopup extends JPanel{
+/**
+ * The CheatsPopup is a pop up window that displays a list of available cheats
+ * and allows for toggling of those cheats on and off
+ * 
+ * @author Ryan Burnell, 300279172
+ * 
+ */
+public class CheatsPopup extends JPanel {
 
-	
-	
 	private JPanel actions;
 	private JPanel switches;
 	private ClientGame client;
 
-	public CheatsPopup(ClientGame cl){
+	public CheatsPopup(ClientGame cl) {
 		this.client = cl;
 		setLayout(new FlowLayout());
 		actions = new JPanel();
 		switches = new JPanel();
-		actions.setLayout(new GridLayout(0,1));
-		switches.setLayout(new GridLayout(0,1));
-		
+		actions.setLayout(new GridLayout(0, 1));
+		switches.setLayout(new GridLayout(0, 1));
+
 		setupLabels();
 		add(actions);
 		add(switches);
 	}
-	
-	public void showCheats(){
-		JOptionPane.showMessageDialog(null, this, "Enable/Disable Cheats",JOptionPane.PLAIN_MESSAGE);
+
+	public void showCheats() {
+		JOptionPane.showMessageDialog(null, this, "Enable/Disable Cheats",
+				JOptionPane.PLAIN_MESSAGE);
 	}
-	
-	private void addCheat(String cheat, CheatSwitch c){
+
+	private void addCheat(String cheat, CheatSwitch c) {
 		JLabel a = new JLabel(cheat);
-		a.setPreferredSize(new Dimension(250,25));
+		a.setPreferredSize(new Dimension(250, 25));
 		a.setFont(new Font("Verdana", Font.BOLD, 18));
 		actions.add(a);
 		switches.add(c);
 	}
-	
-	private void setupLabels(){
+
+	private void setupLabels() {
 		addCheat("Invincibility", new Invincibility(client));
 		addCheat("Unlimited Fire Rate", new UnlimitedSnowballs(client));
 		addCheat("Unlimited Speed", new UnlimitedSpeed(client));
