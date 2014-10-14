@@ -25,7 +25,7 @@ public class LoadGame{
 	public static void main(String[] args) {
 		
 		StaxParser parser = new StaxParser();
-		StoredGame testGame = parser.parse(new File("src/storage/1413289751685.xml"));
+		StoredGame testGame = parser.parse(new File("src/storage/defaultBoard.xml"));
         System.out.println("Game Loaded by load main");
 	}
 	

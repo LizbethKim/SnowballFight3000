@@ -216,6 +216,7 @@ public class StaxWriter {
 			Chest chest = (Chest)item;
 			str.append(chest.id+XMLValues.SPACE);
 			str.append(chest.isLocked());
+			break;
 		case KEY:
 			Key key = (Key)item;
 			str.append(key.id+XMLValues.SPACE);
