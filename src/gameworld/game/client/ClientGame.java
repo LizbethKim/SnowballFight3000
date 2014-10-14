@@ -291,12 +291,12 @@ public class ClientGame {
 		return boardState.getDirection();
 	}
 
-	public void save(String filepath) {
+	public void save(File file) {
 		SaveGame saver = new SaveGame();
 		List<Player> ps = new ArrayList<Player>();
 		ps.addAll(playerIDs.values());
 		StoredGame sg = new StoredGame(this.board, ps);
-		saver.save(sg, filepath);
+		saver.save(sg, file);
 	}
 
 	public ClientUpdater getUpdater() {
