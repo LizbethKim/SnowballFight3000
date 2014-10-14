@@ -8,10 +8,9 @@ import javax.imageio.ImageIO;
 /**
  * Represents the different types of terrain a tile may have.
  * @author jackkels + kimeliz1
- *
  */
 public enum Terrain {
-	SNOW("snow.png"), 	// EK add the image names here if you find some
+	SNOW("snow.png"),
 	FLOOR("Floor.png"), 
 	GRASS("Grass.png"),
 	DIRT("Dirt.png"),

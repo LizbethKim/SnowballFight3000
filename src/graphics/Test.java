@@ -7,7 +7,8 @@ import javax.swing.JFrame;
 public class Test extends JFrame{
 	
 	/**
-	 * 
+	 * Just for initial testing of graphics pane before UI was implemented
+	 * @author Elizabeth Kim kimeliz1 (300302456)
 	 */
 	private static final long serialVersionUID = 5957453991714700567L;
 	private static final int WIDTH = 700;
@@ -16,7 +17,7 @@ public class Test extends JFrame{
 	public Test(){
 		super("Graphics Test");
 		BoardState meow = new BoardState();
-		setContentPane(new GraphicsPane(1, meow));
+		setContentPane(new GraphicsPane(meow));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(WIDTH, HEIGHT);
 		setVisible(true); 

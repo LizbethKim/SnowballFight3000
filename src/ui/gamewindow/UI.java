@@ -104,7 +104,7 @@ public class UI extends JFrame {
 	}
 
 	private void setupGraphics() {
-		graphicsPanel = new GraphicsPane(2, client.getBoard());
+		graphicsPanel = new GraphicsPane(client.getBoard());
 		gamePanel.add(graphicsPanel);
 		graphicsPanel.setBounds(0, 0, DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
 	}
