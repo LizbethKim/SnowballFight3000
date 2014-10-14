@@ -454,8 +454,8 @@ public class Board {
 					board[x][y].place(new Furniture("A wall", Objects.WALL_E_W));
 					board[79 - x][79 - y].place(new Furniture("A wall", Objects.WALL_E_W));
 				} else if (items[y][x] == "E") {
-					board[x][y].place(new Door("A door", 0, Direction.EAST));
-					board[79 - x][79 - y].place(new Door("A door", 0, Direction.EAST));
+					board[x][y].place(new Door("A door", Direction.EAST, 0, false));
+					board[79 - x][79 - y].place(new Door("A door", Direction.EAST, 0, false));
 				} else if (items[y][x] == "F") {
 					board[x][y].place(new Furniture("A wall", Objects.CORNER_N_W));
 					board[79 - x][79 - y].place(new Furniture("A wall", Objects.CORNER_S_E));
@@ -491,23 +491,23 @@ public class Board {
 					board[x][y].place(b1);
 					board[79 - x][79 - y].place(b2);
 				} else if (items[y][x] == "N1") {
-					board[x][y].place(new Door("A door", 2, Direction.NORTH));
+					board[x][y].place(new Door("A door", Direction.NORTH, 2, true));
 					board[79 - 13][79 - 36].place(new Key("Unlocks a door", 3));
-					board[79 - x][79 - y].place(new Door("A door", 3, Direction.NORTH));
+					board[79 - x][79 - y].place(new Door("A door", Direction.NORTH, 3, true));
 					board[13][36].place(new Key("Unlocks a door", 3));
 				} else if (items[y][x] == "N2") {
-					board[x][y].place(new Door("A door", 4, Direction.NORTH));
+					board[x][y].place(new Door("A door", Direction.NORTH, 4, true));
 					board[25][32].place(new Key("Unlocks a door", 4));
-					board[79 - x][79 - y].place(new Door("A door", 5, Direction.NORTH));
+					board[79 - x][79 - y].place(new Door("A door", Direction.NORTH, 5, true));
 					board[79 - 25][79 - 32].place(new Key("Unlocks a door", 5));
 				} else if (items[y][x] == "N3") {
-					board[x][y].place(new Door("A door", 6, Direction.NORTH));
-					board[79 - x][79 - y].place(new Door("A door", 7, Direction.NORTH));
+					board[x][y].place(new Door("A door", Direction.NORTH, 6, true));
+					board[79 - x][79 - y].place(new Door("A door",  Direction.NORTH, 7, true));
 					board[29][13].place(new Key("Unlocks a door", 7));
 					board[79 - 29][79 - 13].place(new Key("Unlocks a door", 6));
 				} else if (items[y][x] == "N4") {
-					board[x][y].place(new Door("A door", 8, Direction.NORTH));
-					board[79 - x][79 - y].place(new Door("A door", 9, Direction.NORTH));
+					board[x][y].place(new Door("A door", Direction.NORTH, 8, true));
+					board[79 - x][79 - y].place(new Door("A door", Direction.NORTH, 9, true));
 					board[11][11].place(new Key("Unlocks a door", 8));
 					board[79 - 11][79 - 11].place(new Key("Unlocks a door", 9));
 				} else if (items[y][x] == "c1") {
