@@ -81,7 +81,7 @@ public class GraphicsPane extends JPanel {
 		} else {
 			System.out.println("LOADING IMAGE HERE"); //Insert Loading Music
 		}
-		int lightState = 1;
+		int lightState = boardState.getLight();
 		switch(lightState){
 		case 0: g.drawImage(nightShade, 0, 0, (int) width, (int) height, null); //Night vision
 		break;
