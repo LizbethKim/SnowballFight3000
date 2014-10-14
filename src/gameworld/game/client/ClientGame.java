@@ -66,7 +66,7 @@ public class ClientGame {
 		player = new Player(name, team, 0, new NullLocation());
 
 		ClientUpdater u = this.getUpdater();
-		client.startReceiving(u);
+		client.startReceiving(u, board.width(), board.height());
 	}
 
 	public ClientGame(String IP, UI display) {
