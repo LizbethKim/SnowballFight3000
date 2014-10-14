@@ -54,7 +54,6 @@ public class UI extends JFrame {
 	private ControlsPopup controlsPopup;
 	private GameSetup gameSetup;
 	private JFrame setupFrame;
-	private int selectedIndex;
 
 	public UI() {
 
@@ -67,7 +66,6 @@ public class UI extends JFrame {
 	 * Sets up panels, starts and displays the game window
 	 */
 	public void startGame() {
-		selectedIndex = -1;
 		
 		// setup the panels and listeners
 		setupFileBar();
@@ -223,14 +221,6 @@ public class UI extends JFrame {
 		for (Component c : gamePanel.getComponents()) {
 			c.setBounds(x, y, width, height);
 		}
-	}
-
-	public void setSelectedIndex(int index){
-		selectedIndex = index;
-	}
-	
-	public int getSelectedIndex(){
-		return selectedIndex;
 	}
 	
 	/**

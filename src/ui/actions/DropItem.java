@@ -16,8 +16,8 @@ public class DropItem extends KeyAction{
 
 	@Override
 	protected void execute() {
-		if(parent.getSelectedIndex() >= 0){
-			//client.dropItem();
+		if(client.getSelectedIndex() >= 0){
+			client.dropSelectedItem();
 		}
 	}
 

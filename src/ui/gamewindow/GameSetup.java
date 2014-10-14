@@ -12,10 +12,11 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import server.Server;
+import network.Server;
 import ui.popups.ControlsPopup;
 import ui.popups.InputPopup;
 import ui.popups.LoadPopup;
