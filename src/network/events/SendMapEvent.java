@@ -19,7 +19,6 @@ public class SendMapEvent implements UpdateEvent {
 	 */
 	public SendMapEvent(byte[] data) {
 		this.data = data;
-		System.out.println("CREATED");
 	}
 
 	@Override
