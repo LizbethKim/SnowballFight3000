@@ -1,9 +1,6 @@
 package gameworld.game;
 
-import network.Server;
 import ui.gamewindow.UI;
-import gameworld.game.server.ServerGame;
-import gameworld.world.Board;
 
 /**
  * Main game loop.
@@ -12,20 +9,7 @@ import gameworld.world.Board;
  */
 public class Main {
 	public static void main (String[] args) {
-		if (args.length > 0) {
-			if (args[0].equals("server")) {
-				ServerGame g = new ServerGame(Board.defaultBoard());
-				Server server = new Server(g);
-				// start server connection accepting thread
-				new Thread(server).start();
-				new Thread(new Time(g)).start();
-			} else {
-				new UI();
-			}
-
-		} else {
-			new UI();
-		}
+		new UI();
 	}
 
 }

@@ -51,7 +51,9 @@ public class LoadGame{
 	 * @return The storedGame that was transferred
 	 */
 	public StoredGame loadGame(byte[] map) {
-		File file = new File("src/storage/loadedGame.xml");
+		
+		File file = new File(System.getProperty("user.home"),"loadedGame.xml");
+		System.out.println(file.getAbsolutePath());
 		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream(file);

@@ -75,7 +75,6 @@ public class Server implements Runnable {
 			try {
 				server = new ServerSocket(6015);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			while(true) {

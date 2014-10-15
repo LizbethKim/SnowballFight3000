@@ -6,10 +6,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A bag is an item that is also an inventory.
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class Bag extends Item implements Inventory {
 	private final int itemLimit = 4;
 	private List<Item> contents;
-	
+
 	/**
 	 * Constructs an empty bag
 	 */
@@ -54,7 +59,7 @@ public class Bag extends Item implements Inventory {
 		}
 		return Collections.unmodifiableList(ans);
 	}
-	
+
 	@Override
 	public Objects asEnum() {
 		return Objects.BAG;
