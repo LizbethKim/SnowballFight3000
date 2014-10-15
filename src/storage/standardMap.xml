@@ -1632,7 +1632,7 @@
 <tile>DIRT 20 27 </tile>
 <tile>SNOW 20 28 </tile>
 <tile>DIRT 20 29 </tile>
-<tile>DIRT 20 30 </tile>
+<tile>DIRT 20 30 <item>POWERUP FLAMING_SNOWBALL</item></tile>
 <tile>SNOW 20 31 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>SNOW 20 32 </tile>
 <tile>SNOW 20 33 </tile>
