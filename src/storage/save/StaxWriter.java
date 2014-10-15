@@ -127,12 +127,10 @@ public class StaxWriter {
 						eventWriter.add(eventFactory.createCharacters(tileContents));
 						InanimateEntity onItem = t.getOn();
 						if(onItem!=null && (onItem.asEnum()==Objects.CHEST || onItem.asEnum()==Objects.BAG)){
-							System.out.println("we have a chest/bag");
 							eventWriter.add(eventFactory.createStartElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.INVENTORY));
 							eventWriter.add(eventFactory.createCharacters(buildEntityString(onItem)));
 							List<Item> itemsIn = ((Inventory)t.getOn()).getContents();
 							for(Item it:itemsIn){
-								System.out.println("in the chest/bag");
 								createTag(XMLValues.ITEM, buildEntityString(it));
 							}
 							eventWriter.add(eventFactory.createEndElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.INVENTORY));

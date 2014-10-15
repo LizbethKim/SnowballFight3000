@@ -118,7 +118,6 @@ public class StaxParser {
 						//get the characters within the tag
 						event = eventReader.nextEvent();
 						String data = event.asCharacters().getData();
-						System.out.println("DATA: "+data.length());
 						String[] values = data.split(XMLValues.DELIMITER);
 						curArea = parseArea(values);
 						continue;
@@ -211,7 +210,6 @@ public class StaxParser {
 
 					//The game should be finished loading, it will ignore excess info past this
 					if (elemName.equals(XMLValues.GAME)) {
-						System.out.println("GAME LOADED");
 						break;
 					}
 
@@ -244,12 +242,10 @@ public class StaxParser {
 		}
 		
 		int i;
-		System.out.println(values.length);
 		for(i = 1;i<values.length;i=i+2){
 			Location loc = parseLoc(values[i], values[i+1]);
 			a.add(tiles[loc.x][loc.y]);
 		}
-		System.out.println("FINAL i VALUE:"+i);
 		areaCount++;
 		return a;
 	}
