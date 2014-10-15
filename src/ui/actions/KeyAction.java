@@ -34,5 +34,8 @@ public abstract class KeyAction extends AbstractAction {
 		execute();
 	}
 
+	/**
+	 * complete the action
+	 */
 	protected abstract void execute();
 }

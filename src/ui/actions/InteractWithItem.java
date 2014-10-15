@@ -1,9 +1,7 @@
 package ui.actions;
 
 import ui.gamewindow.UI;
-import ui.popups.ContainerPopup;
 import gameworld.game.client.ClientGame;
-import gameworld.game.client.NoItemException;
 import gameworld.game.client.NotAContainerException;
 
 /**
@@ -17,6 +15,11 @@ import gameworld.game.client.NotAContainerException;
 
 public class InteractWithItem extends KeyAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2500988752556843468L;
+
 	public InteractWithItem(ClientGame cl, UI parent) {
 		super(cl, parent);
 	}
@@ -28,6 +31,7 @@ public class InteractWithItem extends KeyAction {
 			client.getContents();
 			parent.openContainer(false);
 		} catch (NotAContainerException e) {
+			//otherwise unfreeze the player
 			client.unfreezePlayer();
 		}
 	}

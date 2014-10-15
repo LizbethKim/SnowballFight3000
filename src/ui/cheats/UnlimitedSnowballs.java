@@ -12,6 +12,11 @@ import gameworld.game.client.ClientGame;
 
 public class UnlimitedSnowballs extends CheatSwitch {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2225360626841634395L;
+
 	public UnlimitedSnowballs(ClientGame cl) {
 		super(cl);
 	}

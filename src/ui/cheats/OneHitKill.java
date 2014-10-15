@@ -11,6 +11,11 @@ import gameworld.game.client.ClientGame;
 
 public class OneHitKill extends CheatSwitch {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2884892466886304511L;
+
 	public OneHitKill(ClientGame cl) {
 		super(cl);
 	}

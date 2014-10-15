@@ -21,6 +21,10 @@ import javax.swing.JPanel;
  */
 
 public class HUDPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2839333094835117084L;
 	public static final String IMAGE_PATH = "src/ui/assets/";
 	private static final Image healthBar = loadImage("HealthBar.png");
 	private static final Image healthBase = loadImage("HealthBarBase.png");
@@ -28,7 +32,6 @@ public class HUDPanel extends JPanel {
 	private static final double inventoryYProportion = 1.0 / 10.0;
 	private static final double maxHealth = 100.0;
 
-	private boolean inventoryHidden = false;
 	private final double aspectRatio;
 
 	private final ClientGame client;
@@ -148,6 +151,10 @@ public class HUDPanel extends JPanel {
 
 	}
 
+	/**
+	 * paints the description of the item last inspected
+	 * @param g
+	 */
 	private void paintItemDescription(Graphics g) {
 		final int xPos = (int) (this.getWidth() / 2 / aspectRatio);
 		final int yPos = this.getHeight() / 2;

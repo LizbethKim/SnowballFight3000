@@ -1,7 +1,6 @@
 package ui.actions;
 
 import ui.gamewindow.UI;
-import ui.popups.ContainerPopup;
 import gameworld.game.client.ClientGame;
 
 /**
@@ -14,6 +13,11 @@ import gameworld.game.client.ClientGame;
  */
 
 public class UseItem extends KeyAction {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4879185215676441421L;
 
 	public UseItem(ClientGame cl, UI parent) {
 		super(cl, parent);

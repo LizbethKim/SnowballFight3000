@@ -150,7 +150,7 @@ public class UI extends JFrame {
 		
 		//set size and add the gameSetup panel
 		setupFrame.setSize(DEFAULT_GAME_WIDTH, DEFAULT_GAME_HEIGHT);
-		gameSetup = new GameSetup(this, ASPECT_RATIO);
+		gameSetup = new GameSetup(this);
 		setupFrame.add(gameSetup);
 		gameSetup.setPreferredSize(new Dimension(DEFAULT_GAME_WIDTH,
 				DEFAULT_GAME_WIDTH));

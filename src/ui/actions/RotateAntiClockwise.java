@@ -12,6 +12,11 @@ import gameworld.game.client.ClientGame;
 
 public class RotateAntiClockwise extends KeyAction{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3500405530788557555L;
+
 	public RotateAntiClockwise(ClientGame cl, UI parent){
 		super(cl, parent);
 	}

@@ -11,6 +11,11 @@ import gameworld.game.client.ClientGame;
 
 public class UnlimitedSpeed extends CheatSwitch {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8130731122309477631L;
+
 	public UnlimitedSpeed(ClientGame cl) {
 		super(cl);
 	}
