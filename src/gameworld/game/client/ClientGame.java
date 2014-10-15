@@ -161,7 +161,7 @@ public class ClientGame {
 	}
 
 	public boolean selectedIsContainer(){
-		if (selectedIndex != -1 && player.getInventoryItems().get(selectedIndex) instanceof Inventory) {
+		if (selectedIndex != -1 && selectedIndex <= player.getInventoryItems().size() && player.getInventoryItems().get(selectedIndex) instanceof Inventory) {
 			return true;
 		}
 		return false;
