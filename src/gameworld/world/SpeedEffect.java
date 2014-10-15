@@ -1,6 +1,6 @@
 package gameworld.world;
 
-public class SpeedEffect implements PowerupEffect {
+public class SpeedEffect implements PowerupEffect, Runnable {
 	private Player p;
 	@Override
 	public void apply(Player p) {

@@ -2,7 +2,7 @@ package gameworld.world;
 
 import gameworld.world.Snowball.SnowballType;
 
-public class SuperSnowballsEffect implements PowerupEffect {
+public class SuperSnowballsEffect implements PowerupEffect, Runnable {
 	private Player p;
 
 	@Override
@@ -17,7 +17,7 @@ public class SuperSnowballsEffect implements PowerupEffect {
 		try{
 			Thread.sleep(30000);
 		} catch(InterruptedException e) {
-			
+
 		}
 		p.setCanThrow(SnowballType.NORMAL);
 	}

@@ -11,9 +11,4 @@ public class PotionEffect implements PowerupEffect {
 	public void apply(Player p) {
 		p.damage(-boost);
 	}
-
-	@Override
-	public void run() {
-	}
-
 }

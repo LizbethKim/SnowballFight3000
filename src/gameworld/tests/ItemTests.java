@@ -6,6 +6,9 @@ import gameworld.world.Chest;
 import gameworld.world.Direction;
 import gameworld.world.Door;
 import gameworld.world.Key;
+import gameworld.world.Location;
+import gameworld.world.Snowball;
+import gameworld.world.Snowball.SnowballType;
 
 import org.junit.Test;
 
@@ -35,7 +38,7 @@ public class ItemTests {
 
 	@Test
 	public void testSnowball() {
-
+		Snowball s = new Snowball(new Location(3,3), Direction.SOUTH, 20, 1, SnowballType.NORMAL);
 	}
 
 	@Test
