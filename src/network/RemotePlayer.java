@@ -1,6 +1,5 @@
 package network;
 
-import gameworld.game.client.ClientUpdater;
 import gameworld.game.server.ServerGame;
 import gameworld.world.Direction;
 import gameworld.world.Location;
@@ -12,11 +11,8 @@ import java.io.InputStream;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
-import network.events.CreateLocalPlayerEvent;
 import network.events.UpdateEvent;
 
 /**
