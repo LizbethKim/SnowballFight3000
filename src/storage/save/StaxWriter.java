@@ -193,7 +193,7 @@ public class StaxWriter {
 	 */
 	private String buildTileString(Tile t) throws XMLStreamException {
 		StringBuilder str = new StringBuilder();
-		str.append(t.getType().ordinal());	// the terrain type
+		str.append(t.getType().name());	// the terrain type
 		str.append(String.format(" %d %d ", t.getCoords().x, t.getCoords().y));	// the coordinates of the tile
 		return str.toString();
 	}
