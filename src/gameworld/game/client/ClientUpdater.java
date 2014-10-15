@@ -42,6 +42,13 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
+	/**
+	 * Adds a player with the given parameters to the model
+	 * @param name
+	 * @param t
+	 * @param id
+	 * @param l
+	 */
 	public void addPlayer(String name, Team t, int id, Location l) {
 		if (playerIDs.get(id) == null) {
 			playerIDs.put(id, new Player(name, t, id, l));
@@ -49,6 +56,11 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
+	/**
+	 * Sets the local player id and location.
+	 * @param id
+	 * @param l
+	 */
 	public void createLocalPlayer(int id, Location l) {
 		this.playerID = id;
 		clientGame.setID(id);
@@ -56,6 +68,11 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
+	/**
+	 * Moves the player with the given id to the given location.
+	 * @param id
+	 * @param l
+	 */
 	public void movePlayer(int id, Location l) {
 		Player p = playerIDs.get(id);
 		if (p != null) {
@@ -64,11 +81,20 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
+	/**
+	 * Remove the player with the given id from the model
+	 * @param id
+	 */
 	public void removePlayer(int id) {
 		this.playerIDs.remove(id);
 		updateBoardState();
 	}
 
+	/**
+	 * Turns the player with the given id to face the given direction.
+	 * @param id
+	 * @param d
+	 */
 	public void turnPlayer(int id, Direction d) {
 		Player p = playerIDs.get(id);
 		if (p != null) {
@@ -77,6 +103,10 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
+	/**
+	 * Changes the local player health to the given value
+	 * @param health The new health of the player
+	 */
 	public void updatePlayerHealth(int health) {
 		Player p = playerIDs.get(playerID);
 		if (p != null) {
@@ -84,6 +114,10 @@ public class ClientUpdater {
 		}
 	}
 
+	/**
+	 * Adds the given item to the local player's inventory
+	 * @param i
+	 */
 	public void pickupItem(Item i) {
 		Player p = this.playerIDs.get(playerID);
 		if (p != null) {
@@ -91,6 +125,10 @@ public class ClientUpdater {
 		}
 	}
 
+	/**
+	 * Removes the item at the given index in the local player's inventory
+	 * @param index
+	 */
 	public void removeFromInventory(int index) {
 		Player p = playerIDs.get(playerID);
 		if (p != null) {
@@ -99,6 +137,10 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
+	/**
+	 * Freezes the player with the given id on the local model.
+	 * @param id ID of the player to freeze.
+	 */
 	public void freezePlayer(int id) {
 		Player p = playerIDs.get(id);
 		if (p != null) {
@@ -106,6 +148,10 @@ public class ClientUpdater {
 		}
 	}
 
+	/**
+	 * Unfreezes the player with the given id on the local model.
+	 * @param id ID of the player to unfreeze.
+	 */
 	public void unFreezePlayer(int id) {
 		Player p = playerIDs.get(id);
 		if (p != null) {
@@ -113,6 +159,23 @@ public class ClientUpdater {
 		}
 	}
 
+	/**
+	 * Places the given item to the given location.
+	 * @param i Item to place
+	 * @param l Location to place it at
+	 */
+	public void placeItem(Item i, Location l) {
+		if (board.tileAt(l).isClear()) {
+			board.tileAt(l).place(i);
+		} else if (board.tileAt(l).getOn() instanceof Inventory) {
+			((Inventory)board.tileAt(l).getOn()).addItem(i);
+		}
+	}
+
+	/**
+	 * Removes the item at the given location from the local model.
+	 * @param l
+	 */
 	public void removeItemAt(Location l) {
 		if (board.containsLocation(l)) {
 			board.removeItemAt(l);
@@ -120,6 +183,12 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
+	/**
+	 * Removes the item at the given index from the container at the
+	 * given location on the local model.
+	 * @param l
+	 * @param index
+	 */
 	public void removeFromContainerAt(Location l, int index) {
 		if (board.containsLocation(l) && board.tileAt(l).getOn() instanceof Inventory) {
 			Inventory i = (Inventory)board.tileAt(l).getOn();
@@ -130,25 +199,29 @@ public class ClientUpdater {
 		updateBoardState();
 	}
 
-
+	/**
+	 * Exits the program if the client is disconnected from the server
+	 */
 	public void disconnectFromServer() {
 		System.exit(0);
 	}
 
+	/**
+	 * Updates the positions and types of the snowballs
+	 * @param snowballPositions
+	 * @param snowballTypes
+	 */
 	public void updateProjectiles(Location[] snowballPositions, SnowballType[] snowballTypes) {
 		this.snowballPositions = snowballPositions;
 		this.snowballTypes = snowballTypes;
 		updateBoardState();
 	}
 
-	public void placeItem(Item i, Location l) {
-		if (board.tileAt(l).isClear()) {
-			board.tileAt(l).place(i);
-		} else if (board.tileAt(l).getOn() instanceof Inventory) {
-			((Inventory)board.tileAt(l).getOn()).addItem(i);
-		}
-	}
 
+	/**
+	 * Unlocks the container at the given location
+	 * @param l
+	 */
 	public void unlock(Location l) {
 		if (board.containsLocation(l) && board.tileAt(l).getOn() != null
 				&& board.tileAt(l).getOn() instanceof Lockable) {
@@ -156,14 +229,27 @@ public class ClientUpdater {
 		}
 	}
 
+	/**
+	 * Updates the score of the player with the given id
+	 * @param score
+	 * @param id
+	 */
 	public void updateScore(int score, int id) {
 		this.playerIDs.get(playerID).setScore(score);
 	}
 
+	/**
+	 * Updates the time to the given hours
+	 * @param time
+	 */
 	public void updateTime(int time) {
 		bs.setTime(time);
 	}
 
+	/**
+	 * Ends the game, with the given team as the winners.
+	 * @param winners
+	 */
 	public void endGame (Team winners) {
 		System.out.println("winning!");
 		display.endGame(winners == Team.RED ? "Red Team"  : "Blue Team");
@@ -179,9 +265,10 @@ public class ClientUpdater {
 		Area toRender = board.getAreaContaining(playerIDs.get(playerID).getLocation());
 
 		Objects[][] items = board.itemEnumsInArea(toRender);
-		for (Location l: snowballPositions) {
+		for (int i = 0; i < snowballPositions.length; i++) {
+			Location l = snowballPositions[i];
 			if (l != null && toRender.containsLoc(l)) {
-				items[l.x][l.y] = Objects.SNOWBALL;
+				items[l.x][l.y] = (snowballTypes[i] == SnowballType.FLAMING ? Objects.FIRESNOWBALL : Objects.SNOWBALL);
 			}
 		}
 		for (Player p: playerIDs.values()) {
@@ -199,6 +286,7 @@ public class ClientUpdater {
 	}
 
 	// For loading multiplayer game. Not implemented.
+
 	public void receivePlayerValidity (boolean isValid) {
 		if (!isValid) {
 		}
