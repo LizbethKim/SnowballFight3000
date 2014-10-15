@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * A bag is an item that is also an inventory.
+ * A bag is an item that is also an inventory. Can hold items and be held.
  * @author Kelsey Jack 300275851
  *
  */

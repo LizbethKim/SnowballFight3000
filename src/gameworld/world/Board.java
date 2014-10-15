@@ -15,15 +15,28 @@ public class Board {
 	private Tile[][] board; 	// board[x][y] will access correctly. (same x and y as in location)
 	private List<Area> rooms;
 
+	/**
+	 * Constructs a board with the given tiles.
+	 * @param board
+	 */
 	public Board(Tile[][] board) {
 		this.board = board;
 	}
 
+	/**
+	 * Constructs a board with the given tiles and areas.
+	 * @param board
+	 * @param rooms
+	 */
 	public Board(Tile[][] board, List<Area> rooms) {
 		this.board = board;
 		this.rooms = rooms;
 	}
 
+	/**
+	 * @param l
+	 * @return The tile at the given location
+	 */
 	public Tile tileAt(Location l) {
 		System.out.println(l);
 		if (l.x >= 0 && l.x < board.length && l.y >= 0 && l.y < board[0].length) {
@@ -32,6 +45,10 @@ public class Board {
 		throw new IllegalArgumentException();
 	}
 
+	/**
+	 * @param l
+	 * @return Whether the given location can be walked across
+	 */
 	public boolean canTraverse (Location l) {
 		return board[l.x][l.y].isTraversable();
 	}
@@ -42,6 +59,9 @@ public class Board {
 		}
 	}
 
+	/**
+	 * @return A double array of enums representing the type of terrain each tile has
+	 */
 	public Terrain[][] convertToEnums () {
 		Terrain[][] enumTiles = new Terrain[board.length][board[0].length];
 		for (int x = 0; x < board.length; x++) {
@@ -52,6 +72,11 @@ public class Board {
 		return enumTiles;
 	}
 
+	/**
+	 *
+	 * @param a
+	 * @return A double array of enums representing the type of terrain each tile has within the given area.
+	 */
 	public Terrain[][] convertToEnumsInArea (Area a) {
 		Terrain[][] enumTiles = new Terrain[board.length][board[0].length];
 		for (int x = 0; x < board.length; x++) {
@@ -66,6 +91,9 @@ public class Board {
 		return enumTiles;
 	}
 
+	/**
+	 * @return A double array of the enums representing the objects on the tiles.
+	 */
 	public Objects[][] itemEnums () {
 		Objects[][] enumObjects = new Objects[board.length][board[0].length];
 		for (int x = 0; x < board.length; x++) {
@@ -80,10 +108,8 @@ public class Board {
 	}
 
 	/**
-	 * Gets the double array of objects within the area that contains the location
-	 * of the player.
 	 * @param playerLoc
-	 * @return
+	 * @return A double array of the enums representing the objects on the tiles within the given area
 	 */
 	public Objects[][] itemEnumsInArea (Area a) {
 		Objects[][] enumObjects = new Objects[board.length][board[0].length];
@@ -98,6 +124,10 @@ public class Board {
 		return enumObjects;
 	}
 
+	/**
+	 * @param l
+	 * @return The area containing the given location
+	 */
 	public Area getAreaContaining(Location l) {
 		for (Area a: rooms) {
 			if (a.containsLoc(l)) {
@@ -107,11 +137,17 @@ public class Board {
 		throw new IllegalArgumentException();
 	}
 
-
+	/**
+	 * @return An unmodifiable collections of the rooms
+	 */
 	public List<Area> getRooms() {
 		return Collections.unmodifiableList(this.rooms);
 	}
 
+	/**
+	 * @param t
+	 * @return The spawnArea of the given team
+	 */
 	public Area getSpawnArea(Team t) {
 		for (Area a: rooms) {
 			if (a instanceof SpawnArea && ((SpawnArea)a).team == t) {
@@ -121,6 +157,10 @@ public class Board {
 		return rooms.get(0);
 	}
 
+	/**
+	 * @param l
+	 * @return Whether the given location is a valid location on the map
+	 */
 	public boolean containsLocation(Location l) {
 		return l.x >= 0 && l.x < board.length && l.y >= 0 && l.y < board[0].length;
 	}
