@@ -6,6 +6,11 @@ import gameworld.world.Team;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * Event for creating a remote player on a client
+ * @author Bryden Frizzell
+ *
+ */
 public class CreatePlayerEvent extends LocationEvent {
 
 	private int playerID;
@@ -13,6 +18,12 @@ public class CreatePlayerEvent extends LocationEvent {
 	private Location location;
 	private Team team;
 
+	/**
+	 * @param id the id of the player to be created
+	 * @param name the name of the player to be created
+	 * @param location the location of the player to be created
+	 * @param team the team of the player to be created
+	 */
 	public CreatePlayerEvent(int id, String name, Location l, Team team) {
 		this.playerID=id;
 		this.name = name;

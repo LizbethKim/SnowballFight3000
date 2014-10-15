@@ -8,8 +8,19 @@ import gameworld.world.Powerup;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * This class contains code for writing items to an OutputStream
+ * @author Bryden Frizzell
+ *
+ */
 public abstract class ItemEvent extends LocationEvent {
 
+	/**
+	 * writes an Item to an OutputStream
+	 * @param out the OutputStream for data to be written to
+	 * @param item the item to be written
+	 * @throws IOException
+	 */
 	protected void writeItem(OutputStream out, Item item) throws IOException {
 		out.write(item.asEnum().ordinal());
 		if(item instanceof Key){

@@ -6,11 +6,23 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 
+/**
+ * This class contains code for writing locations to an OutputStream
+ * @author frizzebryd
+ *
+ */
 public abstract class LocationEvent implements UpdateEvent {
 
 	private static int worldWidth = -1;
 	private static int worldHeight = -1;
 	private static int locationLen;
+
+	/**
+	 * Writes a location to an OutputStream
+	 * @param out the OutputStream for the location to be written to
+	 * @param location the location to be written to the output stream
+	 * @throws IOException
+	 */
 	protected void writeLocation(OutputStream out, Location location) throws IOException {
 		if(location.x>worldWidth || location.y>worldHeight) {
 			throw new RuntimeException("Location out of bounds exception: "+location);
