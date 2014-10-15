@@ -3,10 +3,19 @@ package network.events;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * removes a player from the client
+ * sent when a player disconnects
+ * @author Bryden Frizzell
+ *
+ */
 public class RemovePlayerEvent implements UpdateEvent {
 
 	private int id;
 
+	/**
+	 * @param id the id of the player to be removed
+	 */
 	public RemovePlayerEvent(int id) {
 		this.id = id;
 	}

@@ -6,11 +6,22 @@ import gameworld.world.Snowball.SnowballType;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * Sent when projectiles need to be updated,
+ * contains the new location of all the projectiles
+ * on the map
+ * @author Bryden Frizzell
+ *
+ */
 public class UpdateProjectilePositionsEvent extends LocationEvent {
 
 	private Location projectiles[];
 	private SnowballType types[];
 
+	/**
+	 * @param projectiles the locations of all the projectiles on the map
+	 * @param types the types of all the projectiles on the map
+	 */
 	public UpdateProjectilePositionsEvent(Location projectiles[], SnowballType types[]) {
 		this.projectiles = projectiles;
 		this.types=types;

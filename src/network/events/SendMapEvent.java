@@ -5,10 +5,18 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 
+/**
+ * Sent to a player when they request the map
+ * @author Bryden Frizzell
+ *
+ */
 public class SendMapEvent implements UpdateEvent {
 
 	private byte[] data;
 
+	/**
+	 * @param data an array of byte containing the map file data
+	 */
 	public SendMapEvent(byte[] data) {
 		this.data = data;
 		System.out.println("CREATED");

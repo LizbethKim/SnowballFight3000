@@ -5,9 +5,19 @@ import gameworld.world.Location;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * Removes an item from a container
+ * @author Bryden Frizzell
+ *
+ */
 public class RemoveFromContainerEvent extends LocationEvent {
 	private int index;
 	private Location location;
+
+	/**
+	 * @param location the location of the container
+	 * @param index the index in the container of the item
+	 */
 	public RemoveFromContainerEvent(Location l, int index){
 		this.index=index;
 		this.location=l;

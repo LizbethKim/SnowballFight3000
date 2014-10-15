@@ -3,9 +3,17 @@ package network.events;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * Sent when the local player on a client's health changes
+ * @author Bryden Frizzell
+ *
+ */
 public class UpdateHealthEvent implements UpdateEvent {
 	private int health;
 
+	/**
+	 * @param health the new health value for the client's player
+	 */
 	public UpdateHealthEvent(int health) {
 		this.health=health;
 	}

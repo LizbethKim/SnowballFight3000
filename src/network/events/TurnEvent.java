@@ -5,11 +5,20 @@ import java.io.OutputStream;
 
 import gameworld.world.Direction;
 
+/**
+ * sent to the client when a player turns
+ * @author Bryden Frizzell
+ *
+ */
 public class TurnEvent implements UpdateEvent {
 
 	private Direction direction;
 	private int playerID;
 
+	/**
+	 * @param playerID the id of the player who is turning
+	 * @param direction the new direction of the player
+	 */
 	public TurnEvent(int playerID, Direction d) {
 		// AUTO
 		this.playerID=playerID;
