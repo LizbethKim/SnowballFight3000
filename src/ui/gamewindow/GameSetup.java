@@ -104,7 +104,7 @@ public class GameSetup extends JPanel {
 	private void startServer() {
 		JFileChooser fileChooser = new JFileChooser();
 		// display the dialog and save the file if valid one selected
-		if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			LoadGame loader = new LoadGame();
 			// make new server
