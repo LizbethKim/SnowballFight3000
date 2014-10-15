@@ -22,11 +22,19 @@ public class ItemTests {
 	public void testChest() {
 		Chest c = new Chest("A chest", 0, false);
 		assertTrue(c.getContents().isEmpty());
-		assertFalse(c.getContents().add(new Key("", 0)));
+		Key k = new Key("", 0);
 		for (int i = 0; i < c.maxSize(); i++) {
-			assertTrue(c.addItem(new Key("", 0)));
+			k = new Key("", 0);
+			assertTrue(c.addItem(k));
 		}
 		assertFalse(c.addItem(new Key("", 0)));
+		assertTrue(c.removeItem(k));
+	}
+
+	@Test (expected = UnsupportedOperationException.class)
+	public void testAddingToChestItemList(){
+		Chest c = new Chest("A chest", 0, false);
+		c.getContents().add(new Key("", 0));
 	}
 
 	@Test

@@ -19,7 +19,7 @@ public class PlayerTests {
 		toReturn.addItemToInventory(new Key("A key", 0));
 		return toReturn;
 	}
-	
+
 	@Test
 	public void testMoveWorks() {
 		Player p = setUpPlayer();
@@ -27,7 +27,7 @@ public class PlayerTests {
 		assertTrue(p.move(n));
 		assertTrue(p.getLocation().equals(n));
 	}
-	
+
 	@Test
 	public void testMoveRestrictions() {
 		Player p = setUpPlayer();
@@ -35,7 +35,7 @@ public class PlayerTests {
 		assertFalse(p.move(n));
 		assertFalse(p.getLocation().equals(n));
 	}
-	
+
 	@Test
 	public void testPlayerInventory() {
 		Player p = setUpPlayerWithInventory();
@@ -45,8 +45,11 @@ public class PlayerTests {
 		p.removeFromInventory(0);
 		assertTrue(p.getInventoryItems().size() == 1);
 		assertFalse(p.addItemToInventory(new Flag(Team.BLUE)));
+		assertTrue(p.addItemToInventory(new Key("", 5)));
+		assertTrue(p.holdsKey(5));
+		assertTrue(p.getKeyIndex(5) == 1);
 	}
-	
+
 	@Test
 	public void testDamage() {
 		Player p = setUpPlayer();
@@ -59,7 +62,7 @@ public class PlayerTests {
 		p.damage(-110);
 		assertTrue(p.getHealth() == 100);
 	}
-	
+
 	@Test
 	public void testScore() {
 		Player p = setUpPlayer();

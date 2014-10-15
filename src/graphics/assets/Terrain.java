@@ -8,11 +8,11 @@ import javax.imageio.ImageIO;
 /**
  * Represents the different types of terrain a tile may have.
  * A lot of the tiles were found on google
- * @author jackkels + Elizabeth Kim kimeliz1 300302456
+ * @author Kelsey Jack 300275851 + Elizabeth Kim kimeliz1 300302456
  */
 public enum Terrain {
 	SNOW("snow.png"),
-	FLOOR("Floor.png"), 
+	FLOOR("Floor.png"),
 	GRASS("Grass.png"),
 	DIRT("Dirt.png"),
 	TESTTILE("TileTemplate.png"),
@@ -22,7 +22,7 @@ public enum Terrain {
 	NULLTILE("NullTile.png"),
 	RED("RedTile.png"),
 	BLUE("BlueTile.png");
-	
+
 	public final BufferedImage img;
 
 	/**
