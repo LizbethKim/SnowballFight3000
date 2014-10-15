@@ -135,7 +135,7 @@ public class ClientGame {
 		}
 	}
 
-	public void inspectItem() throws NoItemException {
+	public void inspectItem(){
 		Location facing = player.getLocationInFrontOf();
 		if (board.containsLocation(facing) && board.tileAt(facing).getOn() != null) {
 			this.lastInspected =  board.tileAt(facing).getOn().getDescription();
