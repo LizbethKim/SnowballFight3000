@@ -3,7 +3,7 @@ package gameworld.world;
 import java.util.List;
 
 import gameworld.world.Snowball.SnowballType;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 /**
  * Represents players in the world
@@ -56,29 +56,29 @@ public class Player implements Entity {
 	}
 
 	@Override
-	public Objects asEnum() {
+	public Entities asEnum() {
 		if (this.isFrozen()) {
-			return Objects.SNOWMAN;
+			return Entities.SNOWMAN;
 		}
 		if (this.team == Team.RED) {
 			if (this.d == Direction.NORTH) {
-				return Objects.REDPLAYER_N;
+				return Entities.REDPLAYER_N;
 			} else if (this.d== Direction.EAST) {
-				return Objects.REDPLAYER_E;
+				return Entities.REDPLAYER_E;
 			} else if (this.d == Direction.SOUTH) {
-				return Objects.REDPLAYER_S;
+				return Entities.REDPLAYER_S;
 			} else {
-				return Objects.REDPLAYER_W;
+				return Entities.REDPLAYER_W;
 			}
 		} else {
 			if (this.d == Direction.NORTH) {
-				return Objects.BLUEPLAYER_N;
+				return Entities.BLUEPLAYER_N;
 			} else if (this.d == Direction.EAST) {
-				return Objects.BLUEPLAYER_E;
+				return Entities.BLUEPLAYER_E;
 			} else if (this.d == Direction.SOUTH) {
-				return Objects.BLUEPLAYER_S;
+				return Entities.BLUEPLAYER_S;
 			} else {
-				return Objects.BLUEPLAYER_W;
+				return Entities.BLUEPLAYER_W;
 			}
 		}
 	}
@@ -115,7 +115,7 @@ public class Player implements Entity {
 		return this.inventory.getContents();
 	}
 
-	public List<Objects> getInventoryEnums() {
+	public List<Entities> getInventoryEnums() {
 		return this.inventory.getContentsAsEnums();
 	}
 
@@ -142,7 +142,7 @@ public class Player implements Entity {
 
 	public boolean holdsKey(int id) {
 		for (Item i: inventory.getContents()) {
-			if (i instanceof Key && ((Key)i).id == id) {
+			if (i instanceof Key && ((Key)i).ID == id) {
 				return true;
 			}
 		}
@@ -152,7 +152,7 @@ public class Player implements Entity {
 	public int getKeyIndex(int id) {
 		for (int i = 0; i < inventory.getContents().size(); i++) {
 			if (inventory.getContents().get(i) instanceof Key &&
-					((Key)inventory.getContents().get(i)).id == id) {
+					((Key)inventory.getContents().get(i)).ID == id) {
 				return i;
 			}
 		}

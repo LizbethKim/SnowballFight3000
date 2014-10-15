@@ -14,7 +14,7 @@ import gameworld.world.NullLocation;
 import gameworld.world.Player;
 import gameworld.world.Snowball.SnowballType;
 import gameworld.world.Team;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 /**
  * Class that modifies the state of the model on the clients. Used by the Client
@@ -264,11 +264,11 @@ public class ClientUpdater {
 
 		Area toRender = board.getAreaContaining(playerIDs.get(playerID).getLocation());
 
-		Objects[][] items = board.itemEnumsInArea(toRender);
+		Entities[][] items = board.itemEnumsInArea(toRender);
 		for (int i = 0; i < snowballPositions.length; i++) {
 			Location l = snowballPositions[i];
 			if (l != null && toRender.containsLoc(l)) {
-				items[l.x][l.y] = (snowballTypes[i] == SnowballType.FLAMING ? Objects.FIRESNOWBALL : Objects.SNOWBALL);
+				items[l.x][l.y] = (snowballTypes[i] == SnowballType.FLAMING ? Entities.FIRESNOWBALL : Entities.SNOWBALL);
 			}
 		}
 		for (Player p: playerIDs.values()) {

@@ -30,7 +30,7 @@ public enum Terrain {
 	 * @param resourceName
 	 */
 	Terrain(String resourceName) {
-		try { img = ImageIO.read(Objects.class.getResource(resourceName)); }
+		try { img = ImageIO.read(Entities.class.getResource(resourceName)); }
 		catch (IOException e) { throw new Error ("Error in image loading."); }
 	}
 }

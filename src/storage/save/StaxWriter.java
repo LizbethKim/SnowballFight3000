@@ -17,7 +17,7 @@ import gameworld.world.Powerup;
 import gameworld.world.SpawnArea;
 import gameworld.world.Team;
 import gameworld.world.Tile;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -126,7 +126,7 @@ public class StaxWriter {
 						String tileContents = buildTileString(t);
 						eventWriter.add(eventFactory.createCharacters(tileContents));
 						InanimateEntity onItem = t.getOn();
-						if(onItem!=null && (onItem.asEnum()==Objects.CHEST || onItem.asEnum()==Objects.BAG)){
+						if(onItem!=null && (onItem.asEnum()==Entities.CHEST || onItem.asEnum()==Entities.BAG)){
 							System.out.println("we have a chest/bag");
 							eventWriter.add(eventFactory.createStartElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.INVENTORY));
 							eventWriter.add(eventFactory.createCharacters(buildEntityString(onItem)));
@@ -224,7 +224,7 @@ public class StaxWriter {
 	 */
 	private String buildEntityString(InanimateEntity item) throws XMLStreamException {
 		StringBuilder str = new StringBuilder();
-		Objects itemEnum = item.asEnum();
+		Entities itemEnum = item.asEnum();
 		// The enum name of the object, as that is the easiest distinction
 		str.append(itemEnum.name()+XMLValues.SPACE);
 		//if it need more detail, it will be in here
@@ -236,7 +236,7 @@ public class StaxWriter {
 			break;
 		case KEY:
 			Key key = (Key)item;
-			str.append(key.id+XMLValues.SPACE);
+			str.append(key.ID+XMLValues.SPACE);
 			str.append(key.getDescription());
 			break;
 		case HEALTH:

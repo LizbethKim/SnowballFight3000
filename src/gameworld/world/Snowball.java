@@ -1,6 +1,6 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 /**
  * Represents a projectile, eg a snowball.
@@ -72,11 +72,11 @@ public class Snowball implements Entity {
 	}
 
 	@Override
-	public Objects asEnum() {
+	public Entities asEnum() {
 		if (this.type == SnowballType.FLAMING) {
-			return Objects.FIRESNOWBALL;
+			return Entities.FIRESNOWBALL;
 		}
-		return Objects.SNOWBALL;
+		return Entities.SNOWBALL;
 	}
 
 }

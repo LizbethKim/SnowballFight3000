@@ -7,7 +7,7 @@ import gameworld.world.Furniture;
 import gameworld.world.Key;
 import gameworld.world.Location;
 import gameworld.world.Tile;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 import graphics.assets.Terrain;
 
 import org.junit.Test;
@@ -62,13 +62,13 @@ public class BoardTests {
 			board[14][y] = new Tile(new Location(14, y), Terrain.GRASS, null);
 		}
 
-		board[0][0].place(new Furniture("A tree", Objects.TREE));
-		board[4][2].place(new Furniture("A tree", Objects.TREE));
-		board[5][3].place(new Furniture("A tree", Objects.TREE));
-		board[2][7].place(new Furniture("A bush", Objects.BUSH));
+		board[0][0].place(new Furniture("A tree", Entities.TREE));
+		board[4][2].place(new Furniture("A tree", Entities.TREE));
+		board[5][3].place(new Furniture("A tree", Entities.TREE));
+		board[2][7].place(new Furniture("A bush", Entities.BUSH));
 		board[6][11].place(new Key("A key", 0));
 		board[12][17] = new Tile(new Location(12,17), Terrain.GRASS, null);
-		board[13][10].place(new Furniture("A bush", Objects.BUSH));
+		board[13][10].place(new Furniture("A bush", Entities.BUSH));
 		return new Board(board);
 	}
 	

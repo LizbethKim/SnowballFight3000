@@ -1,6 +1,6 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 /**
  * Represents a map that can be read to show a more detailed view
@@ -15,8 +15,8 @@ public class Map extends Item {
 	}
 
 	@Override
-	public Objects asEnum() {
-		return Objects.MAP;
+	public Entities asEnum() {
+		return Entities.MAP;
 	}
 
 }

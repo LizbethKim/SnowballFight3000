@@ -1,7 +1,7 @@
 package ui.gamewindow;
 
 import gameworld.game.client.ClientGame;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -177,7 +177,7 @@ public class HUDPanel extends JPanel {
 		// loads in the images which are stored in the jar
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(Objects.class.getResource(filename));
+			img = ImageIO.read(Entities.class.getResource(filename));
 			return img;
 		} catch (IOException e) {
 			// can't load an image so abort the game

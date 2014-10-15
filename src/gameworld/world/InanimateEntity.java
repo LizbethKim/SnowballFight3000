@@ -6,6 +6,13 @@ package gameworld.world;
  *
  */
 public interface InanimateEntity extends Entity {
+	/**
+	 * @return Whether the player can walk through the entity
+	 */
 	public boolean canMoveThrough();
+
+	/**
+	 * @return A description of the entity.
+	 */
 	public String getDescription();
 }

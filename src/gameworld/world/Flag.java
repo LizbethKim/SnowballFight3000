@@ -1,10 +1,18 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
+/**
+ * The flag that must be captured to win the game.
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class Flag extends Item {
 	private Team team;
 
+	/**
+	 * @param t The team who the flag belongs to.
+	 */
 	public Flag(Team t) {
 		this.team = t;
 		this.description = "The " + (this.team == Team.RED ? "red": "blue")
@@ -12,22 +20,21 @@ public class Flag extends Item {
 
 	}
 
-	@Override
-	public boolean canMoveThrough () {
-		return false;
-	}
-	
 	public Team getTeam() {
 		return team;
 	}
 
+	@Override
+	public boolean canMoveThrough () {
+		return false;
+	}
 
 	@Override
-	public Objects asEnum() {
+	public Entities asEnum() {
 		if (this.team == Team.RED) {
-			return Objects.REDFLAG;
+			return Entities.REDFLAG;
 		} else {
-			return Objects.BLUEFLAG;
+			return Entities.BLUEFLAG;
 		}
 	}
 

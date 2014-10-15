@@ -9,10 +9,12 @@ package gameworld.world;
 public abstract class Item implements InanimateEntity {
 	protected String description;
 
+	@Override
 	public boolean canMoveThrough () {
 		return true;
 	}
 
+	@Override
 	public String getDescription() {
 		return description;
 	}

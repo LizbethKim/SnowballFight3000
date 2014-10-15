@@ -1,9 +1,10 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 /**
- *
+ * A door is furniture that can be locked. If it is locked, it is not possible
+ * to move through the door.
  * @author Kelsey Jack 300275851
  *
  */
@@ -11,18 +12,24 @@ public class Door extends Furniture implements Lockable {
 	private boolean locked;
 	public final int id;
 
-	public Door(String description, Direction d, int id, boolean locked) {
-		super(description, Objects.DOOREW);
+	/**
+	 * @param description
+	 * @param d The direction it faces
+	 * @param ID The ID a key must have to unlock it.
+	 * @param locked Whether the door is locked initially
+	 */
+	public Door(String description, Direction d, int ID, boolean locked) {
+		super(description, Entities.DOOREW);
 		if (d == Direction.NORTH || d == Direction.SOUTH) {
-			this.type = Objects.DOORNS;
+			this.type = Entities.DOORNS;
 		}
-		this.id = id;
+		this.id = ID;
 		this.locked = locked;
 	}
 
 	@Override
 	public boolean unlock(Key k) {
-		if (k.id == this.id) {
+		if (k.ID == this.id) {
 			this.locked = false;
 			return true;
 		}

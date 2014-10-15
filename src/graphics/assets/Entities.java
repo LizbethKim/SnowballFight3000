@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
  *  http://www.spriters-resource.com
  * @author Kelsey Jack (300275851) + Elizabeth Kim kimeliz1 (300302456)
  */
-public enum Objects {
+public enum Entities {
 	KEY("key.png", "key.png", "key.png", "key.png"),
 	REDBOX("RedBox.png", "RedBox.png", "RedBox.png", "RedBox.png"),
 	BLUEBOX("BlueBox.png", "BlueBox.png", "BlueBox.png", "BlueBox.png"),
@@ -55,13 +55,13 @@ public enum Objects {
 	 * Creates the enumeration and gives it the associated image.
 	 * @param resourceName
 	 */
-	Objects(String resourceNameNorth, String resourceNameSouth, String resourceNameWest, String resourceNameEast) {
+	Entities(String resourceNameNorth, String resourceNameSouth, String resourceNameWest, String resourceNameEast) {
 		try {
 			imgs = new Image[4];
-			imgs[0] = ImageIO.read(Objects.class.getResource(resourceNameNorth));
-			imgs[1] = ImageIO.read(Objects.class.getResource(resourceNameSouth));
-			imgs[2] = ImageIO.read(Objects.class.getResource(resourceNameEast));
-			imgs[3] = ImageIO.read(Objects.class.getResource(resourceNameWest));
+			imgs[0] = ImageIO.read(Entities.class.getResource(resourceNameNorth));
+			imgs[1] = ImageIO.read(Entities.class.getResource(resourceNameSouth));
+			imgs[2] = ImageIO.read(Entities.class.getResource(resourceNameEast));
+			imgs[3] = ImageIO.read(Entities.class.getResource(resourceNameWest));
 		}
 		catch (IOException e) { throw new Error ("Error in image loading."); }
 	}

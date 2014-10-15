@@ -1,6 +1,6 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 /**
  * "Magic" items. May have some effect on the player who uses it
@@ -82,11 +82,11 @@ public class Powerup extends Item {
 	}
 
 	@Override
-	public Objects asEnum() {
+	public Entities asEnum() {
 		if (power == Power.STRONG_HEALTH_POTION || power == Power.HEALTH_POTION) {
-			return Objects.HEALTH;
+			return Entities.HEALTH;
 		}
-		return Objects.POWERUP;
+		return Entities.POWERUP;
 	}
 
 }

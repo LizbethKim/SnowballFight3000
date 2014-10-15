@@ -12,7 +12,7 @@ import gameworld.world.Player;
 import gameworld.world.Snowball;
 import gameworld.world.Snowball.SnowballType;
 import gameworld.world.Team;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import org.junit.Test;
 
@@ -46,7 +46,7 @@ public class ItemTests {
 		Bag b = new Bag();
 		Flag f = new Flag(Team.RED);
 		assertFalse(b.addItem(f));
-		assertTrue(b.asEnum() == Objects.BAG);
+		assertTrue(b.asEnum() == Entities.BAG);
 		assertTrue(b.canMoveThrough());
 
 	}

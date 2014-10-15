@@ -1,7 +1,7 @@
 package storage.load;
 
 import gameworld.world.*;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 import graphics.assets.Terrain;
 
 import java.io.File;
@@ -291,35 +291,35 @@ public class StaxParser {
 		String name = values[0];
 		InanimateEntity item = null;
 
-		if(name.equals(Objects.KEY.name())){
+		if(name.equals(Entities.KEY.name())){
 			//Its a Key! parse its description and id
 			item = new Key(parseDescription(2, values), Integer.parseInt(values[1]));
-		}else if(name.equals(Objects.BAG.name())){
+		}else if(name.equals(Entities.BAG.name())){
 			//bags don't have anything special
 			chestLoad = true;
 			item = new Bag();
-		}else if(name.equals(Objects.CHEST.name())){
+		}else if(name.equals(Entities.CHEST.name())){
 			//turn chestLoad on and parse it's description
 			chestLoad = true;
 			item = new Chest(parseDescription(1, values), Integer.parseInt(values[1]), Boolean.parseBoolean(values[2]));
-		}else if(name.equals(Objects.REDFLAG.name())){
+		}else if(name.equals(Entities.REDFLAG.name())){
 			//new Flag for the redteam
 			item = new Flag(Team.RED);
-		}else if(name.equals(Objects.BLUEFLAG.name())){
+		}else if(name.equals(Entities.BLUEFLAG.name())){
 			//new flag for the blue team
 			item = new Flag(Team.BLUE);
-		}else if(name.equals(Objects.DOOREW.name())){
+		}else if(name.equals(Entities.DOOREW.name())){
 			//parse its description, id. It's direction will be east/west
 			item = new Door(parseDescription(3, values), Direction.EAST, Integer.parseInt(values[1]),Boolean.parseBoolean(values[2]));
-		}else if(name.equals(Objects.DOORNS.name())){
+		}else if(name.equals(Entities.DOORNS.name())){
 			//parse its description, id. It's direction will be north/south
 			item = new Door(parseDescription(3, values), Direction.NORTH, Integer.parseInt(values[1]),Boolean.parseBoolean(values[2]));
-		}else if(name.equals(Objects.POWERUP.name()) || name.equals(Objects.HEALTH.name())){
+		}else if(name.equals(Entities.POWERUP.name()) || name.equals(Entities.HEALTH.name())){
 			//It's some kind of powerup/health, just give it it's power enum
 			item = new Powerup(Powerup.Power.valueOf(values[1]));
 		}else{
 			//It's just another piece of furniture, parse it's description and type enum.
-			Objects type = Objects.valueOf(name);
+			Entities type = Entities.valueOf(name);
 			item = new Furniture(parseDescription(1, values), type);
 		}
 

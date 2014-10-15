@@ -1,5 +1,10 @@
 package gameworld.world;
 
+/**
+ * The effect of a FireSpeedBoost powerup.
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class FireSpeedEffect implements PowerupEffect, Runnable {
 	private Player p;
 

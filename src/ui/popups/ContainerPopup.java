@@ -2,7 +2,7 @@ package ui.popups;
 
 import gameworld.game.client.ClientGame;
 import gameworld.game.client.NotAContainerException;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -52,7 +52,7 @@ public class ContainerPopup extends JPanel implements KeyListener {
 	private ClientGame client;
 	private int selectedItem;
 	private int maxItems;
-	private List<Objects> items;
+	private List<Entities> items;
 	private boolean inventoryContainer;
 	private int width;
 	private int height;

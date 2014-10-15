@@ -1,23 +1,27 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 /**
- * Can lock Lockable objects. Associated with one Lockable.
+ * Can lock Lockable objects. Associated with any lockable with the same ID.
  * @author Kelsey Jack 300275851
  */
 public class Key extends Item {
-	public final int id;
+	public final int ID;
 
-	public Key (String description, int id) {
+	/**
+	 * @param description
+	 * @param ID The ID of the Lockable(s) this key opens.
+	 */
+	public Key (String description, int ID) {
 		this.description = description;
-		this.id = id;
+		this.ID = ID;
 	}
 
 
 	@Override
-	public Objects asEnum() {
-		return Objects.KEY;
+	public Entities asEnum() {
+		return Entities.KEY;
 	}
 
 }
