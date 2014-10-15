@@ -74,7 +74,6 @@ public class RemotePlayer implements Runnable {
 			}
 			//flush the data
 			connection.getOutputStream().flush();
-			System.out.println("ZESRXDTCFYVGUBINO");
 		} catch (IOException e) {
 			System.out.println("Error writing data to "+id+"'s socket.");
 			// TODO Auto-generated catch block
