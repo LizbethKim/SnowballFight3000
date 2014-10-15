@@ -186,6 +186,7 @@ public class StaxParser {
 					if (elemName.equals(XMLValues.TILE)) {
 						tileLoad = false;
 						tiles[curTile.getCoords().x][curTile.getCoords().y] = curTile;
+						System.out.println("tile: "+curTile.getType().name()+" "+curTile.getCoords().x+" "+curTile.getCoords().y);
 						continue;
 					}
 					
@@ -235,7 +236,7 @@ public class StaxParser {
 		for(int i=1;i<values.length;i=i+2){
 			Location loc = parseLoc(values[i], values[i+1]);
 			a.add(tiles[loc.x][loc.y]);
-			System.out.println("added tile "+ loc.x+" " +loc.y);
+			System.out.println("added tile "+i);
 		}
 		return a;
 	}

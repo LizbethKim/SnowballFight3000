@@ -32,6 +32,7 @@ public enum Objects {
 	CORNER_N_W("CornerNW.png", "CornerSE.png", "CornerSW.png", "CornerNE.png"),
 	CORNER_N_E("CornerNE.png", "CornerSW.png", "CornerNW.png", "CornerSE.png"),
 	SNOWBALL("Snowball.png", "Snowball.png", "Snowball.png", "Snowball.png"),
+	FIRESNOWBALL("FlamingSnowball.png", "FlamingSnowball.png", "FlamingSnowball.png", "FlamingSnowball.png"),
 	BUSH("Bush.png", "Bush.png", "Bush.png", "Bush.png"),
 	REDPLAYER_N("RedPlayerNorth.png", "RedPlayerSouth.png", "RedPlayerWest.png", "RedPlayerEast.png"),
 	REDPLAYER_E("RedPlayerEast.png", "RedPlayerWest.png", "RedPlayerNorth.png", "RedPlayerSouth.png"),
