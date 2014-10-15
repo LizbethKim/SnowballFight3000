@@ -38,6 +38,7 @@ public class ClientGame {
 
 	private BoardState boardState;
 	private int selectedIndex = -1;	// index selected in inventory
+	private String lastInspected = "";
 
 
 	public ClientGame(String name, String IP, Team team, UI display) {
@@ -134,12 +135,11 @@ public class ClientGame {
 		}
 	}
 
-	public String inspectItem() throws NoItemException {
+	public void inspectItem() throws NoItemException {
 		Location facing = player.getLocationInFrontOf();
 		if (board.containsLocation(facing) && board.tileAt(facing).getOn() != null) {
-			return board.tileAt(facing).getOn().getDescription();
+			this.lastInspected =  board.tileAt(facing).getOn().getDescription();
 		}
-		throw new NoItemException();
 	}
 
 	public void pickUpItem() {
@@ -286,6 +286,10 @@ public class ClientGame {
 
 	public Direction getOrientation(){
 		return boardState.getDirection();
+	}
+
+	public String getLastInspected() {
+		return lastInspected;
 	}
 
 	public void save(File file) {
