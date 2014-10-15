@@ -20,6 +20,10 @@ import network.events.CreateLocalPlayerEvent;
 import network.events.UpdateEvent;
 
 /**
+ * This class handles a players connection, calling
+ * updates on a ServerGame object as they are recieved,
+ * and handles queueing and sending of UpdateEvents to
+ * the player
  * @author Bryden Frizzell
  *
  */
@@ -38,12 +42,12 @@ public class RemotePlayer implements Runnable {
 	 * @param mapWidth the width of the map, used for de-packing locations
 	 * @param mapHeight the height of the map, used for de-packing locations
 	 */
-	public RemotePlayer(int id, Socket sock, ServerGame g, int mapW, int mapH) {
-		this.game = g;
+	public RemotePlayer(int id, Socket sock, ServerGame game, int mapWidth, int mapHeight) {
+		this.game = game;
 		this.id = id;
 		this.connection = sock;
-		this.mapWidth=mapW;
-		int maxLocation = mapW*mapH;
+		this.mapWidth=mapWidth;
+		int maxLocation = mapWidth*mapHeight;
 		for(locationLen=0;maxLocation>0;locationLen++){
 			maxLocation=maxLocation>>1;
 		}
@@ -55,8 +59,8 @@ public class RemotePlayer implements Runnable {
 	 * call sendUpdates to send queued events
 	 * @param event the event to be queued to be sent to the server
 	 */
-	public void queueEvent(UpdateEvent e) {
-		queuedEvents.offer(e);
+	public void queueEvent(UpdateEvent event) {
+		queuedEvents.offer(event);
 	}
 
 	/**

@@ -21,9 +21,12 @@ public class Server implements Runnable {
 
 	private ServerGame game;
 
-	public Server(ServerGame g) {
-		game = g;
-		g.setServer(this);
+	/**
+	 * @param serverGame the ServerGame object for updates to be called on
+	 */
+	public Server(ServerGame serverGame) {
+		game = serverGame;
+		game.setServer(this);
 		updateQueue = new LinkedBlockingQueue<RemotePlayer>();
 		playersByID = new HashMap<Integer, RemotePlayer>();
 		//start accepting thread
@@ -41,6 +44,11 @@ public class Server implements Runnable {
 		LocationEvent.setWorldSize(game.getBoardWidth(), game.getBoardHeight());
 	}
 
+	/**
+	 * Queues an event to be sent to a player
+	 * @param event the event to be sent
+	 * @param playerID the ID of the player the event is being sent to
+	 */
 	public void queuePlayerUpdate(UpdateEvent event, int playerID) {
 		//System.out.println("Queued event: "+event);
 		RemotePlayer playerUpdates = playersByID.get(playerID);
@@ -49,11 +57,15 @@ public class Server implements Runnable {
 		updateQueue.offer(playerUpdates);
 	}
 
+	/**
+	 * Generates a new, unused player ID
+	 * @return a new, unused player ID
+	 */
 	public int generatePlayerID() {
 		//BF make this method less stupid
-		int id = (int) (Math.random()*1000000);
+		int id = (int) (Math.random()*255);
 		while(playersByID.containsKey(id)) {
-			id = (int) (Math.random()*1000000);
+			id = (int) (Math.random()*255);
 		}
 		return id;
 	}
