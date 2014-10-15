@@ -24,7 +24,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.xml.stream.XMLEventFactory;
@@ -52,7 +51,7 @@ public class StaxWriter {
 	private List<Player> players;
 	private XMLEventWriter eventWriter;
 	private List<Area> areaList;
-	private boolean mainArea = true;
+	//private boolean mainArea = true;
 
 	/**
 	 * Writes the storedGame to an XML file
