@@ -5,7 +5,7 @@ import graphics.assets.Objects;
 /**
  * "Magic" items. May have some effect on the player who uses it
  * and/or the player it's used on.
- * Uses a strategy pattern and a factory pattern. KTC (?) 
+ * Uses a strategy pattern and a factory pattern.
  * @author Kelsey Jack 300275851
  *
  */

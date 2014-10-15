@@ -44,7 +44,7 @@ public class ClientGame {
 	public ClientGame(String name, String IP, Team team, UI display) {
 		this.client = new Client(IP);
 		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
-		this.playerID = 0; // KTC (?)
+		this.playerID = 0;
 		this.board = sb.getBoard();
 		System.out.println(board);
 
@@ -322,9 +322,7 @@ public class ClientGame {
 			this.player.setSnowballDelay(Player.DEFAULT_SNOWBALL_DELAY);
 		}
 	}
-	public void toggleInvincibility () {
-		// KTC think about
-	}
+
 	public void toggleOneHitKill () {
 		if (this.player.getCanThrow() == SnowballType.ONE_HIT) {
 			this.player.setCanThrow(SnowballType.NORMAL);
