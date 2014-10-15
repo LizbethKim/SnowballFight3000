@@ -1,9 +1,6 @@
 package gameworld.game;
 
-import network.Server;
 import ui.gamewindow.UI;
-import gameworld.game.server.ServerGame;
-import gameworld.world.Board;
 
 /**
  * Main game loop.

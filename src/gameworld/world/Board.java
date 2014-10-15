@@ -3,7 +3,6 @@ package gameworld.world;
 import java.util.Collections;
 import java.util.List;
 
-import gameworld.world.Powerup.Power;
 import graphics.assets.Objects;
 import graphics.assets.Terrain;
 

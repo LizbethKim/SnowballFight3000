@@ -18,23 +18,22 @@ import gameworld.world.*;
  */
 public class ServerGame {
 	private Board board;
-	private byte[] map;
 	private Map<Integer, Player> playerIDs;
 	private List<Snowball> projectiles;
 	private SnowballFactory snowballFactory;
 	private Server server;
+
+	private byte[] map;
 	private int time = 12;	// 24 hour time
 	private long lastHourTime;
 	private final long millisPerHour = 10000;
 
-	public ServerGame(Board b) {
-		this.board = b;
-		this.playerIDs = new HashMap<Integer, Player>();
-		this.projectiles = new ArrayList<Snowball>();
-		this.snowballFactory = new SnowballFactory();
-	}
-
-	public ServerGame(StoredGame sg,  byte[] map) {
+	/**
+	 * Creates a new game with the board from the StoredGame
+	 * @param sg
+	 * @param map
+	 */
+	public ServerGame(StoredGame sg, byte[] map) {
 		this.board = sg.getBoard();
 		this.map = map;
 		this.playerIDs = new HashMap<Integer, Player>();
@@ -42,7 +41,11 @@ public class ServerGame {
 		this.snowballFactory = new SnowballFactory();
 	}
 
-	// examples of methods that will be in here
+	/**
+	 * Moves the player with the given ID to the given location
+	 * @param playerID
+	 * @param l
+	 */
 	public void movePlayer (int playerID, Location l) {
 		Player p = playerIDs.get(playerID);
 		if (board.canTraverse(l) && p != null && this.isFree(l)) {
@@ -54,6 +57,11 @@ public class ServerGame {
 		}
 	}
 
+	/**
+	 * Turns the player with the given ID to the given direction
+	 * @param playerID
+	 * @param d
+	 */
 	public void turnPlayer(int playerID, Direction d) {
 		Player p = playerIDs.get(playerID);
 		if (p != null) {
@@ -64,6 +72,10 @@ public class ServerGame {
 		}
 	}
 
+	/**
+	 * Makes the player with the given ID pick up the item in front of them
+	 * @param playerID
+	 */
 	public void pickUpItem (int playerID) {
 		Player p = this.playerIDs.get(playerID);
 		if (p != null) {
@@ -82,6 +94,12 @@ public class ServerGame {
 		}
 	}
 
+	/**
+	 * Makes the player with the given ID take the item at the given index from the
+	 * container in front of them
+	 * @param playerID
+	 * @param index
+	 */
 	public void takeFromContainer(int playerID, int index) {
 		Player p = this.playerIDs.get(playerID);
 		if (p != null) {
@@ -102,6 +120,12 @@ public class ServerGame {
 		}
 	}
 
+	/**
+	 * Makes the player with the given ID drop the item at the given index in their
+	 * inventory.
+	 * @param playerID
+	 * @param index
+	 */
 	public void dropItem(int playerID, int index) {
 		Player p = this.playerIDs.get(playerID);
 		if (p != null) {
@@ -132,7 +156,12 @@ public class ServerGame {
 		}
 	}
 
-
+	/**
+	 * Makes the player with the given ID use the item at the given index
+	 * in their inventory.
+	 * @param playerID
+	 * @param index
+	 */
 	public void useItem(int playerID, int index) {
 		Player p = this.playerIDs.get(playerID);
 		if (p != null) {
@@ -153,16 +182,11 @@ public class ServerGame {
 		}
 	}
 
-	private void unlock(Location l) {
-		if (board.containsLocation(l) && board.tileAt(l).getOn() != null
-				&& board.tileAt(l).getOn() instanceof Lockable) {
-			((Lockable)board.tileAt(l).getOn()).setLocked(false);
-			for (int id: playerIDs.keySet()) {
-				server.queuePlayerUpdate(new UnlockEvent(l), id);
-			}
-		}
-	}
-
+	/**
+	 * Throws a snowball of the given type from the given paper
+	 * @param playerID
+	 * @param type
+	 */
 	public void throwSnowball(int playerID, Snowball.SnowballType type) {
 		Player thrower = playerIDs.get(playerID);
 		if (board.tileAt(thrower.getLocation()).isSnow()) {
@@ -170,6 +194,10 @@ public class ServerGame {
 		}
 	}
 
+	/**
+	 * Unfreezes the player with the given ID
+	 * @param playerID
+	 */
 	public void unfreezePlayer(int playerID) {
 		Player p = this.playerIDs.get(playerID);
 		if (p!= null) {
@@ -190,6 +218,12 @@ public class ServerGame {
 		}
 	}
 
+	/**
+	 * Adds a player with the given information to the playerIDs map.
+	 * @param playerID
+	 * @param name
+	 * @param t
+	 */
 	public void addPlayer(int playerID, String name, Team t) {
 		Area spawnArea = board.getSpawnArea(t);
 		Location spawnLoc = new NullLocation();
@@ -213,6 +247,10 @@ public class ServerGame {
 		}
 	}
 
+	/**
+	 * Removes the player with the given ID from the game
+	 * @param playerID
+	 */
 	public void removePlayer(int playerID) {
 		playerIDs.remove(playerID);
 		for (int id: playerIDs.keySet()) {
@@ -223,22 +261,9 @@ public class ServerGame {
 		}
 	}
 
-	public void setServer(Server s) {
-		this.server = s;
-	}
-
-	public int getBoardWidth() {
-		return board.width();
-	}
-
-	public int getBoardHeight() {
-		return board.height();
-	}
-
-	public void requestFile(int id) {
-		server.queuePlayerUpdate(new SendMapEvent(map), id);
-	}
-
+	/**
+	 * Updates the model one clock tick
+	 */
 	public void clockTick() {
 		Iterator<Snowball> it = projectiles.iterator();
 		while (it.hasNext()) {
@@ -282,6 +307,37 @@ public class ServerGame {
 				server.queuePlayerUpdate(new UpdateTimeEvent(time), id);
 			}
 			this.lastHourTime = System.currentTimeMillis();
+		}
+	}
+
+
+	// getters and setters
+
+	public void setServer(Server s) {
+		this.server = s;
+	}
+
+	public int getBoardWidth() {
+		return board.width();
+	}
+
+	public int getBoardHeight() {
+		return board.height();
+	}
+
+	public void getFile(int id) {
+		server.queuePlayerUpdate(new SendMapEvent(map), id);
+	}
+
+	// helper methods
+
+	private void unlock(Location l) {
+		if (board.containsLocation(l) && board.tileAt(l).getOn() != null
+				&& board.tileAt(l).getOn() instanceof Lockable) {
+			((Lockable)board.tileAt(l).getOn()).setLocked(false);
+			for (int id: playerIDs.keySet()) {
+				server.queuePlayerUpdate(new UnlockEvent(l), id);
+			}
 		}
 	}
 
