@@ -43,6 +43,7 @@ public class StaxParser {
 	private boolean playerLoad=false;
 	private boolean tileLoad=false;
 	private boolean chestLoad=false;
+	private int areaCount=0;
 	
 	
 
@@ -116,7 +117,9 @@ public class StaxParser {
 					if (elemName.equals(XMLValues.AREA)) {
 						//get the characters within the tag
 						event = eventReader.nextEvent();
-						String[] values = event.asCharacters().getData().split(XMLValues.DELIMITER);
+						String data = event.asCharacters().getData();
+						System.out.println("DATA: "+data.length());
+						String[] values = data.split(XMLValues.DELIMITER);
 						curArea = parseArea(values);
 						continue;
 					}
@@ -153,7 +156,6 @@ public class StaxParser {
 						}else if(tileLoad){
 							//Loading items on a tile, but not within a chest, so add to the tile
 							curTile.place(item);
-							System.out.println("ITEM PLACED" + curTile.getOn().asEnum().name());
 						}
 						continue;
 					}
@@ -186,13 +188,14 @@ public class StaxParser {
 					if (elemName.equals(XMLValues.TILE)) {
 						tileLoad = false;
 						tiles[curTile.getCoords().x][curTile.getCoords().y] = curTile;
-						System.out.println("tile: "+curTile.getType().name()+" "+curTile.getCoords().x+" "+curTile.getCoords().y);
 						continue;
 					}
 					
 					//end of an area, add it to the list
 					if (elemName.equals(XMLValues.AREA)) {
-						areaList.add(curArea);
+						if(areaCount>=2){
+							areaList.add(curArea);
+						}		
 						continue;
 					}
 					
@@ -226,18 +229,27 @@ public class StaxParser {
 	 */
 	private Area parseArea(String[] values) {
 		Area a;
-		if(values[0].equals("NOTEAM")){
+		if(areaCount==1){
+			a = curArea;
+		}else if(values[0].equals("NOTEAM")){
 			//just a plain area
 			a = new Area();
 		}else{
 			//spawn area, give it its team name
 			a = new SpawnArea(Team.valueOf(values[0]));
 		}
-		for(int i=1;i<values.length;i=i+2){
+		
+		int i;
+		System.out.println(values.length);
+		for(i = 1;i<values.length;i=i+2){
 			Location loc = parseLoc(values[i], values[i+1]);
+			if(curArea==null){
+				System.out.println("ITS NULL");
+			}
 			a.add(tiles[loc.x][loc.y]);
-			System.out.println("added tile "+i);
 		}
+		System.out.println("FINAL i VALUE:"+i);
+		areaCount++;
 		return a;
 	}
 

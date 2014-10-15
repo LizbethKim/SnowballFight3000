@@ -49,6 +49,7 @@ public class StaxWriter {
 	private List<Player> players;
 	private XMLEventWriter eventWriter;
 	private List<Area> areaList;
+	private boolean mainArea = true;
 
 	/**
 	 * Writes the storedGame to an XML file
@@ -143,6 +144,9 @@ public class StaxWriter {
 
 				// make the area tags
 				for(Area area : areaList){
+					//if(area.getTiles().size()>2290){
+						//Area newArea = area.
+					//}
 					createTag(XMLValues.AREA,buildAreaString(area));
 					eventWriter.add(newline);
 				}
