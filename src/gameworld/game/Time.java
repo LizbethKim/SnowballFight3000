@@ -4,7 +4,7 @@ import gameworld.game.server.ServerGame;
 
 /**
  * Used to tick time. Calls tick on a ServerGame.
- * @author jackkels
+ * @author Kelsey Jack 300275851
  *
  */
 public class Time implements Runnable {

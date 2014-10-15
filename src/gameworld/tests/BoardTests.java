@@ -13,19 +13,21 @@ import graphics.assets.Terrain;
 import org.junit.Test;
 
 public class BoardTests {
-	
+
 	@Test
 	public void testTileAt() {
 		Board b = setUpBoard();
 		assertTrue(b.tileAt(new Location (0,0)).getType() == Terrain.GRASS);
 	}
-	
-	@Test 
+
+	@Test
 	public void testTraversable() {
-		
+		Board b = setUpBoard();
+		assertTrue(b.canTraverse(new Location(3,3)));
+		assertFalse(b.canTraverse(new Location(5,3)));
 	}
-	
-	@Test 
+
+	@Test
 	public void testContainsLocation() {
 		Board b = setUpBoard();
 		assertTrue(b.containsLocation(new Location(0,0)));
@@ -36,8 +38,8 @@ public class BoardTests {
 		assertFalse(b.containsLocation(new Location(18, 10)));
 		assertFalse(b.containsLocation(new Location(15, 20)));
 	}
-	
-	@Test 
+
+	@Test
 	public void testLocation() {
 		Location l = new Location(2,3);
 		assertTrue(Location.locationInFrontOf(l, Direction.EAST).equals(new Location(3,3)));
@@ -45,8 +47,8 @@ public class BoardTests {
 		assertTrue(Location.locationInFrontOf(l, Direction.SOUTH).equals(new Location(2,4)));
 		assertTrue(Location.locationInFrontOf(l, Direction.WEST).equals(new Location(1,3)));
 	}
-	
-	
+
+
 	// same as default board setup, but local in case that gets changed.
 	private Board setUpBoard() {
 		Tile[][] board = new Tile[15][20];
@@ -71,6 +73,6 @@ public class BoardTests {
 		board[13][10].place(new Furniture("A bush", Entities.BUSH));
 		return new Board(board);
 	}
-	
+
 
 }

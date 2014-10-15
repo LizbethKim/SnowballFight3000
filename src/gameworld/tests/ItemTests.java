@@ -17,7 +17,6 @@ import graphics.assets.Entities;
 import org.junit.Test;
 
 public class ItemTests {
-	// KTC finish these tests
 	@Test
 	public void testChest() {
 		Chest c = new Chest("A chest", 0, false);
@@ -80,16 +79,6 @@ public class ItemTests {
 
 	}
 
-	@Test
-	public void testKey() {
-
-	}
-
-	@Test
-	public void testFurniture() {
-
-	}
-
 	public void testDoor() {
 		Door d = new Door("A door", Direction.NORTH, 2, true);
 		Key goodKey = new Key("A key", 2);
@@ -101,5 +90,4 @@ public class ItemTests {
 		assertFalse(d.isLocked());
 		assertTrue(d.canMoveThrough());
 	}
-
 }

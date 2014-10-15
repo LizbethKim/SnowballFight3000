@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Represents one area on the board. Stores the tiles in that area.
- * @author jackkels
+ * @author Kelsey Jack 300275851
  *
  */
 public class Area {
