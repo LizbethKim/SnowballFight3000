@@ -216,7 +216,7 @@ public class GraphicsPane extends JPanel {
 			}
 		}
 	}
-	
+
 	/**
 	 * Drawing the board with the "east" direction being north
 	 * @param currentBoard Terrain data from board state
@@ -272,7 +272,7 @@ public class GraphicsPane extends JPanel {
 			}
 		}
 	}
-	
+
 	/**
 	 * Drawing the board with "west" direction as north
 	 * @param currentBoard Terrain data passed in from board state

@@ -251,7 +251,6 @@ public class ClientUpdater {
 	 * @param winners
 	 */
 	public void endGame (Team winners) {
-		System.out.println("winning!");
 		display.endGame(winners == Team.RED ? "Red Team"  : "Blue Team");
 	}
 

@@ -38,7 +38,6 @@ public class Board {
 	 * @return The tile at the given location
 	 */
 	public Tile tileAt(Location l) {
-		System.out.println(l);
 		if (l.x >= 0 && l.x < board.length && l.y >= 0 && l.y < board[0].length) {
 			return board[l.x][l.y];
 		}

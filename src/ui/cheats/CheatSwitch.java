@@ -17,14 +17,14 @@ import ui.gamewindow.HUDPanel;
 /**
  * CheatSwitch is an abstract class providing the framework for adding and
  * displaying a switch to toggle cheats on and off by clicking the switch image
- * 
+ *
  * @author Ryan Burnell, 300279172
- * 
+ *
  */
 
 public abstract class CheatSwitch extends JPanel {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -7548076773638146542L;
 	private static final Image onSwitch = HUDPanel.loadImage("OnSwitch.png");
@@ -73,7 +73,6 @@ public abstract class CheatSwitch extends JPanel {
 		addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("switching");
 				switchedOn = !switchedOn;
 				changeState();
 				repaint();

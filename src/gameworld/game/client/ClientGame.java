@@ -333,7 +333,6 @@ public class ClientGame {
 
 	public void setID(int ID) {
 		this.playerID = ID;
-		System.out.println("ID is " + ID);
 		this.player.setID(ID);
 		this.playerIDs.put(ID, this.player);
 	}
