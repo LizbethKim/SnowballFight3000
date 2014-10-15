@@ -19,35 +19,17 @@ public class Tile {
 		this.on = on;
 	}
 
-	public Location getCoords () {
-		return coords;
-	}
-
-	public InanimateEntity getOn() {
-		return on;
-	}
-
-	public void clear() {
-		this.on = null;
-	}
-
+	/**
+	 * Places the given InanimateEntity on the tile if it's clear.
+	 * @param i
+	 * @return Whether the InanimateEntity was placed
+	 */
 	public boolean place(InanimateEntity i) {
 		if (this.on != null) {
 			return false;
 		}
 		this.on = i;
 		return true;
-	}
-
-	/**
-	 * @return Whether there is an object on this tile
-	 */
-	public boolean isClear() {
-		return on == null;
-	}
-
-	public boolean isSnow() {
-		return type == Terrain.SNOW;
 	}
 
 	/**
@@ -61,7 +43,32 @@ public class Tile {
 		return true;
 	}
 
+	/**
+	 * @return Whether there is an object on this tile
+	 */
+	public boolean isClear() {
+		return on == null;
+	}
+
+	// Getters and setters
+
+	public boolean isSnow() {
+		return type == Terrain.SNOW;
+	}
+
 	public Terrain getType() {
 		return type;
+	}
+
+	public Location getCoords () {
+		return coords;
+	}
+
+	public InanimateEntity getOn() {
+		return on;
+	}
+
+	public void clear() {
+		this.on = null;
 	}
 }

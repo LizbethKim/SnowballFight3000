@@ -81,8 +81,8 @@ public class PlayerInventory implements Inventory {
 	public int size() {
 		return contents.size();
 	}
-	
-	@Override 
+
+	@Override
 	public int maxSize() {
 		return itemLimit;
 	}

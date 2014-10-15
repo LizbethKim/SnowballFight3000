@@ -1,5 +1,10 @@
 package gameworld.world;
 
+/**
+ * The effect of a Potion powerup.
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class PotionEffect implements PowerupEffect {
 	private int boost;
 

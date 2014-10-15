@@ -29,6 +29,10 @@ public class Powerup extends Item {
 		}
 	}
 
+	/**
+	 * Creates a powerup with the given power
+	 * @param p
+	 */
 	public Powerup(Power p) {
 		this.power = p;
 		this.description = p.description;
@@ -73,6 +77,10 @@ public class Powerup extends Item {
 		}
 	}
 
+	/**
+	 * Applies the effect of the powerup to the given player
+	 * @param p
+	 */
 	public void use (Player p) {
 		effect.apply(p);
 	}
