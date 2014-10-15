@@ -47,7 +47,7 @@ public class ClientGame {
 		this.playerID = 0;
 		this.board = sb.getBoard();
 
-		// this.board = Board.defaultBoard();
+		// this.board = Board.defaultBoard(); KTC
 
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();
@@ -59,9 +59,6 @@ public class ClientGame {
 		client.startReceiving(u, board.width(), board.height());
 	}
 
-	public int getPlayerHealth() {
-		return player.getHealth();
-	}
 
 	public List<Objects> getPlayerInventory() {
 		return player.getInventoryEnums();
@@ -85,6 +82,7 @@ public class ClientGame {
 				if (board.containsLocation(newLoc) && this.isFree(newLoc)) {
 					if (board.canTraverse(newLoc)) {
 						client.sendMove(newLoc);
+						this.lastInspected = "";
 					} else if (board.tileAt(newLoc).getOn() instanceof Door) {
 						if (this.unlock((Lockable)board.tileAt(newLoc).getOn(), newLoc)) {
 							client.sendMove(newLoc);
@@ -97,16 +95,6 @@ public class ClientGame {
 			}
 		lastMovedTime = System.currentTimeMillis();
 		}
-	}
-
-	public void rotateClockwise() {
-		boardState.rotateClockwise();
-		refresh();
-	}
-
-	public void rotateAnticlockwise() {
-		boardState.rotateAnticlockwise();
-		refresh();
 	}
 
 	public void throwSnowball() {
@@ -219,13 +207,52 @@ public class ClientGame {
 		throw new NotAContainerException();
 	}
 
-	public void unfreezePlayer() {
+	public boolean unfreezePlayer() {
 		Location facing = player.getLocationInFrontOf();
 		for(Player p: playerIDs.values()) {
 			if (p.getLocation().equals(facing)) {
 				client.unfreezePlayer(this.playerID);
+				return true;
 			}
 		}
+		return false;
+	}
+
+	public void toggleUnlimitedSpeed () {
+		if (this.player.getStepDelay() != 0) {
+			this.player.setStepDelay(0);
+		} else {
+			this.player.setStepDelay(Player.DEFAULT_STEP_DELAY);
+		}
+	}
+	public void toggleUnlimitedFireRate () {
+		if (this.player.getSnowballDelay() != 0) {
+			this.player.setSnowballDelay(0);
+		} else {
+			this.player.setSnowballDelay(Player.DEFAULT_SNOWBALL_DELAY);
+		}
+	}
+
+	public void toggleOneHitKill () {
+		if (this.player.getCanThrow() == SnowballType.ONE_HIT) {
+			this.player.setCanThrow(SnowballType.NORMAL);
+		} else {
+			this.player.setCanThrow(SnowballType.ONE_HIT);
+		}
+	}
+
+	public void toggleNightVision() {
+		boardState.toggleNightVision();
+	}
+
+	public void rotateClockwise() {
+		boardState.rotateClockwise();
+		refresh();
+	}
+
+	public void rotateAnticlockwise() {
+		boardState.rotateAnticlockwise();
+		refresh();
 	}
 
 	public int getPlayerID() {
@@ -239,6 +266,11 @@ public class ClientGame {
 
 	public void setSelectedIndex(int selectedIndex) {
 		this.selectedIndex = selectedIndex;
+	}
+
+
+	public int getPlayerHealth() {
+		return player.getHealth();
 	}
 
 
@@ -289,32 +321,9 @@ public class ClientGame {
 				boardState, display, playerID);
 	}
 
-	public void toggleUnlimitedSpeed () {
-		if (this.player.getStepDelay() != 0) {
-			this.player.setStepDelay(0);
-		} else {
-			this.player.setStepDelay(Player.DEFAULT_STEP_DELAY);
-		}
-	}
-	public void toggleUnlimitedFireRate () {
-		if (this.player.getSnowballDelay() != 0) {
-			this.player.setSnowballDelay(0);
-		} else {
-			this.player.setSnowballDelay(Player.DEFAULT_SNOWBALL_DELAY);
-		}
-	}
 
-	public void toggleOneHitKill () {
-		if (this.player.getCanThrow() == SnowballType.ONE_HIT) {
-			this.player.setCanThrow(SnowballType.NORMAL);
-		} else {
-			this.player.setCanThrow(SnowballType.ONE_HIT);
-		}
-	}
-	public void toggleNightVision() {
-		boardState.toggleNightVision();
-	}
 
+	// Helper methods
 	private boolean isFree(Location l) {
 		for (Player p: playerIDs.values()) {
 			if (p.getLocation().equals(l)) {
