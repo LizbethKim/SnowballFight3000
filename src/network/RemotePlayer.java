@@ -80,7 +80,6 @@ public class RemotePlayer implements Runnable {
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
 			System.out.println("Error writing data to "+id+"'s socket.");
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -92,7 +91,6 @@ public class RemotePlayer implements Runnable {
 			while (!connection.isClosed()) {
 				//switch by packet ID
 				int in =  readFromSocket();
-				System.out.println(in);
 				if(in==0x01) {
 					readMove();
 				}
@@ -133,7 +131,6 @@ public class RemotePlayer implements Runnable {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SocketClosedException e) {
 			System.out.println("Socket forcibly closed.");
@@ -141,7 +138,6 @@ public class RemotePlayer implements Runnable {
 				try {
 					connection.close();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -150,6 +146,7 @@ public class RemotePlayer implements Runnable {
 	}
 
 	private void readMove() throws IOException, SocketClosedException {
+		//pack location
 		int input = 0;
 		for(int i=0;i<(locationLen/8)+1;i++) {
 			input += (((int)readFromSocket())<<(i*8));
@@ -174,7 +171,9 @@ public class RemotePlayer implements Runnable {
 
 	private String readString() throws IOException, SocketClosedException {
 		String output = "";
+		//read length
 		int len = readFromSocket();
+		//read string
 		for(int i=0;i<len;i++) {
 			output = output + (char)readFromSocket();
 		}
@@ -195,7 +194,6 @@ public class RemotePlayer implements Runnable {
 		if (input == -1) {
 			throw new SocketClosedException();
 		}
-		// RAAEAAAAAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEG
 		return input;
 	}
 

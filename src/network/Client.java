@@ -112,7 +112,6 @@ public class Client implements Runnable {
 				else if (in == 0x0A) {
 					int hp = readFromSocket();
 					updater.updatePlayerHealth(hp);
-					// BF I added it in, hope that's ok - Kelsey
 				}
 				// freeze player
 				else if (in == 0x0B) {
@@ -201,6 +200,7 @@ public class Client implements Runnable {
 	 */
 	public void sendMove(Location location) {
 		try {
+			// write packed location
 			int output = location.x+(location.y*worldWidth);
 			connection.getOutputStream().write(0x01);
 			for(int i=0;i<(locationLen/8)+1;i++) {
@@ -406,7 +406,9 @@ public class Client implements Runnable {
 	 */
 	private String readString() throws IOException, SocketClosedException {
 		String output = "";
+		//read length
 		int len = readFromSocket();
+		//read string
 		for(int i=0;i<len;i++) {
 			output = output + (char)readFromSocket();
 		}
@@ -420,10 +422,12 @@ public class Client implements Runnable {
 	 * @throws SocketClosedException
 	 */
 	private Location readLocation() throws IOException, SocketClosedException {
+		//read raw data
 		int input = 0;
 		for(int i=0;i<(locationLen/8)+1;i++) {
 			input += (readFromSocket()<<(i*8));
 		}
+		//unpack location
 		int x = input%worldWidth;
 		int y = input/worldWidth;
 		return new Location(x,y);
@@ -437,6 +441,7 @@ public class Client implements Runnable {
 	 */
 	private Item readItem() throws IOException, SocketClosedException {
 		Objects object = Objects.values()[readFromSocket()];
+		//read object-specific values
 		if(object==Objects.KEY) {
 			int id = readFromSocket();
 			String description = readString();

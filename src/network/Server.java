@@ -50,7 +50,6 @@ public class Server implements Runnable {
 	 * @param playerID the ID of the player the event is being sent to
 	 */
 	public void queuePlayerUpdate(UpdateEvent event, int playerID) {
-		//System.out.println("Queued event: "+event);
 		RemotePlayer playerUpdates = playersByID.get(playerID);
 		playerUpdates.queueEvent(event);
 		playersByID.put(playerID, playerUpdates);
@@ -72,6 +71,7 @@ public class Server implements Runnable {
 
 	@Override
 	public void run() {
+		//hack to make server multithreaded
 		if(server==null) {
 			try {
 				server = new ServerSocket(6015);
@@ -81,6 +81,7 @@ public class Server implements Runnable {
 			}
 			while(true) {
 				try {
+					//accept connection and create new player
 					Socket newSocket = server.accept();
 					newSocket.setTcpNoDelay(true); // stops TCP from combining packets, reduces latency
 					int id = generatePlayerID();
