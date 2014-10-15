@@ -13,6 +13,7 @@ import gameworld.game.client.ClientGame;
 import graphics.GraphicsPane;
 import ui.actions.*;
 import ui.popups.CheatsPopup;
+import ui.popups.ContainerPopup;
 import ui.popups.ControlsPopup;
 import ui.popups.LoadPopup;
 
@@ -54,6 +55,7 @@ public class UI extends JFrame {
 	private ControlsPopup controlsPopup;
 	private GameSetup gameSetup;
 	private JFrame setupFrame;
+	private ContainerPopup cont;
 
 	public UI() {
 
@@ -178,6 +180,22 @@ public class UI extends JFrame {
 		hudPanel.setupInventory();
 	}
 
+	public void openContainer(boolean interactable){
+		cont = new ContainerPopup(client, this, interactable);
+		cont.setOpaque(false);
+		gamePanel.add(cont);
+		gamePanel.moveToFront(cont);
+		cont.requestFocus();
+		validate();
+		repaint();
+	}
+	
+	public void closeContainer(){
+		gamePanel.remove(cont);
+		validate();
+		repaint();
+	}
+	
 	/**
 	 * adds a listener to resize the game window when the frame size is changed
 	 */
@@ -321,7 +339,7 @@ public class UI extends JFrame {
 
 		// get the input and action maps
 		InputMap im = getRootPane().getInputMap(
-				JComponent.WHEN_IN_FOCUSED_WINDOW);
+				JComponent.WHEN_FOCUSED);
 		ActionMap am = getRootPane().getActionMap();
 
 		// tie each key constant to the action string
