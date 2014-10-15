@@ -1,14 +1,14 @@
 package gameworld.world;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class Area {
-	Set<Tile> tiles;
+	List<Tile> tiles;
 
 	public Area(){
-		this.tiles = new HashSet<Tile>();
+		this.tiles = new ArrayList<Tile>();
 	}
 
 	public boolean add(Tile t) {
@@ -19,8 +19,8 @@ public class Area {
 		return tiles.contains(t);
 	}
 	
-	public Set<Tile> getTiles() {
-		return Collections.unmodifiableSet(tiles);
+	public List<Tile> getTiles() {
+		return Collections.unmodifiableList(tiles);
 	}
 
 	public boolean containsLoc(Location l) {

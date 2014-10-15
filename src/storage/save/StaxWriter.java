@@ -245,7 +245,9 @@ public class StaxWriter {
 	}
 
 	/**
-	 * @param p
+	 * Build Player String
+	 * @param player
+	 * @return String description of the player
 	 */
 	private String buildPlayerString(Player p) {
 		StringBuilder str = new StringBuilder();

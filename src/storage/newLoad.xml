@@ -1,9 +1,5 @@
 <game>
 <players>
-<player>0 18 31 defaultname
-<inventory></inventory></player>
-<player>0 14 21 defaultname
-<inventory></inventory></player>
 </players>
 <board>080 080
 <tile>NULLTILE 0 0 </tile>
