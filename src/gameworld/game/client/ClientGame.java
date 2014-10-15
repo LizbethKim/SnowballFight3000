@@ -17,7 +17,8 @@ import storage.StoredGame;
 import ui.gamewindow.UI;
 
 /**
- * Current reprentation of the model on the client. Deals with the network and sends and receives updates to/from the server.
+ * Current representation of the model on the client.
+ * Deals with the network and sends and receives updates to/from the server.
  *
  * @author Kelsey Jack 300275851
  *
@@ -27,17 +28,16 @@ public class ClientGame {
 	private Map<Integer, Player> playerIDs;
 
 	private Player player;
-	private Client client;
-	private ClientUpdater updater;
-
 	private int playerID;
 
+	private Client client;
+	private ClientUpdater updater;
 	private UI display;
+	private BoardState boardState;
+
 	private long lastMovedTime;
 	private long lastFiredTime;
-
-	private BoardState boardState;
-	private int selectedIndex = -1;	// index selected in inventory
+	private int selectedIndex = -1;		// index selected in inventory
 	private String lastInspected = "";
 
 
@@ -46,7 +46,6 @@ public class ClientGame {
 		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
 		this.playerID = 0;
 		this.board = sb.getBoard();
-		System.out.println(board);
 
 		// this.board = Board.defaultBoard();
 
@@ -58,24 +57,6 @@ public class ClientGame {
 
 		ClientUpdater u = this.getUpdater();
 		client.startReceiving(u, board.width(), board.height());
-	}
-
-	public ClientGame(String IP, UI display) {
-		this.client = new Client(IP);
-		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
-		this.playerID = 0;
-		this.board = sb.getBoard();
-
-		// KTC what
-	}
-
-	public List<String> getPlayerList() {
-		// KTC list of possible players
-		return null;
-	}
-
-	public void loadPlayer(int index) {
-		// KTC to do
 	}
 
 	public int getPlayerHealth() {
@@ -352,6 +333,21 @@ public class ClientGame {
 			}
 		}
 		return false;
+	}
+
+	// For multiplayer loading. Didn't get round to implementing.
+	public ClientGame(String IP, UI display) {
+		this.client = new Client(IP);
+		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
+		this.playerID = 0;
+		this.board = sb.getBoard();
+	}
+
+	public List<String> getPlayerList() {
+		return null;
+	}
+
+	public void loadPlayer(int index) {
 	}
 
 }

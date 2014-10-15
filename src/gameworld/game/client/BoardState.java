@@ -9,8 +9,8 @@ import graphics.assets.Terrain;
 /**
  * Represents the state of the board so that it can be
  * rendered. Consists of an orientation, the location of
- * the player it's centred on, the tiles and the objects on
- * the tiles.
+ * the player it's centred on, the tiles, the brightness,
+ * and the objects on the tiles.
  * @author Kelsey Jack 300275851
  *
  */
@@ -21,35 +21,6 @@ public class BoardState {
 	private Location playerCoords;
 	private int time = 12;
 	private boolean nightVision;
-
-	/*
-	 * EK This is for you, sets up a plain boring board for testing purposes.
-	 */
-	public BoardState() {
-		board = new Terrain[10][10];
-		for (int i = 1; i < 9; i++) {
-			board[i][0] = Terrain.GRASS;
-			board[i][9] = Terrain.GRASS;
-			for (int j = 1; j < 9; j++) {
-				board[i][j] = Terrain.SNOW;
-			}
-		}
-		for (int i = 0; i < 10; i++) {
-			board[0][i] = Terrain.GRASS;
-			board[9][i] = Terrain.GRASS;
-		}
-
-		entities = new Objects[10][10];
-		entities[0][0] = Objects.POWERUP;
-		entities[4][2] = Objects.TREE;
-		entities[5][3] = Objects.BUSH;
-		entities[2][7] = Objects.BUSH;
-		entities[8][5] = Objects.TREE;
-		this.orientation = Direction.NORTH;
-
-		playerCoords = new Location(3,3);
-	}
-
 
 	public BoardState(Terrain[][] board, Objects[][] entities) {
 		this.board = board;
@@ -98,7 +69,10 @@ public class BoardState {
 	public Direction getDirection() {
 		return orientation;
 	}
-	
+
+	/**
+	 * @return The amount of light in the board
+	 */
 	public int getLight() {
 		if (nightVision) {
 			return 2;
@@ -130,11 +104,11 @@ public class BoardState {
 		// goes forward 3 clockwise - same as going one anticlockwise.
 		orientation = Direction.values()[(orientation.ordinal() + 3) % 4];
 	}
-	
+
 	protected void setTime(int time) {
 		this.time = time;
 	}
-	
+
 	protected void toggleNightVision() {
 		this.nightVision = !this.nightVision;
 	}
