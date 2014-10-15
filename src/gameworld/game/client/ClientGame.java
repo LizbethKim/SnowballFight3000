@@ -154,7 +154,7 @@ public class ClientGame {
 	}
 
 	/**
-	 * Sends a request to use the item
+	 * Sends a request to use the item selected in the player inventory.
 	 */
 	public void useSelectedItem() {
 		if (!player.isFrozen() && selectedIndex != -1 && player.getInventoryItems().get(selectedIndex) != null) {
@@ -171,49 +171,15 @@ public class ClientGame {
 		}
 	}
 
-	public boolean selectedIsContainer(){
-		if (selectedIndex != -1 && selectedIndex <= player.getInventoryItems().size() && player.getInventoryItems().get(selectedIndex) instanceof Inventory) {
-			return true;
-		}
-		return false;
-	}
-
-	public List<Objects> getContentsOfSelected() throws NotAContainerException {
-		if (selectedIsContainer()) {
-			return ((Inventory)player.getInventoryItems().get(selectedIndex)).getContentsAsEnums();
-		}
-		throw new NotAContainerException();
-	}
-
+	/**
+	 * Send a request to the server to drop the selected item in the player inventory
+	 */
 	public void dropSelectedItem() {
 		if (!player.isFrozen() && player.getInventoryItems().size() > selectedIndex
 				&& player.getInventoryItems().get(selectedIndex) != null
 				&& board.tileAt(player.getLocationInFrontOf()).isClear()) {
 			client.dropItem(selectedIndex);
 		}
-	}
-
-	/**
-	 * Gets the contents of the inventory (if there is one) in front of where the
-	 * player is standing. If there is none, it returns an empty list.
-	 * @return An unmodifiable list of enums representing the objects in the inventory.
-	 * @throws NotAContainerException
-	 */
-	public List<Objects> getContents() throws NotAContainerException {
-		Location containerLoc = Location.locationInFrontOf(player.getLocation(), player.getDirection());
-		if (board.containsLocation(containerLoc)) {
-			InanimateEntity on = board.tileAt(containerLoc).getOn();
-			if (on != null && on instanceof Inventory) {
-				if (on instanceof Lockable && ((Lockable)on).isLocked()) {
-					if (this.unlock((Lockable)on, containerLoc)) {
-							return ((Inventory)on).getContentsAsEnums();
-					}
-				} else {
-					return ((Inventory)on).getContentsAsEnums();
-				}
-			}
-		}
-		throw new NotAContainerException();
 	}
 
 	/**
@@ -244,6 +210,52 @@ public class ClientGame {
 		saver.save(sg, file);
 	}
 
+	// Methods to pass information to the UI
+
+	/**
+	 * @return Whether the selected item in the inventory is a container
+	 */
+	public boolean selectedIsContainer(){
+		if (selectedIndex != -1 && selectedIndex <= player.getInventoryItems().size() && player.getInventoryItems().get(selectedIndex) instanceof Inventory) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @return The contents of the selected container in the inventory if it is one.
+	 * @throws NotAContainerException
+	 */
+	public List<Objects> getContentsOfSelected() throws NotAContainerException {
+		if (selectedIsContainer()) {
+			return ((Inventory)player.getInventoryItems().get(selectedIndex)).getContentsAsEnums();
+		}
+		throw new NotAContainerException();
+	}
+
+	/**
+	 * Gets the contents of the inventory (if there is one) in front of where the
+	 * player is standing. If there is none, it returns an empty list.
+	 * @return An unmodifiable list of enums representing the objects in the inventory.
+	 * @throws NotAContainerException
+	 */
+	public List<Objects> getContents() throws NotAContainerException {
+		Location containerLoc = Location.locationInFrontOf(player.getLocation(), player.getDirection());
+		if (board.containsLocation(containerLoc)) {
+			InanimateEntity on = board.tileAt(containerLoc).getOn();
+			if (on != null && on instanceof Inventory) {
+				if (on instanceof Lockable && ((Lockable)on).isLocked()) {
+					if (this.unlock((Lockable)on, containerLoc)) {
+							return ((Inventory)on).getContentsAsEnums();
+					}
+				} else {
+					return ((Inventory)on).getContentsAsEnums();
+				}
+			}
+		}
+		throw new NotAContainerException();
+	}
+
 	// getters and setters
 
 	public void toggleUnlimitedSpeed () {
@@ -268,7 +280,6 @@ public class ClientGame {
 			this.player.setCanThrow(SnowballType.ONE_HIT);
 		}
 	}
-
 	public void toggleNightVision() {
 		boardState.toggleNightVision();
 	}
@@ -300,7 +311,6 @@ public class ClientGame {
 		return playerID;
 	}
 
-
 	public int getSelectedIndex() {
 		return selectedIndex;
 	}
@@ -309,11 +319,9 @@ public class ClientGame {
 		this.selectedIndex = selectedIndex;
 	}
 
-
 	public int getPlayerHealth() {
 		return player.getHealth();
 	}
-
 
 	public BoardState getBoard() {
 		return boardState;
@@ -353,8 +361,6 @@ public class ClientGame {
 		return new ClientUpdater(this, board, playerIDs,
 				boardState, display, playerID);
 	}
-
-
 
 	// Helper methods
 	private boolean isFree(Location l) {
