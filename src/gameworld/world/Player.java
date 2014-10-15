@@ -23,7 +23,7 @@ public class Player implements Entity {
 	private long stepDelay = DEFAULT_STEP_DELAY;
 	private long snowballDelay = DEFAULT_SNOWBALL_DELAY;
 	private SnowballType canThrow = SnowballType.NORMAL;
-	
+
 	public static final int MAX_SCORE = 64998;
 	public static final long DEFAULT_STEP_DELAY = 200;
 	public static final long DEFAULT_SNOWBALL_DELAY = 500;
@@ -110,7 +110,7 @@ public class Player implements Entity {
 	public List<Location> getSurroundingLocations() {
 		return Location.getSurroundingLocations(this.loc);
 	}
-	
+
 	public List<Item> getInventoryItems() {
 		return this.inventory.getContents();
 	}
@@ -139,7 +139,7 @@ public class Player implements Entity {
 		}
 		return this.inventory.addItem(i);
 	}
-	
+
 	public boolean holdsKey(int id) {
 		for (Item i: inventory.getContents()) {
 			if (i instanceof Key && ((Key)i).id == id) {
@@ -158,7 +158,7 @@ public class Player implements Entity {
 		}
 		throw new IllegalArgumentException();
 	}
-	
+
 	// GETTERS AND SETTERS
 	public void setHealth(int health) {
 		this.health = health;
@@ -186,7 +186,7 @@ public class Player implements Entity {
 	public int getScore() {
 		return score;
 	}
-	
+
 	public void setScore(int score) {
 		if (score > 0 && score < MAX_SCORE) {
 			this.score = score;
@@ -242,6 +242,10 @@ public class Player implements Entity {
 	}
 
 	public SnowballType getCanThrow() {
+		if (canThrow == SnowballType.FLAMING) {
+			this.canThrow = SnowballType.NORMAL;
+			return SnowballType.FLAMING;
+		}
 		return canThrow;
 	}
 

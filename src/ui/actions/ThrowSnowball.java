@@ -12,6 +12,11 @@ import gameworld.game.client.ClientGame;
 
 public class ThrowSnowball extends KeyAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2404746045177812699L;
+
 	public ThrowSnowball(ClientGame cl, UI parent) {
 		super(cl, parent);
 	}

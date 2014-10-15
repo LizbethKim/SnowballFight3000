@@ -18,7 +18,7 @@ public class Snowball implements Entity {
 
 
 	public enum SnowballType{
-		NORMAL, SUPER, FAST, ONE_HIT;
+		NORMAL, SUPER, FAST, ONE_HIT, FLAMING;
 	}
 
 	/**
@@ -48,8 +48,12 @@ public class Snowball implements Entity {
 	 * Damages the player it hits.
 	 * @param p The player hit
 	 */
-	public void hit(Player p) {
-		p.damage(this.damage);
+	public boolean hit(Player p) {
+		if (p.getLocation().equals(this.l)) {
+			p.damage(this.damage);
+			return true;
+		}
+		return false;
 	}
 
 	/**

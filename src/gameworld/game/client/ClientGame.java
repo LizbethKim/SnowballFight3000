@@ -42,12 +42,12 @@ public class ClientGame {
 
 	public ClientGame(String name, String IP, Team team, UI display) {
 		this.client = new Client(IP);
-		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
-		this.playerID = 0; // KTC (?)
-		this.board = sb.getBoard();
-		System.out.println(board);
+//		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
+//		this.playerID = 0; // KTC (?)
+//		this.board = sb.getBoard();
+//		System.out.println(board);
 
-		// this.board = Board.defaultBoard();
+		this.board = Board.defaultBoard();
 
 		boardState = new BoardState(board.convertToEnums(), board.itemEnums());
 		playerIDs = new HashMap<Integer, Player>();

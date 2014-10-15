@@ -32,7 +32,7 @@ import ui.gamewindow.UI;
  *
  */
 
-public class ContainerPopup extends JDialog implements KeyListener {
+public class ContainerPopup extends JPanel implements KeyListener {
 	// images to be drawn
 	private static final Image containerSlot = HUDPanel
 			.loadImage("ContainerSlot.png");
@@ -42,7 +42,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 			.loadImage("CloseContainer.png");
 
 	// the size of each slot
-	private static final int SLOT_SIZE = 100;
+	private int SLOT_SIZE = 100;
 	// the maximum slots to be drawn in a column
 	private static final int MAX_COLUMN = 3;
 
@@ -56,11 +56,12 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	private int height;
 	private JPanel buttonPanel;
 	private JPanel containerPanel;
+	private final UI ui;
 
-	public ContainerPopup(ClientGame cl, UI ui, String title,
+	public ContainerPopup(ClientGame cl, UI ui, /*String title,*/
 			boolean interactable) {
 		// initialise fields
-		super(ui, title, ModalityType.APPLICATION_MODAL);
+		//super(ui, title, ModalityType.APPLICATION_MODAL);
 		this.client = cl;
 		this.selectedItem = 1;
 		this.inventoryContainer = interactable;
@@ -68,8 +69,9 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		this.maxItems = items.size();
 		this.width = width();
 		this.height = height();
-		setTitle(title);
-		this.setLocationRelativeTo(ui);
+		this.ui = ui;
+		//setTitle(title);
+		//this.setLocationRelativeTo(ui);
 
 		setupPopup();
 	}
@@ -79,17 +81,14 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	 */
 	private void setupPopup() {
 		// sets layout and adds components
-		setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		setupComponents();
 
 		// setup listeners
 		addKeyListener(this);
 		setupMotionListener();
+		updateSlotSize();
 
-		// now display
-		pack();
-		setResizable(false);
-		setVisible(true);
 	}
 
 	/**
@@ -112,29 +111,26 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		return SLOT_SIZE * ((int) Math.ceil((double) maxItems / MAX_COLUMN));
 	}
 
-	/**
-	 * adds the button which will exit the dialog when clicked
-	 */
-	private void setupExitButton() {
-		// setup panel
-		buttonPanel = new JPanel() {
-			@Override
-			public void paintComponent(Graphics g) {
-				paintExitButton(g);
-			}
-		};
-		buttonPanel.setPreferredSize(new Dimension(width, SLOT_SIZE / 2));
-
-		// add mouse listener to exit on click
-		buttonPanel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				dispose();
-			}
-		});
-		add(buttonPanel);
+	@Override public void repaint(){
+		updateSlotSize();
+		super.repaint();
 	}
-
+	
+	private void updateSlotSize(){
+		SLOT_SIZE = getWidth()/10;
+	}
+	
+	private boolean onCloseButton(int x, int y){
+		int xStart = getWidth()/3;
+		int xEnd = xStart + width();
+		int yStart = getWidth()/3;
+		int yEnd = yStart + SLOT_SIZE/2;
+		if(x > xStart && x < xEnd && y > yStart && y < yEnd){
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * sets up the panel for displaying the container slots
 	 */
@@ -146,6 +142,14 @@ public class ContainerPopup extends JDialog implements KeyListener {
 				paintContainer(g);
 			}
 		};
+		
+		containerPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ui.closeContainer();
+			}
+		});
+		
 		containerPanel.setPreferredSize(new Dimension(width, height));
 		add(containerPanel);
 	}
@@ -155,7 +159,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	 */
 	private void setupComponents() {
 		setupContainerPanel();
-		setupExitButton();
+		//setupExitButton();
 	}
 
 	/**
@@ -164,8 +168,8 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	 * @param g
 	 *            the graphics object to draw on
 	 */
-	private void paintExitButton(Graphics g) {
-		g.drawImage(exitButton, 0, 0, width, SLOT_SIZE / 2, null);
+	private void paintExitButton(int x, int y, Graphics g) {
+		g.drawImage(exitButton, x, y, MAX_COLUMN*SLOT_SIZE, SLOT_SIZE/2, null);
 	}
 
 	/**
@@ -175,6 +179,8 @@ public class ContainerPopup extends JDialog implements KeyListener {
 	 *            the graphics object to draw on
 	 */
 	private void paintContainer(Graphics g) {
+		int xStart = getWidth()/3;
+		int yStart = getHeight()/3;
 		// creat the images
 		Image slot = containerSlot.getScaledInstance(SLOT_SIZE, SLOT_SIZE, 0);
 		Image selectedSlot = selectedContainerSlot.getScaledInstance(SLOT_SIZE,
@@ -183,13 +189,18 @@ public class ContainerPopup extends JDialog implements KeyListener {
 		// initial slot
 		int row = 0;
 		int column = 0;
-
+		int xPos = xStart;
+		int yPos = yStart;
+		
+		paintExitButton(xPos, yPos, g);
+		yStart = yStart + SLOT_SIZE/2;
+		
 		// draw each slot and its item
 		for (int i = 0; i != maxItems; i++) {
-			// get the position of the slot
-			int xPos = column * SLOT_SIZE;
-			int yPos = row * SLOT_SIZE;
-
+			// get the position of the slot	
+			xPos = xStart + column * SLOT_SIZE;
+			yPos = yStart + row * SLOT_SIZE;
+			
 			// if this slot is selected
 			if (i + 1 == selectedItem) {
 				// draw with the selected image
@@ -212,7 +223,9 @@ public class ContainerPopup extends JDialog implements KeyListener {
 				column = 0;
 				row++;
 			}
-		}
+
+		}	
+		
 	}
 
 	/**
@@ -233,7 +246,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 			repaint();
 		} catch (NotAContainerException e) {
 			//no container so dispose of dialog
-			dispose();
+			//dispose();
 
 		}
 	}
@@ -315,8 +328,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				if (getContentPane().getComponentAt(
-						new Point(e.getX(), e.getY())) == buttonPanel) {
+				if (onCloseButton(e.getX(), e.getY())) {
 					setCursor(new Cursor(Cursor.HAND_CURSOR));
 				} else {
 					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

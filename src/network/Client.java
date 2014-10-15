@@ -101,7 +101,7 @@ public class Client implements Runnable {
 						types[i] = SnowballType.values()[readFromSocket()];
 
 					}
-					updater.updateProjectiles(projectileLocations);
+					updater.updateProjectiles(projectileLocations,types);
 				}
 				// remove player
 				else if (in == 0x09) {

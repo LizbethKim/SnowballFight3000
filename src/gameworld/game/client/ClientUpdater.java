@@ -12,6 +12,7 @@ import gameworld.world.Location;
 import gameworld.world.Lockable;
 import gameworld.world.NullLocation;
 import gameworld.world.Player;
+import gameworld.world.Snowball.SnowballType;
 import gameworld.world.Team;
 import graphics.assets.Objects;
 
@@ -26,6 +27,7 @@ public class ClientUpdater {
 	private Map<Integer, Player> playerIDs;
 	private int playerID;
 	private Location[] snowballPositions = new Location[1];
+	private SnowballType[] snowballTypes = new SnowballType[1];
 	private ClientGame clientGame;
 	private BoardState bs;
 	private UI display;
@@ -104,7 +106,7 @@ public class ClientUpdater {
 			p.setHealth(0);
 		}
 	}
-	
+
 	public void unFreezePlayer(int id) {
 		Player p = playerIDs.get(id);
 		if (p != null) {
@@ -134,8 +136,9 @@ public class ClientUpdater {
 		System.exit(0);
 	}
 
-	public void updateProjectiles(Location[] snowballPositions) {
+	public void updateProjectiles(Location[] snowballPositions, SnowballType[] snowballTypes) {
 		this.snowballPositions = snowballPositions;
+		this.snowballTypes = snowballTypes;
 		updateBoardState();
 	}
 
@@ -146,22 +149,22 @@ public class ClientUpdater {
 			((Inventory)board.tileAt(l).getOn()).addItem(i);
 		}
 	}
-	
+
 	public void unlock(Location l) {
-		if (board.containsLocation(l) && board.tileAt(l).getOn() != null 
+		if (board.containsLocation(l) && board.tileAt(l).getOn() != null
 				&& board.tileAt(l).getOn() instanceof Lockable) {
 			((Lockable)board.tileAt(l).getOn()).setLocked(false);
 		}
 	}
-	
+
 	public void updateScore(int score, int id) {
 		this.playerIDs.get(playerID).setScore(score);
 	}
-	
+
 	public void updateTime(int time) {
 		bs.setTime(time);
 	}
-	
+
 	public void endGame (Team winners) {
 		System.out.println("winning!");
 		display.endGame(winners == Team.RED ? "Red Team"  : "Blue Team");
@@ -172,7 +175,7 @@ public class ClientUpdater {
 			// KTC make the user select a different player.
 		}
 	}
-	
+
 	// Updates the boardState after other methods are called.
 	private void updateBoardState() {
 		if (playerIDs.get(playerID) == null || !board.containsLocation(playerIDs.get(playerID).getLocation())) {
@@ -201,5 +204,5 @@ public class ClientUpdater {
 		display.repaint();
 	}
 
-	
+
 }

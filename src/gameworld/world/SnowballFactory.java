@@ -10,6 +10,8 @@ public class SnowballFactory {
 			return new Snowball(l, d, 35, 1, s);
 		} else if (s == SnowballType.ONE_HIT) {
 			return new Snowball(l, d, 100, 2, s);
+		} else if (s == SnowballType.FLAMING) {
+			return new Snowball(l, d, 75, 2, s);
 		} else {
 			return new Snowball(l, d, 25, 2, s);
 		}
