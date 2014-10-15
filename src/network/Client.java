@@ -97,7 +97,6 @@ public class Client implements Runnable {
 					Location projectileLocations[] = new Location[numProjectiles];
 					SnowballType types[] = new SnowballType[numProjectiles];
 					for(int i=0;i<numProjectiles;i++) {
-						System.out.println("FUCKING NAZIS");
 						projectileLocations[i] = readLocation();
 						types[i] = SnowballType.values()[readFromSocket()];
 
