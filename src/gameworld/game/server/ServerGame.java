@@ -83,7 +83,7 @@ public class ServerGame {
 			InanimateEntity on = board.tileAt(l).getOn();
 			if (on != null && on instanceof Item) {
 				if(p.addItemToInventory((Item)on)) {
-					p.incrementScore(50);
+					p.incrementScore(500);
 					board.tileAt(l).clear();
 					server.queuePlayerUpdate(new PickUpItemEvent((Item)on), playerID);
 					for (int id: playerIDs.keySet()) {

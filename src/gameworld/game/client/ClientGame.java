@@ -71,16 +71,15 @@ public class ClientGame {
 	}
 
 	public void move(Direction d) {
+		this.lastInspected = "";
 		Direction up = boardState.getDirection();
 		d = Direction.values()[(d.ordinal() - up.ordinal() + 4) % 4];
-
 		if (!player.isFrozen() && System.currentTimeMillis() - lastMovedTime > player.getStepDelay()) {
 			if (player.getDirection() == d) {
 				Location newLoc = player.getLocationInFrontOf();
 				if (board.containsLocation(newLoc) && this.isFree(newLoc)) {
 					if (board.canTraverse(newLoc)) {
 						client.sendMove(newLoc);
-						this.lastInspected = "";
 					} else if (board.tileAt(newLoc).getOn() instanceof Door) {
 						if (this.unlock((Lockable)board.tileAt(newLoc).getOn(), newLoc)) {
 							client.sendMove(newLoc);

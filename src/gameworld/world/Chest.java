@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Represents a chest. Currently has unlimited capacity.
+ * Represents a chest, which is an Inventory and Furniture. Can be locked.
  * @author Kelsey Jack 300275851
  */
 public class Chest extends Furniture implements Inventory, Lockable {
