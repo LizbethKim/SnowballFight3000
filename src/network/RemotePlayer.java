@@ -99,7 +99,7 @@ public class RemotePlayer implements Runnable {
 					readNameAndTeam();
 				}
 				else if(in==0x07) {
-					// BF put code for sending map file here
+
 				}
 				else if(in==0x08) {
 					SnowballType type = SnowballType.values()[readFromSocket()];

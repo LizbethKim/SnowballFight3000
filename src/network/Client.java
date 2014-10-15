@@ -176,7 +176,7 @@ public class Client implements Runnable {
 				// recieve score
 				else if (in == 0x16) {
 					int score = readFromSocket();
-					score += readFromSocket()>>8;
+					score += readFromSocket()<<8;
 					updater.updateScore(score, 0);
 				}
 				// receive time
@@ -360,7 +360,9 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 		try {
-			this.wait();
+			synchronized (this){
+				this.wait();
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
