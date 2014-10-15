@@ -11,6 +11,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import network.events.LocationEvent;
 import network.events.UpdateEvent;
 
 public class Server implements Runnable {
@@ -36,6 +37,8 @@ public class Server implements Runnable {
 				e.printStackTrace();
 			}
 		}
+		// set up location map size for packing
+		LocationEvent.setWorldSize(game.getBoardWidth(), game.getBoardHeight());
 	}
 
 	public void queuePlayerUpdate(UpdateEvent event, int playerID) {
@@ -69,7 +72,7 @@ public class Server implements Runnable {
 					Socket newSocket = server.accept();
 					newSocket.setTcpNoDelay(true); // stops TCP from combining packets, reduces latency
 					int id = generatePlayerID();
-					RemotePlayer newPlayer = new RemotePlayer(id, newSocket, game);
+					RemotePlayer newPlayer = new RemotePlayer(id, newSocket, game, game.getBoardWidth(), game.getBoardHeight());
 					playersByID.put(id, newPlayer);
 					//create and start a new thread, running the socket worker code
 					new Thread(newPlayer).start();
