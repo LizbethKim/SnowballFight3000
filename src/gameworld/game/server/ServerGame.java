@@ -18,6 +18,7 @@ import gameworld.world.*;
  */
 public class ServerGame {
 	private Board board;
+	private byte[] map;
 	private Map<Integer, Player> playerIDs;
 	private List<Snowball> projectiles;
 	private SnowballFactory snowballFactory;
@@ -33,8 +34,10 @@ public class ServerGame {
 		this.snowballFactory = new SnowballFactory();
 	}
 
-	public ServerGame(StoredGame sg) {
+	public ServerGame(StoredGame sg,  byte[] map) {
 		this.board = sg.getBoard();
+		this.map = map;
+		// KTC do something with a player list
 		this.playerIDs = new HashMap<Integer, Player>();
 		this.projectiles = new ArrayList<Snowball>();
 		this.snowballFactory = new SnowballFactory();
@@ -210,6 +213,7 @@ public class ServerGame {
 		server.queuePlayerUpdate(new CreateLocalPlayerEvent(playerID, spawnLoc), playerID);
 		Player p = new Player(name, t, playerID, spawnLoc);
 		playerIDs.put(playerID, p);
+		System.out.println("Created player with id");
 		for (int id: playerIDs.keySet()) {
 			Player other = playerIDs.get(id);
 			server.queuePlayerUpdate(new CreatePlayerEvent(id, other.name, other.getLocation(), other.getTeam()), playerID);
@@ -237,6 +241,10 @@ public class ServerGame {
 
 	public int getBoardHeight() {
 		return board.height();
+	}
+
+	public void requestFile(int id) {
+		server.queuePlayerUpdate(new SendMapEvent(map), id);
 	}
 
 	public void clockTick() {

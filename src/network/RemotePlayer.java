@@ -116,7 +116,7 @@ public class RemotePlayer implements Runnable {
 				}
 				else if(in==0x19) {
 					int index = readFromSocket();
-					game.unfreezePlayer(readFromSocket());
+					game.unfreezePlayer(index);
 				}
 			}
 		} catch (IOException e) {

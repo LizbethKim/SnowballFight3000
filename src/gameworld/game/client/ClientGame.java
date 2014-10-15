@@ -62,7 +62,7 @@ public class ClientGame {
 	public ClientGame(String IP, UI display) {
 		this.client = new Client(IP);
 		//StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
-		// this.playerID = KTC to do
+		//this.playerID = KTC to do
 		//this.board = sb.getBoard();
 	}
 
