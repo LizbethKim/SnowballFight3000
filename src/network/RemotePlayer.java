@@ -28,16 +28,25 @@ public class RemotePlayer implements Runnable {
 	private Socket connection;
 	private Queue<UpdateEvent> queuedEvents;
 	private ServerGame game;
+	private int locationLen;
+	private int mapWidth;
 
 	/**
 	 * @param id the id of the player this represents
 	 * @param sock the socket connected to the player
 	 * @param game the ServerGame object for updates to be called on
+	 * @param mapWidth the width of the map, used for de-packing locations
+	 * @param mapHeight the height of the map, used for de-packing locations
 	 */
-	public RemotePlayer(int id, Socket sock, ServerGame g) {
+	public RemotePlayer(int id, Socket sock, ServerGame g, int mapW, int mapH) {
 		this.game = g;
 		this.id = id;
 		this.connection = sock;
+		this.mapWidth=mapW;
+		int maxLocation = mapW*mapH;
+		for(locationLen=0;maxLocation>0;locationLen++){
+			maxLocation=maxLocation>>1;
+		}
 		queuedEvents = new LinkedList<UpdateEvent>();
 	}
 
@@ -78,7 +87,7 @@ public class RemotePlayer implements Runnable {
 			InputStream input = connection.getInputStream();
 			while (!connection.isClosed()) {
 				//switch by packet ID
-				byte in =  readFromSocket();
+				int in =  readFromSocket();
 				System.out.println(in);
 				if(in==0x01) {
 					readMove();
@@ -90,7 +99,7 @@ public class RemotePlayer implements Runnable {
 					readNameAndTeam();
 				}
 				else if(in==0x07) {
-					// BF put code for sending map file here
+
 				}
 				else if(in==0x08) {
 					SnowballType type = SnowballType.values()[readFromSocket()];
@@ -101,7 +110,7 @@ public class RemotePlayer implements Runnable {
 				}
 				else if(in==0x0C) {
 					game.pickUpItem(id);
-					}
+				}
 				else if(in==0x0D) {
 					int index = readFromSocket();
 					game.dropItem(id, index);
@@ -134,14 +143,15 @@ public class RemotePlayer implements Runnable {
 			}
 		}
 		game.removePlayer(id);
-		// BF could you please stop the server running if all players disconnect?
 	}
 
 	private void readMove() throws IOException, SocketClosedException {
-		int x = readFromSocket();
-		x += readFromSocket()<<8;
-		int y = readFromSocket();
-		y += readFromSocket()<<8;
+		int input = 0;
+		for(int i=0;i<(locationLen/8)+1;i++) {
+			input += (((int)readFromSocket())<<(i*8));
+		}
+		int x = input%mapWidth;
+		int y = input/mapWidth;
 		game.movePlayer(id, new Location(x,y));
 	}
 
@@ -167,7 +177,7 @@ public class RemotePlayer implements Runnable {
 		return output;
 	}
 
-	private byte readFromSocket() throws IOException, SocketClosedException {
+	private int readFromSocket() throws IOException, SocketClosedException {
 		//I hate java
 		if(connection.isInputShutdown()){
 			throw new SocketClosedException();
@@ -181,7 +191,8 @@ public class RemotePlayer implements Runnable {
 		if (input == -1) {
 			throw new SocketClosedException();
 		}
-		return (byte) input;
+		// RAAEAAAAAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEG
+		return input;
 	}
 
 	public int getID() {

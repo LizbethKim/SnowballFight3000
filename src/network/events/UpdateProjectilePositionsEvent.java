@@ -28,7 +28,7 @@ public class UpdateProjectilePositionsEvent extends LocationEvent {
 			writeLocation(out,projectiles[i]);
 			out.write(types[i].ordinal());
 		}
-		
+
 	}
 
 }

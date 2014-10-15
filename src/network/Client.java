@@ -31,6 +31,12 @@ public class Client implements Runnable {
 
 	private Socket connection;
 
+
+	//stuff required for packing and de-packing locations
+	private int worldWidth;
+	private int worldHeight;
+	private int locationLen;
+
 	private byte[] mapBytes;
 
 	/**
@@ -54,7 +60,7 @@ public class Client implements Runnable {
 		while (true) {
 			try {
 				// debugging code
-				byte in = readFromSocket();
+				int in = readFromSocket();
 				// move player
 				if (in == 0x01) {
 					int id = readFromSocket();
@@ -99,6 +105,7 @@ public class Client implements Runnable {
 					Location projectileLocations[] = new Location[numProjectiles];
 					SnowballType types[] = new SnowballType[numProjectiles];
 					for(int i=0;i<numProjectiles;i++) {
+						System.out.println("FUCKING NAZIS");
 						projectileLocations[i] = readLocation();
 						types[i] = SnowballType.values()[readFromSocket()];
 
@@ -169,7 +176,7 @@ public class Client implements Runnable {
 				// recieve score
 				else if (in == 0x16) {
 					int score = readFromSocket();
-					score += readFromSocket()>>8;
+					score += readFromSocket()<<8;
 					updater.updateScore(score, 0);
 				}
 				// receive time
@@ -203,11 +210,11 @@ public class Client implements Runnable {
 	 */
 	public void sendMove(Location l) {
 		try {
+			int output = l.x+(l.y*worldWidth);
 			connection.getOutputStream().write(0x01);
-			connection.getOutputStream().write(l.x);
-			connection.getOutputStream().write(l.x>>8);
-			connection.getOutputStream().write(l.y);
-			connection.getOutputStream().write(l.y>>8);
+			for(int i=0;i<(locationLen/8)+1;i++) {
+				connection.getOutputStream().write(output>>(i*8));
+			}
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -353,7 +360,9 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 		try {
-			this.wait();
+			synchronized (this){
+				this.wait();
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -364,10 +373,19 @@ public class Client implements Runnable {
 	/**
 	 * starts receiving data in a new thread
 	 * @param updater the ClientUpdater to call update methods on
+	 * @param width the width of the map
+	 * @param height the height of the map
 	 */
-	public void startReceiving(ClientUpdater c) {
+	public void startReceiving(ClientUpdater c, int width, int height) {
 		this.updater = c;
 		Thread t = new Thread(this);
+		worldWidth = width;
+		worldHeight = height;
+		//get minimum number of bits required to encode a location
+		int maxLocation = worldWidth*worldHeight;
+		for(locationLen=0;maxLocation>0;locationLen++){
+			maxLocation=maxLocation>>1;
+		}
 		t.start();
 	}
 
@@ -388,17 +406,18 @@ public class Client implements Runnable {
 	}
 
 	/**
-	 * reads a location from the connection, where X and Y are
-	 * 2-byte big-endian encoded
+	 * reads a packed location from the connection
 	 * @return the recieved location
 	 * @throws IOException
 	 * @throws SocketClosedException
 	 */
 	private Location readLocation() throws IOException, SocketClosedException {
-		int x = readFromSocket();
-		x += readFromSocket() << 8;
-		int y = readFromSocket();
-		y += readFromSocket() << 8;
+		int input = 0;
+		for(int i=0;i<(locationLen/8)+1;i++) {
+			input += (readFromSocket()<<(i*8));
+		}
+		int x = input%worldWidth;
+		int y = input/worldWidth;
 		return new Location(x,y);
 	}
 
@@ -444,12 +463,12 @@ public class Client implements Runnable {
 	 * @throws IOException
 	 * @throws SocketClosedException
 	 */
-	private byte readFromSocket() throws IOException, SocketClosedException {
+	private int readFromSocket() throws IOException, SocketClosedException {
 		//I hate java
 		int input = connection.getInputStream().read();
 		if (input == -1) {
 			throw new SocketClosedException();
 		}
-		return (byte) input;
+		return input;
 	}
 }

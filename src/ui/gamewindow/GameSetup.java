@@ -107,24 +107,26 @@ public class GameSetup extends JPanel {
 		if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			LoadGame loader = new LoadGame();
-		// make new server
+			// make new server
 
-		byte[] map = new byte[5];
-		try {
-			map = Files.readAllBytes(file.toPath());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		ServerGame g = new ServerGame(loader.loadGame(file), map);
-		//ServerGame g = new ServerGame(Board.defaultBoard());
-		Server server = new Server(g);
+			byte[] map = new byte[5];
+			try {
+				map = Files.readAllBytes(file.toPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			ServerGame g = new ServerGame(loader.loadGame(file), map);
+			//ServerGame g = new ServerGame(Board.defaultBoard());
 
-		// start server connection accepting thread
-		new Thread(server).start();
-		new Thread(new Time(g)).start();
-		// let the user know the server was started
-		JOptionPane.showMessageDialog(null, "Server Started");
+			Server server = new Server(g);
+
+			// start server connection accepting thread
+			new Thread(server).start();
+			new Thread(new Time(g)).start();
+			// let the user know the server was started
+			JOptionPane.showMessageDialog(null, "Server Started");
 		}
+
 	}
 
 	/**
