@@ -42,7 +42,7 @@ public class RightClickMenu extends JPopupMenu {
 		use.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				client.useItem();
+				client.useSelectedItem();
 			}
 		});
 

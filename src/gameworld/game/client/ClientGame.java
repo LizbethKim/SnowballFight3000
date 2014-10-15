@@ -41,6 +41,13 @@ public class ClientGame {
 	private String lastInspected = "";
 
 
+	/**
+	 * Creates a new ClientGame with user input passed by the UI
+	 * @param name
+	 * @param IP
+	 * @param team
+	 * @param display
+	 */
 	public ClientGame(String name, String IP, Team team, UI display) {
 		this.client = new Client(IP);
 		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
@@ -57,19 +64,12 @@ public class ClientGame {
 		client.startReceiving(u, board.width(), board.height());
 	}
 
+	// Methods to send requests to the server if appropriate
 
-	public List<Objects> getPlayerInventory() {
-		return player.getInventoryEnums();
-	}
-
-	public Location getPlayerLocation() {
-		return player.getLocation();
-	}
-
-	public Direction getPlayerDirection() {
-		return player.getDirection();
-	}
-
+	/**
+	 * Sends a request to the server to move the player in the given direction.
+	 * @param d
+	 */
 	public void move(Direction d) {
 		this.lastInspected = "";
 		Direction up = boardState.getDirection();
@@ -94,6 +94,9 @@ public class ClientGame {
 		}
 	}
 
+	/**
+	 * Sends a request to the server to throw a snowball
+	 */
 	public void throwSnowball() {
 		if (!player.isFrozen() && System.currentTimeMillis() - lastFiredTime > player.getSnowballDelay()) {
 			client.throwSnowball(player.getCanThrow());
@@ -101,6 +104,9 @@ public class ClientGame {
 		}
 	}
 
+	/**
+	 * Returns a string description of the item in front of the local player
+	 */
 	public void inspectItem(){
 		Location facing = player.getLocationInFrontOf();
 		if (board.containsLocation(facing) && board.tileAt(facing).getOn() != null) {
@@ -108,6 +114,10 @@ public class ClientGame {
 		}
 	}
 
+	/**
+	 * Requests at the server for the player to pick up the item in front of them, if
+	 * there is one.
+	 */
 	public void pickUpItem() {
 		Location facing = player.getLocationInFrontOf();
 		if (!player.isFrozen() && board.containsLocation(facing)) {
@@ -120,7 +130,7 @@ public class ClientGame {
 	/**
 	 * Removes the item at the specified index from the container
 	 * in front of the player in the world. Places it in the
-	 * player's inventory
+	 * player's inventory.
 	 * @param index
 	 */
 	public void takeItemFromContainer(int index) {
@@ -143,7 +153,10 @@ public class ClientGame {
 		}
 	}
 
-	public void useItem() {
+	/**
+	 * Sends a request to use the item
+	 */
+	public void useSelectedItem() {
 		if (!player.isFrozen() && selectedIndex != -1 && player.getInventoryItems().get(selectedIndex) != null) {
 			Item toUse = player.getInventoryItems().get(selectedIndex);
 			if (toUse instanceof Powerup) {
@@ -151,7 +164,6 @@ public class ClientGame {
 				if (powerup.getPower() == Powerup.Power.HEALTH_POTION || powerup.getPower() == Powerup.Power.STRONG_HEALTH_POTION) {
 					client.useItem(selectedIndex);
 				} else {
-					System.out.println(player);
 					powerup.use(player);
 					client.useItem(selectedIndex);
 				}
@@ -269,6 +281,19 @@ public class ClientGame {
 	public void rotateAnticlockwise() {
 		boardState.rotateAnticlockwise();
 		refresh();
+	}
+
+
+	public List<Objects> getPlayerInventory() {
+		return player.getInventoryEnums();
+	}
+
+	public Location getPlayerLocation() {
+		return player.getLocation();
+	}
+
+	public Direction getPlayerDirection() {
+		return player.getDirection();
 	}
 
 	public int getPlayerID() {

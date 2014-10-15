@@ -30,7 +30,7 @@ public class UseItem extends KeyAction {
 			parent.openContainer(true);// new ContainerPopup(client, parent, "", true);
 			System.out.println("popup done");
 		} else {
-			client.useItem();
+			client.useSelectedItem();
 		}
 	}
 
