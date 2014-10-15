@@ -5,12 +5,14 @@ import gameworld.world.Bag;
 import gameworld.world.Chest;
 import gameworld.world.Direction;
 import gameworld.world.Door;
+import gameworld.world.Flag;
 import gameworld.world.Key;
 import gameworld.world.Location;
 import gameworld.world.Player;
 import gameworld.world.Snowball;
 import gameworld.world.Snowball.SnowballType;
 import gameworld.world.Team;
+import graphics.assets.Objects;
 
 import org.junit.Test;
 
@@ -36,6 +38,16 @@ public class ItemTests {
 	public void testBagNotContainItself() {
 		Bag bag = new Bag();
 		bag.addItem(bag);
+	}
+
+	@Test
+	public void testBag() {
+		Bag b = new Bag();
+		Flag f = new Flag(Team.RED);
+		assertFalse(b.addItem(f));
+		assertTrue(b.asEnum() == Objects.BAG);
+		assertTrue(b.canMoveThrough());
+
 	}
 
 	@Test
@@ -70,8 +82,10 @@ public class ItemTests {
 		Key badKey = new Key ("A bad key", 3);
 		assertFalse(d.unlock(badKey));
 		assertTrue(d.isLocked());
+		assertFalse(d.canMoveThrough());
 		assertTrue(d.unlock(goodKey));
 		assertFalse(d.isLocked());
+		assertTrue(d.canMoveThrough());
 	}
 
 }
