@@ -2,6 +2,7 @@ package ui.gamewindow;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -179,13 +180,18 @@ public class UI extends JFrame {
 		hudPanel.setupInventory();
 	}
 
+	/**
+	 * opens a 
+	 * @param interactable
+	 */
 	public void openContainer(boolean interactable){
 		cont = new ContainerPopup(client, this, interactable);
 		cont.setOpaque(false);
 		gamePanel.add(cont);
 		gamePanel.moveToFront(cont);
 		cont.requestFocus();
-		validate();
+		Rectangle bounds = gamePanel.getBounds();
+		cont.setBounds(bounds.x, bounds.y, bounds.width, bounds.height);
 		repaint();
 	}
 	

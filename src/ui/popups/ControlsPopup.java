@@ -21,22 +21,32 @@ public class ControlsPopup extends JPanel {
 	private JPanel controls;
 
 	public ControlsPopup() {
+		//initialise fields
 		setLayout(new FlowLayout());
 		actions = new JPanel();
 		controls = new JPanel();
 		actions.setLayout(new GridLayout(0, 1));
 		controls.setLayout(new GridLayout(0, 1));
 
+		//setup popup
 		setupLabels();
 		add(actions);
 		add(controls);
 	}
 
+	/**
+	 * display the controls dialog
+	 */
 	public void showControls() {
 		JOptionPane.showMessageDialog(null, this, "Game Controls",
 				JOptionPane.PLAIN_MESSAGE);
 	}
 
+	/**
+	 * helper method for adding a control
+	 * @param action the name of the action
+	 * @param control the keys to carry out the action
+	 */
 	private void addControl(String action, String control) {
 		JLabel a = new JLabel(action);
 		JLabel c = new JLabel(" " + control);
@@ -46,6 +56,9 @@ public class ControlsPopup extends JPanel {
 		controls.add(c);
 	}
 
+	/**
+	 *add all the controls 
+	 */
 	private void setupLabels() {
 		addControl("Move Up:", "press W or Up on the Arrow Keys");
 		addControl("Move Down:", "press S or Down on the Arrow Keys");

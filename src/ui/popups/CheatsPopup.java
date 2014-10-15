@@ -30,6 +30,7 @@ public class CheatsPopup extends JPanel {
 	private ClientGame client;
 
 	public CheatsPopup(ClientGame cl) {
+		//initialise fields
 		this.client = cl;
 		setLayout(new FlowLayout());
 		actions = new JPanel();
@@ -37,16 +38,25 @@ public class CheatsPopup extends JPanel {
 		actions.setLayout(new GridLayout(0, 1));
 		switches.setLayout(new GridLayout(0, 1));
 
-		setupLabels();
+		//now set up the pop-up
+		setupCheats();
 		add(actions);
 		add(switches);
 	}
 
+	/**
+	 * displays the pop-up
+	 */
 	public void showCheats() {
 		JOptionPane.showMessageDialog(null, this, "Enable/Disable Cheats",
 				JOptionPane.PLAIN_MESSAGE);
 	}
 
+	/**
+	 * helper method for adding cheats to the popup
+	 * @param cheat the name of the cheat
+	 * @param c the cheatswitch object
+	 */
 	private void addCheat(String cheat, CheatSwitch c) {
 		JLabel a = new JLabel(cheat);
 		a.setPreferredSize(new Dimension(250, 25));
@@ -55,7 +65,10 @@ public class CheatsPopup extends JPanel {
 		switches.add(c);
 	}
 
-	private void setupLabels() {
+	/**
+	 * adds cheats to the pop-up
+	 */
+	private void setupCheats() {
 		addCheat("Unlimited Fire Rate", new UnlimitedSnowballs(client));
 		addCheat("Unlimited Speed", new UnlimitedSpeed(client));
 		addCheat("One Hit Kill", new OneHitKill(client));

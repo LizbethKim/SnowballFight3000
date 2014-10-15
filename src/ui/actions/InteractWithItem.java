@@ -26,13 +26,15 @@ public class InteractWithItem extends KeyAction {
 
 	@Override
 	protected void execute() {
+		//try to unfreeze the player
+		boolean unfrozen = client.unfreezePlayer();
+		if(!unfrozen){
 		try {
 			// check that the client has a container in front
 			client.getContents();
 			parent.openContainer(false);
 		} catch (NotAContainerException e) {
-			//otherwise unfreeze the player
-			client.unfreezePlayer();
+		}
 		}
 	}
 
