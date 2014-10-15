@@ -4,7 +4,6 @@
 package storage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -22,12 +21,12 @@ public class LoadGame{
 	 * Purely for testing
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		StaxParser parser = new StaxParser();
 		StoredGame testGame = parser.parse(new File("src/storage/defaultBoard.xml"));
         System.out.println("Game Loaded by load main");
-	}
+	}*/
 	
 	/**
 	 * Loads the given filepath
@@ -38,7 +37,7 @@ public class LoadGame{
 		StaxParser parser = new StaxParser();
 		System.out.println(file);
 		if(file==null){
-			System.out.println("That's not a path: "+file);
+			System.out.println("That's not a path: ");
 		}else{
 			game = parser.parse(file);
 			System.out.println("Game Loaded by loader");
@@ -52,16 +51,17 @@ public class LoadGame{
 	 * @return The storedGame that was transferred
 	 */
 	public StoredGame loadGame(byte[] map) {
+		File file = new File("src/storage/loadedGame.xml");
 		FileOutputStream fos;
 		try {
-			fos = new FileOutputStream(new File("src/storage/byteBoard.xml"));
+			fos = new FileOutputStream(file);
 			fos.write(map);
 			fos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return loadGame(new File("byteBoard.xml"));
+		return loadGame(file);
 	}
 
 
