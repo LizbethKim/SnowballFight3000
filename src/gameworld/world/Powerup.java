@@ -19,7 +19,8 @@ public class Powerup extends Item {
 		STRONG_HEALTH_POTION("Restores you to full health"),
 		HEALTH_POTION("Restores 50 health points"),
 		FAST_SNOWBALLS("Throw fast snowballs for 30 seconds"),
-		SUPER_SNOWBALLS("Throw snowballs that do double damage for 30 seconds");
+		SUPER_SNOWBALLS("Throw snowballs that do double damage for 30 seconds"),
+		FLAMING_SNOWBALL("Allows you to throw one one-hit-kill snowball.");
 
 
 		public final String description;
@@ -41,6 +42,8 @@ public class Powerup extends Item {
 			this.effect = new PotionEffect(50);
 		} else if (power == Power.FAST_SNOWBALLS) {
 			this.effect = new FastSnowballsEffect();
+		} else if (power == power.FLAMING_SNOWBALL) {
+			this.effect = new FlamingSnowballsEffect();
 		} else {
 			this.effect = new SuperSnowballsEffect();
 		}
@@ -63,6 +66,8 @@ public class Powerup extends Item {
 			this.effect = new PotionEffect(50);
 		} else if (power == Power.FAST_SNOWBALLS) {
 			this.effect = new FastSnowballsEffect();
+		} else if (power == power.FLAMING_SNOWBALL) {
+			this.effect = new FlamingSnowballsEffect();
 		} else {
 			this.effect = new SuperSnowballsEffect();
 		}
