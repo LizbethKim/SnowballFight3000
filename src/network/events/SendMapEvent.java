@@ -11,10 +11,12 @@ public class SendMapEvent implements UpdateEvent {
 
 	public SendMapEvent(byte[] data) {
 		this.data = data;
+		System.out.println("CREATED");
 	}
 
 	@Override
 	public void writeTo(OutputStream out) throws IOException {
+
 		out.write(0x07);
 		out.write(data.length);
 		out.write(data.length>>8);

@@ -89,15 +89,7 @@ public class Client implements Runnable {
 				}
 				// read map file
 				else if (in == 0x07) {
-					int len = readFromSocket();
-					len += readFromSocket()<<8;
-					len += readFromSocket()<<16;
-					len += readFromSocket()<<24;
-					mapBytes = new byte[len];
-					for(int i=0;i<len;i++) {
-						mapBytes[i] = (byte) readFromSocket();
-					}
-					this.notify();
+					// moved cause it's only needed at the beginning
 				}
 				// update projectile positions
 				else if (in == 0x08) {
@@ -360,10 +352,23 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 		try {
-			synchronized (this){
-				this.wait();
+			int in = readFromSocket();
+			if(in == 0x07) {
+				int len = readFromSocket();
+				len += readFromSocket()<<8;
+				len += readFromSocket()<<16;
+				len += readFromSocket()<<24;
+				mapBytes = new byte[len];
+				for(int i=0;i<len;i++) {
+					mapBytes[i] = (byte) readFromSocket();
+				}
+			} else {
+				throw new RuntimeException("Server isn't doing what I want it to ;_;");
 			}
-		} catch (InterruptedException e) {
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SocketClosedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
