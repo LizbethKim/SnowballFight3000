@@ -42,7 +42,7 @@ public class Powerup extends Item {
 			this.effect = new PotionEffect(50);
 		} else if (power == Power.FAST_SNOWBALLS) {
 			this.effect = new FastSnowballsEffect();
-		} else if (power == power.FLAMING_SNOWBALL) {
+		} else if (power == Power.FLAMING_SNOWBALL) {
 			this.effect = new FlamingSnowballsEffect();
 		} else {
 			this.effect = new SuperSnowballsEffect();
@@ -66,7 +66,7 @@ public class Powerup extends Item {
 			this.effect = new PotionEffect(50);
 		} else if (power == Power.FAST_SNOWBALLS) {
 			this.effect = new FastSnowballsEffect();
-		} else if (power == power.FLAMING_SNOWBALL) {
+		} else if (power == Power.FLAMING_SNOWBALL) {
 			this.effect = new FlamingSnowballsEffect();
 		} else {
 			this.effect = new SuperSnowballsEffect();
