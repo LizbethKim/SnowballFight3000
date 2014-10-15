@@ -34,18 +34,18 @@ public class StaxParser {
 	private Tile[][] tiles;
 	private List<Player> players;
 	private List<Area> areaList;
-	
+
 	private Player curPlayer;
 	private Tile curTile;
 	private Inventory curInven;
 	private Area curArea;
-	
+
 	private boolean playerLoad=false;
 	private boolean tileLoad=false;
 	private boolean chestLoad=false;
 	private int areaCount=0;
-	
-	
+
+
 
 
 	/**
@@ -112,7 +112,7 @@ public class StaxParser {
 						curTile = parseTile(values);
 						continue;
 					}
-					
+
 					//Start of a new area
 					if (elemName.equals(XMLValues.AREA)) {
 						//get the characters within the tag
@@ -194,15 +194,15 @@ public class StaxParser {
 						tiles[curTile.getCoords().x][curTile.getCoords().y] = curTile;
 						continue;
 					}
-					
+
 					//end of an area, add it to the list
 					if (elemName.equals(XMLValues.AREA)) {
 						if(areaCount>=3){
 							areaList.add(curArea);
-						}		
+						}
 						continue;
 					}
-					
+
 					// end of a board element, add the tiles and areas
 					if (elemName.equals(XMLValues.BOARD)) {
 						board = new Board(tiles, areaList);
@@ -242,7 +242,7 @@ public class StaxParser {
 			//spawn area, give it its team name
 			a = new SpawnArea(Team.valueOf(values[0]));
 		}
-		
+
 		int i;
 		System.out.println(values.length);
 		for(i = 1;i<values.length;i=i+2){

@@ -78,8 +78,6 @@ public class GraphicsPane extends JPanel {
 				drawNorth(currentBoard, currentObjects, g);
 				break;
 			}
-		} else {
-			System.out.println("LOADING IMAGE HERE"); //Insert Loading Music
 		}
 		int lightState = boardState.getLight();
 		switch(lightState){
