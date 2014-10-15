@@ -40,7 +40,6 @@ public class ClientUpdater {
 		this.bs = bs;
 		this.display = display;
 		updateBoardState();
-
 	}
 
 	public void addPlayer(String name, Team t, int id, Location l) {
@@ -170,11 +169,6 @@ public class ClientUpdater {
 		display.endGame(winners == Team.RED ? "Red Team"  : "Blue Team");
 	}
 
-	public void receivePlayerValidity (boolean isValid) {
-		if (!isValid) {
-			// KTC make the user select a different player.
-		}
-	}
 
 	// Updates the boardState after other methods are called.
 	private void updateBoardState() {
@@ -203,6 +197,13 @@ public class ClientUpdater {
 		}
 		display.repaint();
 	}
+
+	// For loading multiplayer game. Not implemented.
+	public void receivePlayerValidity (boolean isValid) {
+		if (!isValid) {
+		}
+	}
+
 
 
 }
