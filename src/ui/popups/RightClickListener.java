@@ -47,7 +47,7 @@ public class RightClickListener extends MouseAdapter {
 				client.setSelectedIndex(selected - 1);
 				if (e.isPopupTrigger()) {
 					// now launch right-click popup if appropriate
-					showPopup(e, selected);
+					showPopup(e);
 				}
 			}
 		}
@@ -64,12 +64,11 @@ public class RightClickListener extends MouseAdapter {
 	}
 
 	/**
-	 * Display a right click menu at
-	 * @param e
-	 * @param selected
+	 * Display a right click menu at the position of the mouse click
+	 * @param e the mouse event
 	 */
-	private void showPopup(MouseEvent e, int selected) {
-		RightClickMenu menu = new RightClickMenu(client, selected);
+	private void showPopup(MouseEvent e) {
+		RightClickMenu menu = new RightClickMenu(client);
 		menu.show(e.getComponent(), e.getX(), e.getY());
 	}
 }

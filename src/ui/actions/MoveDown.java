@@ -1,29 +1,30 @@
 package ui.actions;
 
-import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
 import gameworld.world.Direction;
+import ui.gamewindow.UI;
 
 /**
- * MoveDown is a key action that attempts to move the player in the SOUTH direction
+ * MoveDown is a key action that attempts to move the player in the SOUTH
+ * direction
  * 
  * @author Ryan Burnell, 300279172
  * 
  */
 
-public class MoveDown extends KeyAction{
-	
+public class MoveDown extends KeyAction {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -660615412929122211L;
 
-	public MoveDown(ClientGame cl, UI parent){
+	public MoveDown(ClientGame cl, UI parent) {
 		super(cl, parent);
 	}
 
 	@Override
-	protected void execute(){
+	protected void execute() {
 		client.move(Direction.SOUTH);
 	}
 }

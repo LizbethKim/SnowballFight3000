@@ -17,18 +17,23 @@ import javax.swing.JPopupMenu;
  */
 
 public class RightClickMenu extends JPopupMenu {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4185069777237371759L;
 	private ClientGame client;
-	private int itemNumber;
 	private JMenuItem drop;
 	private JMenuItem use;
 	private JMenuItem inspect;
 
-	public RightClickMenu(ClientGame cl, int itemNum) {
+	public RightClickMenu(ClientGame cl) {
 		this.client = cl;
-		this.itemNumber = itemNum;
 		setupMenu();
 	}
 
+	/**
+	 * sets up a menu with drop, use and inspect options
+	 */
 	private void setupMenu() {
 		drop = new JMenuItem("Drop Item");
 		drop.addActionListener(new ActionListener() {
@@ -54,6 +59,7 @@ public class RightClickMenu extends JPopupMenu {
 			}
 		});
 
+		//add the options
 		add(drop);
 		add(use);
 		add(inspect);

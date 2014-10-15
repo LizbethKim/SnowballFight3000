@@ -1,7 +1,7 @@
 package ui.actions;
 
-import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
+import ui.gamewindow.UI;
 
 /**
  * InspectItem is a key action that attempts to inspect the item in front of the
@@ -24,7 +24,7 @@ public class InspectItem extends KeyAction {
 
 	@Override
 	protected void execute() {
-			client.inspectItem();	
+		client.inspectItem();
 	}
 
 }
