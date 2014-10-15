@@ -56,7 +56,6 @@ public class UI extends JFrame {
 	private GameSetup gameSetup;
 	private JFrame setupFrame;
 	private ContainerPopup cont;
-
 	public UI() {
 
 		// initialise UI

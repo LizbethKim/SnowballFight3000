@@ -84,6 +84,7 @@ public class HUDPanel extends JPanel {
 		// paints the health bar and score
 		paintHealthBar(g);
 		paintScore(g);
+		paintItemDescription(g);
 	}
 
 	@Override
@@ -97,7 +98,8 @@ public class HUDPanel extends JPanel {
 	/**
 	 * paints the player's health bar int he left hand corner of the hud
 	 * 
-	 * @param g the graphics object to paint on
+	 * @param g
+	 *            the graphics object to paint on
 	 */
 	private void paintHealthBar(Graphics g) {
 		// get the size and position of the base of the health bar relative to
@@ -125,7 +127,8 @@ public class HUDPanel extends JPanel {
 	/**
 	 * paints the score in the top right corner of the hud
 	 * 
-	 * @param g the graphics object to paint on
+	 * @param g
+	 *            the graphics object to paint on
 	 */
 	private void paintScore(Graphics g) {
 		// get size and position relative to the size of the game and
@@ -145,10 +148,19 @@ public class HUDPanel extends JPanel {
 
 	}
 
+	private void paintItemDescription(Graphics g) {
+		final int xPos = (int) (this.getWidth() / 2 / aspectRatio);
+		final int yPos = this.getHeight() / 2;
+
+		String descr = "this is a key here's a long string yo watch out for baddies";
+		g.drawString(descr, xPos, yPos);
+	}
+
 	/**
 	 * Load an image from the file system, using a given filename.
 	 * 
-	 * @param filename the name of the file to load
+	 * @param filename
+	 *            the name of the file to load
 	 * @return the fetched image
 	 */
 	public static Image loadImage(String filename) {
@@ -158,7 +170,7 @@ public class HUDPanel extends JPanel {
 			img = ImageIO.read(new File(IMAGE_PATH + filename));
 			return img;
 		} catch (IOException e) {
-			//can't load an image so abort the game
+			// can't load an image so abort the game
 			throw new RuntimeException("Unable to load image: " + filename);
 		}
 

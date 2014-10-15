@@ -115,8 +115,8 @@ public class GameSetup extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			//ServerGame g = new ServerGame(loader.loadGame(file), map);
-			ServerGame g = new ServerGame(Board.defaultBoard());
+			ServerGame g = new ServerGame(loader.loadGame(file), map);
+			//ServerGame g = new ServerGame(Board.defaultBoard());
 
 			Server server = new Server(g);
 
