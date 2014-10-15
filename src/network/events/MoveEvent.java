@@ -25,7 +25,6 @@ public class MoveEvent extends LocationEvent {
 
 	@Override
 	public void writeTo(OutputStream out) throws IOException {
-		// TODO Auto-generated method stub
 		out.write(0x01);
 		out.write(playerID);
 		writeLocation(out,location);

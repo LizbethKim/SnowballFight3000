@@ -28,8 +28,6 @@ public class CreateLocalPlayerEvent extends LocationEvent {
 		out.write(0x06);
 		out.write(id);
 		writeLocation(out,location);
-		// TODO Auto-generated method stub
-
 	}
 
 }

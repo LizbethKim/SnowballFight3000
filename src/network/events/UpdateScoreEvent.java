@@ -21,7 +21,6 @@ public class UpdateScoreEvent implements UpdateEvent {
 
 	@Override
 	public void writeTo(OutputStream out) throws IOException {
-		// TODO Auto-generated method stub
 		out.write(0x16);
 		out.write(score);
 		out.write(score>>8);

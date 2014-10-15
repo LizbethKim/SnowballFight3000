@@ -22,7 +22,6 @@ public class RemovePlayerEvent implements UpdateEvent {
 
 	@Override
 	public void writeTo(OutputStream out) throws IOException {
-		// TODO Auto-generated method stub
 		out.write(0x09);
 		out.write(id);
 	}

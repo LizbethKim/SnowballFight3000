@@ -23,7 +23,6 @@ public class UnlockEvent extends LocationEvent {
 
 	@Override
 	public void writeTo(OutputStream out) throws IOException {
-		// TODO Auto-generated method stub
 		out.write(0x18);
 		writeLocation(out,location);
 	}

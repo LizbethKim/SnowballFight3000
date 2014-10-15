@@ -170,8 +170,6 @@ public class RemotePlayer implements Runnable {
 		game.addPlayer(id, name, team);
 	}
 
-	// TODO functions here will be made as needed as we develop the protocol
-
 	private String readString() throws IOException, SocketClosedException {
 		String output = "";
 		//read length

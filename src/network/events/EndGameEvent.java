@@ -23,7 +23,6 @@ public class EndGameEvent implements UpdateEvent {
 
 	@Override
 	public void writeTo(OutputStream out) throws IOException {
-		// TODO Auto-generated method stub
 		out.write(0x17);
 		out.write(winningTeam.ordinal());
 	}

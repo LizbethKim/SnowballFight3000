@@ -47,10 +47,8 @@ public class Client implements Runnable {
 		try {
 			connection = new Socket(host, 6015);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -208,7 +206,6 @@ public class Client implements Runnable {
 			}
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -223,7 +220,6 @@ public class Client implements Runnable {
 			connection.getOutputStream().write(direction.ordinal());
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -239,7 +235,6 @@ public class Client implements Runnable {
 			connection.getOutputStream().write(id);
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -254,7 +249,6 @@ public class Client implements Runnable {
 			connection.getOutputStream().write(type.ordinal());
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -268,7 +262,6 @@ public class Client implements Runnable {
 			connection.getOutputStream().write(0x0C);
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -284,7 +277,6 @@ public class Client implements Runnable {
 			connection.getOutputStream().write(index);
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -299,7 +291,6 @@ public class Client implements Runnable {
 			connection.getOutputStream().write(index);
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -314,7 +305,6 @@ public class Client implements Runnable {
 			connection.getOutputStream().write(index);
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -336,7 +326,6 @@ public class Client implements Runnable {
 			connection.getOutputStream().write(team.ordinal());
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -351,7 +340,6 @@ public class Client implements Runnable {
 			connection.getOutputStream().write(0x07);
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
@@ -369,10 +357,8 @@ public class Client implements Runnable {
 				throw new RuntimeException("Server isn't doing what I want it to ;_;");
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SocketClosedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return mapBytes;

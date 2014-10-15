@@ -36,7 +36,6 @@ public class Server implements Runnable {
 			try {
 				Thread.currentThread().sleep(1);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -90,7 +89,6 @@ public class Server implements Runnable {
 					//create and start a new thread, running the socket worker code
 					new Thread(newPlayer).start();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -109,7 +107,6 @@ public class Server implements Runnable {
 				if(p!=null)
 					p.sendUpdates();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

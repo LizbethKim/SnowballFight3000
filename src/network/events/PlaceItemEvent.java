@@ -27,7 +27,6 @@ public class PlaceItemEvent extends ItemEvent {
 
 	@Override
 	public void writeTo(OutputStream out) throws IOException {
-		// TODO Auto-generated method stub
 		out.write(0x0f);
 		writeItem(out,item);
 		writeLocation(out,location);

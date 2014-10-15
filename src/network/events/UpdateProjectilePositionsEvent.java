@@ -32,7 +32,6 @@ public class UpdateProjectilePositionsEvent extends LocationEvent {
 
 	@Override
 	public void writeTo(OutputStream out) throws IOException {
-		// TODO Auto-generated method stub
 		out.write(0x08);
 		out.write(projectiles.length);
 		for(int i=0;i<projectiles.length;i++) {
