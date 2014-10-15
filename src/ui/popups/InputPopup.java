@@ -21,6 +21,10 @@ import ui.gamewindow.UI;
  */
 
 public class InputPopup extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1238937909701994743L;
 	private static final String blueTeam = "blue";
 	private static final String redTeam = "red";
 
@@ -53,14 +57,10 @@ public class InputPopup extends JPanel {
 			team1.setActionCommand(redTeam);
 			team2 = new JRadioButton("Team Blue");
 			team2.setActionCommand(blueTeam);
-			// JPanel buttonPanel = new JPanel();
-			// buttonPanel.setLayout(new );
 			teamChoice.add(team1);
 			teamChoice.add(team2);
 			team1.setSelected(true);
 
-			// buttonPanel.add(team1);
-			// buttonPanel.add(team2);
 
 			name = new JTextField("defaultname");
 

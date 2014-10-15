@@ -25,6 +25,10 @@ import ui.cheats.UnlimitedSpeed;
  */
 public class CheatsPopup extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2432983872485973072L;
 	private JPanel actions;
 	private JPanel switches;
 	private ClientGame client;

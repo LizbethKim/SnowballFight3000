@@ -1,7 +1,7 @@
 package ui.actions;
 
-import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
+import ui.gamewindow.UI;
 
 /**
  * SelectItem is a key action that selects the inventory slot corresponding to

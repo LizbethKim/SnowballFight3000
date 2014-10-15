@@ -1,10 +1,11 @@
 package ui.actions;
 
-import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
+import ui.gamewindow.UI;
 
 /**
- * ThrowSnowball is a key action that prompts the throwing of a snowball by the player
+ * ThrowSnowball is a key action that prompts the throwing of a snowball by the
+ * player
  * 
  * @author Ryan Burnell, 300279172
  * 

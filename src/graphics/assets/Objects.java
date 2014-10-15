@@ -8,9 +8,11 @@ import javax.imageio.ImageIO;
 /**
  * Represents the types of objects that can be rendered on a tile
  *  - this can be furniture, items, etc. WALL_E_W is a wall going east to west,
- *  WALL_N_S is a wall going north to south. RB, also stores the associated images,
+ *  WALL_N_S is a wall going north to south. 
  *  accessed through the img field. Each enum has 4 images associated with it to do
  *  with each of the 4 views that are possible in the game
+ *  A lot of the sprites were taken from google searching or
+ *  http://www.spriters-resource.com
  * @author Kelsey Jack (300275851) + Elizabeth Kim kimeliz1 (300302456)
  */
 public enum Objects {

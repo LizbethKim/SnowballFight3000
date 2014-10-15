@@ -1,7 +1,7 @@
 package ui.actions;
 
-import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
+import ui.gamewindow.UI;
 
 /**
  * UseItem is a key action that uses the currently selected item in the players
@@ -27,7 +27,8 @@ public class UseItem extends KeyAction {
 	protected void execute() {
 		if (client.selectedIsContainer()) {
 			// System.out.println("is container");
-			parent.openContainer(true);// new ContainerPopup(client, parent, "", true);
+			parent.openContainer(true);// new ContainerPopup(client, parent, "",
+										// true);
 			System.out.println("popup done");
 		} else {
 			client.useSelectedItem();
