@@ -34,7 +34,10 @@ public class ServerGame {
 	}
 
 	public ServerGame(StoredGame sg) {
-		// KTC
+		this.board = sg.getBoard();
+		this.playerIDs = new HashMap<Integer, Player>();
+		this.projectiles = new ArrayList<Snowball>();
+		this.snowballFactory = new SnowballFactory();
 	}
 
 	// examples of methods that will be in here
@@ -165,19 +168,27 @@ public class ServerGame {
 	}
 
 	public void unfreezePlayer(int playerID) {
+		System.out.println("ID who is unfreezing is " + playerID);
+		System.out.println("Unfreeze event received.");
 		Player p = this.playerIDs.get(playerID);
+		System.out.println("Found player who sent it");
 		if (p!= null) {
+			System.out.println("Player wasn't null");
 			Location l = p.getLocationInFrontOf();
 			Player toUnfreeze = null;
 			for (Player player: playerIDs.values()) {
+				System.out.println("Looking at player with location " + player.getLocation());
 				if (player.getLocation().equals(l)) {
+					System.out.println("Found a player to unfreeze");
 					toUnfreeze = player;
 					break;
 				}
 			}
 			if (toUnfreeze != null && p.getTeam() == toUnfreeze.getTeam()) {
 				toUnfreeze.damage(-20);
+				System.out.println("Unfreezing player");
 				for (int id: playerIDs.keySet()) {
+					System.out.println("sending unfreeze event");
 					server.queuePlayerUpdate(new UnfreezePlayerEvent(toUnfreeze.getID()), id);
 				}
 			}

@@ -18,18 +18,7 @@ public class Chest extends Furniture implements Inventory, Lockable {
 	public final int id;
 
 	/**
-	 * Constructs a chest containing the given collection of items.
-	 * @param contents The items to be placed in the chest. Cannot be null.
-	 * @param description A description of the chest
-	 */
-	public Chest(String description, Collection<Item> contents) {
-		super(description, Objects.CHEST);
-		this.contents = new ArrayList<Item>(contents);
-		this.id = 0;
-	}
-	
-	/**
-	 * Constructs a chest containing the given collection of items, 
+	 * Constructs a chest containing the given collection of items,
 	 * and associated with keys with the given ID.
 	 * @param contents The items to be placed in the chest. Cannot be null.
 	 * @param description A description of the chest
@@ -44,24 +33,15 @@ public class Chest extends Furniture implements Inventory, Lockable {
 	}
 
 	/**
-	 * Constructs an empty chest.
-	 */
-	public Chest(String description) {
-		super(description, Objects.CHEST);
-		this.contents = new ArrayList<Item>();
-		this.id = 0;
-	}
-	
-	/**
 	 * Constructs an empty chest associated with a key.
 	 * @param description A desciption of the chest
-	 * @param id The id of the keys that can unlock it
+	 * @param ID The id of the keys that can unlock it
 	 * @param locked Whether the chest is initally locked
 	 */
-	public Chest(String description, int id, boolean locked) {
+	public Chest(String description, int ID, boolean locked) {
 		super(description, Objects.CHEST);
 		this.contents = new ArrayList<Item>();
-		this.id = id;
+		this.id = ID;
 		this.locked = locked;
 	}
 
@@ -121,18 +101,18 @@ public class Chest extends Furniture implements Inventory, Lockable {
 	public int getID() {
 		return id;
 	}
-	
+
 	public boolean isLocked() {
 		return locked;
 	}
 
 	@Override
 	public void setLocked(boolean locked) {
-		this.locked = locked;		
+		this.locked = locked;
 	}
 
 	@Override
 	public void empty() {
-		this.contents.clear();		
+		this.contents.clear();
 	}
 }

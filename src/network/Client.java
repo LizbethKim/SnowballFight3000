@@ -31,12 +31,13 @@ public class Client implements Runnable {
 
 	private Socket connection;
 
+
 	//stuff required for packing and de-packing locations
 	private int worldWidth;
 	private int worldHeight;
 	private int locationLen;
 
-	private Byte mapBytes[];
+	private byte[] mapBytes;
 
 	/**
 	 * @param host the address of the server to connect to
@@ -92,7 +93,7 @@ public class Client implements Runnable {
 					len += readFromSocket()<<8;
 					len += readFromSocket()<<16;
 					len += readFromSocket()<<24;
-					mapBytes = new Byte[len];
+					mapBytes = new byte[len];
 					for(int i=0;i<len;i++) {
 						mapBytes[i] = (byte) readFromSocket();
 					}
@@ -350,7 +351,7 @@ public class Client implements Runnable {
 	 * this function blocks until the file is received
 	 * @return an array of byte containing the file data
 	 */
-	public Byte[] sendMapRequest() {
+	public byte[] sendMapRequest() {
 		try {
 			connection.getOutputStream().write(0x07);
 			connection.getOutputStream().flush();

@@ -285,7 +285,7 @@ public class StaxParser {
 		}else if(name.equals(Objects.CHEST.name())){
 			//turn chestLoad on and parse it's description
 			chestLoad = true;
-			item = new Chest(parseDescription(1, values));
+			item = new Chest(parseDescription(1, values), Integer.parseInt(values[1]), Boolean.parseBoolean(values[2]));
 		}else if(name.equals(Objects.REDFLAG.name())){
 			//new Flag for the redteam
 			item = new Flag(Team.RED);
@@ -294,10 +294,10 @@ public class StaxParser {
 			item = new Flag(Team.BLUE);
 		}else if(name.equals(Objects.DOOREW.name())){
 			//parse its description, id. It's direction will be east/west
-			item = new Door(parseDescription(3, values),Integer.parseInt(values[1]) ,Direction.EAST );
+			item = new Door(parseDescription(3, values), Direction.EAST, Integer.parseInt(values[1]),Boolean.parseBoolean(values[2]));
 		}else if(name.equals(Objects.DOORNS.name())){
 			//parse its description, id. It's direction will be north/south
-			item = new Door(parseDescription(3, values),Integer.parseInt(values[1]) ,Direction.NORTH );
+			item = new Door(parseDescription(3, values), Direction.NORTH, Integer.parseInt(values[1]),Boolean.parseBoolean(values[2]));
 		}else if(name.equals(Objects.POWERUP.name()) || name.equals(Objects.HEALTH.name())){
 			//It's some kind of powerup/health, just give it it's power enum
 			item = new Powerup(Powerup.Power.valueOf(values[1]));

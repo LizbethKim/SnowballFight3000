@@ -108,7 +108,6 @@ public class GameSetup extends JPanel {
 //		// make new server
 //		ServerGame g = new ServerGame(loader.loadGame(file));
 		ServerGame g = new ServerGame(Board.defaultBoard());
-
 		Server server = new Server(g);
 
 		// start server connection accepting thread
@@ -116,7 +115,6 @@ public class GameSetup extends JPanel {
 		new Thread(new Time(g)).start();
 		// let the user know the server was started
 		JOptionPane.showMessageDialog(null, "Server Started");
-		//}
 	}
 
 	/**
