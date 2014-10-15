@@ -182,7 +182,6 @@ public class Client implements Runnable {
 					updater.unFreezePlayer(id);
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return;
 			} catch(SocketClosedException e) {

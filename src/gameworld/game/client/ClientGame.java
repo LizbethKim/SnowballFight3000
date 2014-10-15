@@ -207,6 +207,11 @@ public class ClientGame {
 		throw new NotAContainerException();
 	}
 
+	/**
+	 * Attempts to find a player in front of this one, and sends
+	 * an unfreeze request to the server if one is found
+	 * @return If a request was sent
+	 */
 	public boolean unfreezePlayer() {
 		Location facing = player.getLocationInFrontOf();
 		for(Player p: playerIDs.values()) {
@@ -217,6 +222,20 @@ public class ClientGame {
 		}
 		return false;
 	}
+
+	/**
+	 * Save current game into the given file
+	 * @param file
+	 */
+	public void save(File file) {
+		SaveGame saver = new SaveGame();
+		List<Player> ps = new ArrayList<Player>();
+		ps.addAll(playerIDs.values());
+		StoredGame sg = new StoredGame(this.board, ps);
+		saver.save(sg, file);
+	}
+
+	// getters and setters
 
 	public void toggleUnlimitedSpeed () {
 		if (this.player.getStepDelay() != 0) {
@@ -303,14 +322,6 @@ public class ClientGame {
 
 	public String getLastInspected() {
 		return lastInspected;
-	}
-
-	public void save(File file) {
-		SaveGame saver = new SaveGame();
-		List<Player> ps = new ArrayList<Player>();
-		ps.addAll(playerIDs.values());
-		StoredGame sg = new StoredGame(this.board, ps);
-		saver.save(sg, file);
 	}
 
 	public ClientUpdater getUpdater() {
