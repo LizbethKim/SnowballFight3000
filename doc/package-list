@@ -1,1 +1,17 @@
 gameworld.game
+gameworld.game.client
+gameworld.game.server
+gameworld.tests
+gameworld.world
+graphics
+graphics.assets
+network
+network.events
+storage
+storage.load
+storage.save
+storage.tests
+ui.actions
+ui.cheats
+ui.gamewindow
+ui.popups
