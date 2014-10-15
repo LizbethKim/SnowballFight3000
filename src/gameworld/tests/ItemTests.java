@@ -20,7 +20,13 @@ public class ItemTests {
 	// KTC finish these tests
 	@Test
 	public void testChest() {
-
+		Chest c = new Chest("A chest", 0, false);
+		assertTrue(c.getContents().isEmpty());
+		assertFalse(c.getContents().add(new Key("", 0)));
+		for (int i = 0; i < c.maxSize(); i++) {
+			assertTrue(c.addItem(new Key("", 0)));
+		}
+		assertFalse(c.addItem(new Key("", 0)));
 	}
 
 	@Test

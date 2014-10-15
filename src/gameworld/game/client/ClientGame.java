@@ -216,7 +216,7 @@ public class ClientGame {
 	 * @return Whether the selected item in the inventory is a container
 	 */
 	public boolean selectedIsContainer(){
-		if (selectedIndex != -1 && selectedIndex <= player.getInventoryItems().size() && player.getInventoryItems().get(selectedIndex) instanceof Inventory) {
+		if (selectedIndex != -1 && selectedIndex < player.getInventoryItems().size() && player.getInventoryItems().get(selectedIndex) instanceof Inventory) {
 			return true;
 		}
 		return false;
