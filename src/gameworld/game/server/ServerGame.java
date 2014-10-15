@@ -213,7 +213,7 @@ public class ServerGame {
 		server.queuePlayerUpdate(new CreateLocalPlayerEvent(playerID, spawnLoc), playerID);
 		Player p = new Player(name, t, playerID, spawnLoc);
 		playerIDs.put(playerID, p);
-		System.out.println("Created player with id");
+		System.out.println("Created player with id " + playerID);
 		for (int id: playerIDs.keySet()) {
 			Player other = playerIDs.get(id);
 			server.queuePlayerUpdate(new CreatePlayerEvent(id, other.name, other.getLocation(), other.getTeam()), playerID);
