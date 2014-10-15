@@ -200,9 +200,9 @@ public class Client implements Runnable {
 	/**
 	 * @param location the location you're moving to
 	 */
-	public void sendMove(Location l) {
+	public void sendMove(Location location) {
 		try {
-			int output = l.x+(l.y*worldWidth);
+			int output = location.x+(location.y*worldWidth);
 			connection.getOutputStream().write(0x01);
 			for(int i=0;i<(locationLen/8)+1;i++) {
 				connection.getOutputStream().write(output>>(i*8));
@@ -218,10 +218,10 @@ public class Client implements Runnable {
 	 * sends a request to turn your player to the server
 	 * @param direction the new direction to face
 	 */
-	public void sendTurn(Direction d) {
+	public void sendTurn(Direction direction) {
 		try {
 			connection.getOutputStream().write(0x02);
-			connection.getOutputStream().write(d.ordinal());
+			connection.getOutputStream().write(direction.ordinal());
 			connection.getOutputStream().flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -230,6 +230,10 @@ public class Client implements Runnable {
 	}
 
 
+	/**
+	 * sends a request to unfreeze a player to the server
+	 * @param id the id of the player to unfreeze
+	 */
 	public void unfreezePlayer(int id) {
 		try {
 			connection.getOutputStream().write(0x19);
@@ -381,8 +385,8 @@ public class Client implements Runnable {
 	 * @param width the width of the map
 	 * @param height the height of the map
 	 */
-	public void startReceiving(ClientUpdater c, int width, int height) {
-		this.updater = c;
+	public void startReceiving(ClientUpdater updater, int width, int height) {
+		this.updater = updater;
 		Thread t = new Thread(this);
 		worldWidth = width;
 		worldHeight = height;
@@ -397,7 +401,7 @@ public class Client implements Runnable {
 	/**
 	 * reads a string, encoded as a byte containing length
 	 * followed by length characters, from the connection
-	 * @return
+	 * @return the string read from the connection
 	 * @throws IOException
 	 * @throws SocketClosedException
 	 */
