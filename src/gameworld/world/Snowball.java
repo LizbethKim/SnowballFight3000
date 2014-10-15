@@ -73,6 +73,9 @@ public class Snowball implements Entity {
 
 	@Override
 	public Objects asEnum() {
+		if (this.type == SnowballType.FLAMING) {
+			return Objects.FIRESNOWBALL;
+		}
 		return Objects.SNOWBALL;
 	}
 
