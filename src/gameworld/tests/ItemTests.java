@@ -32,6 +32,7 @@ public class ItemTests {
 		assertTrue(c.isLocked());
 		assertTrue(c.unlock(goodKey));
 		assertFalse(c.isLocked());
+		assertFalse(c.canMoveThrough());
 	}
 
 	@Test (expected = IllegalArgumentException.class)

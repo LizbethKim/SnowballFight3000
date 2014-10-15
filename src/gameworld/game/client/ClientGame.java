@@ -66,7 +66,7 @@ public class ClientGame {
 		this.playerID = 0;
 		this.board = sb.getBoard();
 
-		// KTC what?
+		// KTC what
 	}
 
 	public List<String> getPlayerList() {
