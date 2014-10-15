@@ -153,6 +153,7 @@ public class StaxParser {
 						}else if(tileLoad){
 							//Loading items on a tile, but not within a chest, so add to the tile
 							curTile.place(item);
+							System.out.println("ITEM PLACED" + curTile.getOn().asEnum().name());
 						}
 						continue;
 					}
@@ -234,6 +235,7 @@ public class StaxParser {
 		for(int i=1;i<values.length;i=i+2){
 			Location loc = parseLoc(values[i], values[i+1]);
 			a.add(tiles[loc.x][loc.y]);
+			System.out.println("added tile "+ loc.x+" " +loc.y);
 		}
 		return a;
 	}
@@ -246,10 +248,9 @@ public class StaxParser {
 	private Tile parseTile(String[] values){
 		// turn tileLoad on, to differentiate between inventories
 		tileLoad=true;
-		int terrain = Integer.parseInt(values[0]);
 		Location loc = parseLoc(values[1],values[2]);
 		// create the tile
-		return new Tile(loc,Terrain.values()[terrain], null);
+		return new Tile(loc,Terrain.valueOf(values[0]), null);
 	}
 
 	/**

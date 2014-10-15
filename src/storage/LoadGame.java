@@ -60,8 +60,14 @@ public class LoadGame{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		return loadGame(file);
+		StoredGame game = loadGame(file);
+		if(game.getBoard()==null){
+			System.out.println("Board is null");
+		}
+		if(game.getPlayers()==null){
+			System.out.println("Players is null");
+		}
+		return game; 
 	}
 
 
