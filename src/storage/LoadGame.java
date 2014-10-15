@@ -16,17 +16,6 @@ import storage.load.StaxParser;
  */
 public class LoadGame{
 	private StoredGame game;
-
-	/**
-	 * Purely for testing
-	 * @param args
-	 */
-	/*public static void main(String[] args) {
-		
-		StaxParser parser = new StaxParser();
-		StoredGame testGame = parser.parse(new File("src/storage/defaultBoard.xml"));
-        System.out.println("Game Loaded by load main");
-	}*/
 	
 	/**
 	 * Loads the given filepath
@@ -35,13 +24,7 @@ public class LoadGame{
 	 */
 	public StoredGame loadGame(File file){
 		StaxParser parser = new StaxParser();
-		System.out.println(file);
-		if(file==null){
-			System.out.println("That's not a path: ");
-		}else{
-			game = parser.parse(file);
-			System.out.println("Game Loaded by loader");
-		}
+		game = parser.parse(file);
 		return game;
 	}
 
@@ -53,7 +36,6 @@ public class LoadGame{
 	public StoredGame loadGame(byte[] map) {
 		
 		File file = new File(System.getProperty("user.home"),"loadedGame.xml");
-		System.out.println(file.getAbsolutePath());
 		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream(file);
@@ -63,12 +45,6 @@ public class LoadGame{
 			e.printStackTrace();
 		}
 		StoredGame game = loadGame(file);
-		if(game.getBoard()==null){
-			System.out.println("Board is null");
-		}
-		if(game.getPlayers()==null){
-			System.out.println("Players is null");
-		}
 		return game; 
 	}
 
