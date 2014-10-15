@@ -243,9 +243,6 @@ public class StaxParser {
 		System.out.println(values.length);
 		for(i = 1;i<values.length;i=i+2){
 			Location loc = parseLoc(values[i], values[i+1]);
-			if(curArea==null){
-				System.out.println("ITS NULL");
-			}
 			a.add(tiles[loc.x][loc.y]);
 		}
 		System.out.println("FINAL i VALUE:"+i);

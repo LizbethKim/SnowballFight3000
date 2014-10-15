@@ -22,6 +22,10 @@ public class Area {
 	public List<Tile> getTiles() {
 		return Collections.unmodifiableList(tiles);
 	}
+	
+	public boolean remove(Tile t){
+		return tiles.remove(t);
+	}
 
 	public boolean containsLoc(Location l) {
 		for (Tile t : tiles) {
