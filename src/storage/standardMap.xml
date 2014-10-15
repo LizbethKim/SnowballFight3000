@@ -944,7 +944,7 @@
 <tile>SNOW 11 59 </tile>
 <tile>SNOW 11 60 </tile>
 <tile>SNOW 11 61 </tile>
-<tile>SNOW 11 62 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>SNOW 11 62 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>SNOW 11 63 </tile>
 <tile>SNOW 11 64 </tile>
 <tile>SNOW 11 65 </tile>
@@ -1030,7 +1030,7 @@
 <tile>SNOW 12 65 </tile>
 <tile>DIRT 12 66 </tile>
 <tile>SNOW 12 67 </tile>
-<tile>SNOW 12 68 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>SNOW 12 68 <item>HEALTH HEALTH_POTION</item></tile>
 <tile>SNOW 12 69 <item>WALL_E_W </item></tile>
 <tile>NULLTILE 12 70 </tile>
 <tile>NULLTILE 12 71 </tile>
@@ -1054,14 +1054,14 @@
 <tile>DIRT 13 9 <item>WALL_N_S </item></tile>
 <tile>GRASS 13 10 <item>WALL_E_W </item></tile>
 <tile>GRASS 13 11 </tile>
-<tile>GRASS 13 12 <item>HEALTH HEALTH_POTION</item></tile>
+<tile>GRASS 13 12 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>GRASS 13 13 </tile>
 <tile>GRASS 13 14 </tile>
 <tile>SNOW 13 15 </tile>
 <tile>SNOW 13 16 </tile>
 <tile>SNOW 13 17 </tile>
 <tile>SNOW 13 18 </tile>
-<tile>SNOW 13 19 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>SNOW 13 19 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>SNOW 13 20 </tile>
 <tile>SNOW 13 21 </tile>
 <tile>SNOW 13 22 </tile>
@@ -1109,7 +1109,7 @@
 <tile>SNOW 13 64 </tile>
 <tile>DIRT 13 65 <item>BUSH </item></tile>
 <tile>DIRT 13 66 </tile>
-<tile>DIRT 13 67 <item>POWERUP SPEED_BOOST</item></tile>
+<tile>DIRT 13 67 <item>HEALTH HEALTH_POTION</item></tile>
 <tile>SNOW 13 68 </tile>
 <tile>SNOW 13 69 <item>WALL_E_W </item></tile>
 <tile>DIRT 13 70 <item>WALL_N_S </item></tile>
@@ -1124,7 +1124,7 @@
 <tile>DIRT 13 79 <item>CORNER_S_W </item></tile>
 <tile>GRASS 14 0 <item>WALL_E_W </item></tile>
 <tile>GRASS 14 1 </tile>
-<tile>GRASS 14 2 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>GRASS 14 2 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
 <tile>GRASS 14 3 </tile>
 <tile>GRASS 14 4 </tile>
 <tile>GRASS 14 5 </tile>
@@ -1146,7 +1146,7 @@
 <tile>SNOW 14 21 </tile>
 <tile>SNOW 14 22 </tile>
 <tile>SNOW 14 23 </tile>
-<tile>SNOW 14 24 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>SNOW 14 24 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
 <tile>SNOW 14 25 </tile>
 <tile>SNOW 14 26 </tile>
 <tile>SNOW 14 27 </tile>
@@ -1203,9 +1203,9 @@
 <tile>DIRT 14 78 </tile>
 <tile>DIRT 14 79 <item>WALL_E_W </item></tile>
 <tile>GRASS 15 0 <item>WALL_E_W </item></tile>
-<tile>GRASS 15 1 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>GRASS 15 1 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>GRASS 15 2 </tile>
-<tile>GRASS 15 3 <inventory>CHEST 11 true<item>KEY 13 Unlocks a chest</item><item>POWERUP SPEED_BOOST</item><item>BAG </item><item>HEALTH STRONG_HEALTH_POTION</item></inventory></tile>
+<tile>GRASS 15 3 <inventory>CHEST 11 true<item>KEY 13 Unlocks a chest</item><item>POWERUP FIRE_SPEED_BOOST</item><item>BAG </item><item>HEALTH STRONG_HEALTH_POTION</item></inventory></tile>
 <tile>GRASS 15 4 </tile>
 <tile>DIRT 15 5 </tile>
 <tile>DIRT 15 6 </tile>
@@ -1228,7 +1228,7 @@
 <tile>SNOW 15 23 </tile>
 <tile>SNOW 15 24 </tile>
 <tile>SNOW 15 25 </tile>
-<tile>SNOW 15 26 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>SNOW 15 26 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>SNOW 15 27 <item>BUSH </item></tile>
 <tile>SNOW 15 28 </tile>
 <tile>SNOW 15 29 <item>BUSH </item></tile>
@@ -1446,7 +1446,7 @@
 <tile>GRASS 18 1 </tile>
 <tile>DIRT 18 2 </tile>
 <tile>DIRT 18 3 </tile>
-<tile>DIRT 18 4 <item>HEALTH HEALTH_POTION</item></tile>
+<tile>DIRT 18 4 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>DIRT 18 5 </tile>
 <tile>DIRT 18 6 </tile>
 <tile>DIRT 18 7 </tile>
@@ -1540,7 +1540,7 @@
 <tile>SNOW 19 15 <item>TREE </item></tile>
 <tile>SNOW 19 16 </tile>
 <tile>SNOW 19 17 <item>TREE </item></tile>
-<tile>SNOW 19 18 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>SNOW 19 18 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>SNOW 19 19 </tile>
 <tile>SNOW 19 20 </tile>
 <tile>SNOW 19 21 </tile>
@@ -1570,7 +1570,7 @@
 <tile>SNOW 19 45 </tile>
 <tile>SNOW 19 46 </tile>
 <tile>SNOW 19 47 </tile>
-<tile>SNOW 19 48 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>SNOW 19 48 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>SNOW 19 49 </tile>
 <tile>SNOW 19 50 </tile>
 <tile>SNOW 19 51 </tile>
@@ -1590,7 +1590,7 @@
 <tile>SNOW 19 65 </tile>
 <tile>SNOW 19 66 </tile>
 <tile>SNOW 19 67 </tile>
-<tile>SNOW 19 68 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>SNOW 19 68 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>SNOW 19 69 <item>WALL_E_W </item></tile>
 <tile>DIRT 19 70 </tile>
 <tile>DIRT 19 71 </tile>
@@ -1598,7 +1598,7 @@
 <tile>DIRT 19 73 </tile>
 <tile>DIRT 19 74 </tile>
 <tile>DIRT 19 75 </tile>
-<tile>DIRT 19 76 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>DIRT 19 76 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
 <tile>DIRT 19 77 </tile>
 <tile>DIRT 19 78 </tile>
 <tile>DIRT 19 79 <item>WALL_E_W </item></tile>
@@ -1633,13 +1633,13 @@
 <tile>SNOW 20 28 </tile>
 <tile>DIRT 20 29 </tile>
 <tile>DIRT 20 30 </tile>
-<tile>SNOW 20 31 <item>POWERUP FAST_SNOWBALLS</item></tile>
+<tile>SNOW 20 31 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>SNOW 20 32 </tile>
 <tile>SNOW 20 33 </tile>
 <tile>SNOW 20 34 </tile>
 <tile>SNOW 20 35 </tile>
 <tile>SNOW 20 36 </tile>
-<tile>SNOW 20 37 <item>BAG </item></tile>
+<tile>SNOW 20 37 <inventory>BAG <item>HEALTH STRONG_HEALTH_POTION</item><item>POWERUP FIRE_SPEED_BOOST</item><item>POWERUP FAST_SNOWBALLS</item></inventory></tile>
 <tile>SNOW 20 38 </tile>
 <tile>SNOW 20 39 </tile>
 <tile>SNOW 20 40 </tile>
@@ -1698,7 +1698,7 @@
 <tile>SNOW 21 13 </tile>
 <tile>SNOW 21 14 </tile>
 <tile>SNOW 21 15 </tile>
-<tile>SNOW 21 16 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>SNOW 21 16 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
 <tile>SNOW 21 17 <item>BUSH </item></tile>
 <tile>SNOW 21 18 </tile>
 <tile>SNOW 21 19 <item>BUSH </item></tile>
@@ -1760,7 +1760,7 @@
 <tile>DIRT 21 75 </tile>
 <tile>DIRT 21 76 </tile>
 <tile>DIRT 21 77 </tile>
-<tile>DIRT 21 78 <item>POWERUP FAST_SNOWBALLS</item></tile>
+<tile>DIRT 21 78 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>DIRT 21 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 22 0 <item>WALL_E_W </item></tile>
 <tile>DIRT 22 1 </tile>
@@ -1823,7 +1823,7 @@
 <tile>SNOW 22 58 </tile>
 <tile>SNOW 22 59 </tile>
 <tile>SNOW 22 60 </tile>
-<tile>SNOW 22 61 <item>HEALTH HEALTH_POTION</item></tile>
+<tile>SNOW 22 61 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>SNOW 22 62 <item>TREE </item></tile>
 <tile>SNOW 22 63 <item>TREE </item></tile>
 <tile>SNOW 22 64 </tile>
@@ -1835,7 +1835,7 @@
 <tile>DIRT 22 70 </tile>
 <tile>DIRT 22 71 </tile>
 <tile>DIRT 22 72 </tile>
-<tile>DIRT 22 73 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>DIRT 22 73 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>DIRT 22 74 </tile>
 <tile>DIRT 22 75 </tile>
 <tile>DIRT 22 76 </tile>
@@ -1844,11 +1844,11 @@
 <tile>DIRT 22 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 23 0 <item>WALL_E_W </item></tile>
 <tile>DIRT 23 1 </tile>
-<tile>DIRT 23 2 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>DIRT 23 2 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>DIRT 23 3 </tile>
 <tile>DIRT 23 4 </tile>
 <tile>DIRT 23 5 </tile>
-<tile>DIRT 23 6 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>DIRT 23 6 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>DIRT 23 7 </tile>
 <tile>DIRT 23 8 </tile>
 <tile>DIRT 23 9 </tile>
@@ -2238,7 +2238,7 @@
 <tile>DIRT 27 73 </tile>
 <tile>DIRT 27 74 </tile>
 <tile>DIRT 27 75 </tile>
-<tile>DIRT 27 76 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>DIRT 27 76 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>DIRT 27 77 </tile>
 <tile>DIRT 27 78 </tile>
 <tile>DIRT 27 79 <item>WALL_E_W </item></tile>
@@ -2246,7 +2246,7 @@
 <tile>DIRT 28 1 </tile>
 <tile>DIRT 28 2 </tile>
 <tile>DIRT 28 3 </tile>
-<tile>DIRT 28 4 <item>POWERUP FAST_SNOWBALLS</item></tile>
+<tile>DIRT 28 4 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>DIRT 28 5 </tile>
 <tile>DIRT 28 6 </tile>
 <tile>DIRT 28 7 </tile>
@@ -2259,7 +2259,7 @@
 <tile>SNOW 28 14 </tile>
 <tile>SNOW 28 15 </tile>
 <tile>SNOW 28 16 </tile>
-<tile>SNOW 28 17 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>SNOW 28 17 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>SNOW 28 18 </tile>
 <tile>SNOW 28 19 </tile>
 <tile>SNOW 28 20 </tile>
@@ -2327,7 +2327,7 @@
 <tile>DIRT 29 2 </tile>
 <tile>DIRT 29 3 </tile>
 <tile>DIRT 29 4 </tile>
-<tile>DIRT 29 5 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>DIRT 29 5 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>DIRT 29 6 </tile>
 <tile>DIRT 29 7 </tile>
 <tile>DIRT 29 8 </tile>
@@ -2395,7 +2395,7 @@
 <tile>DIRT 29 70 </tile>
 <tile>DIRT 29 71 </tile>
 <tile>DIRT 29 72 </tile>
-<tile>DIRT 29 73 <item>BAG </item></tile>
+<tile>DIRT 29 73 <inventory>BAG <item>POWERUP FAST_SNOWBALLS</item><item>POWERUP SPEED_BOOST</item><item>POWERUP FAST_SNOWBALLS</item></inventory></tile>
 <tile>DIRT 29 74 </tile>
 <tile>DIRT 29 75 </tile>
 <tile>DIRT 29 76 </tile>
@@ -2484,7 +2484,7 @@
 <tile>DIRT 30 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 31 0 <item>WALL_E_W </item></tile>
 <tile>DIRT 31 1 </tile>
-<tile>DIRT 31 2 <item>BAG </item></tile>
+<tile>DIRT 31 2 <inventory>BAG <item>HEALTH HEALTH_POTION</item><item>POWERUP SUPER_SNOWBALLS</item><item>POWERUP SPEED_BOOST</item></inventory></tile>
 <tile>DIRT 31 3 </tile>
 <tile>DIRT 31 4 </tile>
 <tile>DIRT 31 5 </tile>
@@ -2510,7 +2510,7 @@
 <tile>SNOW 31 25 </tile>
 <tile>SNOW 31 26 </tile>
 <tile>SNOW 31 27 </tile>
-<tile>GRASS 31 28 <item>BAG </item></tile>
+<tile>GRASS 31 28 <inventory>BAG <item>HEALTH STRONG_HEALTH_POTION</item><item>HEALTH HEALTH_POTION</item><item>POWERUP SUPER_SNOWBALLS</item></inventory></tile>
 <tile>GRASS 31 29 </tile>
 <tile>GRASS 31 30 </tile>
 <tile>SNOW 31 31 </tile>
@@ -2622,7 +2622,7 @@
 <tile>SNOW 32 57 </tile>
 <tile>SNOW 32 58 <item>BUSH </item></tile>
 <tile>SNOW 32 59 <item>BUSH </item></tile>
-<tile>SNOW 32 60 <item>POWERUP SPEED_BOOST</item></tile>
+<tile>SNOW 32 60 <item>HEALTH HEALTH_POTION</item></tile>
 <tile>SNOW 32 61 </tile>
 <tile>SNOW 32 62 </tile>
 <tile>SNOW 32 63 </tile>
@@ -2639,7 +2639,7 @@
 <tile>DIRT 32 74 </tile>
 <tile>DIRT 32 75 </tile>
 <tile>DIRT 32 76 </tile>
-<tile>DIRT 32 77 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>DIRT 32 77 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>DIRT 32 78 </tile>
 <tile>DIRT 32 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 33 0 <item>WALL_E_W </item></tile>
@@ -2663,7 +2663,7 @@
 <tile>SNOW 33 18 </tile>
 <tile>SNOW 33 19 </tile>
 <tile>SNOW 33 20 </tile>
-<tile>SNOW 33 21 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>SNOW 33 21 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>SNOW 33 22 </tile>
 <tile>SNOW 33 23 </tile>
 <tile>SNOW 33 24 </tile>
@@ -2790,7 +2790,7 @@
 <tile>SNOW 34 65 <item>BUSH </item></tile>
 <tile>SNOW 34 66 </tile>
 <tile>SNOW 34 67 <item>BUSH </item></tile>
-<tile>SNOW 34 68 <item>POWERUP FAST_SNOWBALLS</item></tile>
+<tile>SNOW 34 68 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>SNOW 34 69 <item>WALL_E_W </item></tile>
 <tile>GRASS 34 70 </tile>
 <tile>GRASS 34 71 </tile>
@@ -2800,7 +2800,7 @@
 <tile>DIRT 34 75 </tile>
 <tile>DIRT 34 76 </tile>
 <tile>DIRT 34 77 </tile>
-<tile>DIRT 34 78 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>DIRT 34 78 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>DIRT 34 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 35 0 <item>WALL_E_W </item></tile>
 <tile>DIRT 35 1 </tile>
@@ -2858,7 +2858,7 @@
 <tile>SNOW 35 53 </tile>
 <tile>SNOW 35 54 </tile>
 <tile>SNOW 35 55 </tile>
-<tile>SNOW 35 56 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>SNOW 35 56 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>SNOW 35 57 </tile>
 <tile>SNOW 35 58 <item>BUSH </item></tile>
 <tile>SNOW 35 59 </tile>
@@ -2885,9 +2885,9 @@
 <tile>DIRT 36 0 <item>WALL_E_W </item></tile>
 <tile>DIRT 36 1 </tile>
 <tile>DIRT 36 2 </tile>
-<tile>DIRT 36 3 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>DIRT 36 3 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
 <tile>DIRT 36 4 </tile>
-<tile>DIRT 36 5 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>DIRT 36 5 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>DIRT 36 6 </tile>
 <tile>DIRT 36 7 </tile>
 <tile>DIRT 36 8 </tile>
@@ -2911,7 +2911,7 @@
 <tile>SNOW 36 26 </tile>
 <tile>SNOW 36 27 <item>TREE </item></tile>
 <tile>SNOW 36 28 </tile>
-<tile>SNOW 36 29 <item>BAG </item></tile>
+<tile>SNOW 36 29 <inventory>BAG <item>KEY 15 Unlocks a chest</item></inventory></tile>
 <tile>SNOW 36 30 </tile>
 <tile>SNOW 36 31 </tile>
 <tile>SNOW 36 32 <item>TREE </item></tile>
@@ -2950,11 +2950,11 @@
 <tile>SNOW 36 65 <item>TREE </item></tile>
 <tile>SNOW 36 66 </tile>
 <tile>SNOW 36 67 </tile>
-<tile>SNOW 36 68 <inventory>CHEST 16 true<item>HEALTH HEALTH_POTION</item><item>POWERUP SPEED_BOOST</item><item>HEALTH STRONG_HEALTH_POTION</item></inventory></tile>
+<tile>SNOW 36 68 <inventory>CHEST 16 true<item>POWERUP SUPER_SNOWBALLS</item><item>POWERUP SPEED_BOOST</item><item>HEALTH HEALTH_POTION</item></inventory></tile>
 <tile>SNOW 36 69 <item>WALL_E_W </item></tile>
 <tile>GRASS 36 70 </tile>
 <tile>GRASS 36 71 </tile>
-<tile>GRASS 36 72 <item>HEALTH HEALTH_POTION</item></tile>
+<tile>GRASS 36 72 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>GRASS 36 73 </tile>
 <tile>DIRT 36 74 </tile>
 <tile>DIRT 36 75 <item>HEALTH HEALTH_POTION</item></tile>
@@ -3142,12 +3142,12 @@
 <tile>SNOW 39 17 </tile>
 <tile>SNOW 39 18 <item>TREE </item></tile>
 <tile>SNOW 39 19 </tile>
-<tile>SNOW 39 20 <item>BAG </item></tile>
+<tile>SNOW 39 20 <inventory>BAG <item>HEALTH STRONG_HEALTH_POTION</item><item>HEALTH STRONG_HEALTH_POTION</item><item>HEALTH HEALTH_POTION</item></inventory></tile>
 <tile>SNOW 39 21 </tile>
 <tile>SNOW 39 22 </tile>
 <tile>SNOW 39 23 </tile>
 <tile>SNOW 39 24 </tile>
-<tile>SNOW 39 25 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>SNOW 39 25 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>SNOW 39 26 </tile>
 <tile>SNOW 39 27 </tile>
 <tile>SNOW 39 28 </tile>
@@ -3256,12 +3256,12 @@
 <tile>SNOW 40 51 </tile>
 <tile>SNOW 40 52 </tile>
 <tile>SNOW 40 53 </tile>
-<tile>SNOW 40 54 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>SNOW 40 54 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>SNOW 40 55 </tile>
 <tile>SNOW 40 56 </tile>
 <tile>SNOW 40 57 </tile>
 <tile>SNOW 40 58 </tile>
-<tile>SNOW 40 59 <item>BAG </item></tile>
+<tile>SNOW 40 59 <inventory>BAG <item>POWERUP FAST_SNOWBALLS</item><item>HEALTH STRONG_HEALTH_POTION</item><item>POWERUP FAST_SNOWBALLS</item></inventory></tile>
 <tile>SNOW 40 60 </tile>
 <tile>SNOW 40 61 <item>TREE </item></tile>
 <tile>SNOW 40 62 </tile>
@@ -3446,14 +3446,14 @@
 <tile>DIRT 43 1 </tile>
 <tile>DIRT 43 2 </tile>
 <tile>DIRT 43 3 </tile>
-<tile>DIRT 43 4 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>DIRT 43 4 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>DIRT 43 5 </tile>
 <tile>GRASS 43 6 </tile>
-<tile>GRASS 43 7 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>GRASS 43 7 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>GRASS 43 8 </tile>
 <tile>GRASS 43 9 </tile>
 <tile>SNOW 43 10 <item>WALL_E_W </item></tile>
-<tile>SNOW 43 11 <inventory>CHEST 15 true<item>POWERUP FIRE_SPEED_BOOST</item><item>POWERUP SPEED_BOOST</item><item>HEALTH HEALTH_POTION</item></inventory></tile>
+<tile>SNOW 43 11 <inventory>CHEST 15 true<item>POWERUP FAST_SNOWBALLS</item><item>HEALTH HEALTH_POTION</item><item>POWERUP SUPER_SNOWBALLS</item></inventory></tile>
 <tile>SNOW 43 12 </tile>
 <tile>SNOW 43 13 </tile>
 <tile>SNOW 43 14 <item>TREE </item></tile>
@@ -3492,7 +3492,7 @@
 <tile>SNOW 43 47 <item>TREE </item></tile>
 <tile>SNOW 43 48 </tile>
 <tile>SNOW 43 49 </tile>
-<tile>SNOW 43 50 <item>BAG </item></tile>
+<tile>SNOW 43 50 <inventory>BAG <item>KEY 16 Unlocks a chest</item></inventory></tile>
 <tile>SNOW 43 51 </tile>
 <tile>SNOW 43 52 <item>TREE </item></tile>
 <tile>SNOW 43 53 </tile>
@@ -3516,9 +3516,9 @@
 <tile>DIRT 43 71 </tile>
 <tile>DIRT 43 72 </tile>
 <tile>DIRT 43 73 </tile>
-<tile>DIRT 43 74 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>DIRT 43 74 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>DIRT 43 75 </tile>
-<tile>DIRT 43 76 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>DIRT 43 76 <item>HEALTH HEALTH_POTION</item></tile>
 <tile>DIRT 43 77 </tile>
 <tile>DIRT 43 78 </tile>
 <tile>DIRT 43 79 <item>WALL_E_W </item></tile>
@@ -3545,7 +3545,7 @@
 <tile>SNOW 44 20 </tile>
 <tile>SNOW 44 21 <item>BUSH </item></tile>
 <tile>SNOW 44 22 </tile>
-<tile>SNOW 44 23 <item>HEALTH HEALTH_POTION</item></tile>
+<tile>SNOW 44 23 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>SNOW 44 24 </tile>
 <tile>SNOW 44 25 </tile>
 <tile>SNOW 44 26 </tile>
@@ -3603,7 +3603,7 @@
 <tile>DIRT 44 78 </tile>
 <tile>DIRT 44 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 45 0 <item>WALL_E_W </item></tile>
-<tile>DIRT 45 1 <item>HEALTH HEALTH_POTION</item></tile>
+<tile>DIRT 45 1 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>DIRT 45 2 </tile>
 <tile>DIRT 45 3 </tile>
 <tile>DIRT 45 4 </tile>
@@ -3613,7 +3613,7 @@
 <tile>GRASS 45 8 </tile>
 <tile>GRASS 45 9 </tile>
 <tile>SNOW 45 10 <item>WALL_E_W </item></tile>
-<tile>SNOW 45 11 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>SNOW 45 11 <item>HEALTH HEALTH_POTION</item></tile>
 <tile>SNOW 45 12 <item>BUSH </item></tile>
 <tile>SNOW 45 13 </tile>
 <tile>SNOW 45 14 <item>BUSH </item></tile>
@@ -3745,7 +3745,7 @@
 <tile>SNOW 46 60 </tile>
 <tile>SNOW 46 61 </tile>
 <tile>DIRT 46 62 </tile>
-<tile>SNOW 46 63 <item>HEALTH HEALTH_POTION</item></tile>
+<tile>SNOW 46 63 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>DIRT 46 64 <item>BUSH </item></tile>
 <tile>DIRT 46 65 </tile>
 <tile>SNOW 46 66 </tile>
@@ -3764,7 +3764,7 @@
 <tile>DIRT 46 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 47 0 <item>WALL_E_W </item></tile>
 <tile>DIRT 47 1 </tile>
-<tile>DIRT 47 2 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>DIRT 47 2 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>DIRT 47 3 </tile>
 <tile>DIRT 47 4 </tile>
 <tile>DIRT 47 5 </tile>
@@ -3781,7 +3781,7 @@
 <tile>SNOW 47 16 </tile>
 <tile>SNOW 47 17 </tile>
 <tile>SNOW 47 18 </tile>
-<tile>SNOW 47 19 <item>POWERUP SPEED_BOOST</item></tile>
+<tile>SNOW 47 19 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>SNOW 47 20 <item>BUSH </item></tile>
 <tile>SNOW 47 21 <item>BUSH </item></tile>
 <tile>SNOW 47 22 </tile>
@@ -3893,7 +3893,7 @@
 <tile>SNOW 48 48 </tile>
 <tile>GRASS 48 49 </tile>
 <tile>GRASS 48 50 </tile>
-<tile>GRASS 48 51 <item>BAG </item></tile>
+<tile>GRASS 48 51 <inventory>BAG <item>POWERUP FIRE_SPEED_BOOST</item><item>HEALTH HEALTH_POTION</item><item>POWERUP SUPER_SNOWBALLS</item></inventory></tile>
 <tile>SNOW 48 52 </tile>
 <tile>SNOW 48 53 </tile>
 <tile>SNOW 48 54 </tile>
@@ -3919,7 +3919,7 @@
 <tile>DIRT 48 74 </tile>
 <tile>DIRT 48 75 </tile>
 <tile>DIRT 48 76 </tile>
-<tile>DIRT 48 77 <item>BAG </item></tile>
+<tile>DIRT 48 77 <inventory>BAG <item>HEALTH HEALTH_POTION</item><item>HEALTH HEALTH_POTION</item><item>POWERUP FIRE_SPEED_BOOST</item></inventory></tile>
 <tile>DIRT 48 78 </tile>
 <tile>DIRT 48 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 49 0 <item>WALL_E_W </item></tile>
@@ -4008,7 +4008,7 @@
 <tile>DIRT 50 3 </tile>
 <tile>DIRT 50 4 </tile>
 <tile>DIRT 50 5 </tile>
-<tile>DIRT 50 6 <item>BAG </item></tile>
+<tile>DIRT 50 6 <inventory>BAG <item>POWERUP FIRE_SPEED_BOOST</item><item>POWERUP SUPER_SNOWBALLS</item><item>HEALTH HEALTH_POTION</item></inventory></tile>
 <tile>DIRT 50 7 </tile>
 <tile>DIRT 50 8 </tile>
 <tile>DIRT 50 9 </tile>
@@ -4076,7 +4076,7 @@
 <tile>DIRT 50 71 </tile>
 <tile>DIRT 50 72 </tile>
 <tile>DIRT 50 73 </tile>
-<tile>DIRT 50 74 <item>POWERUP FAST_SNOWBALLS</item></tile>
+<tile>DIRT 50 74 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>DIRT 50 75 </tile>
 <tile>DIRT 50 76 </tile>
 <tile>DIRT 50 77 </tile>
@@ -4144,7 +4144,7 @@
 <tile>SNOW 51 59 </tile>
 <tile>SNOW 51 60 </tile>
 <tile>SNOW 51 61 </tile>
-<tile>SNOW 51 62 <item>POWERUP FAST_SNOWBALLS</item></tile>
+<tile>SNOW 51 62 <item>HEALTH HEALTH_POTION</item></tile>
 <tile>SNOW 51 63 </tile>
 <tile>SNOW 51 64 </tile>
 <tile>SNOW 51 65 </tile>
@@ -4157,7 +4157,7 @@
 <tile>DIRT 51 72 </tile>
 <tile>DIRT 51 73 </tile>
 <tile>DIRT 51 74 </tile>
-<tile>DIRT 51 75 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>DIRT 51 75 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>DIRT 51 76 </tile>
 <tile>DIRT 51 77 </tile>
 <tile>DIRT 51 78 </tile>
@@ -4165,7 +4165,7 @@
 <tile>DIRT 52 0 <item>WALL_E_W </item></tile>
 <tile>DIRT 52 1 </tile>
 <tile>DIRT 52 2 </tile>
-<tile>DIRT 52 3 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>DIRT 52 3 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>DIRT 52 4 </tile>
 <tile>DIRT 52 5 </tile>
 <tile>DIRT 52 6 </tile>
@@ -4555,11 +4555,11 @@
 <tile>DIRT 56 70 </tile>
 <tile>DIRT 56 71 </tile>
 <tile>DIRT 56 72 </tile>
-<tile>DIRT 56 73 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>DIRT 56 73 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>DIRT 56 74 </tile>
 <tile>DIRT 56 75 </tile>
 <tile>DIRT 56 76 </tile>
-<tile>DIRT 56 77 <item>HEALTH HEALTH_POTION</item></tile>
+<tile>DIRT 56 77 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>DIRT 56 78 </tile>
 <tile>DIRT 56 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 57 0 <item>WALL_E_W </item></tile>
@@ -4643,7 +4643,7 @@
 <tile>DIRT 57 78 </tile>
 <tile>DIRT 57 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 58 0 <item>WALL_E_W </item></tile>
-<tile>DIRT 58 1 <item>HEALTH HEALTH_POTION</item></tile>
+<tile>DIRT 58 1 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>DIRT 58 2 </tile>
 <tile>DIRT 58 3 </tile>
 <tile>DIRT 58 4 </tile>
@@ -4705,7 +4705,7 @@
 <tile>SNOW 58 60 <item>BUSH </item></tile>
 <tile>SNOW 58 61 </tile>
 <tile>SNOW 58 62 <item>BUSH </item></tile>
-<tile>SNOW 58 63 <item>POWERUP SPEED_BOOST</item></tile>
+<tile>SNOW 58 63 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
 <tile>SNOW 58 64 </tile>
 <tile>SNOW 58 65 </tile>
 <tile>SNOW 58 66 </tile>
@@ -4764,13 +4764,13 @@
 <tile>SNOW 59 39 </tile>
 <tile>SNOW 59 40 </tile>
 <tile>SNOW 59 41 </tile>
-<tile>SNOW 59 42 <item>BAG </item></tile>
+<tile>SNOW 59 42 <inventory>BAG <item>HEALTH STRONG_HEALTH_POTION</item><item>POWERUP FIRE_SPEED_BOOST</item><item>HEALTH STRONG_HEALTH_POTION</item></inventory></tile>
 <tile>SNOW 59 43 </tile>
 <tile>SNOW 59 44 </tile>
 <tile>SNOW 59 45 </tile>
 <tile>SNOW 59 46 </tile>
 <tile>SNOW 59 47 </tile>
-<tile>SNOW 59 48 <item>POWERUP FAST_SNOWBALLS</item></tile>
+<tile>SNOW 59 48 <item>POWERUP SPEED_BOOST</item></tile>
 <tile>DIRT 59 49 </tile>
 <tile>DIRT 59 50 </tile>
 <tile>SNOW 59 51 </tile>
@@ -4805,7 +4805,7 @@
 <tile>DIRT 60 0 <item>WALL_E_W </item></tile>
 <tile>DIRT 60 1 </tile>
 <tile>DIRT 60 2 </tile>
-<tile>DIRT 60 3 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>DIRT 60 3 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>DIRT 60 4 </tile>
 <tile>DIRT 60 5 </tile>
 <tile>DIRT 60 6 </tile>
@@ -4813,7 +4813,7 @@
 <tile>DIRT 60 8 </tile>
 <tile>DIRT 60 9 </tile>
 <tile>SNOW 60 10 <item>WALL_E_W </item></tile>
-<tile>SNOW 60 11 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>SNOW 60 11 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>SNOW 60 12 </tile>
 <tile>SNOW 60 13 </tile>
 <tile>SNOW 60 14 </tile>
@@ -4833,7 +4833,7 @@
 <tile>SNOW 60 28 </tile>
 <tile>SNOW 60 29 </tile>
 <tile>SNOW 60 30 </tile>
-<tile>SNOW 60 31 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>SNOW 60 31 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>SNOW 60 32 </tile>
 <tile>SNOW 60 33 </tile>
 <tile>SNOW 60 34 </tile>
@@ -4863,7 +4863,7 @@
 <tile>SNOW 60 58 </tile>
 <tile>SNOW 60 59 </tile>
 <tile>SNOW 60 60 </tile>
-<tile>SNOW 60 61 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>SNOW 60 61 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>SNOW 60 62 <item>TREE </item></tile>
 <tile>SNOW 60 63 </tile>
 <tile>SNOW 60 64 <item>TREE </item></tile>
@@ -4957,7 +4957,7 @@
 <tile>DIRT 61 72 </tile>
 <tile>DIRT 61 73 </tile>
 <tile>DIRT 61 74 </tile>
-<tile>DIRT 61 75 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>DIRT 61 75 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>DIRT 61 76 </tile>
 <tile>DIRT 61 77 </tile>
 <tile>GRASS 61 78 </tile>
@@ -5164,7 +5164,7 @@
 <tile>SNOW 64 39 </tile>
 <tile>SNOW 64 40 </tile>
 <tile>SNOW 64 41 </tile>
-<tile>SNOW 64 42 <item>POWERUP FAST_SNOWBALLS</item></tile>
+<tile>SNOW 64 42 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>SNOW 64 43 </tile>
 <tile>SNOW 64 44 </tile>
 <tile>SNOW 64 45 </tile>
@@ -5175,7 +5175,7 @@
 <tile>SNOW 64 50 <item>BUSH </item></tile>
 <tile>SNOW 64 51 </tile>
 <tile>SNOW 64 52 <item>BUSH </item></tile>
-<tile>SNOW 64 53 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>SNOW 64 53 <item>HEALTH HEALTH_POTION</item></tile>
 <tile>SNOW 64 54 </tile>
 <tile>SNOW 64 55 </tile>
 <tile>SNOW 64 56 </tile>
@@ -5198,9 +5198,9 @@
 <tile>DIRT 64 73 </tile>
 <tile>DIRT 64 74 </tile>
 <tile>GRASS 64 75 </tile>
-<tile>GRASS 64 76 <inventory>CHEST 12 true<item>KEY 14 Unlocks a chest</item><item>POWERUP SUPER_SNOWBALLS</item><item>BAG </item><item>HEALTH STRONG_HEALTH_POTION</item></inventory></tile>
+<tile>GRASS 64 76 <inventory>CHEST 12 true<item>KEY 14 Unlocks a chest</item><item>HEALTH HEALTH_POTION</item><item>BAG </item><item>HEALTH STRONG_HEALTH_POTION</item></inventory></tile>
 <tile>GRASS 64 77 </tile>
-<tile>GRASS 64 78 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>GRASS 64 78 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
 <tile>GRASS 64 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 65 0 <item>WALL_E_W </item></tile>
 <tile>DIRT 65 1 </tile>
@@ -5257,7 +5257,7 @@
 <tile>SNOW 65 52 </tile>
 <tile>SNOW 65 53 </tile>
 <tile>SNOW 65 54 </tile>
-<tile>SNOW 65 55 <item>POWERUP FAST_SNOWBALLS</item></tile>
+<tile>SNOW 65 55 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>SNOW 65 56 </tile>
 <tile>SNOW 65 57 </tile>
 <tile>SNOW 65 58 </tile>
@@ -5279,7 +5279,7 @@
 <tile>GRASS 65 74 </tile>
 <tile>GRASS 65 75 </tile>
 <tile>GRASS 65 76 </tile>
-<tile>GRASS 65 77 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>GRASS 65 77 <item>POWERUP FAST_SNOWBALLS</item></tile>
 <tile>GRASS 65 78 </tile>
 <tile>GRASS 65 79 <item>WALL_E_W </item></tile>
 <tile>DIRT 66 0 <item>CORNER_N_E </item></tile>
@@ -5294,7 +5294,7 @@
 <tile>DIRT 66 9 <item>WALL_N_S </item></tile>
 <tile>SNOW 66 10 <item>WALL_E_W </item></tile>
 <tile>SNOW 66 11 </tile>
-<tile>DIRT 66 12 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
+<tile>DIRT 66 12 <item>HEALTH HEALTH_POTION</item></tile>
 <tile>DIRT 66 13 </tile>
 <tile>DIRT 66 14 <item>BUSH </item></tile>
 <tile>SNOW 66 15 </tile>
@@ -5326,7 +5326,7 @@
 <tile>SNOW 66 41 <item>TREE </item></tile>
 <tile>SNOW 66 42 </tile>
 <tile>SNOW 66 43 <item>KEY 3 Unlocks a door</item></tile>
-<tile>SNOW 66 44 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>SNOW 66 44 <item>POWERUP SUPER_SNOWBALLS</item></tile>
 <tile>SNOW 66 45 </tile>
 <tile>SNOW 66 46 </tile>
 <tile>SNOW 66 47 </tile>
@@ -5342,14 +5342,14 @@
 <tile>SNOW 66 57 </tile>
 <tile>SNOW 66 58 </tile>
 <tile>SNOW 66 59 </tile>
-<tile>SNOW 66 60 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>SNOW 66 60 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
 <tile>SNOW 66 61 </tile>
 <tile>SNOW 66 62 </tile>
 <tile>SNOW 66 63 </tile>
 <tile>SNOW 66 64 </tile>
 <tile>GRASS 66 65 </tile>
 <tile>GRASS 66 66 </tile>
-<tile>GRASS 66 67 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
+<tile>GRASS 66 67 <item>POWERUP FIRE_SPEED_BOOST</item></tile>
 <tile>GRASS 66 68 </tile>
 <tile>GRASS 66 69 <item>WALL_E_W </item></tile>
 <tile>DIRT 66 70 <item>WALL_N_S </item></tile>
@@ -5459,7 +5459,7 @@
 <tile>SNOW 68 14 </tile>
 <tile>SNOW 68 15 </tile>
 <tile>SNOW 68 16 </tile>
-<tile>SNOW 68 17 <item>POWERUP SUPER_SNOWBALLS</item></tile>
+<tile>SNOW 68 17 <item>HEALTH STRONG_HEALTH_POTION</item></tile>
 <tile>SNOW 68 18 </tile>
 <tile>SNOW 68 19 </tile>
 <tile>SNOW 68 20 </tile>

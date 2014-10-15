@@ -8,7 +8,7 @@ import java.io.File;
 import storage.save.StaxWriter;
 
 /**
- * @author Kate Henderson
+ * @author Katherine Henderson 300279264
  *
  */
 public class SaveGame {

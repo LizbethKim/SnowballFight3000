@@ -22,7 +22,7 @@ import storage.SaveGame;
 import storage.StoredGame;
 import storage.save.StaxWriter;
 /**
- * @author Kate Henderson
+ * @author Katherine Henderson 300279264
  *
  */
 public class SaveTests {

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Used for storing all of the load/save data for one game to pass around. Should contain game state, players, map, etc.
  *
- * @author Kate Henderson
+ * @author Katherine Henderson 300279264
  *
  */
 public class StoredGame {

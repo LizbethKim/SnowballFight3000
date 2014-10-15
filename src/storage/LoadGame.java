@@ -11,7 +11,7 @@ import storage.load.StaxParser;
 
 /**
  * Loads a previously saved game using the StAX library and XML.
- * @author Kate Henderson 300279254
+ * @author Katherine Henderson 300279264
  *
  */
 public class LoadGame{
