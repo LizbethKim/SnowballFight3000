@@ -20,12 +20,7 @@ public class InspectItem extends KeyAction {
 
 	@Override
 	protected void execute() {
-		try {
-			client.inspectItem();
-		} catch (NoItemException e) {
-			// do nothing
-		}
-		// :TODO board.firesnowball()
+			client.inspectItem();	
 	}
 
 }

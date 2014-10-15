@@ -151,8 +151,9 @@ public class HUDPanel extends JPanel {
 	private void paintItemDescription(Graphics g) {
 		final int xPos = (int) (this.getWidth() / 2 / aspectRatio);
 		final int yPos = this.getHeight() / 2;
-
-		String descr = "this is a key here's a long string yo watch out for baddies";
+		setFont(new Font("Times", Font.PLAIN, 14));
+		
+		String descr = client.getLastInspected();
 		g.drawString(descr, xPos, yPos);
 	}
 

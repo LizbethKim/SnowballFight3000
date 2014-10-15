@@ -26,9 +26,8 @@ public class InteractWithItem extends KeyAction {
 		try {
 			// check that the client has a container in front
 			client.getContents();
-			String title = client.inspectItem();
-			parent.openContainer(false);//new ContainerPopup(client, parent, title, false);
-		} catch (NoItemException | NotAContainerException e) {
+			parent.openContainer(false);
+		} catch (NotAContainerException e) {
 			client.unfreezePlayer();
 		}
 	}
