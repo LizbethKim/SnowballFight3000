@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 /**
  * Represents the different types of terrain a tile may have.
- * @author jackkels + kimeliz1
+ * @author jackkels + Elizabeth Kim kimeliz1 300302456
  */
 public enum Terrain {
 	SNOW("snow.png"),
