@@ -193,7 +193,7 @@ public class StaxParser {
 					
 					//end of an area, add it to the list
 					if (elemName.equals(XMLValues.AREA)) {
-						if(areaCount>=2){
+						if(areaCount>=3){
 							areaList.add(curArea);
 						}		
 						continue;
@@ -229,7 +229,7 @@ public class StaxParser {
 	 */
 	private Area parseArea(String[] values) {
 		Area a;
-		if(areaCount==1){
+		if(areaCount==2 ||areaCount==1){
 			a = curArea;
 		}else if(values[0].equals("NOTEAM")){
 			//just a plain area
