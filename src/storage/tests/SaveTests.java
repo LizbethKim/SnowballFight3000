@@ -31,7 +31,6 @@ public class SaveTests {
 		InputStream is = LoadGame.class.getResourceAsStream("standardMap.xml");
 		File targetFile = null;
 		File saveFile = new File(System.getProperty("user.home"),"testSaveGame.xml");
-		System.out.println(is==null);
 		byte[] buffer;
 		try {
 			buffer = new byte[is.available()];		

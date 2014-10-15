@@ -31,7 +31,7 @@ public class SaveGame {
 	public void save(StoredGame sg, File file) {
 		StaxWriter writer = new StaxWriter();
 	    String filename = writer.saveGame(sg, file);
-	    System.out.println("SAVED FILENAME: "+ filename);
+	    //System.out.println("SAVED FILENAME: "+ filename);
 	}
 	
 }
