@@ -7,8 +7,10 @@ import gameworld.world.Direction;
 import gameworld.world.Door;
 import gameworld.world.Key;
 import gameworld.world.Location;
+import gameworld.world.Player;
 import gameworld.world.Snowball;
 import gameworld.world.Snowball.SnowballType;
+import gameworld.world.Team;
 
 import org.junit.Test;
 
@@ -39,6 +41,15 @@ public class ItemTests {
 	@Test
 	public void testSnowball() {
 		Snowball s = new Snowball(new Location(3,3), Direction.SOUTH, 20, 1, SnowballType.NORMAL);
+		s.clockTick();
+		assertTrue(s.getLocation().equals(new Location(3,4)));
+		Player p = new Player("A player", Team.RED, 0, new Location(3,4));
+		assertTrue(s.hit(p));
+		assertTrue(p.getHealth() == 80);
+		p.setLocation(new Location(5,5));
+		assertFalse(s.hit(p));
+		assertTrue(p.getHealth() == 80);
+
 	}
 
 	@Test
