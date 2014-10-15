@@ -25,7 +25,7 @@ import storage.XMLValues;
 
 /**
  * Handles the parsing of the XML file using StAX into a board and player list, ready to be loaded in game
- * @author Kate Henderson
+ * @author Katherine Henderson 300279264
  *
  */
 public class StaxParser {
@@ -178,7 +178,11 @@ public class StaxParser {
 						//check if its a chest on a tile
 						if(chestLoad==true && tileLoad==true){
 							//place it on the tile and disable chestLoad
-							curTile.place((Chest)curInven);
+							if(curInven instanceof Chest){
+								curTile.place((Chest)curInven);
+							}else{
+								curTile.place((Bag)curInven);
+							}
 							chestLoad=false;
 						}
 						continue;
@@ -292,6 +296,7 @@ public class StaxParser {
 			item = new Key(parseDescription(2, values), Integer.parseInt(values[1]));
 		}else if(name.equals(Objects.BAG.name())){
 			//bags don't have anything special
+			chestLoad = true;
 			item = new Bag();
 		}else if(name.equals(Objects.CHEST.name())){
 			//turn chestLoad on and parse it's description

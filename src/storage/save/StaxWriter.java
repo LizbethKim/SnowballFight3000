@@ -8,6 +8,7 @@ import gameworld.world.Board;
 import gameworld.world.Chest;
 import gameworld.world.Door;
 import gameworld.world.InanimateEntity;
+import gameworld.world.Inventory;
 import gameworld.world.Item;
 import gameworld.world.Key;
 import gameworld.world.Location;
@@ -40,7 +41,7 @@ import storage.XMLValues;
 
 /**
  * Writes StoredGames into XML files using the StAX library.
- * @author Kate Henderson
+ * @author Katherine Henderson 300279264
  *
  */
 
@@ -126,13 +127,13 @@ public class StaxWriter {
 						String tileContents = buildTileString(t);
 						eventWriter.add(eventFactory.createCharacters(tileContents));
 						InanimateEntity onItem = t.getOn();
-						if(onItem!=null && onItem.asEnum()==Objects.CHEST){
-							System.out.println("we have a chest");
+						if(onItem!=null && (onItem.asEnum()==Objects.CHEST || onItem.asEnum()==Objects.BAG)){
+							System.out.println("we have a chest/bag");
 							eventWriter.add(eventFactory.createStartElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.INVENTORY));
 							eventWriter.add(eventFactory.createCharacters(buildEntityString(onItem)));
-							List<Item> itemsIn = ((Chest)t.getOn()).getContents();
+							List<Item> itemsIn = ((Inventory)t.getOn()).getContents();
 							for(Item it:itemsIn){
-								System.out.println("in the chest");
+								System.out.println("in the chest/bag");
 								createTag(XMLValues.ITEM, buildEntityString(it));
 							}
 							eventWriter.add(eventFactory.createEndElement(XMLValues.EMPTY,XMLValues.EMPTY, XMLValues.INVENTORY));
