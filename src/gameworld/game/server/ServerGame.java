@@ -135,7 +135,6 @@ public class ServerGame {
 				Tile toPlaceOn = board.tileAt(l);
 				if (toPlaceOn instanceof FlagTile && toPlaceOn.place(toPlace)) {
 					Team won = Team.values()[(((FlagTile)toPlaceOn).getTeam().ordinal() + 1) % 2];
-					System.out.println("The " + (won == Team.BLUE ? "blue" :"red") +  " team won!");
 					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
 					for (int id: playerIDs.keySet()) {
 						server.queuePlayerUpdate(new PlaceItemEvent(l, toPlace), id);
@@ -231,7 +230,6 @@ public class ServerGame {
 			if (tile.isClear()) {
 				spawnLoc = tile.getCoords();
 				if (isFree(spawnLoc)) {
-					System.out.println(spawnLoc);
 					break;
 				}
 			}
@@ -239,7 +237,6 @@ public class ServerGame {
 		server.queuePlayerUpdate(new CreateLocalPlayerEvent(playerID, spawnLoc), playerID);
 		Player p = new Player(name, t, playerID, spawnLoc);
 		playerIDs.put(playerID, p);
-		System.out.println("Created player with id " + playerID);
 		for (int id: playerIDs.keySet()) {
 			Player other = playerIDs.get(id);
 			server.queuePlayerUpdate(new CreatePlayerEvent(id, other.name, other.getLocation(), other.getTeam()), playerID);

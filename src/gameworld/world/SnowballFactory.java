@@ -2,6 +2,11 @@ package gameworld.world;
 
 import gameworld.world.Snowball.SnowballType;
 
+/**
+ * Factory to create snowballs with the given values
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class SnowballFactory {
 	public Snowball makeSnowball(Location l, Direction d, SnowballType s) {
 		if (s == SnowballType.SUPER) {
@@ -16,5 +21,4 @@ public class SnowballFactory {
 			return new Snowball(l, d, 25, 2, s);
 		}
 	}
-
 }

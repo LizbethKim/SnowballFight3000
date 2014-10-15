@@ -1,6 +1,6 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 import java.util.List;
 
 /**
@@ -27,7 +27,7 @@ public interface Inventory {
 	 */
 	public boolean removeItem(Item i);
 	public List<Item> getContents();
-	public List<Objects> getContentsAsEnums();
+	public List<Entities> getContentsAsEnums();
 	public int size();
 	public int maxSize();
 	public void empty();

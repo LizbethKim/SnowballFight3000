@@ -2,7 +2,7 @@ package ui.popups;
 
 import gameworld.game.client.ClientGame;
 import gameworld.game.client.NotAContainerException;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -25,14 +25,14 @@ import ui.gamewindow.UI;
  * The ContainerPoup displays the contents of a container, and allows the user
  * to select and take items out of the container our put them in. Items are
  * navigated with the arrow keys.
- * 
+ *
  * @author Ryan Burnell, 300279172
- * 
+ *
  */
 
 public class ContainerPopup extends JPanel implements KeyListener {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -4324050237777443111L;
 	// images to be drawn
@@ -52,7 +52,7 @@ public class ContainerPopup extends JPanel implements KeyListener {
 	private ClientGame client;
 	private int selectedItem;
 	private int maxItems;
-	private List<Objects> items;
+	private List<Entities> items;
 	private boolean inventoryContainer;
 	private int width;
 	private int height;
@@ -94,7 +94,7 @@ public class ContainerPopup extends JPanel implements KeyListener {
 
 	/**
 	 * get the width of the panel
-	 * 
+	 *
 	 * @return the width
 	 */
 	private int width() {
@@ -104,7 +104,7 @@ public class ContainerPopup extends JPanel implements KeyListener {
 
 	/**
 	 * get the width of the panel
-	 * 
+	 *
 	 * @return the width
 	 */
 	private int height() {
@@ -127,7 +127,7 @@ public class ContainerPopup extends JPanel implements KeyListener {
 
 	/**
 	 * Returns whether the point is on a given point
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @return
@@ -149,7 +149,7 @@ public class ContainerPopup extends JPanel implements KeyListener {
 	private void setupContainerPanel() {
 		containerPanel = new JPanel() {
 			/**
-			 * 
+			 *
 			 */
 			private static final long serialVersionUID = 5883195826479385002L;
 
@@ -181,7 +181,7 @@ public class ContainerPopup extends JPanel implements KeyListener {
 
 	/**
 	 * draw the exit button
-	 * 
+	 *
 	 * @param g
 	 *            the graphics object to draw on
 	 */
@@ -192,7 +192,7 @@ public class ContainerPopup extends JPanel implements KeyListener {
 
 	/**
 	 * paint all the container slots and any items inside them
-	 * 
+	 *
 	 * @param g
 	 *            the graphics object to draw on
 	 */
@@ -271,7 +271,7 @@ public class ContainerPopup extends JPanel implements KeyListener {
 
 	/**
 	 * draws the given item at the given position
-	 * 
+	 *
 	 * @param item
 	 *            the image of the item to draw
 	 * @param xPos
@@ -290,7 +290,7 @@ public class ContainerPopup extends JPanel implements KeyListener {
 
 	/**
 	 * responds to the key input of the user
-	 * 
+	 *
 	 * @param e
 	 *            the keyEvent from the user input
 	 */
@@ -344,7 +344,7 @@ public class ContainerPopup extends JPanel implements KeyListener {
 
 	/**
 	 * change the selected slot of the inventory
-	 * 
+	 *
 	 * @param selectionChange
 	 *            an integer representing the increment of the selection change
 	 */
@@ -353,7 +353,6 @@ public class ContainerPopup extends JPanel implements KeyListener {
 		int newSelection = selectedItem + selectionChange;
 		if (newSelection > 0 && newSelection <= maxItems) {
 			selectedItem = newSelection;
-			System.out.println("changing selection to:" + newSelection);
 		}
 	}
 

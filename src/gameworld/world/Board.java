@@ -3,7 +3,7 @@ package gameworld.world;
 import java.util.Collections;
 import java.util.List;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 import graphics.assets.Terrain;
 
 /**
@@ -38,7 +38,6 @@ public class Board {
 	 * @return The tile at the given location
 	 */
 	public Tile tileAt(Location l) {
-		System.out.println(l);
 		if (l.x >= 0 && l.x < board.length && l.y >= 0 && l.y < board[0].length) {
 			return board[l.x][l.y];
 		}
@@ -94,8 +93,8 @@ public class Board {
 	/**
 	 * @return A double array of the enums representing the objects on the tiles.
 	 */
-	public Objects[][] itemEnums () {
-		Objects[][] enumObjects = new Objects[board.length][board[0].length];
+	public Entities[][] itemEnums () {
+		Entities[][] enumObjects = new Entities[board.length][board[0].length];
 		for (int x = 0; x < board.length; x++) {
 			for (int y = 0; y < board[0].length; y++) {
 				InanimateEntity on = board[x][y].getOn();
@@ -111,8 +110,8 @@ public class Board {
 	 * @param playerLoc
 	 * @return A double array of the enums representing the objects on the tiles within the given area
 	 */
-	public Objects[][] itemEnumsInArea (Area a) {
-		Objects[][] enumObjects = new Objects[board.length][board[0].length];
+	public Entities[][] itemEnumsInArea (Area a) {
+		Entities[][] enumObjects = new Entities[board.length][board[0].length];
 		for (int x = 0; x < board.length; x++) {
 			for (int y = 0; y < board[0].length; y++) {
 				InanimateEntity on = board[x][y].getOn();

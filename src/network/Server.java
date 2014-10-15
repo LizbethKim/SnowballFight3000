@@ -60,7 +60,6 @@ public class Server implements Runnable {
 	 * @return a new, unused player ID
 	 */
 	public int generatePlayerID() {
-		//BF make this method less stupid
 		int id = (int) (Math.random()*255);
 		while(playersByID.containsKey(id)) {
 			id = (int) (Math.random()*255);

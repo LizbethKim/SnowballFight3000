@@ -1,7 +1,7 @@
 package ui.gamewindow;
 
 import gameworld.game.client.ClientGame;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -104,7 +104,7 @@ public class InventoryPanel extends JPanel {
 	 */
 	private void paintInventory(Graphics g) {
 		// get the inventory
-		List<Objects> items = client.getPlayerInventory();
+		List<Entities> items = client.getPlayerInventory();
 
 		// set number to max size of inventory
 		final int inventoryNumber = items.size();
@@ -155,7 +155,7 @@ public class InventoryPanel extends JPanel {
 	 * @param g
 	 *            the graphics object to draw on
 	 */
-	private void drawItem(int slotXPos, int slotYPos, int size, Objects item,
+	private void drawItem(int slotXPos, int slotYPos, int size, Entities item,
 			Graphics g) {
 		// get the position and size to draw the item inside the slot
 		int itemXPos = slotXPos + size / 6;

@@ -1,9 +1,9 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 /**
- * Represents a projectile, eg a snowball.
+ * Represents a snowball, which can damage players.
  * @author Kelsey Jack 300275851
  *
  */
@@ -36,14 +36,6 @@ public class Snowball implements Entity {
 		this.type = t;
 	}
 
-	/* Move forward one square. May be different to the clockTick,
-	 * as it may tick multiple times before moving.
-	 */
-	private void moveForward() {
-		l = Location.locationInFrontOf(l, d);
-	}
-
-
 	/**
 	 * Damages the player it hits.
 	 * @param p The player hit
@@ -67,16 +59,24 @@ public class Snowball implements Entity {
 		}
 	}
 
+	@Override
+	public Entities asEnum() {
+		if (this.type == SnowballType.FLAMING) {
+			return Entities.FIRESNOWBALL;
+		}
+		return Entities.SNOWBALL;
+	}
+
 	public Location getLocation() {
 		return l;
 	}
 
-	@Override
-	public Objects asEnum() {
-		if (this.type == SnowballType.FLAMING) {
-			return Objects.FIRESNOWBALL;
-		}
-		return Objects.SNOWBALL;
+	/* Move forward one square. May be different to the clockTick,
+	 * as it may tick multiple times before moving.
+	 */
+	private void moveForward() {
+		l = Location.locationInFrontOf(l, d);
 	}
+
 
 }

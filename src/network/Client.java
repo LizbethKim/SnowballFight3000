@@ -12,7 +12,7 @@ import gameworld.world.Powerup;
 import gameworld.world.Powerup.Power;
 import gameworld.world.Snowball.SnowballType;
 import gameworld.world.Team;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -425,27 +425,27 @@ public class Client implements Runnable {
 	 * @throws SocketClosedException
 	 */
 	private Item readItem() throws IOException, SocketClosedException {
-		Objects object = Objects.values()[readFromSocket()];
+		Entities object = Entities.values()[readFromSocket()];
 		//read object-specific values
-		if(object==Objects.KEY) {
+		if(object==Entities.KEY) {
 			int id = readFromSocket();
 			String description = readString();
 			return new Key(description, id);
-		} else if(object==Objects.BAG) {
+		} else if(object==Entities.BAG) {
 			Bag bag = new Bag();
 			int numItems = readFromSocket();
 			for(int i=0;i<numItems;i++) {
 				bag.addItem(readItem());
 			}
 			return bag;
-		} else if(object==Objects.BLUEFLAG) {
+		} else if(object==Entities.BLUEFLAG) {
 			return new Flag(Team.BLUE);
-		} else if(object==Objects.REDFLAG) {
+		} else if(object==Entities.REDFLAG) {
 			return new Flag(Team.RED);
-		} else if(object==Objects.POWERUP) {
+		} else if(object==Entities.POWERUP) {
 			Power p = Power.values()[readFromSocket()];
 			return new Powerup(p);
-		} else if (object==Objects.HEALTH) {
+		} else if (object==Entities.HEALTH) {
 			Power p = Power.values()[readFromSocket()];
 			return new Powerup(p);
 		} else {

@@ -1,6 +1,6 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +26,7 @@ public class Chest extends Furniture implements Inventory, Lockable {
 	 * @param locked Whether the chest is initially locked
 	 */
 	public Chest(String description, Collection<Item> contents, int ID, boolean locked) {
-		super(description, Objects.CHEST);
+		super(description, Entities.CHEST);
 		this.contents = new ArrayList<Item>(contents);
 		this.id = ID;
 		this.locked = locked;
@@ -39,7 +39,7 @@ public class Chest extends Furniture implements Inventory, Lockable {
 	 * @param locked Whether the chest is initally locked
 	 */
 	public Chest(String description, int ID, boolean locked) {
-		super(description, Objects.CHEST);
+		super(description, Entities.CHEST);
 		this.contents = new ArrayList<Item>();
 		this.id = ID;
 		this.locked = locked;
@@ -65,8 +65,8 @@ public class Chest extends Furniture implements Inventory, Lockable {
 	}
 
 	@Override
-	public List<Objects> getContentsAsEnums() {
-		List<Objects> ans = new ArrayList<Objects>();
+	public List<Entities> getContentsAsEnums() {
+		List<Entities> ans = new ArrayList<Entities>();
 		for (Item i: contents) {
 			ans.add(i.asEnum());
 		}
@@ -88,7 +88,7 @@ public class Chest extends Furniture implements Inventory, Lockable {
 
 	@Override
 	public boolean unlock(Key k) {
-		if (k.id == this.id) {
+		if (k.ID == this.id) {
 			this.locked = false;
 			return true;
 		} else if (this.id == 0) {
@@ -102,10 +102,6 @@ public class Chest extends Furniture implements Inventory, Lockable {
 		return id;
 	}
 
-	public boolean isLocked() {
-		return locked;
-	}
-
 	@Override
 	public void setLocked(boolean locked) {
 		this.locked = locked;
@@ -114,5 +110,9 @@ public class Chest extends Furniture implements Inventory, Lockable {
 	@Override
 	public void empty() {
 		this.contents.clear();
+	}
+
+	public boolean isLocked() {
+		return locked;
 	}
 }

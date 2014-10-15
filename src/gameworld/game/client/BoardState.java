@@ -3,7 +3,7 @@ package gameworld.game.client;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.NullLocation;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 import graphics.assets.Terrain;
 
 /**
@@ -16,13 +16,13 @@ import graphics.assets.Terrain;
  */
 public class BoardState {
 	private Terrain[][] board;
-	private Objects[][] entities;
+	private Entities[][] entities;
 	private Direction orientation = Direction.NORTH;
 	private Location playerCoords;
 	private int time = 12;
 	private boolean nightVision;
 
-	public BoardState(Terrain[][] board, Objects[][] entities) {
+	public BoardState(Terrain[][] board, Entities[][] entities) {
 		this.board = board;
 		this.entities = entities;
 		this.playerCoords = new NullLocation();
@@ -46,8 +46,8 @@ public class BoardState {
 	/**
 	 * @return A double array of Objects enums to be rendered on the tiles.
 	 */
-	public Objects[][] getObjects() {
-		Objects[][] entitiesCopy = new Objects[entities.length][entities[0].length];
+	public Entities[][] getObjects() {
+		Entities[][] entitiesCopy = new Entities[entities.length][entities[0].length];
 		for (int x = 0; x < entities.length; x++) {
 			for (int y = 0; y < entities[0].length; y++) {
 				entitiesCopy[x][y] = entities[x][y];
@@ -90,7 +90,7 @@ public class BoardState {
 
 	// Methods to update the state
 
-	protected void update(Terrain[][] newBoard, Objects[][] newEntities, Location playerCoords) {
+	protected void update(Terrain[][] newBoard, Entities[][] newEntities, Location playerCoords) {
 		this.board = newBoard;
 		this.entities = newEntities;
 		this.playerCoords = playerCoords;

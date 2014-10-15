@@ -11,7 +11,7 @@ import gameworld.game.client.BoardState;
 import gameworld.world.Direction;
 import gameworld.world.Location;
 import gameworld.world.NullLocation;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 import graphics.assets.Terrain;
 
 public class GraphicsPane extends JPanel {
@@ -40,9 +40,9 @@ public class GraphicsPane extends JPanel {
 		startingWidth = 700;
 		startingHeight = 700;
 		try {
-			nightShade = ImageIO.read(Objects.class.getResource("NightShade.png"));
-			duskShade = ImageIO.read(Objects.class.getResource("DuskShade.png"));
-			sunShade = ImageIO.read(Objects.class.getResource("SunSet.png"));
+			nightShade = ImageIO.read(Entities.class.getResource("NightShade.png"));
+			duskShade = ImageIO.read(Entities.class.getResource("DuskShade.png"));
+			sunShade = ImageIO.read(Entities.class.getResource("SunSet.png"));
 		} catch (IOException e) {
 			System.out.println("Dis not good m8");
 		}
@@ -55,7 +55,7 @@ public class GraphicsPane extends JPanel {
 		//2d Array of terrain tiles
 		Terrain[][] currentBoard = boardState.getArea();
 		//2d Array of Objects
-		Objects[][] currentObjects = boardState.getObjects();
+		Entities[][] currentObjects = boardState.getObjects();
 
 		width = getWidth();
 		height = getHeight();
@@ -78,8 +78,6 @@ public class GraphicsPane extends JPanel {
 				drawNorth(currentBoard, currentObjects, g);
 				break;
 			}
-		} else {
-			System.out.println("LOADING IMAGE HERE"); //Insert Loading Music
 		}
 		int lightState = boardState.getLight();
 		switch(lightState){
@@ -100,7 +98,7 @@ public class GraphicsPane extends JPanel {
 	 * @param g graphics object to draw on :)
 	 */
 	private void drawNorth(Terrain[][] currentBoard,
-			Objects[][] currentObjects, Graphics g) {
+			Entities[][] currentObjects, Graphics g) {
 		Location playerDir = boardState.getPlayerCoords();
 		for (int i = 0; i < currentBoard.length; i++) {
 			for (int j = 0; j < currentBoard[0].length; j++) {
@@ -169,7 +167,7 @@ public class GraphicsPane extends JPanel {
 	 * @param g Graphics object to draw on :)
 	 */
 	private void drawSouth(Terrain[][] currentBoard,
-			Objects[][] currentObjects, Graphics g) {
+			Entities[][] currentObjects, Graphics g) {
 		//Same logic as above but reversed x, y in respect to board array to draw "upside down"
 		Location playerDir = boardState.getPlayerCoords();
 		for (int i = 0; i < currentBoard.length; i++) {
@@ -216,7 +214,7 @@ public class GraphicsPane extends JPanel {
 			}
 		}
 	}
-	
+
 	/**
 	 * Drawing the board with the "east" direction being north
 	 * @param currentBoard Terrain data from board state
@@ -224,7 +222,7 @@ public class GraphicsPane extends JPanel {
 	 * @param g Graphics object to draw on :)
 	 */
 	private void drawEast(Terrain[][] currentBoard,
-			Objects[][] currentObjects, Graphics g) {
+			Entities[][] currentObjects, Graphics g) {
 		//Starts getting a little trickier here. You have to flip the j and i for x, y, while
 		//j corresponds to the inverse position in the arrays! *Whew* So much math!
 		Location playerDir = boardState.getPlayerCoords();
@@ -272,7 +270,7 @@ public class GraphicsPane extends JPanel {
 			}
 		}
 	}
-	
+
 	/**
 	 * Drawing the board with "west" direction as north
 	 * @param currentBoard Terrain data passed in from board state
@@ -280,7 +278,7 @@ public class GraphicsPane extends JPanel {
 	 * @param g Graphics object to draw on
 	 */
 	private void drawWest(Terrain[][] currentBoard,
-			Objects[][] currentObjects, Graphics g) {
+			Entities[][] currentObjects, Graphics g) {
 		//This is the opposite of east, so easy to figure out when you figure out east :)
 		Location playerDir = boardState.getPlayerCoords();
 		for (int i = 0; i < currentBoard.length; i++) {

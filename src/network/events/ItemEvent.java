@@ -24,7 +24,7 @@ public abstract class ItemEvent extends LocationEvent {
 	protected void writeItem(OutputStream out, Item item) throws IOException {
 		out.write(item.asEnum().ordinal());
 		if(item instanceof Key){
-			out.write(((Key)item).id);
+			out.write(((Key)item).ID);
 			out.write(((Key)item).getDescription().length());
 			out.write(((Key)item).getDescription().getBytes());
 		}

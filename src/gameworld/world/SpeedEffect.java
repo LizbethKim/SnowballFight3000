@@ -1,5 +1,10 @@
 package gameworld.world;
 
+/**
+ * The effect of a SpeedBoost powerup.
+ * @author Kelsey Jack 300275851
+ *
+ */
 public class SpeedEffect implements PowerupEffect, Runnable {
 	private Player p;
 	@Override

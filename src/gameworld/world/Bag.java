@@ -1,6 +1,6 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,8 +49,8 @@ public class Bag extends Item implements Inventory {
 	}
 
 	@Override
-	public List<Objects> getContentsAsEnums() {
-		List<Objects> ans = new ArrayList<Objects>();
+	public List<Entities> getContentsAsEnums() {
+		List<Entities> ans = new ArrayList<Entities>();
 		for (Item i: contents) {
 			ans.add(i.asEnum());
 		}
@@ -61,8 +61,8 @@ public class Bag extends Item implements Inventory {
 	}
 
 	@Override
-	public Objects asEnum() {
-		return Objects.BAG;
+	public Entities asEnum() {
+		return Entities.BAG;
 	}
 
 	@Override

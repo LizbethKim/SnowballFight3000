@@ -12,7 +12,7 @@ import gameworld.world.Player;
 import gameworld.world.Snowball;
 import gameworld.world.Snowball.SnowballType;
 import gameworld.world.Team;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import org.junit.Test;
 
@@ -46,7 +46,7 @@ public class ItemTests {
 		Bag b = new Bag();
 		Flag f = new Flag(Team.RED);
 		assertFalse(b.addItem(f));
-		assertTrue(b.asEnum() == Objects.BAG);
+		assertTrue(b.asEnum() == Entities.BAG);
 		assertTrue(b.canMoveThrough());
 
 	}
@@ -56,7 +56,6 @@ public class ItemTests {
 		Snowball s = new Snowball(new Location(3,3), Direction.SOUTH, 20, 1, SnowballType.NORMAL);
 		assertTrue(s.getLocation().equals(new Location(3,4)));
 		s.clockTick();
-		System.out.println(s.getLocation());
 		assertTrue(s.getLocation().equals(new Location(3,5)));
 		Player p = new Player("A player", Team.RED, 0, new Location(3,5));
 		assertTrue(s.hit(p));

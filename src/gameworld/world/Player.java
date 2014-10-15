@@ -3,7 +3,7 @@ package gameworld.world;
 import java.util.List;
 
 import gameworld.world.Snowball.SnowballType;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 /**
  * Represents players in the world
@@ -39,7 +39,7 @@ public class Player implements Entity {
 
 	/**
 	 * Moves a character to a new location. Only moves them if the new location is
-	 * one step away.
+	 * one step away, and they are not frozen.
 	 * @param l The new location
 	 * @return	true if they moved, false otherwise
 	 */
@@ -55,34 +55,11 @@ public class Player implements Entity {
 		return false;
 	}
 
-	@Override
-	public Objects asEnum() {
-		if (this.isFrozen()) {
-			return Objects.SNOWMAN;
-		}
-		if (this.team == Team.RED) {
-			if (this.d == Direction.NORTH) {
-				return Objects.REDPLAYER_N;
-			} else if (this.d== Direction.EAST) {
-				return Objects.REDPLAYER_E;
-			} else if (this.d == Direction.SOUTH) {
-				return Objects.REDPLAYER_S;
-			} else {
-				return Objects.REDPLAYER_W;
-			}
-		} else {
-			if (this.d == Direction.NORTH) {
-				return Objects.BLUEPLAYER_N;
-			} else if (this.d == Direction.EAST) {
-				return Objects.BLUEPLAYER_E;
-			} else if (this.d == Direction.SOUTH) {
-				return Objects.BLUEPLAYER_S;
-			} else {
-				return Objects.BLUEPLAYER_W;
-			}
-		}
-	}
-
+	/**
+	 * Damages the player the given amount. Doesn't allow the health of the player
+	 * exceed 100 or drop below 0.
+	 * @param amount The amount of health to take off the player
+	 */
 	public void damage(int amount) {
 		health -= amount;
 		if (health < 0) {
@@ -93,6 +70,9 @@ public class Player implements Entity {
 		}
 	}
 
+	/**
+	 * @param amount The amount to increment the score by
+	 */
 	public void incrementScore(int amount) {
 		score += amount;
 		if (score < 0) {
@@ -102,20 +82,27 @@ public class Player implements Entity {
 		}
 	}
 
+	/**
+	 * @return The location the player is facing
+	 */
 	public Location getLocationInFrontOf() {
 		return Location.locationInFrontOf(this.loc, this.d);
 	}
 
-	// Returns a list of the locations surrounding the player.
+	/**
+	 * @return A list of the locations surrounding the player.
+	 */
 	public List<Location> getSurroundingLocations() {
 		return Location.getSurroundingLocations(this.loc);
 	}
+
+	// Inventory methods
 
 	public List<Item> getInventoryItems() {
 		return this.inventory.getContents();
 	}
 
-	public List<Objects> getInventoryEnums() {
+	public List<Entities> getInventoryEnums() {
 		return this.inventory.getContentsAsEnums();
 	}
 
@@ -133,6 +120,11 @@ public class Player implements Entity {
 		throw new IllegalArgumentException();
 	}
 
+	/**
+	 * Adds the given item to the Inventory only if it isn't their team's flag.
+	 * @param i
+	 * @return
+	 */
 	public boolean addItemToInventory (Item i) {
 		if (i instanceof Flag && ((Flag)i).getTeam() == this.team) {
 			return false;
@@ -140,23 +132,35 @@ public class Player implements Entity {
 		return this.inventory.addItem(i);
 	}
 
-	public boolean holdsKey(int id) {
+	/**
+	 * @param ID
+	 * @return Whether the player has a key with the given ID in their inventory.
+	 */
+	public boolean holdsKey(int ID) {
 		for (Item i: inventory.getContents()) {
-			if (i instanceof Key && ((Key)i).id == id) {
+			if (i instanceof Key && ((Key)i).ID == ID) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public int getKeyIndex(int id) {
+	/**
+	 * @param ID
+	 * @return The index of the key with the given ID within the player's inventory
+	 */
+	public int getKeyIndex(int ID) {
 		for (int i = 0; i < inventory.getContents().size(); i++) {
 			if (inventory.getContents().get(i) instanceof Key &&
-					((Key)inventory.getContents().get(i)).id == id) {
+					((Key)inventory.getContents().get(i)).ID == ID) {
 				return i;
 			}
 		}
 		throw new IllegalArgumentException();
+	}
+
+	public void emptyInventory() {
+		this.inventory.empty();
 	}
 
 	// GETTERS AND SETTERS
@@ -253,8 +257,33 @@ public class Player implements Entity {
 		this.canThrow = canThrow;
 	}
 
-	public void emptyInventory() {
-		this.inventory.empty();
+	@Override
+	public Entities asEnum() {
+		if (this.isFrozen()) {
+			return Entities.SNOWMAN;
+		}
+		if (this.team == Team.RED) {
+			if (this.d == Direction.NORTH) {
+				return Entities.REDPLAYER_N;
+			} else if (this.d== Direction.EAST) {
+				return Entities.REDPLAYER_E;
+			} else if (this.d == Direction.SOUTH) {
+				return Entities.REDPLAYER_S;
+			} else {
+				return Entities.REDPLAYER_W;
+			}
+		} else {
+			if (this.d == Direction.NORTH) {
+				return Entities.BLUEPLAYER_N;
+			} else if (this.d == Direction.EAST) {
+				return Entities.BLUEPLAYER_E;
+			} else if (this.d == Direction.SOUTH) {
+				return Entities.BLUEPLAYER_S;
+			} else {
+				return Entities.BLUEPLAYER_W;
+			}
+		}
 	}
+
 
 }

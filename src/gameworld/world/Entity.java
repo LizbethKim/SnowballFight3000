@@ -1,6 +1,6 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 /**
  * Anything that can be within the world.
@@ -8,5 +8,8 @@ import graphics.assets.Objects;
  *
  */
 public interface Entity {
-	public Objects asEnum();
+	/**
+	 * @return The enum representation of the item (immutable with no extra information)
+	 */
+	public Entities asEnum();
 }

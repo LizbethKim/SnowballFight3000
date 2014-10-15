@@ -1,6 +1,6 @@
 package gameworld.world;
 
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import java.util.EnumSet;
 
@@ -12,16 +12,16 @@ import java.util.EnumSet;
  */
 public class Furniture implements StaticEntity {
 
-	private static EnumSet<Objects> FURNITURE = EnumSet.of(Objects.BUSH,
-			Objects.TABLE, Objects.TREE, Objects.WALL_E_W, Objects.WALL_N_S,
-			Objects.DOORNS, Objects.DOOREW,
-			Objects.CHEST, Objects.CORNER_N_W, Objects.CORNER_N_E,
-			Objects.CORNER_S_W, Objects.CORNER_S_E);
+	private static EnumSet<Entities> FURNITURE = EnumSet.of(Entities.BUSH,
+			Entities.TABLE, Entities.TREE, Entities.WALL_E_W, Entities.WALL_N_S,
+			Entities.DOORNS, Entities.DOOREW,
+			Entities.CHEST, Entities.CORNER_N_W, Entities.CORNER_N_E,
+			Entities.CORNER_S_W, Entities.CORNER_S_E);
 
 	private String description;
-	protected Objects type;
+	protected Entities type;
 
-	public Furniture(String description, Objects type) {
+	public Furniture(String description, Entities type) {
 		if (!FURNITURE.contains(type)) {
 			throw new IllegalArgumentException("That type is not furniture.");
 		}
@@ -30,15 +30,17 @@ public class Furniture implements StaticEntity {
 	}
 
 	@Override
-	public boolean canMoveThrough() {
-		return false;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public Objects asEnum() {
+	@Override
+	public boolean canMoveThrough() {
+		return false;
+	}
+
+	@Override
+	public Entities asEnum() {
 		return type;
 	}
 

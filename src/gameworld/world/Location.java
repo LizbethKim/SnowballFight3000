@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Location {
 	public final int x;	// The bigger the x, the more east we are
-	public final int y;	// The bigger the y, the further south (EK, does that make sense?)
+	public final int y;	// The bigger the y, the further south
 
 	public Location(int x, int y) {
 		this.x = x;
@@ -45,7 +45,12 @@ public class Location {
 			return false;
 		return true;
 	}
-	
+
+	/**
+	 * @param l
+	 * @param d
+	 * @return The location in front of the given location in the given description.
+	 */
 	public static Location locationInFrontOf (Location l, Direction d) {
 		if (d == Direction.NORTH) {
 			return new Location (l.x, l.y - 1);
@@ -57,7 +62,11 @@ public class Location {
 			return new Location (l.x + 1, l.y);
 		}
 	}
-	
+
+	/**
+	 * @param l
+	 * @return A list of locations surrounding the given location
+	 */
 	public static List<Location> getSurroundingLocations(Location l) {
 		List<Location> ans = new ArrayList<Location>();
 		ans.add(new Location (l.x + 1, l.y));

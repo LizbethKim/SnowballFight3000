@@ -2,7 +2,7 @@ package gameworld.game.client;
 
 import gameworld.world.*;
 import gameworld.world.Snowball.SnowballType;
-import graphics.assets.Objects;
+import graphics.assets.Entities;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -226,7 +226,7 @@ public class ClientGame {
 	 * @return The contents of the selected container in the inventory if it is one.
 	 * @throws NotAContainerException
 	 */
-	public List<Objects> getContentsOfSelected() throws NotAContainerException {
+	public List<Entities> getContentsOfSelected() throws NotAContainerException {
 		if (selectedIsContainer()) {
 			return ((Inventory)player.getInventoryItems().get(selectedIndex)).getContentsAsEnums();
 		}
@@ -239,7 +239,7 @@ public class ClientGame {
 	 * @return An unmodifiable list of enums representing the objects in the inventory.
 	 * @throws NotAContainerException
 	 */
-	public List<Objects> getContents() throws NotAContainerException {
+	public List<Entities> getContents() throws NotAContainerException {
 		Location containerLoc = Location.locationInFrontOf(player.getLocation(), player.getDirection());
 		if (board.containsLocation(containerLoc)) {
 			InanimateEntity on = board.tileAt(containerLoc).getOn();
@@ -295,7 +295,7 @@ public class ClientGame {
 	}
 
 
-	public List<Objects> getPlayerInventory() {
+	public List<Entities> getPlayerInventory() {
 		return player.getInventoryEnums();
 	}
 
@@ -333,7 +333,6 @@ public class ClientGame {
 
 	public void setID(int ID) {
 		this.playerID = ID;
-		System.out.println("ID is " + ID);
 		this.player.setID(ID);
 		this.playerIDs.put(ID, this.player);
 	}
