@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.stream.XMLEventFactory;
@@ -63,7 +65,7 @@ public class StaxWriter {
 		board = g.getBoard();
 		players = g.getPlayers();
 
-		areaList = board.getRooms();
+		areaList = new ArrayList<Area>(board.getRooms());
 		try {
 			// create an XMLOutputFactory
 			OutputStream out = new FileOutputStream(file);
@@ -144,9 +146,20 @@ public class StaxWriter {
 
 				// make the area tags
 				for(Area area : areaList){
-					//if(area.getTiles().size()>2290){
-						//Area newArea = area.
-					//}
+					//have to split the main area because it's too long
+					/*if(area.getTiles().size()>2000){
+						Area newArea = area.copy();
+						area = area.copy();
+						for(int i=0;i<area.getTiles().size();i++){
+							Tile t = area.getTiles().get(i);
+							if(i<2000){
+								newArea.remove(t);
+							}else{
+								area.remove(t);
+							}							
+						}
+						areaList.add(areaList.indexOf(area)+1, newArea);
+					}*/
 					createTag(XMLValues.AREA,buildAreaString(area));
 					eventWriter.add(newline);
 				}
