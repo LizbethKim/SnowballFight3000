@@ -12,6 +12,11 @@ import gameworld.game.client.ClientGame;
 
 public class NightVision extends CheatSwitch {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8338289522418921457L;
+
 	public NightVision(ClientGame cl) {
 		super(cl);
 	}

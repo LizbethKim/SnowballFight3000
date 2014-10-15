@@ -12,6 +12,10 @@ import gameworld.game.client.ClientGame;
  */
 
 public class SelectItem extends KeyAction {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7095515531210410466L;
 	private int inventoryNumber;
 
 	public SelectItem(ClientGame cl, UI parent, int inventoryNumber) {

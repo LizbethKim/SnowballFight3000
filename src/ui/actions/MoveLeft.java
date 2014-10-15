@@ -13,6 +13,11 @@ import gameworld.world.Direction;
 
 public class MoveLeft extends KeyAction{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2439862930717021266L;
+
 	public MoveLeft(ClientGame cl, UI parent){
 		super(cl, parent);
 	}

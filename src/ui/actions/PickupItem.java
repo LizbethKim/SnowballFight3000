@@ -11,6 +11,11 @@ import gameworld.game.client.ClientGame;
 
 public class PickupItem extends KeyAction{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6303878776381359267L;
+
 	public PickupItem(ClientGame cl, UI parent){
 		super(cl, parent);
 	}

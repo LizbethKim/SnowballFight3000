@@ -2,7 +2,6 @@ package ui.gamewindow;
 
 import gameworld.game.Time;
 import gameworld.game.server.ServerGame;
-import gameworld.world.Board;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -24,7 +23,6 @@ import network.Server;
 import storage.LoadGame;
 import ui.popups.ControlsPopup;
 import ui.popups.InputPopup;
-import ui.popups.LoadPopup;
 
 /**
  * The GameSetup is a panel displayed at the start of the game and is
@@ -35,6 +33,11 @@ import ui.popups.LoadPopup;
  *
  */
 public class GameSetup extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4026611031290322878L;
 
 	private enum ButtonSelected {
 		NEW, LOAD, SERVER, CONTROLS
@@ -51,14 +54,12 @@ public class GameSetup extends JPanel {
 	private static final double LOAD_PLAYER_Y_PROPORTION = 4.0 / 8.0;
 	private static final double START_SERVER_Y_PROPORTION = 5.0 / 8.0;
 	private static final double CONTROLS_Y_PROPORTION = 6.0 / 8.0;
-
-	private final double aspectRatio;
+	
 	private ButtonSelected selected;
 	private UI ui;
 
-	public GameSetup(UI ui, double aspectRatio) {
+	public GameSetup(UI ui) {
 		this.ui = ui;
-		this.aspectRatio = aspectRatio;
 		setupListeners();
 	}
 
@@ -280,6 +281,7 @@ public class GameSetup extends JPanel {
 
 		@Override
 		public void mouseMoved(MouseEvent e) {
+			//update selected item and cursor image
 			updateSelection(e.getX(), e.getY());
 		}
 

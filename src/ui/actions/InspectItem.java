@@ -2,7 +2,6 @@ package ui.actions;
 
 import ui.gamewindow.UI;
 import gameworld.game.client.ClientGame;
-import gameworld.game.client.NoItemException;
 
 /**
  * InspectItem is a key action that attempts to inspect the item in front of the
@@ -13,6 +12,11 @@ import gameworld.game.client.NoItemException;
  */
 
 public class InspectItem extends KeyAction {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1062358383800508831L;
 
 	public InspectItem(ClientGame cl, UI parent) {
 		super(cl, parent);
