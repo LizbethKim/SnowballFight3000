@@ -27,9 +27,9 @@ import ui.gamewindow.UI;
  * The ContainerPoup displays the contents of a container, and allows the user
  * to select and take items out of the container our put them in. Items are
  * navigated with the arrow keys.
- * 
+ *
  * @author Ryan Burnell, 300279172
- * 
+ *
  */
 
 public class ContainerPopup extends JDialog implements KeyListener {
@@ -94,7 +94,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 
 	/**
 	 * get the width of the panel
-	 * 
+	 *
 	 * @return the width
 	 */
 	private int width() {
@@ -104,7 +104,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 
 	/**
 	 * get the width of the panel
-	 * 
+	 *
 	 * @return the width
 	 */
 	private int height() {
@@ -160,7 +160,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 
 	/**
 	 * draw the exit button
-	 * 
+	 *
 	 * @param g
 	 *            the graphics object to draw on
 	 */
@@ -170,7 +170,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 
 	/**
 	 * paint all the container slots and any items inside them
-	 * 
+	 *
 	 * @param g
 	 *            the graphics object to draw on
 	 */
@@ -225,7 +225,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 			if (inventoryContainer) {
 				//get its contents
 				this.items = client.getContentsOfSelected();
-			} else {	
+			} else {
 				//otherwise we're trying to open a container in front of us
 				//so get its contents
 				this.items = client.getContents();
@@ -255,7 +255,7 @@ public class ContainerPopup extends JDialog implements KeyListener {
 			changeSelection(-1);
 		} else if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
 			changeSelection(1);
-		} else if (inventoryContainer) {
+		} else if (!inventoryContainer) {
 			if (key == KeyEvent.VK_Z) {
 				client.takeItemFromContainer(selectedItem - 1);
 			} else if (key == KeyEvent.VK_1) {
