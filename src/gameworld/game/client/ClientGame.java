@@ -45,6 +45,7 @@ public class ClientGame {
 		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
 		this.playerID = 0; // KTC (?)
 		this.board = sb.getBoard();
+		System.out.println(board);
 
 		//this.board = Board.defaultBoard();
 
@@ -60,9 +61,11 @@ public class ClientGame {
 
 	public ClientGame(String IP, UI display) {
 		this.client = new Client(IP);
-		//StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
-		//this.playerID = KTC to do
-		//this.board = sb.getBoard();
+		StoredGame sb = new LoadGame().loadGame(client.sendMapRequest());
+		this.playerID = 0;
+		this.board = sb.getBoard();
+
+		// KTC what?
 	}
 
 	public List<String> getPlayerList() {
