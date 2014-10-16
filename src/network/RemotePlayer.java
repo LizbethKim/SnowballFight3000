@@ -73,6 +73,8 @@ public class RemotePlayer implements Runnable {
 				UpdateEvent event = queuedEvents.poll();
 				if(event!=null){
 					event.writeTo(connection.getOutputStream());
+				} else {
+					System.out.println(queuedEvents.size());
 				}
 			}
 			//flush the data
@@ -180,15 +182,18 @@ public class RemotePlayer implements Runnable {
 	private int readFromSocket() throws IOException, SocketClosedException {
 		//I hate java
 		if(connection.isInputShutdown()){
+			System.out.println("First");
 			throw new SocketClosedException();
 		}
 		int input;
 		try{
 			input = connection.getInputStream().read();
 		}catch(SocketException e) {
+			System.out.println("Second");
 			throw new SocketClosedException();
 		}
 		if (input == -1) {
+			System.out.println("Third");
 			throw new SocketClosedException();
 		}
 		return input;

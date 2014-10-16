@@ -189,7 +189,9 @@ public class ServerGame {
 	public void throwSnowball(int playerID, Snowball.SnowballType type) {
 		Player thrower = playerIDs.get(playerID);
 		if (board.tileAt(thrower.getLocation()).isSnow()) {
-			projectiles.add(snowballFactory.makeSnowball(thrower.getLocation(), thrower.getDirection(), type));
+			synchronized(projectiles){
+				projectiles.add(snowballFactory.makeSnowball(thrower.getLocation(), thrower.getDirection(), type));
+			}
 		}
 	}
 
@@ -262,33 +264,39 @@ public class ServerGame {
 	 * Updates the model one clock tick
 	 */
 	public void clockTick() {
-		Iterator<Snowball> it = projectiles.iterator();
-		while (it.hasNext()) {
-			Snowball s = it.next();
-			s.clockTick();
-			if (!board.containsLocation(s.getLocation()) || !board.canTraverse(s.getLocation())) {
-				it.remove();
-				continue;
-			}
-			for (Player p: playerIDs.values()) {
-				if (p.getLocation().equals(s.getLocation())) {
-					s.hit(p);
+		Location[] snowballLocs;
+		Snowball.SnowballType[] snowballTypes;
+		synchronized(projectiles){
+			Iterator<Snowball> it = projectiles.iterator();
+	
+			while (it.hasNext()) {
+				Snowball s = it.next();
+				s.clockTick();
+				if (!board.containsLocation(s.getLocation()) || !board.canTraverse(s.getLocation())) {
 					it.remove();
-					server.queuePlayerUpdate(new UpdateHealthEvent(p.getHealth()), p.getID());
-					if (p.isFrozen()) {
-						this.freezePlayer(p);
+					continue;
+				}
+				for (Player p: playerIDs.values()) {
+					if (p.getLocation().equals(s.getLocation())) {
+						s.hit(p);
+						it.remove();
+						server.queuePlayerUpdate(new UpdateHealthEvent(p.getHealth()), p.getID());
+						if (p.isFrozen()) {
+							this.freezePlayer(p);
+						}
+						break;
 					}
-					break;
 				}
 			}
-		}
-		Location[] snowballLocs = new Location[projectiles.size()];
-		Snowball.SnowballType[] snowballTypes = new Snowball.SnowballType[projectiles.size()];
-		int i = 0;
-		for (Snowball s: projectiles) {
-			snowballLocs[i] = s.getLocation();
-			snowballTypes[i] = s.type;
-			i++;
+			snowballLocs = new Location[projectiles.size()];
+			snowballTypes = new Snowball.SnowballType[projectiles.size()];
+			int i = 0;
+	
+			for (Snowball s: projectiles) {
+				snowballLocs[i] = s.getLocation();
+				snowballTypes[i] = s.type;
+				i++;
+			}
 		}
 		for(int id: playerIDs.keySet()) {
 			server.queuePlayerUpdate(new UpdateProjectilePositionsEvent(snowballLocs, snowballTypes), id);
