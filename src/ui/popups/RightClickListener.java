@@ -59,7 +59,7 @@ public class RightClickListener extends MouseAdapter {
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseClicked(MouseEvent e) {
 		respondToClick(e);
 	}
 
