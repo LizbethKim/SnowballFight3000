@@ -31,50 +31,55 @@ public class RightClickListener extends MouseAdapter {
 	 * item and/or launching the right click menu depending on the position of
 	 * the click
 	 * 
-	 * @param e the MouseEvent from the click
+	 * @param e
+	 *            the MouseEvent from the click
 	 */
 	private void respondToClick(MouseEvent e) {
 		// get position of click
 		int x = e.getX();
 		int y = e.getY();
 		// if the click was on the show hide button, toggle it
-		if (panel.onShowHideButton(x, y)) {
-			panel.toggleShowHide();
-		} else {
-			// otherwise if on an item, select it
+		if (!panel.onShowHideButton(x, y)) {
+			// if on an item, select it
 			int selected = panel.getSelectedItem(x, y);
 			if (selected > 0) {
 				client.setSelectedIndex(selected - 1);
+				if (e.isPopupTrigger()) {
+					System.out.println("showing right click");
+					// now launch right-click popup if appropriate
+					showPopup(e);
+				}
 			}
 		}
 	}
-	
-	private void respondToRightClick(MouseEvent e){
-		if (e.isPopupTrigger()) {
-			System.out.println("showing right click");
-			// now launch right-click popup if appropriate
-			showPopup(e);
+
+	private void toggleShowHide(MouseEvent e) {
+		if (panel.onShowHideButton(e.getX(), e.getY())) {
+			panel.toggleShowHide();
 		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		toggleShowHide(e);
 		respondToClick(e);
 	}
-	
+
 	@Override
 	public void mousePressed(MouseEvent e) {
-		respondToRightClick(e);
+		respondToClick(e);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		respondToRightClick(e);
+		respondToClick(e);
 	}
 
 	/**
 	 * Display a right click menu at the position of the mouse click
-	 * @param e the mouse event
+	 * 
+	 * @param e
+	 *            the mouse event
 	 */
 	private void showPopup(MouseEvent e) {
 		RightClickMenu menu = new RightClickMenu(client);
