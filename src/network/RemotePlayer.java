@@ -56,9 +56,6 @@ public class RemotePlayer implements Runnable {
 	 */
 	public void queueEvent(UpdateEvent event) {
 		if (event != null) queuedEvents.offer(event);
-		else {
-			System.out.println("Meow meowm eow");
-		}
 	}
 
 	/**
