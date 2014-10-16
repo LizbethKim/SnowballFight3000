@@ -238,10 +238,8 @@ public class StaxParser {
 
 		Location low = parseLoc(values[1], values[2]);
 		Location high = parseLoc(values[3], values[4]);
-		System.out.println(low.x + " "+ low.y + high.x + " "+ high.y);
 		for(int x = low.x ; x <= high.x ; x++){
 			for(int y = low.y ; y <= high.y ; y++){
-//				System.out.println(x + " "+ y);
 				a.add(tiles[x][y]);
 			}
 		}
