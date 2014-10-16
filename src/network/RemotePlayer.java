@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import network.events.UpdateEvent;
 
@@ -26,7 +25,7 @@ import network.events.UpdateEvent;
 public class RemotePlayer implements Runnable {
 	private int id;
 	private Socket connection;
-	private Queue<UpdateEvent> queuedEvents;
+	private ConcurrentLinkedQueue<UpdateEvent> queuedEvents;
 	private ServerGame game;
 	private int locationLen;
 	private int mapWidth;
@@ -47,7 +46,7 @@ public class RemotePlayer implements Runnable {
 		for(locationLen=0;maxLocation>0;locationLen++){
 			maxLocation=maxLocation>>1;
 		}
-		queuedEvents = new LinkedList<UpdateEvent>();
+		queuedEvents = new ConcurrentLinkedQueue<UpdateEvent>();
 	}
 
 	/**
@@ -56,7 +55,10 @@ public class RemotePlayer implements Runnable {
 	 * @param event the event to be queued to be sent to the server
 	 */
 	public void queueEvent(UpdateEvent event) {
-		queuedEvents.offer(event);
+		if (event != null) queuedEvents.offer(event);
+		else {
+			System.out.println("Meow meowm eow");
+		}
 	}
 
 	/**
@@ -73,8 +75,6 @@ public class RemotePlayer implements Runnable {
 				UpdateEvent event = queuedEvents.poll();
 				if(event!=null){
 					event.writeTo(connection.getOutputStream());
-				} else {
-					System.out.println(queuedEvents.size());
 				}
 			}
 			//flush the data
