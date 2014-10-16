@@ -58,8 +58,11 @@ public class ClientGame {
 		playerIDs = new HashMap<Integer, Player>();
 		this.display = display;
 		client.sendNameAndTeam(name, team);
-		player = new Player(name, team, 0, new NullLocation());
-
+		if(sb.getPlayers().isEmpty()){
+			player = new Player(name, team, 0, new NullLocation());
+		}else{
+			player = sb.getPlayers().get(0);
+		}
 		ClientUpdater u = this.getUpdater();
 		client.startReceiving(u, board.width(), board.height());
 	}
@@ -338,7 +341,9 @@ public class ClientGame {
 	}
 
 	public void setLocalLocation(Location l) {
-		this.player.setLocation(l);
+		if(this.player.getLocation() instanceof NullLocation){
+			this.player.setLocation(l);
+		}
 	}
 
 	public int getPlayerScore() {
