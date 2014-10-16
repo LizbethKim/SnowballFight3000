@@ -172,9 +172,11 @@ public class ServerGame {
 						powerup.use(p);
 						server.queuePlayerUpdate(new UpdateHealthEvent(p.getHealth()), playerID);
 					}
+					p.removeFromInventory(index);
 					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
 				} else if (toUse instanceof Key) {
 					this.unlock(p.getLocationInFrontOf());
+					p.removeFromInventory(index);
 					server.queuePlayerUpdate(new RemoveFromInventoryEvent(index), playerID);
 				}
 			}
@@ -268,7 +270,7 @@ public class ServerGame {
 		Snowball.SnowballType[] snowballTypes;
 		synchronized(projectiles){
 			Iterator<Snowball> it = projectiles.iterator();
-	
+
 			while (it.hasNext()) {
 				Snowball s = it.next();
 				s.clockTick();
@@ -291,7 +293,7 @@ public class ServerGame {
 			snowballLocs = new Location[projectiles.size()];
 			snowballTypes = new Snowball.SnowballType[projectiles.size()];
 			int i = 0;
-	
+
 			for (Snowball s: projectiles) {
 				snowballLocs[i] = s.getLocation();
 				snowballTypes[i] = s.type;
