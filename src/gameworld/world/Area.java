@@ -56,4 +56,26 @@ public class Area {
 		}
 		return false;
 	}
+	
+	public Tile lowestTile(){
+		Tile lowest = tiles.get(0);
+		for(Tile t:tiles){
+			Location loc = t.getCoords();
+			if(loc.x <=lowest.getCoords().x && loc.y <=lowest.getCoords().y){
+				lowest = t;
+			}
+		}
+		return lowest;
+	}
+	
+	public Tile highestTile(){
+		Tile highest = tiles.get(0);
+		for(Tile t:tiles){
+			Location loc = t.getCoords();
+			if(loc.x >=highest.getCoords().x && loc.y >=highest.getCoords().y){
+				highest = t;
+			}
+		}
+		return highest;
+	}
 }

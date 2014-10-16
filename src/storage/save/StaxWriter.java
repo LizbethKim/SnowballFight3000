@@ -144,21 +144,7 @@ public class StaxWriter {
 
 				// make the area tags
 				for(Area area : areaList){
-					//have to split the main area because it's too long
-					/*if(area.getTiles().size()>2000){
-						Area newArea = area.copy();
-						area = area.copy();
-						for(int i=0;i<area.getTiles().size();i++){
-							Tile t = area.getTiles().get(i);
-							if(i<2000){
-								newArea.remove(t);
-							}else{
-								area.remove(t);
-							}							
-						}
-						areaList.add(areaList.indexOf(area)+1, newArea);
-					}*/
-					createTag(XMLValues.AREA,buildAreaString(area));
+					createTag(XMLValues.AREA, buildAreaString(area));
 					eventWriter.add(newline);
 				}
 
@@ -193,10 +179,10 @@ public class StaxWriter {
 		}else{
 			str.append("NOTEAM "); //No team
 		}
-		for(Tile t : area.getTiles()){
-			 // append coordinates for all the tiles
-			str.append(String.format("%d %d ", t.getCoords().x, t.getCoords().y));
-		}
+		Location lowest = area.lowestTile().getCoords();		
+		str.append(String.format("%d %d ", lowest.x, lowest.y));
+		Location highest = area.highestTile().getCoords();
+		str.append(String.format("%d %d ", highest.x, highest.y));
 		return str.toString();
 	}
 

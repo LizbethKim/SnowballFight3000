@@ -43,7 +43,6 @@ public class StaxParser {
 	private boolean playerLoad=false;
 	private boolean tileLoad=false;
 	private boolean chestLoad=false;
-	private int areaCount=0;
 
 
 
@@ -196,9 +195,7 @@ public class StaxParser {
 
 					//end of an area, add it to the list
 					if (elemName.equals(XMLValues.AREA)) {
-						if(areaCount>=3){
-							areaList.add(curArea);
-						}
+						areaList.add(curArea);
 						continue;
 					}
 
@@ -231,9 +228,7 @@ public class StaxParser {
 	 */
 	private Area parseArea(String[] values) {
 		Area a;
-		if(areaCount==2 ||areaCount==1){
-			a = curArea;
-		}else if(values[0].equals("NOTEAM")){
+		if(values[0].equals("NOTEAM")){
 			//just a plain area
 			a = new Area();
 		}else{
@@ -241,12 +236,15 @@ public class StaxParser {
 			a = new SpawnArea(Team.valueOf(values[0]));
 		}
 
-		int i;
-		for(i = 1;i<values.length;i=i+2){
-			Location loc = parseLoc(values[i], values[i+1]);
-			a.add(tiles[loc.x][loc.y]);
+		Location low = parseLoc(values[1], values[2]);
+		Location high = parseLoc(values[3], values[4]);
+		System.out.println(low.x + " "+ low.y + high.x + " "+ high.y);
+		for(int x = low.x ; x <= high.x ; x++){
+			for(int y = low.y ; y <= high.y ; y++){
+//				System.out.println(x + " "+ y);
+				a.add(tiles[x][y]);
+			}
 		}
-		areaCount++;
 		return a;
 	}
 
