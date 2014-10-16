@@ -45,22 +45,31 @@ public class RightClickListener extends MouseAdapter {
 			int selected = panel.getSelectedItem(x, y);
 			if (selected > 0) {
 				client.setSelectedIndex(selected - 1);
-				if (e.isPopupTrigger()) {
-					// now launch right-click popup if appropriate
-					showPopup(e);
-				}
 			}
 		}
 	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		respondToClick(e);
+	
+	private void respondToRightClick(MouseEvent e){
+		if (e.isPopupTrigger()) {
+			System.out.println("showing right click");
+			// now launch right-click popup if appropriate
+			showPopup(e);
+		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		respondToClick(e);
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+		respondToRightClick(e);
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		respondToRightClick(e);
 	}
 
 	/**
